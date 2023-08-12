@@ -4,10 +4,20 @@
     box-sizing: border-box;
 }
 
-input,
-button,
-textarea,
-select {
-    margin: 0;
-    font: inherit;
+// input,
+// button,
+// textarea,
+// select {
+//     margin: 0;
+//     font: inherit;
+// }
+
+a,
+a:link,
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
 }
