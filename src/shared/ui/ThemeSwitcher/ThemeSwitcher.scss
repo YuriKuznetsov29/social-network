@@ -8,7 +8,7 @@
     width: 40px;
 }
 
-label {
+.label {
     position: absolute;
     bottom: 0;
     width: 40px;
@@ -18,7 +18,7 @@ label {
     cursor: pointer;
 }
 
-input {
+.input {
     position: absolute;
     display: none;
 }
@@ -31,7 +31,7 @@ input {
     transition: 0.3s;
 }
 
-input:checked ~ .slider {
+.input:checked ~ .slider {
     background-color: var(--light);
 }
 
@@ -48,7 +48,7 @@ input:checked ~ .slider {
     transition: 0.3s;
 }
 
-input:checked ~ .slider::before {
+.input:checked ~ .slider::before {
     transform: translateX(16px);
     background-color: var(--dark);
     box-shadow: none;

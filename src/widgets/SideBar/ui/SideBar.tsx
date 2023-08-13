@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import cls from './SideBar.module.scss'
 import { AppLink } from 'shared/ui/AppLink/AppLink'
-import ThemeSwitcher from 'widgets/ThemeSwither/ThemeSwitcher'
+import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ThemeSwitcher'
 
 interface SideBarProps {
     className?: string

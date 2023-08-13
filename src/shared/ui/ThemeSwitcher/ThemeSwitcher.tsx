@@ -12,8 +12,8 @@ const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
     return (
         <div className={classNames('ThemeSwitcher', {}, [className])}>
             <div className={'toggle-switch'}>
-                <label>
-                    <input type="checkbox" />
+                <label className="label">
+                    <input className="input" type="checkbox" />
                     <span className={'slider'} onClick={toggleTheme}></span>
                 </label>
             </div>

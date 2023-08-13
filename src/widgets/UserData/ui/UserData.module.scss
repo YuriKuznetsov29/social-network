@@ -1,0 +1,17 @@
+.user {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    // background-color: var(--bg-user);
+    fill: var(--fill-user);
+}
+
+.contentWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dataWrapper {
+    display: flex;
+    flex-direction: column;
+}
