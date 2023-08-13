@@ -17,7 +17,7 @@ export const SideBar = ({ className }: SideBarProps) => {
                 <AppLink to={'/news'} className={cls.link}>
                     Новости
                 </AppLink>
-                <AppLink to={'/messages'} className={cls.link}>
+                <AppLink to={'/messenger'} className={cls.link}>
                     Мессенджер
                 </AppLink>
                 <AppLink to={'/friends'} className={cls.link}>

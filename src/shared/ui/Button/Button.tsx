@@ -5,8 +5,13 @@ import { ReactNode } from 'react'
 interface ButtonProps {
     className?: string
     children: ReactNode
+    type?: 'button' | 'submit' | 'reset'
 }
 
-export const Button = ({ className, children }: ButtonProps) => {
-    return <div className={classNames(cls.Button, {}, [className])}>{children}</div>
+export const Button = ({ className, children, type }: ButtonProps) => {
+    return (
+        <button className={classNames(cls.Button, {}, [className])} type={type}>
+            {children}
+        </button>
+    )
 }

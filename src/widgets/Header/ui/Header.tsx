@@ -9,10 +9,12 @@ interface HeaderProps {
 
 export const Header = ({ className }: HeaderProps) => {
     return (
-        <div className={classNames(cls.Header, {}, [className])}>
-            <Container>
-                <Input placeholder="Поиск" type="search"></Input>
-            </Container>
+        <div className={cls.container}>
+            <div className={classNames(cls.Header, {}, [className])}>
+                <Container>
+                    <Input placeholder="Поиск" type="search"></Input>
+                </Container>
+            </div>
         </div>
     )
 }
