@@ -1,42 +1,115 @@
-import classNames from 'classnames'
 import cls from './MessengerPage.module.scss'
 import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
 import User from 'shared/assets/icons/user.svg'
-import { Header } from 'widgets/Header'
-import Container from 'shared/ui/Container/Container'
-import { SideBar } from 'widgets/SideBar'
+import Arrow from 'shared/assets/icons/caret-left-bold.svg'
+import { Input } from 'shared/ui/Input/Input'
+import { Button } from 'shared/ui/Button/Button'
+import { Dialog } from 'widgets/Dialog'
+import { Outlet } from 'react-router-dom'
+import { AppLink } from 'shared/ui/AppLink/AppLink'
 
-interface MessengerPageProps {
-    className?: string
-}
-
-export const MessengerPage = ({ className }: MessengerPageProps) => {
+export const MessengerPage = () => {
     return (
-        <>
-            <Header />
-            <Container>
-                <div className={classNames(cls.MessengerPage, {}, [className])}>
-                    <SideBar />
-                    <ContentContainer>
-                        <div>
-                            <User />
-                            Имя
+        <div style={{ width: '100%' }}>
+            <ContentContainer className={cls.contentContainer}>
+                <Input placeholder="Поиск" className={cls.inputSearch} />
+                <AppLink to={'/messenger/1'}>
+                    <div className={cls.dialog}>
+                        <User className={cls.avatar} />
+                        <div className={cls.dialogData}>
+                            <div>
+                                <div>Имя Фамилия</div>
+                                <div>Сообщение</div>
+                            </div>
+                            <div>20:52</div>
                         </div>
-                        <div>
-                            <User />
-                            Имя
+                    </div>
+                </AppLink>
+                <AppLink to={'/messenger/1'}>
+                    <div className={cls.dialog}>
+                        <User className={cls.avatar} />
+                        <div className={cls.dialogData}>
+                            <div>
+                                <div>Имя Фамилия</div>
+                                <div>Сообщение</div>
+                            </div>
+                            <div>20:52</div>
                         </div>
-                        <div>
-                            <User />
-                            Имя
+                    </div>
+                </AppLink>
+                <AppLink to={'/messenger/1'}>
+                    <div className={cls.dialog}>
+                        <User className={cls.avatar} />
+                        <div className={cls.dialogData}>
+                            <div>
+                                <div>Имя Фамилия</div>
+                                <div>Сообщение</div>
+                            </div>
+                            <div>20:52</div>
                         </div>
-                        <div>
-                            <User />
-                            Имя
+                    </div>
+                </AppLink>
+                <AppLink to={'/messenger/1'}>
+                    <div className={cls.dialog}>
+                        <User className={cls.avatar} />
+                        <div className={cls.dialogData}>
+                            <div>
+                                <div>Имя Фамилия</div>
+                                <div>Сообщение</div>
+                            </div>
+                            <div>20:52</div>
                         </div>
-                    </ContentContainer>
-                </div>
-            </Container>
-        </>
+                    </div>
+                </AppLink>
+                <AppLink to={'/messenger/1'}>
+                    <div className={cls.dialog}>
+                        <User className={cls.avatar} />
+                        <div className={cls.dialogData}>
+                            <div>
+                                <div>Имя Фамилия</div>
+                                <div>Сообщение</div>
+                            </div>
+                            <div>20:52</div>
+                        </div>
+                    </div>
+                </AppLink>
+                <AppLink to={'/messenger/1'}>
+                    <div className={cls.dialog}>
+                        <User className={cls.avatar} />
+                        <div className={cls.dialogData}>
+                            <div>
+                                <div>Имя Фамилия</div>
+                                <div>Сообщение</div>
+                            </div>
+                            <div>20:52</div>
+                        </div>
+                    </div>
+                </AppLink>
+                <AppLink to={'/messenger/1'}>
+                    <div className={cls.dialog}>
+                        <User className={cls.avatar} />
+                        <div className={cls.dialogData}>
+                            <div>
+                                <div>Имя Фамилия</div>
+                                <div>Сообщение</div>
+                            </div>
+                            <div>20:52</div>
+                        </div>
+                    </div>
+                </AppLink>
+                <AppLink to={'/messenger/1'}>
+                    <div className={cls.dialog}>
+                        <User className={cls.avatar} />
+                        <div className={cls.dialogData}>
+                            <div>
+                                <div>Имя Фамилия</div>
+                                <div>Сообщение</div>
+                            </div>
+                            <div>20:52</div>
+                        </div>
+                    </div>
+                </AppLink>
+            </ContentContainer>
+        </div>
     )
 }

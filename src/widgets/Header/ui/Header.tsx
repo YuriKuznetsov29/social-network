@@ -12,7 +12,7 @@ export const Header = ({ className }: HeaderProps) => {
         <div className={cls.container}>
             <div className={classNames(cls.Header, {}, [className])}>
                 <Container>
-                    <Input placeholder="Поиск" type="search"></Input>
+                    <Input className={cls.search} placeholder="Поиск" type="search"></Input>
                 </Container>
             </div>
         </div>

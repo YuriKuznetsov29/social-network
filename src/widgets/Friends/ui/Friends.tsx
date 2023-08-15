@@ -10,7 +10,7 @@ interface FriendsProps {
 export const Friends = ({ className }: FriendsProps) => {
     return (
         <div className={classNames(cls.Friends, {}, [className])}>
-            <ContentContainer>
+            <ContentContainer className={cls.container}>
                 <h3>Друзья</h3>
                 <div className={cls.friendsWrapper}>
                     <div className={cls.friend}>

@@ -7,6 +7,8 @@
 }
 
 .contentWrapper {
+    margin-top: 0;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
 }
@@ -14,4 +16,18 @@
 .dataWrapper {
     display: flex;
     flex-direction: column;
+}
+
+.button {
+    padding: 0 10px;
+    height: 32px;
+    background-color: var(--bg-button);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: background-color 0.2s;
+    &:hover {
+        background-color: var(--bg-button-hover);
+    }
 }

@@ -16,7 +16,7 @@ export const UserData = ({ className }: UserDataProps) => {
                     <div>Юрий Кузнецов</div>
                     <div>Новодвинск</div>
                     <div>Подробнее</div>
-                    <Button>Редактировать профиль</Button>
+                    <Button className={cls.button}>Редактировать профиль</Button>
                 </div>
             </ContentContainer>
         </div>

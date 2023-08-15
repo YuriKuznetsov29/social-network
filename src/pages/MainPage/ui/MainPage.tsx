@@ -11,15 +11,9 @@ interface MainPageProps {
 
 const MainPage = ({ className }: MainPageProps) => {
     return (
-        <>
-            <Header />
-            <Container>
-                <div className={classNames(cls.MainPage, {}, [className])}>
-                    <SideBar />
-                    <div>MainPage</div>
-                </div>
-            </Container>
-        </>
+        <div className={classNames(cls.MainPage, {}, [className])}>
+            <div>MainPage</div>
+        </div>
     )
 }
 
