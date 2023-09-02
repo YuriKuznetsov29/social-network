@@ -1,6 +1,6 @@
 import './ThemeSwitcher.scss'
 import classNames from 'classnames'
-import useTheme from 'app/Providers/lib/useTheme'
+import useTheme from 'app/Providers/ThemeProvider/lib/useTheme'
 
 interface ThemeSwitcherProps {
     className?: string
