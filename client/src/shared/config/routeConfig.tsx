@@ -56,7 +56,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.NOT_FOUND]: {
         path: RoutePath['not-found'],
         element: <NotFoundPage />,
-        authOnly: true,
+        // authOnly: true,
     },
     [AppRoutes.SIGNUP]: {
         path: RoutePath['signUp'],

@@ -7,7 +7,7 @@ import { authActions } from 'features/AuthByEmail/model/slice/signInSlice'
 import { signInByEmail } from 'features/AuthByEmail/model/services/singInByEmail'
 import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
 import cls from './SignInForm.module.scss'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 interface SignInFormProps {
     className?: string
@@ -59,6 +59,9 @@ export const SignInForm = ({ className }: SignInFormProps) => {
                     onChange={onChangePassword}
                 />
                 <Button onClick={(e) => onLoginClick(e)}>Войти</Button>
+                <Button>
+                    <NavLink to="/signUp">Зарегистрироваться</NavLink>
+                </Button>
             </form>
         </div>
     )

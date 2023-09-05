@@ -36,8 +36,12 @@ export const authSlice = createSlice({
             })
             .addCase(signInByEmail.fulfilled, (state, action) => {
                 state.isLoading = false
-                state.isAuth = true
-                state.userData = action.payload.user
+                if (action.payload?.user) {
+                    state.userData = action.payload.user
+                    state.isAuth = true
+                } else {
+                    state.isAuth = false
+                }
             })
             .addCase(signInByEmail.rejected, (state, action) => {
                 state.isLoading = false
@@ -48,8 +52,13 @@ export const authSlice = createSlice({
             })
             .addCase(signUpByEmail.fulfilled, (state, action) => {
                 state.isLoading = false
-                state.isAuth = true
-                state.userData = action.payload.user
+
+                if (action.payload?.user) {
+                    state.userData = action.payload.user
+                    state.isAuth = true
+                } else {
+                    state.isAuth = false
+                }
             })
             .addCase(signUpByEmail.rejected, (state, action) => {
                 state.isLoading = false
@@ -60,8 +69,10 @@ export const authSlice = createSlice({
             })
             .addCase(checkAuth.fulfilled, (state, action) => {
                 state.isLoading = false
-                state.isAuth = true
-                state.userData = action.payload.user
+                if (action.payload?.user) {
+                    state.userData = action.payload.user
+                    state.isAuth = true
+                }
             })
             .addCase(checkAuth.rejected, (state, action) => {
                 state.isLoading = false
