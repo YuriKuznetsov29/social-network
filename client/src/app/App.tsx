@@ -5,21 +5,26 @@ import { Header } from 'widgets/Header'
 import Container from 'shared/ui/Container/Container'
 import { SideBar } from 'widgets/SideBar'
 import { useTheme } from './Providers/ThemeProvider'
-import { SignInForm, SignUpForm } from 'features/AuthByEmail'
+import { SignInForm, SignUpForm, checkAuth } from 'features/AuthByEmail'
+import { useEffect } from 'react'
+import { useAppDispatch } from './Providers/StoreProvider/config/hooks'
 
 const App = () => {
-    const { theme } = useTheme()
+    const { initTheme } = useTheme()
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            dispatch(checkAuth())
+        }
+
+        initTheme()
+    }, [])
 
     return (
-        <div className={classNames('app', {}, [theme])}>
-            {/* <SignInForm /> */}
-            <SignUpForm />
-            <Header />
-            <Container>
-                <SideBar />
-                <AppRouter />
-            </Container>
-        </div>
+        // <div className={classNames('', {}, [])}>
+        <AppRouter />
+        // </div>
     )
 }
 

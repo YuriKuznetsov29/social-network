@@ -7,6 +7,7 @@ import { authActions } from 'features/AuthByEmail/model/slice/signInSlice'
 import { signInByEmail } from 'features/AuthByEmail/model/services/singInByEmail'
 import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
 import cls from './SignInForm.module.scss'
+import { useNavigate } from 'react-router-dom'
 
 interface SignInFormProps {
     className?: string
@@ -15,6 +16,7 @@ interface SignInFormProps {
 export const SignInForm = ({ className }: SignInFormProps) => {
     const { email, password } = useAppSelector(getAuthState)
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     const onChangeEmail = useCallback(
         (value: string) => {
@@ -34,6 +36,7 @@ export const SignInForm = ({ className }: SignInFormProps) => {
         (e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault()
             dispatch(signInByEmail({ email, password }))
+            navigate('/profile')
         },
         [dispatch, email, password]
     )

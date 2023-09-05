@@ -2,6 +2,9 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { signInByEmail } from '../services/singInByEmail'
 import { AuthSchema } from '../types/authSchema'
 import { signUpByEmail } from '../services/signUpByEmail'
+import { checkAuth } from '../services/checkAuth'
+import { signOut } from '../services/signOut'
+import { IUser } from '../types/IUser'
 
 export interface signInState {
     value: number
@@ -9,12 +12,14 @@ export interface signInState {
 
 const initialState: AuthSchema = {
     isLoading: false,
+    isAuth: false,
     email: '',
     password: '',
+    userData: {} as IUser,
 }
 
 export const authSlice = createSlice({
-    name: 'autorization',
+    name: 'authorization',
     initialState,
     reducers: {
         setEmail: (state, action: PayloadAction<string>) => {
@@ -31,6 +36,8 @@ export const authSlice = createSlice({
             })
             .addCase(signInByEmail.fulfilled, (state, action) => {
                 state.isLoading = false
+                state.isAuth = true
+                state.userData = action.payload.user
             })
             .addCase(signInByEmail.rejected, (state, action) => {
                 state.isLoading = false
@@ -41,10 +48,27 @@ export const authSlice = createSlice({
             })
             .addCase(signUpByEmail.fulfilled, (state, action) => {
                 state.isLoading = false
+                state.isAuth = true
+                state.userData = action.payload.user
             })
             .addCase(signUpByEmail.rejected, (state, action) => {
                 state.isLoading = false
                 state.error = action.payload
+            })
+            .addCase(checkAuth.pending, (state) => {
+                state.error = undefined
+            })
+            .addCase(checkAuth.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isAuth = true
+                state.userData = action.payload.user
+            })
+            .addCase(checkAuth.rejected, (state, action) => {
+                state.isLoading = false
+                // state.error = action.payload
+            })
+            .addCase(signOut.fulfilled, (state) => {
+                state.isAuth = false
             })
     },
 })
