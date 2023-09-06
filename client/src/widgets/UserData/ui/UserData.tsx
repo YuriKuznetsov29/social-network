@@ -15,7 +15,11 @@ export const UserData = ({ className }: UserDataProps) => {
     return (
         <div className={classNames(cls.UserData, {}, [className])}>
             <ContentContainer className={cls.contentWrapper}>
-                <User className={cls.user} />
+                {userData.avatarPath ? (
+                    <img src={'http://localhost:8080/' + userData.avatarPath} alt="avatar" />
+                ) : (
+                    <User className={cls.user} />
+                )}
                 <div className={cls.dataWrapper}>
                     <div>{userData.firstName}</div>
                     <div>{userData.lastName}</div>

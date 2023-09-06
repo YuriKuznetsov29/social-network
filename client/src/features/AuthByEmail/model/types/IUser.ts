@@ -6,4 +6,5 @@ export interface IUser {
     password: string
     gender: 'male' | 'female'
     birthDay: string
+    avatarPath: string
 }

@@ -5,6 +5,7 @@ import { signUpByEmail } from '../services/signUpByEmail'
 import { checkAuth } from '../services/checkAuth'
 import { signOut } from '../services/signOut'
 import { IUser } from '../types/IUser'
+import { uploadAvatar } from '../services/uploadAvatar'
 
 export interface signInState {
     value: number
@@ -80,6 +81,12 @@ export const authSlice = createSlice({
             })
             .addCase(signOut.fulfilled, (state) => {
                 state.isAuth = false
+            })
+            .addCase(uploadAvatar.fulfilled, (state, action) => {
+                if (action.payload?.user) {
+                    state.userData = action.payload.user
+                    state.isAuth = true
+                }
             })
     },
 })

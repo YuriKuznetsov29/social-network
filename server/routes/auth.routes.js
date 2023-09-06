@@ -148,6 +148,7 @@ router.post("/signInWithPassword", [
                     posts: exitingUser.posts,
                     requests: exitingUser.requests,
                     birthDay: exitingUser.birthDay,
+                    avatarPath: exitingUser.avatarPath,
                 },
             })
         } catch (e) {
@@ -211,6 +212,7 @@ router.get("/token", async (req, res) => {
                 posts: user.posts,
                 requests: user.requests,
                 birthDay: user.birthDay,
+                avatarPath: user.avatarPath,
             },
         })
     } catch (e) {
