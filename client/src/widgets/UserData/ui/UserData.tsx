@@ -3,23 +3,44 @@ import cls from './UserData.module.scss'
 import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
 import User from 'shared/assets/icons/user.svg'
 import { Button } from 'shared/ui/Button/Button'
-import { useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
+import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
+import { Input } from 'shared/ui/Input/Input'
+import { removeAvatar, uploadAvatar } from 'features/AuthByEmail'
 interface UserDataProps {
     className?: string
 }
 
 export const UserData = ({ className }: UserDataProps) => {
     const { userData } = useAppSelector(getAuthState)
+    const dispatch = useAppDispatch()
+
+    const onChangeLoadAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files[0]
+        dispatch(uploadAvatar(file))
+    }
+
+    const onClickRemoveAvatar = () => {
+        dispatch(removeAvatar())
+    }
 
     return (
         <div className={classNames(cls.UserData, {}, [className])}>
             <ContentContainer className={cls.contentWrapper}>
-                {userData.avatarPath ? (
-                    <img src={'http://localhost:8080/' + userData.avatarPath} alt="avatar" />
-                ) : (
-                    <User className={cls.user} />
-                )}
+                <div>
+                    {userData.avatarPath ? (
+                        <img
+                            className={cls.user}
+                            src={'http://localhost:8080/' + userData.avatarPath}
+                            alt="avatar"
+                        />
+                    ) : (
+                        <User className={cls.user} />
+                    )}
+                    <input accept="image/*" type="file" onChange={(e) => onChangeLoadAvatar(e)} />
+                    <Button onClick={onClickRemoveAvatar}>Удалить аватар</Button>
+                </div>
+
                 <div className={cls.dataWrapper}>
                     <div>{userData.firstName}</div>
                     <div>{userData.lastName}</div>

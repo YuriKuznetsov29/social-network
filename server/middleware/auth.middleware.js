@@ -12,7 +12,6 @@ module.exports = (req, res, next) => {
         }
 
         const data = TokenService.validateAccess(token);
-        console.log(data);
         res.user = data;
         next();
     } catch (e) {

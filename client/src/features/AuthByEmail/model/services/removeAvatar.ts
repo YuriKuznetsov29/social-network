@@ -2,14 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AuthResponse } from '../types/response/AuthResponse'
 import $api from '../../../../http/index'
 
-export const uploadAvatar = createAsyncThunk('file/uploadAvatar', async (file: string | Blob) => {
-    const formData = new FormData()
-    formData.append('file', file)
-
+export const removeAvatar = createAsyncThunk('file/removeAvatar', async () => {
     try {
-        const response = await $api.post<AuthResponse>(
-            `http://localhost:8080/api/file/uploadAvatar`,
-            formData,
+        const response = await $api.delete<AuthResponse>(
+            `http://localhost:8080/api/file/removeAvatar`,
             {
                 withCredentials: true,
             }

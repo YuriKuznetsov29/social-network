@@ -6,6 +6,7 @@ import { checkAuth } from '../services/checkAuth'
 import { signOut } from '../services/signOut'
 import { IUser } from '../types/IUser'
 import { uploadAvatar } from '../services/uploadAvatar'
+import { removeAvatar } from '../services/removeAvatar'
 
 export interface signInState {
     value: number
@@ -85,7 +86,11 @@ export const authSlice = createSlice({
             .addCase(uploadAvatar.fulfilled, (state, action) => {
                 if (action.payload?.user) {
                     state.userData = action.payload.user
-                    state.isAuth = true
+                }
+            })
+            .addCase(removeAvatar.fulfilled, (state, action) => {
+                if (action.payload?.user) {
+                    state.userData = action.payload.user
                 }
             })
     },
