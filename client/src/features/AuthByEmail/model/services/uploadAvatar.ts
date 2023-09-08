@@ -9,10 +9,7 @@ export const uploadAvatar = createAsyncThunk('file/uploadAvatar', async (file: s
     try {
         const response = await $api.post<AuthResponse>(
             `http://localhost:8080/api/file/uploadAvatar`,
-            formData,
-            {
-                withCredentials: true,
-            }
+            formData
         )
 
         return response.data

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { AuthResponse } from 'features/AuthByEmail/model/types/response/AuthResponse'
 
 export const API_URL = `http://localhost:8080/api`
+export const SERVER_URL = `http://localhost:8080/`
 
 //84.38.183.52
 

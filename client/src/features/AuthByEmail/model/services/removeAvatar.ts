@@ -5,10 +5,7 @@ import $api from '../../../../http/index'
 export const removeAvatar = createAsyncThunk('file/removeAvatar', async () => {
     try {
         const response = await $api.delete<AuthResponse>(
-            `http://localhost:8080/api/file/removeAvatar`,
-            {
-                withCredentials: true,
-            }
+            `http://localhost:8080/api/file/removeAvatar`
         )
 
         return response.data

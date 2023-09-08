@@ -8,6 +8,8 @@ import { signInByEmail } from 'features/AuthByEmail/model/services/singInByEmail
 import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
 import cls from './SignInForm.module.scss'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { io } from 'socket.io-client'
+import { SERVER_URL } from '../../../../http/index'
 
 interface SignInFormProps {
     className?: string
@@ -36,10 +38,16 @@ export const SignInForm = ({ className }: SignInFormProps) => {
         (e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault()
             dispatch(signInByEmail({ email, password }))
+            connectToSocket()
             navigate('/profile')
         },
         [dispatch, email, password]
     )
+
+    const connectToSocket = () => {
+        const socket = io(SERVER_URL)
+        console.log(socket)
+    }
 
     return (
         <div className={classNames(cls.SignInForm, {}, [className])}>

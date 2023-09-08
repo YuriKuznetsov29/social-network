@@ -1,4 +1,6 @@
-import { SignInForm, SignUpForm } from 'features/AuthByEmail'
+import { ChangeUserDataForm, SignInForm, SignUpForm } from 'features/AuthByEmail'
+import { AnotherUserPage } from 'pages/AnotherUserPage'
+import { ChangeProfilePage } from 'pages/ChangeProfilePage'
 import { MainPage } from 'pages/MainPage'
 import { MessengerPage } from 'pages/MessengerPage'
 import { NotFoundPage } from 'pages/NotFoundPage'
@@ -15,9 +17,10 @@ export enum AppRoutes {
     PROFILE = 'profile',
     MESSENGER = 'messenger',
     DIALOG = 'dialog',
-    SIGNUP = 'signUp',
-    SIGNIN = 'signIn',
-    // NEWS = 'news',
+    SIGN_UP = 'signUp',
+    SIGN_IN = 'signIn',
+    CHANGE_PROFILE = 'changeProfile',
+    ANOTHER_PROFILE = 'anotherProfile',
     NOT_FOUND = 'not-found',
 }
 
@@ -26,9 +29,10 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.PROFILE]: 'profile',
     [AppRoutes.MESSENGER]: 'messenger',
     [AppRoutes.DIALOG]: 'messenger/:id',
-    [AppRoutes.SIGNUP]: '/signUp',
-    [AppRoutes.SIGNIN]: '/signIn',
-    // [AppRoutes.NEWS]: '/news',
+    [AppRoutes.SIGN_UP]: '/signUp',
+    [AppRoutes.SIGN_IN]: '/signIn',
+    [AppRoutes.CHANGE_PROFILE]: '/changeProfile',
+    [AppRoutes.ANOTHER_PROFILE]: '/:userId',
     [AppRoutes.NOT_FOUND]: '*',
 }
 
@@ -56,14 +60,23 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.NOT_FOUND]: {
         path: RoutePath['not-found'],
         element: <NotFoundPage />,
-        // authOnly: true,
     },
-    [AppRoutes.SIGNUP]: {
-        path: RoutePath['signUp'],
+    [AppRoutes.SIGN_UP]: {
+        path: RoutePath.signUp,
         element: <SignUpForm />,
     },
-    [AppRoutes.SIGNIN]: {
-        path: RoutePath['signIn'],
+    [AppRoutes.SIGN_IN]: {
+        path: RoutePath.signIn,
         element: <SignInForm />,
+    },
+    [AppRoutes.CHANGE_PROFILE]: {
+        path: RoutePath.changeProfile,
+        element: <ChangeProfilePage />,
+        authOnly: true,
+    },
+    [AppRoutes.ANOTHER_PROFILE]: {
+        path: RoutePath.anotherProfile,
+        element: <AnotherUserPage />,
+        authOnly: true,
     },
 }

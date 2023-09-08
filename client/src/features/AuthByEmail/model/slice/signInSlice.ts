@@ -7,6 +7,9 @@ import { signOut } from '../services/signOut'
 import { IUser } from '../types/IUser'
 import { uploadAvatar } from '../services/uploadAvatar'
 import { removeAvatar } from '../services/removeAvatar'
+import { addFriend } from '../services/addFriend'
+import { removeFriend } from '../services/removeFriend'
+import { getAllFriends } from '../services/getAllFriends'
 
 export interface signInState {
     value: number
@@ -17,6 +20,7 @@ const initialState: AuthSchema = {
     isAuth: false,
     email: '',
     password: '',
+    friends: '',
     userData: {} as IUser,
 }
 
@@ -93,8 +97,22 @@ export const authSlice = createSlice({
                     state.userData = action.payload.user
                 }
             })
+            .addCase(addFriend.fulfilled, (state, action) => {
+                if (action.payload?.user) {
+                    state.userData = action.payload.user
+                }
+            })
+            .addCase(removeFriend.fulfilled, (state, action) => {
+                if (action.payload?.user) {
+                    state.userData = action.payload.user
+                }
+            })
+            .addCase(getAllFriends.fulfilled, (state, action) => {
+                if (action.payload?.friends) {
+                    state.friends = action.payload.friends
+                }
+            })
     },
 })
 
 export const { actions: authActions, reducer: authReducer } = authSlice
-// export const { reducer: authReducer } = authSlice

@@ -6,5 +6,6 @@ export interface AuthSchema {
     email: string
     password: string
     error?: string
+    friends: IUser[] | ''
     userData: IUser
 }
