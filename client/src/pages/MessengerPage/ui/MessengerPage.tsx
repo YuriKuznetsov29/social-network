@@ -6,6 +6,7 @@ import { AppLink } from 'shared/ui/AppLink/AppLink'
 import Container from 'shared/ui/Container/Container'
 import { Header } from 'widgets/Header'
 import { SideBar } from 'widgets/SideBar'
+import { Messenger } from 'features/Messenger'
 
 export const MessengerPage = () => {
     return (
@@ -14,7 +15,9 @@ export const MessengerPage = () => {
             <Container>
                 <SideBar />
                 <div style={{ width: '100%' }}>
-                    <ContentContainer className={cls.contentContainer}>
+                    <Messenger />
+
+                    {/* <ContentContainer className={cls.contentContainer}>
                         <Input placeholder="Поиск" className={cls.inputSearch} />
                         <AppLink to={'/messenger/1'}>
                             <div className={cls.dialog}>
@@ -112,7 +115,7 @@ export const MessengerPage = () => {
                                 </div>
                             </div>
                         </AppLink>
-                    </ContentContainer>
+                    </ContentContainer> */}
                 </div>
             </Container>
         </>

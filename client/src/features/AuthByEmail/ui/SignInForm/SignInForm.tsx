@@ -6,10 +6,10 @@ import { useCallback } from 'react'
 import { authActions } from 'features/AuthByEmail/model/slice/signInSlice'
 import { signInByEmail } from 'features/AuthByEmail/model/services/singInByEmail'
 import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
-import cls from './SignInForm.module.scss'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
 import { SERVER_URL } from '../../../../http/index'
+import cls from './SignInForm.module.scss'
 
 interface SignInFormProps {
     className?: string

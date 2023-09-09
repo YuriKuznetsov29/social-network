@@ -1,14 +1,14 @@
-const express = require("express")
-const User = require("../models/User")
-const auth = require("../middleware/auth.middleware")
-const UserService = require("../services/user.service")
-const router = express.Router({ mergeParams: true })
+const express = require("express");
+const User = require("../models/User");
+const auth = require("../middleware/auth.middleware");
+const UserService = require("../services/user.service");
+const router = express.Router({ mergeParams: true });
 
 router.get("/:userId", auth, async (req, res) => {
     try {
-        const { userId } = req.params
+        const { userId } = req.params;
         if (userId) {
-            const user = await User.findById(userId)
+            const user = await User.findById(userId);
 
             if (!user) {
                 return res.status(400).send({
@@ -16,7 +16,7 @@ router.get("/:userId", auth, async (req, res) => {
                         message: "Пользователя с таким id не найдено",
                         code: 400,
                     },
-                })
+                });
             }
 
             res.send({
@@ -32,23 +32,23 @@ router.get("/:userId", auth, async (req, res) => {
                     birthDay: user.birthDay,
                     avatarPath: user.avatarPath,
                 },
-            })
+            });
         }
     } catch (e) {
-        console.log(e)
+        console.log(e);
         res.status(500).json({
             message: "На сервере произошла ошибка. Попробуйте позже",
-        })
+        });
     }
-})
+});
 
 router.patch("/:userId/update", auth, async (req, res) => {
     try {
-        const { userId } = req.params
+        const { userId } = req.params;
         if (userId) {
             const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
                 new: true,
-            })
+            });
             res.send({
                 user: {
                     userId: updatedUser._id,
@@ -62,34 +62,34 @@ router.patch("/:userId/update", auth, async (req, res) => {
                     birthDay: updatedUser.birthDay,
                     avatarPath: updatedUser.avatarPath,
                 },
-            })
+            });
         }
     } catch (e) {
-        console.log(e)
+        console.log(e);
         res.status(500).json({
             message: "На сервере произошла ошибка. Попробуйте позже",
-        })
+        });
     }
-})
+});
 
 router.patch("/:userId/addFriend", async (req, res) => {
     try {
-        const { userId } = req.params
-        const { friendId } = req.body
+        const { userId } = req.params;
+        const { friendId } = req.body;
 
         if (userId && friendId) {
-            let currentUser = await User.findOne({ _id: userId })
-            let friend = await User.findOne({ _id: friendId })
+            let currentUser = await User.findOne({ _id: userId });
+            let friend = await User.findOne({ _id: friendId });
 
-            currentUser.friends.push(friend._id)
-            friend.friends.push(currentUser._id)
+            currentUser.friends.push(friend._id);
+            friend.friends.push(currentUser._id);
 
             await User.findByIdAndUpdate(friendId, friend, {
                 new: true,
-            })
+            });
             const updatedUser = await User.findByIdAndUpdate(userId, currentUser, {
                 new: true,
-            })
+            });
 
             res.send({
                 user: {
@@ -104,36 +104,36 @@ router.patch("/:userId/addFriend", async (req, res) => {
                     birthDay: updatedUser.birthDay,
                     avatarPath: updatedUser.avatarPath,
                 },
-            })
+            });
         }
     } catch (e) {
-        console.log(e)
+        console.log(e);
         res.status(500).json({
             message: "На сервере произошла ошибка. Попробуйте позже",
-        })
+        });
     }
-})
+});
 
 router.patch("/:userId/removeFriend", async (req, res) => {
     try {
-        const { userId } = req.params
-        const { friendId } = req.body
+        const { userId } = req.params;
+        const { friendId } = req.body;
 
         if (userId && friendId) {
-            let currentUser = await User.findOne({ _id: userId })
-            let friend = await User.findOne({ _id: friendId })
+            let currentUser = await User.findOne({ _id: userId });
+            let friend = await User.findOne({ _id: friendId });
 
-            currentUser.friends = currentUser.friends.filter((el) => el !== friendId)
-            friend.friends = friend.friends.filter((el) => el !== userId)
+            currentUser.friends = currentUser.friends.filter((el) => el !== friendId);
+            friend.friends = friend.friends.filter((el) => el !== userId);
 
             await User.findByIdAndUpdate(friendId, friend, {
                 new: true,
-            })
+            });
             const updatedUser = await User.findByIdAndUpdate(userId, currentUser, {
                 new: true,
-            })
+            });
 
-            console.log(friend._id)
+            console.log(friend._id);
             // console.log(userId, friendId, currentUser, friend)
             res.send({
                 user: {
@@ -148,52 +148,65 @@ router.patch("/:userId/removeFriend", async (req, res) => {
                     birthDay: updatedUser.birthDay,
                     avatarPath: updatedUser.avatarPath,
                 },
-            })
+            });
         }
     } catch (e) {
-        console.log(e)
+        console.log(e);
         res.status(500).json({
             message: "На сервере произошла ошибка. Попробуйте позже",
-        })
+        });
     }
-})
+});
 
 router.get("/:userId/getAllFriends", async (req, res) => {
     try {
-        const { userId } = req.params
+        const { userId } = req.params;
 
         if (userId) {
-            let currentUser = await User.findOne({ _id: userId })
+            let currentUser = await User.findOne({ _id: userId });
 
             if (currentUser.friends.length !== 0) {
                 const findStructure = currentUser.friends.map((el) => ({
                     _id: el,
-                }))
+                }));
 
-                const friends = await User.find({ $or: findStructure })
+                const friends = await User.find({ $or: findStructure });
+                const modFriends = friends.map((user) => ({
+                    userId: user._id,
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    gender: user.gender,
+                    friends: user.friends,
+                    posts: user.posts,
+                    requests: user.requests,
+                    birthDay: user.birthDay,
+                    avatarPath: user.avatarPath,
+                }));
+                console.log(modFriends);
                 res.send({
-                    friends,
-                })
+                    friends: modFriends,
+                });
             } else {
                 res.status(400).json({
                     error: {
                         message: "У вас еще нет друзей",
                         code: 400,
                     },
-                })
+                });
             }
         }
     } catch (e) {
-        console.log(e)
+        console.log(e);
         res.status(500).json({
             message: "На сервере произошла ошибка. Попробуйте позже",
-        })
+        });
     }
-})
+});
 
 router.get("/getAllUsers", auth, async (req, res) => {
     try {
-        const data = await UserService.getAllUsers()
+        const data = await UserService.getAllUsers();
         const users = data.map((user) => ({
             userId: user._id,
             email: user.email,
@@ -205,14 +218,14 @@ router.get("/getAllUsers", auth, async (req, res) => {
             requests: user.requests,
             birthDay: user.birthDay,
             avatarPath: user.avatarPath,
-        }))
+        }));
 
-        res.status(200).send(users)
+        res.status(200).send(users);
     } catch (e) {
         res.status(500).json({
             message: "На сервере произошла ошибка. Попробуйте позже",
-        })
+        });
     }
-})
+});
 
-module.exports = router
+module.exports = router;

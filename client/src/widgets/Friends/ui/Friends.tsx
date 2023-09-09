@@ -24,7 +24,7 @@ export const Friends = ({ className }: FriendsProps) => {
     useEffect(() => {
         dispatch(getAllFriends({ userId }))
     }, [])
-
+    console.log(friends)
     return (
         <div className={classNames(cls.Friends, {}, [className])}>
             <ContentContainer className={cls.container}>
