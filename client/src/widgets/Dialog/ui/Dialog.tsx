@@ -6,13 +6,39 @@ import User from 'shared/assets/icons/user.svg'
 import Arrow from 'shared/assets/icons/caret-left-bold.svg'
 import { Input } from 'shared/ui/Input/Input'
 import { useParams } from 'react-router-dom'
+import { Message } from 'widgets/Dialog/model/useChat'
+import { useState } from 'react'
+import { nanoid } from 'nanoid'
+import { useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
+import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
+import useChat from 'widgets/Dialog/model/useChat'
 
 interface DialogProps {
     className?: string
 }
 
 export const Dialog = ({ className }: DialogProps) => {
-    console.log(useParams())
+    const [text, setText] = useState('')
+
+    const { roomId } = useParams()
+
+    const { log, messages, users, sendMessage } = useChat(roomId)
+
+    const { userData } = useAppSelector(getAuthState)
+
+    const onClickSendMessage = () => {
+        const message = {
+            messageId: nanoid(),
+            messageType: 'text',
+            textOrPathToFile: text,
+            roomId: roomId,
+            userId: userData.userId,
+            userName: userData.firstName,
+        }
+
+        sendMessage(message)
+    }
+
     return (
         <ContentContainer className={cls.contentContainer}>
             <div className={cls.dialogHeader}>
@@ -23,16 +49,21 @@ export const Dialog = ({ className }: DialogProps) => {
                 <User className={cls.dialogIcon} />
             </div>
             <div className={cls.messagesBlock}>
-                <div>Сообщение</div>
-                <div>Сообщение</div>
-                <div>Сообщение</div>
-                <div>Сообщение</div>
-                <div>Сообщение</div>
-                <div>Сообщение</div>
-                <div>Сообщение</div>
+                {messages.map((message) => (
+                    <>
+                        <div>{message.userName}</div>
+                        <div>{message.textOrPathToFile}</div>
+                    </>
+                ))}
             </div>
             <div className={cls.inputBlock}>
-                <Input placeholder="Напишите сообщение..." className={cls.inputMessage} />
+                <Input
+                    placeholder="Напишите сообщение..."
+                    className={cls.inputMessage}
+                    value={text}
+                    onChange={setText}
+                />
+                <Button onClick={onClickSendMessage}>Send</Button>
             </div>
         </ContentContainer>
     )

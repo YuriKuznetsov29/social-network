@@ -76,7 +76,7 @@ export const ChangeUserDataForm = ({ className }: SignUpFormProps) => {
                             firstName,
                             lastName,
                             email,
-                            password,
+                            // password,
                             gender,
                             birthDay,
                             userId,

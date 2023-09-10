@@ -1,3 +1,5 @@
+import { Conversations } from './response/Conversations'
+
 export interface IUser {
     email: string
     userId: string
@@ -7,4 +9,6 @@ export interface IUser {
     gender: 'male' | 'female'
     birthDay: string
     avatarPath: string
+    friends: string[]
+    conversations: Conversations[]
 }

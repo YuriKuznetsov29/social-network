@@ -31,6 +31,7 @@ router.get("/:userId", auth, async (req, res) => {
                     requests: user.requests,
                     birthDay: user.birthDay,
                     avatarPath: user.avatarPath,
+                    conversations: user.conversations,
                 },
             });
         }
@@ -61,6 +62,7 @@ router.patch("/:userId/update", auth, async (req, res) => {
                     requests: updatedUser.requests,
                     birthDay: updatedUser.birthDay,
                     avatarPath: updatedUser.avatarPath,
+                    conversations: updatedUser.conversations,
                 },
             });
         }
@@ -103,6 +105,7 @@ router.patch("/:userId/addFriend", async (req, res) => {
                     requests: updatedUser.requests,
                     birthDay: updatedUser.birthDay,
                     avatarPath: updatedUser.avatarPath,
+                    conversations: updatedUser.conversations,
                 },
             });
         }
@@ -147,6 +150,7 @@ router.patch("/:userId/removeFriend", async (req, res) => {
                     requests: updatedUser.requests,
                     birthDay: updatedUser.birthDay,
                     avatarPath: updatedUser.avatarPath,
+                    conversations: updatedUser.conversations,
                 },
             });
         }
@@ -182,6 +186,7 @@ router.get("/:userId/getAllFriends", async (req, res) => {
                     requests: user.requests,
                     birthDay: user.birthDay,
                     avatarPath: user.avatarPath,
+                    conversations: user.conversations,
                 }));
                 console.log(modFriends);
                 res.send({
@@ -195,6 +200,49 @@ router.get("/:userId/getAllFriends", async (req, res) => {
                     },
                 });
             }
+        }
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: "На сервере произошла ошибка. Попробуйте позже",
+        });
+    }
+});
+
+router.patch("/:userId/addConversation", async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { roomId, friendId } = req.body;
+
+        if (userId && friendId && roomId) {
+            let currentUser = await User.findOne({ _id: userId });
+            let friend = await User.findOne({ _id: friendId });
+
+            currentUser.friends.push({ roomId, friendId });
+            friend.friends.push({ roomId, friendId: userId });
+
+            await User.findByIdAndUpdate(friendId, friend, {
+                new: true,
+            });
+            const updatedUser = await User.findByIdAndUpdate(userId, currentUser, {
+                new: true,
+            });
+
+            res.send({
+                user: {
+                    userId: updatedUser._id,
+                    email: updatedUser.email,
+                    firstName: updatedUser.firstName,
+                    lastName: updatedUser.lastName,
+                    gender: updatedUser.gender,
+                    friends: updatedUser.friends,
+                    posts: updatedUser.posts,
+                    requests: updatedUser.requests,
+                    birthDay: updatedUser.birthDay,
+                    avatarPath: updatedUser.avatarPath,
+                    conversations: updatedUser.conversations,
+                },
+            });
         }
     } catch (e) {
         console.log(e);
@@ -218,6 +266,7 @@ router.get("/getAllUsers", auth, async (req, res) => {
             requests: user.requests,
             birthDay: user.birthDay,
             avatarPath: user.avatarPath,
+            conversations: user.conversations,
         }));
 
         res.status(200).send(users);

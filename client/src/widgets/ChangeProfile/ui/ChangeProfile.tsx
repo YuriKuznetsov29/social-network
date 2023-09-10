@@ -30,13 +30,12 @@ const PersonSchema = Yup.object({
         .required('Введите дату рождения')
         .min('1969-11-13', 'Date is too early')
         .max(format(new Date(), 'dd-MM-yyyy'), 'Вы еще не родились'),
-    password: Yup.string()
-        .min(8, 'Пароль не должен быть короче 8 символов')
-        .required('Введите пароль'),
+    password: Yup.string().min(8, 'Пароль не должен быть короче 8 символов'),
+    // .required('Введите пароль'),
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password')], 'Пароли не совпадают')
-        .min(8, 'Пароль не должен быть короче 8 символов')
-        .required('Введите пароль'),
+        .min(8, 'Пароль не должен быть короче 8 символов'),
+    // .required('Введите пароль'),
     gender: Yup.string().required('Выберете значение'),
 })
 
@@ -79,7 +78,6 @@ export const ChangeProfile = ({ className }: ChangeProfileProps) => {
                             firstName,
                             lastName,
                             email,
-                            password,
                             gender,
                             birthDay,
                             userId,

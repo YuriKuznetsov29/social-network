@@ -6,7 +6,7 @@ import { SERVER_URL } from '../../../http/index'
 import { useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 
-interface Message {
+export interface Message {
     messageId: string
     messageType: string
     textOrPathToFile: string
@@ -15,7 +15,7 @@ interface Message {
     userName: string
 }
 
-export default function useChat() {
+export default function useChat(roomId: string) {
     // извлекаем данные пользователя из локального хранилища
     // const user = storage.get(USER_KEY)
     const { userData } = useAppSelector(getAuthState)
@@ -31,7 +31,7 @@ export default function useChat() {
         io(SERVER_URL, {
             query: {
                 // отправляем идентификатор комнаты и имя пользователя на сервер
-                roomId: userData.userId, //user.roomId,
+                roomId: roomId, //user.roomId,
                 userName: userData.firstName,
             },
         })

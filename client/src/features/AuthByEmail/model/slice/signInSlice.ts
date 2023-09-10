@@ -10,6 +10,7 @@ import { removeAvatar } from '../services/removeAvatar'
 import { addFriend } from '../services/addFriend'
 import { removeFriend } from '../services/removeFriend'
 import { getAllFriends } from '../services/getAllFriends'
+import { addConversation } from '../services/addConversation'
 
 export interface signInState {
     value: number
@@ -110,6 +111,11 @@ export const authSlice = createSlice({
             .addCase(getAllFriends.fulfilled, (state, action) => {
                 if (action.payload?.friends) {
                     state.friends = action.payload.friends
+                }
+            })
+            .addCase(addConversation.fulfilled, (state, action) => {
+                if (action.payload?.user) {
+                    state.userData = action.payload.user
                 }
             })
     },

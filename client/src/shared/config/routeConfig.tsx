@@ -28,11 +28,11 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
     [AppRoutes.PROFILE]: 'profile',
     [AppRoutes.MESSENGER]: 'messenger',
-    [AppRoutes.DIALOG]: 'messenger/:id',
+    [AppRoutes.DIALOG]: 'messenger/:roomId',
     [AppRoutes.SIGN_UP]: '/signUp',
     [AppRoutes.SIGN_IN]: '/signIn',
     [AppRoutes.CHANGE_PROFILE]: '/changeProfile',
-    [AppRoutes.ANOTHER_PROFILE]: '/:userId',
+    [AppRoutes.ANOTHER_PROFILE]: '/:anotherUserId',
     [AppRoutes.NOT_FOUND]: '*',
 }
 

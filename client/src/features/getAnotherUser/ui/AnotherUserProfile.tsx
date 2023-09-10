@@ -4,13 +4,14 @@ import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/conf
 import { getAnotherUserState } from '../model/selectors/getAnotherUserState'
 import User from 'shared/assets/icons/user.svg'
 import { Button } from 'shared/ui/Button/Button'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { getAnotherUserData } from '../model/services/getAnotherUserData'
-import cls from './AnotherUserProfile.module.scss'
 import { SERVER_URL } from '../../../http/index'
-import { addFriend, removeFriend } from 'features/AuthByEmail'
+import { addConversation, addFriend, removeFriend } from 'features/AuthByEmail'
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
+import { nanoid } from 'nanoid'
+import cls from './AnotherUserProfile.module.scss'
 
 interface AnotherUserProfileProps {
     className?: string
@@ -19,22 +20,51 @@ interface AnotherUserProfileProps {
 export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
     const { userData } = useAppSelector(getAnotherUserState)
     const {
-        userData: { userId: currentUserId },
+        userData: { userId, friends },
     } = useAppSelector(getAuthState)
     const dispatch = useAppDispatch()
-    const { userId } = useParams()
+    const { anotherUserId } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
-        dispatch(getAnotherUserData({ userId }))
+        dispatch(getAnotherUserData({ userId: anotherUserId }))
     }, [])
 
     const onClickAddFriend = () => {
-        console.log({ friendId: userId, userId: userData.userId })
-        dispatch(addFriend({ friendId: userId, userId: currentUserId }))
+        console.log({ friendId: anotherUserId, userId: userData.userId })
+        dispatch(addFriend({ friendId: anotherUserId, userId }))
     }
 
     const onClickRemoveFriend = () => {
-        dispatch(removeFriend({ friendId: userId, userId: currentUserId }))
+        dispatch(removeFriend({ friendId: anotherUserId, userId }))
+    }
+
+    const isFriend = () => {
+        return friends.includes(anotherUserId)
+    }
+
+    const isConversationCreated = () => {
+        return userData.conversations.find(
+            (conversation) => conversation.friendId === anotherUserId
+        )
+    }
+
+    const createConversation = () => {
+        const conversation = isConversationCreated()
+
+        if (conversation) {
+            navigate(`/${conversation.roomId}`)
+        } else {
+            const roomId = nanoid()
+            dispatch(
+                addConversation({
+                    roomId,
+                    friendId: anotherUserId,
+                    userId,
+                })
+            )
+            navigate(`/${roomId}`)
+        }
     }
 
     return (
@@ -50,8 +80,13 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
                     ) : (
                         <User className={cls.user} />
                     )}
-                    <Button onClick={onClickAddFriend}>Добавить в друзья</Button>
-                    <Button onClick={onClickRemoveFriend}>Удалить из друзей</Button>
+                    {isFriend() ? (
+                        <Button onClick={onClickRemoveFriend}>Удалить из друзей</Button>
+                    ) : (
+                        <Button onClick={onClickAddFriend}>Добавить в друзья</Button>
+                    )}
+
+                    <Button onClick={createConversation}>Написать сообщение</Button>
                 </div>
 
                 <div className={cls.dataWrapper}>
