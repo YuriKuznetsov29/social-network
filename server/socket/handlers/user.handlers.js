@@ -1,33 +1,33 @@
-const users = {};
+const users = {}
 
 module.exports = function userHandlers(io, socket) {
-    const { roomId, userName } = socket;
+    const { roomId, userName } = socket
 
     if (!users[roomId]) {
-        users[roomId] = [];
+        users[roomId] = []
     }
 
     const updateUserList = () => {
-        io.to(roomId).emit("user_list:update", users[roomId]);
-    };
+        io.to(roomId).emit("user_list:update", users[roomId])
+    }
 
     socket.on("user:add", async (user) => {
-        socket.to(roomId).emit("log", `User ${userName} connected`);
+        socket.to(roomId).emit("log", `User ${userName} connected`)
 
-        user.socketId = socket.id;
+        user.socketId = socket.id
 
-        users[roomId].push(user);
+        users[roomId].push(user)
 
-        updateUserList();
-    });
+        updateUserList()
+    })
 
     socket.on("disconnect", () => {
-        if (!users[roomId]) return;
+        if (!users[roomId]) return
+        console.log("disconnect")
+        socket.to(roomId).emit("log", `User ${userName} disconnected`)
 
-        socket.to(roomId).emit("log", `User ${userName} disconnected`);
+        users[roomId] = users[roomId].filter((u) => u.socketId !== socket.id)
 
-        users[roomId] = users[roomId].filter((u) => u.socketId !== socket.id);
-
-        updateUserList();
-    });
-};
+        updateUserList()
+    })
+}

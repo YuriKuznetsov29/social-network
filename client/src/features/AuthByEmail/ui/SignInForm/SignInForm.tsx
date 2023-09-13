@@ -16,7 +16,7 @@ interface SignInFormProps {
 }
 
 export const SignInForm = ({ className }: SignInFormProps) => {
-    const { email, password } = useAppSelector(getAuthState)
+    const { email, password, isAuth } = useAppSelector(getAuthState)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -47,6 +47,10 @@ export const SignInForm = ({ className }: SignInFormProps) => {
     const connectToSocket = () => {
         const socket = io(SERVER_URL)
         console.log(socket)
+    }
+
+    if (isAuth) {
+        navigate('/profile')
     }
 
     return (

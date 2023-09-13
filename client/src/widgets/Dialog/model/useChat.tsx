@@ -6,13 +6,15 @@ import { SERVER_URL } from '../../../http/index'
 import { useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 
-export interface Message {
+export interface MessageData {
     messageId: string
     messageType: string
     textOrPathToFile: string
     roomId: string
     userId: string
     userName: string
+    createdAt?: string
+    avatarPath: string
 }
 
 export default function useChat(roomId: string) {
@@ -23,7 +25,7 @@ export default function useChat(roomId: string) {
     // локальное состояние для списка пользователей
     const [users, setUsers] = useState([])
     // локальное состояние для списка сообщений
-    const [messages, setMessages] = useState<Message[]>([])
+    const [messages, setMessages] = useState<MessageData[]>([])
     // состояние для системного сообщения
     const [log, setLog] = useState(null)
     // иммутабельное состояние для сокета
@@ -62,12 +64,12 @@ export default function useChat(roomId: string) {
     }, [])
 
     // метод для отправки сообщения
-    const sendMessage = (message: Message) => {
+    const sendMessage = (message: MessageData) => {
         socket.emit('message:add', message)
     }
 
     // метод для удаления сообщения
-    const removeMessage = (message: Message) => {
+    const removeMessage = (message: MessageData) => {
         socket.emit('message:remove', message)
     }
 

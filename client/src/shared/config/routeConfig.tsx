@@ -1,6 +1,7 @@
 import { ChangeUserDataForm, SignInForm, SignUpForm } from 'features/AuthByEmail'
 import { AnotherUserPage } from 'pages/AnotherUserPage'
 import { ChangeProfilePage } from 'pages/ChangeProfilePage'
+import { ConversationPage } from 'pages/ConversationPage'
 import { MainPage } from 'pages/MainPage'
 import { MessengerPage } from 'pages/MessengerPage'
 import { NotFoundPage } from 'pages/NotFoundPage'
@@ -16,7 +17,7 @@ export enum AppRoutes {
     MAIN = 'main',
     PROFILE = 'profile',
     MESSENGER = 'messenger',
-    DIALOG = 'dialog',
+    CONVERSATION = 'conversation',
     SIGN_UP = 'signUp',
     SIGN_IN = 'signIn',
     CHANGE_PROFILE = 'changeProfile',
@@ -28,7 +29,7 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
     [AppRoutes.PROFILE]: 'profile',
     [AppRoutes.MESSENGER]: 'messenger',
-    [AppRoutes.DIALOG]: 'messenger/:roomId',
+    [AppRoutes.CONVERSATION]: 'messenger/:roomId',
     [AppRoutes.SIGN_UP]: '/signUp',
     [AppRoutes.SIGN_IN]: '/signIn',
     [AppRoutes.CHANGE_PROFILE]: '/changeProfile',
@@ -52,9 +53,9 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         element: <MessengerPage />,
         authOnly: true,
     },
-    [AppRoutes.DIALOG]: {
-        path: RoutePath.dialog,
-        element: <Dialog />,
+    [AppRoutes.CONVERSATION]: {
+        path: RoutePath.conversation,
+        element: <ConversationPage />,
         authOnly: true,
     },
     [AppRoutes.NOT_FOUND]: {

@@ -1,1 +1,5 @@
 export { Messenger } from '../Messenger/ui/Messenger'
+export { messengerReducer } from './model/slice/MessengerSlice'
+export { getConversationUsers } from './model/services/getConversationUsers'
+export { MessengerSchema } from './model/types/messengerSchema'
+export { getMessengerState } from './model/selectors/getMessengerState'

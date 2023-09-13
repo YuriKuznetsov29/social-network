@@ -18,18 +18,19 @@ const PersonSchema = Yup.object({
     firstName: requiredString,
     lastName: requiredString,
     email: Yup.string().email('Неправильный формат email').required('Введите Email'),
-    birthDay: Yup.date()
-        .transform(function (value, originalValue) {
-            if (this.isType(value)) {
-                return value
-            }
-            const result = parse(originalValue, 'dd.MM.yyyy', new Date())
-            return result
-        })
-        .typeError('Введите действительную дату рождения')
-        .required('Введите дату рождения')
-        .min('1969-11-13', 'Date is too early')
-        .max(format(new Date(), 'dd-MM-yyyy'), 'Вы еще не родились'),
+    birthDay: Yup.string()
+        // Yup.date()
+        //     .transform(function (value, originalValue) {
+        //         if (this.isType(value)) {
+        //             return value
+        //         }
+        //         const result = parse(originalValue, 'dd.MM.yyyy', new Date())
+        //         return result
+        //     })
+        //     .typeError('Введите действительную дату рождения')
+        .required('Введите дату рождения'),
+    //     .min('1969-11-13', 'Date is too early')
+    //     .max(format(new Date(), 'dd-MM-yyyy'), 'Вы еще не родились'),
     password: Yup.string().min(8, 'Пароль не должен быть короче 8 символов'),
     // .required('Введите пароль'),
     confirmPassword: Yup.string()
@@ -98,7 +99,7 @@ export const ChangeProfile = ({ className }: ChangeProfileProps) => {
                     <Field id="email" name="email" placeholder="введите email" type="email" />
                     <ErrorMessage name="email" />
 
-                    <label htmlFor="password">Пароль</label>
+                    {/* <label htmlFor="password">Пароль</label>
                     <Field
                         id="password"
                         name="password"
@@ -116,7 +117,7 @@ export const ChangeProfile = ({ className }: ChangeProfileProps) => {
                         type="password"
                         autoComplete="off"
                     />
-                    <ErrorMessage name="confirmPassword" />
+                    <ErrorMessage name="confirmPassword" /> */}
 
                     <label htmlFor="confirmPassword">Введите дату рождения</label>
                     <Field id="birthDay" name="birthDay" placeholder="dd.mm.yyyy" />

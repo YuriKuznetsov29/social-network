@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require("mongoose")
 
 const schema = new Schema(
     {
@@ -27,10 +27,14 @@ const schema = new Schema(
             type: String,
             required: true,
         },
+        avatarPath: {
+            type: String,
+            required: true,
+        },
     },
     {
         timestamps: true,
     }
-);
+)
 
-module.exports = model("Message", schema);
+module.exports = model("Message", schema)

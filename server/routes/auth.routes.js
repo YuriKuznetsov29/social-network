@@ -69,6 +69,8 @@ router.post("/signUp", [
                     posts: newUser.posts,
                     requests: newUser.requests,
                     birthDay: newUser.birthDay,
+                    avatarPath: newUser.avatarPath,
+                    conversations: newUser.conversations,
                 },
             })
         } catch (e) {
@@ -149,6 +151,7 @@ router.post("/signInWithPassword", [
                     requests: exitingUser.requests,
                     birthDay: exitingUser.birthDay,
                     avatarPath: exitingUser.avatarPath,
+                    conversations: exitingUser.conversations,
                 },
             })
         } catch (e) {
@@ -213,6 +216,7 @@ router.get("/token", async (req, res) => {
                 requests: user.requests,
                 birthDay: user.birthDay,
                 avatarPath: user.avatarPath,
+                conversations: user.conversations,
             },
         })
     } catch (e) {

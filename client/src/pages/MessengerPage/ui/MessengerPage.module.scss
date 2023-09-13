@@ -4,8 +4,9 @@
 }
 
 .contentContainer {
-    width: 100%;
-    padding-bottom: 20px;
+    // width: 100%;
+    height: calc(100vh - var(--header-height));
+    // padding-bottom: 20px;
 }
 
 .avatar {

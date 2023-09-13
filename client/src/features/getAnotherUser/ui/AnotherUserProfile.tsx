@@ -19,11 +19,13 @@ interface AnotherUserProfileProps {
 
 export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
     const { userData } = useAppSelector(getAnotherUserState)
+    const { userData: currentUserData } = useAppSelector(getAuthState)
     const {
         userData: { userId, friends },
     } = useAppSelector(getAuthState)
     const dispatch = useAppDispatch()
     const { anotherUserId } = useParams()
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -44,18 +46,25 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
     }
 
     const isConversationCreated = () => {
-        return userData.conversations.find(
+        console.log(currentUserData.conversations, anotherUserId)
+
+        return currentUserData.conversations?.find(
             (conversation) => conversation.friendId === anotherUserId
         )
     }
 
     const createConversation = () => {
         const conversation = isConversationCreated()
-
+        console.log('find', conversation)
         if (conversation) {
-            navigate(`/${conversation.roomId}`)
+            navigate(`/messenger/${conversation.roomId}`)
         } else {
             const roomId = nanoid()
+            console.log({
+                roomId,
+                friendId: anotherUserId,
+                userId,
+            })
             dispatch(
                 addConversation({
                     roomId,
@@ -63,7 +72,7 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
                     userId,
                 })
             )
-            navigate(`/${roomId}`)
+            navigate(`/messenger/${roomId}`)
         }
     }
 
