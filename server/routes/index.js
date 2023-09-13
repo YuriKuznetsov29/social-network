@@ -5,6 +5,6 @@ router.use("/auth", require("./auth.routes"));
 router.use("/user", require("./user.routes"));
 router.use("/post", require("./post.routes"));
 router.use("/file", require("./files.routes"));
-// router.use('/savedLocations', require('./savedLocations.routes'))
+router.use("/messenger", require("./message.routes"));
 
 module.exports = router;

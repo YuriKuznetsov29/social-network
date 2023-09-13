@@ -5,4 +5,5 @@ export interface IPost {
     date: string
     likes: number
     comments: []
+    author: string
 }

@@ -13,7 +13,7 @@ const initialState: PostHandlerSchema = {
 }
 
 export const postHandlerSlice = createSlice({
-    name: 'messenger',
+    name: 'posts',
     initialState,
     reducers: {},
     extraReducers: (builder) => {

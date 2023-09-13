@@ -32,3 +32,7 @@
     // border-top: 1px var(--container-border-color) solid;
     box-shadow: 0 -1px var(--container-border-color);
 }
+
+.messageContainer {
+    display: flex;
+}

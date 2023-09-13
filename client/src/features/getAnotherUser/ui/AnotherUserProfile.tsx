@@ -12,6 +12,8 @@ import { addConversation, addFriend, removeFriend } from 'features/AuthByEmail'
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 import { nanoid } from 'nanoid'
 import cls from './AnotherUserProfile.module.scss'
+import { getPostHandlerState, getUserPosts } from 'features/PostHandler'
+import { Post } from 'widgets/Post'
 
 interface AnotherUserProfileProps {
     className?: string
@@ -20,11 +22,18 @@ interface AnotherUserProfileProps {
 export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
     const { userData } = useAppSelector(getAnotherUserState)
     const { userData: currentUserData } = useAppSelector(getAuthState)
+
     const {
         userData: { userId, friends },
     } = useAppSelector(getAuthState)
     const dispatch = useAppDispatch()
     const { anotherUserId } = useParams()
+
+    const { posts } = useAppSelector(getPostHandlerState)
+
+    useEffect(() => {
+        dispatch(getUserPosts({ author: anotherUserId }))
+    }, [])
 
     const navigate = useNavigate()
 
@@ -106,6 +115,9 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
                     <div>{userData.birthDay}</div>
                 </div>
             </ContentContainer>
+            {posts.map((post) => (
+                <Post post={post} key={post._id} />
+            ))}
         </div>
     )
 }
