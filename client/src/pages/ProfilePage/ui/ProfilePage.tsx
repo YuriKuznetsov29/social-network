@@ -12,6 +12,7 @@ import { getPostHandlerState, getUserPosts } from 'features/PostHandler'
 import { Post } from 'widgets/Post'
 import { useEffect } from 'react'
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
+import { Button } from 'shared/ui/Button/Button'
 
 interface ProfilePageProps {
     className?: string
@@ -34,6 +35,9 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
                 <div className={classNames(cls.contentWrapper, {}, [className])}>
                     <UserData />
                     <Friends />
+                    <Button onClick={() => dispatch(getUserPosts({ author: userData.userId }))}>
+                        dispatch
+                    </Button>
                     <CreatePost />
                     {posts.map((post) => (
                         <Post post={post} key={post._id} />

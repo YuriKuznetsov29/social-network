@@ -4,7 +4,7 @@ import { PostHandlerResponse } from '../types/postHandlerResponse'
 import { IComment } from '../types/comment'
 
 interface RequestData {
-    comments: string[]
+    postId: string
 }
 
 interface ResponseData {
@@ -15,10 +15,10 @@ export const getCommentsForPost = createAsyncThunk<
     ResponseData,
     RequestData,
     { rejectValue: string }
->('post/getCommentsForPost', async ({ comments }) => {
+>('post/getCommentsForPost', async ({ postId }) => {
     try {
         const response = await $api.post<ResponseData>(`${API_URL}/post/getCommentsForPost`, {
-            comments,
+            postId,
         })
         return response.data
     } catch (e: unknown) {

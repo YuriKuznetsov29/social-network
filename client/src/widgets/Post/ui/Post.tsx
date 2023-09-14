@@ -8,8 +8,10 @@ import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/conf
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 import { Input } from 'shared/ui/Input/Input'
 import Plane from 'shared/assets/icons/paper-plane-right-bold.svg'
-import { useState } from 'react'
-import { createComment } from 'features/PostHandler'
+import { useEffect, useState } from 'react'
+import { createComment, getCommentsForPost, getPostHandlerState } from 'features/PostHandler'
+import { Comment } from 'widgets/Comment'
+import { IComment } from 'features/PostHandler/model/types/comment'
 
 interface PostProps {
     className?: string
@@ -20,12 +22,40 @@ function nl2br(str: string) {
     return { __html: str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + `<br />`) }
 }
 
+interface ResponseData {
+    comments: IComment[]
+}
+
 export const Post = ({ className, post }: PostProps) => {
     const [commentText, setCommentText] = useState('')
-    const { userData } = useAppSelector(getAuthState)
     const [showCommentInput, setShowCommentInput] = useState(false)
+    const [comments, setComments] = useState<IComment[] | null>(null)
+
+    const { userData } = useAppSelector(getAuthState)
+    // const { comments } = useAppSelector(getPostHandlerState)
 
     const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getCommentsForPost({ postId: post._id }))
+
+        const fetchComments = async () => {
+            try {
+                const response = await $api.post<ResponseData>(
+                    `${API_URL}/post/getCommentsForPost`,
+                    {
+                        postId: post._id,
+                    }
+                )
+
+                setComments(response.data.comments)
+            } catch (e: unknown) {
+                console.log(e)
+            }
+        }
+
+        fetchComments()
+    }, [])
 
     const onClickToggleLike = () => {
         $api.post(`${API_URL}/post/toggleLike`, {
@@ -66,6 +96,7 @@ export const Post = ({ className, post }: PostProps) => {
                 />
                 <Plane className={cls.plane} onClick={onClickWriteComment} />
             </div>
+            {comments?.map((comment) => <Comment comment={comment} key={comment._id} />)}
         </ContentContainer>
     )
 }
