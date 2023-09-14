@@ -7,7 +7,7 @@ const schema = new Schema(
         imagePath: { type: String },
         date: { type: Date, default: Date.now },
         likes: { default: 0, type: Number },
-        comments: [[{ default: [], type: Schema.Types.ObjectId, ref: "Comments" }]],
+        comments: [{ default: [], type: Schema.Types.ObjectId, ref: "Comments" }],
     },
     {
         timestamps: true,
