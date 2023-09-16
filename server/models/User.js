@@ -12,7 +12,7 @@ const schema = new Schema(
         conversations: [{ roomId: { type: String }, friendId: { type: String } }],
         friends: [{ default: [], type: String }],
         posts: [{ default: [], type: Schema.Types.ObjectId, ref: "Post" }],
-        requests: [[{ default: [], type: Schema.Types.ObjectId, ref: "User" }]],
+        likes: [{ default: [], type: Schema.Types.ObjectId, ref: "Like" }],
     },
     {
         timestamps: true,

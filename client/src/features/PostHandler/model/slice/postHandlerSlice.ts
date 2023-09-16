@@ -3,9 +3,9 @@ import { PostHandlerSchema } from '../types/postHandlerSchema'
 import { IPost } from '../types/post'
 import { createPost } from '../services/createPost'
 import { getUserPosts } from '../services/getUserPosts'
-import { createComment } from '../services/createComment'
+// import { createComment } from '../services/createComment'
 import { IComment } from '../types/comment'
-import { getCommentsForPost } from '../services/getCommentsForPosts'
+// import { getCommentsForPost } from '../services/getCommentsForPosts'
 
 export interface signInState {
     value: number
@@ -32,16 +32,16 @@ export const postHandlerSlice = createSlice({
                     state.posts = action.payload.posts
                 }
             })
-            .addCase(createComment.fulfilled, (state, action) => {
-                if (action.payload?.posts) {
-                    state.posts = action.payload.posts
-                }
-            })
-            .addCase(getCommentsForPost.fulfilled, (state, action) => {
-                if (action.payload?.comments) {
-                    state.comments = action.payload.comments
-                }
-            })
+        // .addCase(createComment.fulfilled, (state, action) => {
+        //     if (action.payload?.posts) {
+        //         state.posts = action.payload.posts
+        //     }
+        // })
+        // .addCase(getCommentsForPost.fulfilled, (state, action) => {
+        //     if (action.payload?.comments) {
+        //         // state.comments = action.payload.comments
+        //     }
+        // })
     },
 })
 

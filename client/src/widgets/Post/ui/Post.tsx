@@ -8,11 +8,14 @@ import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/conf
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 import { Input } from 'shared/ui/Input/Input'
 import Plane from 'shared/assets/icons/paper-plane-right-bold.svg'
-import { useEffect, useState } from 'react'
-import { createComment, getCommentsForPost, getPostHandlerState } from 'features/PostHandler'
+import { useEffect, useRef, useState } from 'react'
+// import { createComment, getCommentsForPost, getPostHandlerState } from 'features/PostHandler'
 import { Comment } from 'widgets/Comment'
 import { IComment } from 'features/PostHandler/model/types/comment'
-
+import { PostHandlerResponse } from 'features/PostHandler/model/types/postHandlerResponse'
+import Heart from 'shared/assets/icons/iconmonstr-favorite-5.svg'
+import CommentBtn from 'shared/assets/icons/chat-bold.svg'
+import dayjs from 'dayjs'
 interface PostProps {
     className?: string
     post: IPost
@@ -22,26 +25,29 @@ function nl2br(str: string) {
     return { __html: str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + `<br />`) }
 }
 
-interface ResponseData {
+interface ResponseCommentsData {
     comments: IComment[]
+}
+
+interface ResponseIsLikedData {
+    liked: boolean
 }
 
 export const Post = ({ className, post }: PostProps) => {
     const [commentText, setCommentText] = useState('')
     const [showCommentInput, setShowCommentInput] = useState(false)
     const [comments, setComments] = useState<IComment[] | null>(null)
+    const [likes, setLikes] = useState(post.likes)
+    const [likesActive, setLikesActive] = useState(false)
+
+    const commentsScroll = useRef(null)
 
     const { userData } = useAppSelector(getAuthState)
-    // const { comments } = useAppSelector(getPostHandlerState)
-
-    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(getCommentsForPost({ postId: post._id }))
-
         const fetchComments = async () => {
             try {
-                const response = await $api.post<ResponseData>(
+                const response = await $api.post<ResponseCommentsData>(
                     `${API_URL}/post/getCommentsForPost`,
                     {
                         postId: post._id,
@@ -55,48 +61,98 @@ export const Post = ({ className, post }: PostProps) => {
         }
 
         fetchComments()
+
+        const isLiked = async () => {
+            try {
+                const response = await $api.post<ResponseIsLikedData>(`${API_URL}/post/isLiked`, {
+                    author: userData.userId,
+                    postId: post._id,
+                })
+
+                setLikesActive(response.data.liked)
+            } catch (e: unknown) {
+                console.log(e)
+            }
+        }
+
+        isLiked()
     }, [])
 
-    const onClickToggleLike = () => {
-        $api.post(`${API_URL}/post/toggleLike`, {
+    const onClickToggleLike = async () => {
+        const response = await $api.post(`${API_URL}/post/toggleLike`, {
             author: userData.userId,
             postId: post._id,
         })
+
+        setLikes(response.data.likes)
+        setLikesActive((prev) => !prev)
     }
 
     const onClickToggleComment = () => {
         setShowCommentInput((prev) => !prev)
     }
 
-    const onClickWriteComment = () => {
-        dispatch(createComment({ author: userData.userId, body: commentText, postId: post._id }))
+    const onClickWriteComment = async () => {
+        try {
+            const response = await $api.post<ResponseCommentsData>(
+                `${API_URL}/post/createComment`,
+                {
+                    author: userData.userId,
+                    body: commentText,
+                    postId: post._id,
+                }
+            )
+            setComments(response.data.comments)
+        } catch (e: unknown) {
+            console.log(e)
+        }
+
+        setCommentText('')
     }
+
+    useEffect(() => {
+        commentsScroll.current.scrollTop = commentsScroll.current.scrollHeight
+    }, [comments])
 
     return (
         <ContentContainer className={cls.container}>
-            <div dangerouslySetInnerHTML={nl2br(post.text || '')} />
-            {post.imagePath && (
-                <img className={cls.image} src={SERVER_URL + post.imagePath} alt="image" />
-            )}
-            <div className={cls.btnContainer}>
-                <Button onClick={onClickToggleComment}>Комментарий</Button>
-                <div>{post.likes}</div>
-                <Button onClick={onClickToggleLike}>Like</Button>
+            {dayjs(post.date).locale('ru').toNow(true) + ' назад'}
+            <div className={cls.contentContainer}>
+                <div dangerouslySetInnerHTML={nl2br(post.text || '')} />
+                {post.imagePath && (
+                    <img className={cls.image} src={SERVER_URL + post.imagePath} alt="image" />
+                )}
             </div>
+
             <div
-                className={classNames(cls.inputBlock, { [cls.show]: showCommentInput }, [
-                    className,
-                ])}
+                className={classNames(
+                    cls.btnContainer,
+                    { [cls.commentCollapsed]: showCommentInput },
+                    []
+                )}
             >
-                <Input
-                    placeholder="Напиcать комментарий..."
-                    className={cls.inputMessage}
-                    value={commentText}
-                    onChange={setCommentText}
+                <div className={cls.likesValue}>{post.comments.length}</div>
+                <CommentBtn className={cls.commentBtn} onClick={onClickToggleComment} />
+                <div className={cls.likesValue}>{likes}</div>
+                <Heart
+                    className={classNames(cls.heart, { [cls.liked]: likesActive })}
+                    onClick={onClickToggleLike}
                 />
-                <Plane className={cls.plane} onClick={onClickWriteComment} />
             </div>
-            {comments?.map((comment) => <Comment comment={comment} key={comment._id} />)}
+            <div className={classNames(cls.commentBlock, { [cls.show]: showCommentInput }, [])}>
+                <div className={cls.commentsContainer} ref={commentsScroll}>
+                    {comments?.map((comment) => <Comment comment={comment} key={comment._id} />)}
+                </div>
+                <div className={cls.inputBlock}>
+                    <Input
+                        placeholder="Напиcать комментарий..."
+                        className={cls.inputMessage}
+                        value={commentText}
+                        onChange={setCommentText}
+                    />
+                    <Plane className={cls.plane} onClick={onClickWriteComment} />
+                </div>
+            </div>
         </ContentContainer>
     )
 }

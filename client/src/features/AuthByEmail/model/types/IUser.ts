@@ -11,4 +11,5 @@ export interface IUser {
     avatarPath: string
     friends: string[]
     conversations: Conversations[]
+    likes: string[]
 }

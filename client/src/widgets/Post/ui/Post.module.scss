@@ -1,5 +1,13 @@
 .container {
+}
+
+.contentContainer {
     padding: 10px;
+}
+
+.commentsContainer {
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .image {
@@ -7,9 +15,16 @@
 }
 
 .btnContainer {
+    padding: 10px;
     width: 100%;
+    padding: 10px;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+}
+
+.commentCollapsed {
+    border-bottom: 1px var(--container-border-color) solid;
 }
 
 .plane {
@@ -22,12 +37,21 @@
     padding: 10px;
     height: 65px;
     border-top: 1px var(--container-border-color) solid;
-    display: none;
+    display: flex;
     align-items: center;
 }
 
+.commentBlock {
+    display: none;
+}
+
+.commentBtn {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
 .show {
-    display: flex;
+    display: block;
 }
 
 .inputMessage {
@@ -38,4 +62,56 @@
     border: 1px var(--container-border-color) solid;
     border-radius: 8px;
     color: inherit;
+}
+
+.likesValue {
+    margin-right: 8px;
+}
+
+// like btn
+
+$red: #ff3252;
+
+.heart {
+    cursor: pointer;
+    fill-opacity: 0;
+    stroke: #fff;
+    stroke-width: 2px;
+    transition: all 1s;
+}
+
+.liked {
+    fill-opacity: 1;
+    fill: $red;
+    stroke: $red;
+}
+
+*::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+*::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background-color: #dfe9eb;
+}
+
+*::-webkit-scrollbar-track:hover {
+    background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-track:active {
+    background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #397524;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #62a34b;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: #62a34b;
 }

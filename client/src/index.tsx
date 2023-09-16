@@ -5,6 +5,13 @@ import React from 'react'
 import { ThemeProvider } from 'app/Providers/ThemeProvider'
 import { Provider } from 'react-redux'
 import { store } from 'app/Providers/StoreProvider/config/store'
+import AdvancedFormat from 'dayjs/plugin/advancedFormat'
+import isLeapYear from 'dayjs/plugin/isLeapYear'
+import dayjs from 'dayjs'
+import 'dayjs/locale/ru'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
 
 const container = document.getElementById('root')
 const root = createRoot(container!)

@@ -47,6 +47,7 @@ export const CreatePost = ({ className }: CreatePostProps) => {
                 `http://localhost:8080/api/file/uploadImage`,
                 formData
             )
+
             setImagePath(response.data.imagePath)
         } catch (e: unknown) {
             console.log(e)
@@ -65,8 +66,15 @@ export const CreatePost = ({ className }: CreatePostProps) => {
                 onInput={inputText}
             ></div>
             <div className={cls.buttonContainer}>
-                <input type="file" onChange={(e) => onChangeUploadImage(e)} />
-                <Image className={cls.image} />
+                <input
+                    className={cls.input_file}
+                    id="input-file"
+                    type="file"
+                    onChange={(e) => onChangeUploadImage(e)}
+                />
+                <label className={cls.classLabel} htmlFor="input-file">
+                    <Image className={cls.image} />
+                </label>
 
                 <Plane className={cls.plane} onClick={onClickCreatePost} />
             </div>

@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/conf
 import { getLastMessage, getMessengerState } from 'features/Messenger'
 import { IUser } from 'features/AuthByEmail/model/types/IUser'
 import { Avatar } from 'widgets/Avatar'
+import dayjs from 'dayjs'
 
 interface ConversationLinkProps {
     className?: string
@@ -69,7 +70,11 @@ export const ConversationLink = ({ className, roomId, companionId }: Conversatio
                                 <div>{lastMessage?.textOrPathToFile}</div>
                             </div>
                         </div>
-                        <div>{lastMessageTime}</div>
+                        <div>
+                            {dayjs(lastMessage?.createdAt)
+                                .locale('ru')
+                                .toNow(true) + ' назад'}
+                        </div>
                     </div>
                 </div>
             </AppLink>
