@@ -32,6 +32,7 @@ router.get("/:userId", auth, async (req, res) => {
                     birthDay: user.birthDay,
                     avatarPath: user.avatarPath,
                     conversations: user.conversations,
+                    likes: user.likes,
                 },
             });
         }
@@ -63,6 +64,7 @@ router.patch("/:userId/update", auth, async (req, res) => {
                     birthDay: updatedUser.birthDay,
                     avatarPath: updatedUser.avatarPath,
                     conversations: updatedUser.conversations,
+                    likes: updatedUser.likes,
                 },
             });
         }
@@ -106,6 +108,7 @@ router.patch("/:userId/addFriend", async (req, res) => {
                     birthDay: updatedUser.birthDay,
                     avatarPath: updatedUser.avatarPath,
                     conversations: updatedUser.conversations,
+                    likes: updatedUser.likes,
                 },
             });
         }
@@ -151,6 +154,7 @@ router.patch("/:userId/removeFriend", async (req, res) => {
                     birthDay: updatedUser.birthDay,
                     avatarPath: updatedUser.avatarPath,
                     conversations: updatedUser.conversations,
+                    likes: updatedUser.likes,
                 },
             });
         }
@@ -190,6 +194,7 @@ router.get("/:userId/getAllFriends", async (req, res) => {
                     birthDay: user.birthDay,
                     avatarPath: user.avatarPath,
                     conversations: user.conversations,
+                    likes: user.likes,
                 }));
 
                 res.send({
@@ -246,6 +251,7 @@ router.patch("/:userId/addConversation", async (req, res) => {
                     birthDay: updatedUser.birthDay,
                     avatarPath: updatedUser.avatarPath,
                     conversations: updatedUser.conversations,
+                    likes: updatedUser.likes,
                 },
             });
         }
@@ -282,6 +288,7 @@ router.get("/:userId/getConversationUsers", async (req, res) => {
                     birthDay: user.birthDay,
                     avatarPath: user.avatarPath,
                     conversations: user.conversations,
+                    likes: user.likes,
                 }));
 
                 res.send({
@@ -319,6 +326,52 @@ router.get("/getAllUsers", auth, async (req, res) => {
             birthDay: user.birthDay,
             avatarPath: user.avatarPath,
             conversations: user.conversations,
+            likes: user.likes,
+        }));
+
+        res.status(200).send(users);
+    } catch (e) {
+        res.status(500).json({
+            message: "На сервере произошла ошибка. Попробуйте позже",
+        });
+    }
+});
+
+router.get("/findUser/:firstName/:lastName", auth, async (req, res) => {
+    try {
+        const { firstName, lastName } = req.params;
+
+        if (!firstName && !lastName) {
+            res.status(200).send({
+                message: "имя не может быть пустым",
+            });
+        }
+
+        let data;
+        if (firstName && !lastName) {
+            data = await User.find({ firstName: new RegExp(firstName, "i") });
+        } else {
+            data = await User.find({
+                $and: [
+                    { firstName: new RegExp(firstName, "i") },
+                    { lastName: new RegExp(lastName, "i") },
+                ],
+            });
+        }
+
+        const users = data.map((user) => ({
+            userId: user._id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            gender: user.gender,
+            friends: user.friends,
+            posts: user.posts,
+            requests: user.requests,
+            birthDay: user.birthDay,
+            avatarPath: user.avatarPath,
+            conversations: user.conversations,
+            likes: user.likes,
         }));
 
         res.status(200).send(users);

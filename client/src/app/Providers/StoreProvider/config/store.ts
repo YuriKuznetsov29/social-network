@@ -4,6 +4,7 @@ import { authReducer } from 'features/AuthByEmail'
 import { anotherUserReducer } from 'features/getAnotherUser'
 import { messengerReducer } from 'features/Messenger'
 import { postHandlerReducer } from 'features/PostHandler'
+import { searchUsersReducer } from 'features/findUser'
 
 export function createReduxStore(initialState?: StateSchema) {
     const rootReducer: ReducersMapObject<StateSchema> = {
@@ -11,6 +12,7 @@ export function createReduxStore(initialState?: StateSchema) {
         anotherUser: anotherUserReducer,
         messenger: messengerReducer,
         posts: postHandlerReducer,
+        searchUsers: searchUsersReducer,
     }
 
     return configureStore<StateSchema>({
