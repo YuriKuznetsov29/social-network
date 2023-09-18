@@ -25,6 +25,7 @@
 }
 
 .contentContainer {
+    position: relative;
     display: flex;
     justify-content: space-between;
 }
@@ -41,4 +42,10 @@
     &:hover {
         background-color: var(--bg-button-hover);
     }
+}
+
+.searchResults {
+    position: absolute;
+    left: 0;
+    bottom: -409px;
 }

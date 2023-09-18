@@ -337,27 +337,27 @@ router.get("/getAllUsers", auth, async (req, res) => {
     }
 });
 
-router.get("/findUser/:firstName/:lastName", auth, async (req, res) => {
+router.post("/findUser", auth, async (req, res) => {
     try {
-        const { firstName, lastName } = req.params;
+        const { firstName, lastName } = req.body;
 
         if (!firstName && !lastName) {
-            res.status(200).send({
+            return res.status(200).send({
                 message: "имя не может быть пустым",
             });
         }
 
-        let data;
-        if (firstName && !lastName) {
-            data = await User.find({ firstName: new RegExp(firstName, "i") });
-        } else {
-            data = await User.find({
-                $and: [
-                    { firstName: new RegExp(firstName, "i") },
-                    { lastName: new RegExp(lastName, "i") },
-                ],
-            });
-        }
+        // let data;
+        // if (firstName && !lastName) {
+        //     data = await User.find({ firstName: new RegExp(firstName, "i") });
+        // } else {
+        const data = await User.find({
+            $or: [
+                { firstName: new RegExp(firstName, "i") },
+                { lastName: new RegExp(lastName, "i") },
+            ],
+        });
+        // }
 
         const users = data.map((user) => ({
             userId: user._id,
@@ -374,7 +374,7 @@ router.get("/findUser/:firstName/:lastName", auth, async (req, res) => {
             likes: user.likes,
         }));
 
-        res.status(200).send(users);
+        res.status(200).send({ users });
     } catch (e) {
         res.status(500).json({
             message: "На сервере произошла ошибка. Попробуйте позже",

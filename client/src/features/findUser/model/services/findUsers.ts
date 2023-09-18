@@ -16,9 +16,10 @@ export const findUsers = createAsyncThunk<ResponseData, RequestData, { rejectVal
     'user/findUser',
     async ({ firstName, lastName }) => {
         try {
-            const response = await $api.get<ResponseData>(
-                `${API_URL}/user/findUser/${firstName}/${lastName}`
-            )
+            const response = await $api.post<ResponseData>(`${API_URL}/user/findUser`, {
+                firstName,
+                lastName,
+            })
             return response.data
         } catch (e: unknown) {
             console.log(e)

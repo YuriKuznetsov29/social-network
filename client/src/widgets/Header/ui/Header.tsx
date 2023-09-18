@@ -7,7 +7,8 @@ import { useAppDispatch } from 'app/Providers/StoreProvider/config/hooks'
 import { useNavigate } from 'react-router-dom'
 import { signOut } from 'features/AuthByEmail'
 import { FoundUsersList, searchUsersActions } from 'features/findUser'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { MouseEvent } from 'react'
 
 interface HeaderProps {
     className?: string
@@ -23,9 +24,15 @@ export const Header = ({ className }: HeaderProps) => {
         navigate('/')
     }
 
-    const onChangeSearch = () => {
-        dispatch(searchUsersActions.setFirstName('Юрий'))
-        dispatch(searchUsersActions.setLastName('K'))
+    useEffect(() => {
+        const name = searchValue.trim().split(' ')
+        console.log(name)
+        dispatch(searchUsersActions.setFirstName(name[0] || ''))
+        dispatch(searchUsersActions.setLastName(name[1] || ''))
+    }, [searchValue])
+
+    const onChangeSearch = (value: string) => {
+        setSearchValue(value)
     }
 
     return (
@@ -42,9 +49,9 @@ export const Header = ({ className }: HeaderProps) => {
                     <Button className={cls.outBtn} onClick={onSignOut}>
                         Выйти
                     </Button>
+                    <FoundUsersList className={cls.searchResults} />
                 </Container>
             </div>
-            <FoundUsersList />
         </div>
     )
 }
