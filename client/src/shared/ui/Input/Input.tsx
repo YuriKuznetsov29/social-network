@@ -9,6 +9,7 @@ interface InputProps extends HTMLInputProps {
     value?: string
     placeholder?: string
     onChange?: (value: string) => void
+    // id?: 'search'
 }
 
 export const Input = (pros: InputProps) => {
@@ -20,6 +21,7 @@ export const Input = (pros: InputProps) => {
 
     return (
         <input
+            // id={id}
             className={classNames(cls.Input, {}, [className])}
             value={value}
             placeholder={placeholder}

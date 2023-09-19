@@ -1,16 +1,21 @@
 import classNames from 'classnames'
-import cls from './FoundUsersList.module.scss'
 import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
 import { getSearchUsersState } from '../model/selectors/getSearchUsersState'
-import { MouseEventHandler, useEffect, useState, MouseEvent } from 'react'
+import { useEffect, useState } from 'react'
 import { findUsers } from '../model/services/findUsers'
 import { Avatar } from 'widgets/Avatar'
+import { Input } from 'shared/ui/Input/Input'
+import { searchUsersActions } from '../model/slice/searchUsersSlice'
+import cls from './FoundUsersList.module.scss'
+import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
+import { Link } from 'react-router-dom'
 
 interface FoundUsersListProps {
     className?: string
 }
 
 export const FoundUsersList = ({ className }: FoundUsersListProps) => {
+    const [searchValue, setSearchValue] = useState('')
     const [showResults, setShowResults] = useState(false)
 
     const dispatch = useAppDispatch()
@@ -18,51 +23,71 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
 
     useEffect(() => {
         dispatch(findUsers({ firstName, lastName }))
+        if (firstName) {
+            console.log(firstName, 'first')
 
-        if (firstName || lastName) {
             setShowResults(true)
         }
     }, [firstName, lastName])
 
-    const onClickClose = (e: MouseEvent<HTMLDivElement>) => {
-        if (e.currentTarget === e.target) {
-            setShowResults(false)
+    useEffect(() => {
+        const closeSearch = (e: MouseEvent) => {
+            if ((e.target as HTMLElement).id !== 'search') {
+                setShowResults(false)
+                setSearchValue('')
+            }
+            console.log(e.target, (e.currentTarget as HTMLElement).id)
         }
-    }
+
+        document.body.addEventListener<'click'>('click', closeSearch)
+
+        return () => {
+            document.body.removeEventListener<'click'>('click', closeSearch)
+        }
+    }, [])
 
     useEffect(() => {
-        const closeSearch = (e: React.MouseEvent<HTMLElement>) => {
-            if (e.currentTarget.id !== 'closeSearch') {
-                setShowResults(false)
-            }
-        }
+        const name = searchValue.trim().split(' ')
 
-        // document.body.addEventListener('click', (e: React.MouseEvent<HTMLElement>) => {
+        dispatch(searchUsersActions.setFirstName(name[0] || ''))
+        dispatch(searchUsersActions.setLastName(name[1] || ''))
+    }, [searchValue])
 
-        // })
-    })
+    const onChangeSearch = (value: string) => {
+        setSearchValue(value)
+    }
 
     return (
-        <div
-            className={classNames(cls.FoundUsersList, { [cls.show]: showResults }, [className])}
-            onClick={(e: MouseEvent<HTMLDivElement>) => onClickClose(e)}
-        >
-            <div className={cls.results}>
+        <>
+            <Input
+                id="search"
+                className={cls.search}
+                placeholder="Поиск"
+                type="search"
+                value={searchValue}
+                onChange={onChangeSearch}
+                autoComplete="off"
+            />
+            <ContentContainer
+                id="search"
+                className={classNames(cls.results, { [cls.show]: showResults }, [])}
+            >
                 {users ? (
                     users.map((user) => {
-                        console.log(user)
                         return (
-                            <div key={user.userId} className={cls.userContainer}>
-                                <Avatar avatarPath={user.avatarPath} />
-                                {user.lastName}
-                                {user.firstName}
-                            </div>
+                            <Link to={`/${user.userId}`}>
+                                <div key={user.userId} className={cls.userContainer}>
+                                    <Avatar avatarPath={user.avatarPath} className={cls.avatar} />
+                                    <div>{user.firstName}</div>
+                                    <div>{user.lastName}</div>
+                                </div>
+                            </Link>
                         )
                     })
                 ) : (
                     <div>Пользователей не найдено</div>
                 )}
-            </div>
-        </div>
+            </ContentContainer>
+        </>
     )
 }

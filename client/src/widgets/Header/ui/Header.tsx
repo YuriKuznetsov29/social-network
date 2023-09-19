@@ -15,8 +15,6 @@ interface HeaderProps {
 }
 
 export const Header = ({ className }: HeaderProps) => {
-    const [searchValue, setSearchValue] = useState('')
-
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const onSignOut = () => {
@@ -24,32 +22,14 @@ export const Header = ({ className }: HeaderProps) => {
         navigate('/')
     }
 
-    useEffect(() => {
-        const name = searchValue.trim().split(' ')
-        console.log(name)
-        dispatch(searchUsersActions.setFirstName(name[0] || ''))
-        dispatch(searchUsersActions.setLastName(name[1] || ''))
-    }, [searchValue])
-
-    const onChangeSearch = (value: string) => {
-        setSearchValue(value)
-    }
-
     return (
         <div className={cls.container}>
             <div className={classNames(cls.Header, {}, [className])}>
                 <Container className={cls.contentContainer}>
-                    <Input
-                        className={cls.search}
-                        placeholder="Поиск"
-                        type="search"
-                        value={searchValue}
-                        onChange={onChangeSearch}
-                    ></Input>
+                    <FoundUsersList />
                     <Button className={cls.outBtn} onClick={onSignOut}>
                         Выйти
                     </Button>
-                    <FoundUsersList className={cls.searchResults} />
                 </Container>
             </div>
         </div>

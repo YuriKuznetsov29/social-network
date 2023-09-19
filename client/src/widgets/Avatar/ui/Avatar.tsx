@@ -10,11 +10,15 @@ interface AvatarProps {
 
 export const Avatar = ({ className, avatarPath }: AvatarProps) => {
     return (
-        <div className={classNames(cls.Avatar, {}, [className])}>
+        <div className={classNames(cls.Avatar, {}, [])}>
             {avatarPath ? (
-                <img className={cls.user} src={SERVER_URL + avatarPath} alt="avatar" />
+                <img
+                    className={classNames(cls.user, {}, [className])}
+                    src={SERVER_URL + avatarPath}
+                    alt="avatar"
+                />
             ) : (
-                <User className={cls.user} />
+                <User className={classNames(cls.user, {}, [className])} />
             )}
         </div>
     )

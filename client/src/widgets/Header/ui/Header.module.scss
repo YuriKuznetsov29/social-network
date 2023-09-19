@@ -14,16 +14,6 @@
     height: var(--header-height);
 }
 
-.search {
-    width: 200px;
-    height: 30px;
-    background-color: var(--bg-input);
-    border: none;
-    outline: none;
-    border-radius: 6px;
-    color: var(--primary-color);
-}
-
 .contentContainer {
     position: relative;
     display: flex;
@@ -42,10 +32,4 @@
     &:hover {
         background-color: var(--bg-button-hover);
     }
-}
-
-.searchResults {
-    position: absolute;
-    left: 0;
-    bottom: -409px;
 }
