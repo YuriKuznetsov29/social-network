@@ -84,6 +84,26 @@ router.post("/getUserPosts", auth, async (req, res) => {
     }
 })
 
+router.post("/getNews", auth, async (req, res) => {
+    try {
+        const { usersList } = req.body
+
+        let posts = await Promise.all(
+            usersList.map((id) => Post.find({ author: id }).sort({ createdAt: -1 }))
+        )
+        posts = posts.flat(1)
+
+        res.send({
+            posts,
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "На сервере произошла ошибка. Попробуйте позже",
+        })
+    }
+})
+
 router.post("/toggleLike", auth, async (req, res) => {
     try {
         const { author, postId } = req.body

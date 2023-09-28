@@ -47,6 +47,10 @@ router.post("/uploadAvatar", [
                     requests: user.requests,
                     birthDay: user.birthDay,
                     avatarPath: user.avatarPath,
+                    conversations: user.conversations,
+                    likes: user.likes,
+                    isOnline: user.isOnline,
+                    lastSeenOnline: user.lastSeenOnline,
                 },
             })
         } catch (e) {

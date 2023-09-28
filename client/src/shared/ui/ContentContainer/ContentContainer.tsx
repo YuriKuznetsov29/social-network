@@ -10,10 +10,7 @@ interface ContentContainerProps
 
 export const ContentContainer = ({ className, children, ...otherProps }: ContentContainerProps) => {
     return (
-        <div
-            className={classNames(cls.ContentContainer, { [className]: true }, [className])}
-            {...otherProps}
-        >
+        <div className={classNames(cls.ContentContainer, {}, [className])} {...otherProps}>
             {children}
         </div>
     )

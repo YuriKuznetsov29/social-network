@@ -1,15 +1,15 @@
-const userHandlers = require("./handlers/user.handlers.js");
-const messageHandlers = require("./handlers/message.handlers.js");
+const userHandlers = require("./handlers/user.handlers.js")
+const messageHandlers = require("./handlers/message.handlers.js")
 
 module.exports = function (io, socket) {
-    const { roomId, userName } = socket.handshake.query;
+    const { roomId, userName } = socket.handshake.query
 
-    socket.roomId = roomId;
-    socket.userName = userName;
+    socket.roomId = roomId
+    socket.userName = userName
 
-    socket.join(roomId);
+    socket.join(roomId)
 
-    userHandlers(io, socket);
+    userHandlers(io, socket)
 
-    messageHandlers(io, socket);
-};
+    messageHandlers(io, socket, roomId)
+}

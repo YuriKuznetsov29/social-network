@@ -1,5 +1,5 @@
 import { AuthResponse } from 'features/AuthByEmail/model/types/response/AuthResponse'
-import $api from '../../../../http/index'
+import $api from '../../../../shared/api/http/index'
 import { AxiosResponse } from 'axios'
 import { RequestAuthData } from './signUpByEmail'
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AuthResponse } from '../types/response/AuthResponse'
-import $api, { API_URL } from '../../../../http/index'
+import $api, { API_URL } from '../../../../shared/api/http/index'
 import { RequestAuthData } from './signUpByEmail'
 
 export interface RequestChangeData {
@@ -8,7 +8,7 @@ export interface RequestChangeData {
     lastName: string
     email: string
     // password: string
-    gender: 'male' | 'female'
+    gender: 'male' | 'female' | ''
     birthDay: string
     userId: string
 }
@@ -17,18 +17,22 @@ export const changeUserData = createAsyncThunk<
     AuthResponse,
     RequestChangeData,
     { rejectValue: string }
->('user/changeUserData', async ({ firstName, lastName, email, gender, birthDay, userId }) => {
-    try {
-        const response = await $api.patch<AuthResponse>(`${API_URL}/user/${userId}/update`, {
-            firstName,
-            lastName,
-            email,
-            // password,
-            gender,
-            birthDay,
-        })
-        return response.data
-    } catch (e: unknown) {
-        console.log(e)
+>(
+    'user/changeUserData',
+    async ({ firstName, lastName, email, gender, birthDay, userId }, { rejectWithValue }) => {
+        try {
+            const response = await $api.patch<AuthResponse>(`${API_URL}/user/${userId}/update`, {
+                firstName,
+                lastName,
+                email,
+                // password,
+                gender,
+                birthDay,
+            })
+            return response.data
+        } catch (e: unknown) {
+            console.log(e)
+            return rejectWithValue('error')
+        }
     }
-})
+)

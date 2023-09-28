@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
-import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
+import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
-import { authActions } from 'features/AuthByEmail/model/slice/signInSlice'
+import { authActions } from 'features/AuthByEmail/model/slice/authSlice'
 import classNames from 'classnames'
 import { Input } from 'shared/ui/Input/Input'
 import { Button } from 'shared/ui/Button/Button'
@@ -11,6 +11,7 @@ import * as Yup from 'yup'
 import parse from 'date-fns/parse'
 import cls from './SignUpForm.module.scss'
 import { format } from 'date-fns'
+import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 
 export interface Values {
     firstName: string
@@ -18,7 +19,7 @@ export interface Values {
     email: string
     password: string
     confirmPassword: string
-    gender: 'male' | 'female'
+    gender: 'male' | 'female' | ''
     birthDay: string
 }
 

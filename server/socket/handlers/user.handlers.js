@@ -1,4 +1,7 @@
+const User = require("../../models/User")
+
 const users = {}
+let onlineUsers = []
 
 module.exports = function userHandlers(io, socket) {
     const { roomId, userName } = socket
@@ -11,14 +14,38 @@ module.exports = function userHandlers(io, socket) {
         io.to(roomId).emit("user_list:update", users[roomId])
     }
 
-    socket.on("user:add", async (user) => {
+    socket.on("user:connect", async (id, user) => {
+        // console.log(user, id, "connect")
+        if (roomId === "1" && user.userId) {
+            user.socketId = socket.id
+            onlineUsers.push(user)
+            await User.findByIdAndUpdate(user.userId, { isOnline: true })
+        }
+    })
+
+    socket.on("user:add", (user) => {
         socket.to(roomId).emit("log", `User ${userName} connected`)
-
         user.socketId = socket.id
-
         users[roomId].push(user)
 
         updateUserList()
+    })
+
+    const toOfflineUsers = async (users) => {
+        // console.log(users, "users")
+        await Promise.all(
+            users.map((user) =>
+                User.findByIdAndUpdate(user.userId, { isOnline: false, lastSeenOnline: Date.now() })
+            )
+        )
+    }
+
+    socket.on("user:disconnect", async (id, user) => {
+        // console.log(user, id, "disconnected")
+        if (roomId === "1" && user.userId) {
+            onlineUsers = onlineUsers.filter((u) => u.userId !== user.userId)
+            toOfflineUsers([user])
+        }
     })
 
     socket.on("disconnect", () => {
@@ -29,5 +56,10 @@ module.exports = function userHandlers(io, socket) {
         users[roomId] = users[roomId].filter((u) => u.socketId !== socket.id)
 
         updateUserList()
+        if (roomId === "1") {
+            const offlineUsers = onlineUsers.filter((u) => u.socketId === socket.id)
+            onlineUsers = onlineUsers.filter((u) => u.socketId !== socket.id)
+            toOfflineUsers(offlineUsers)
+        }
     })
 }

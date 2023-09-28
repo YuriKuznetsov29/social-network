@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import $api, { API_URL } from '../../../../http/index'
+import $api, { API_URL } from '../../../../shared/api/http/index'
 import { PostHandlerResponse } from '../types/postHandlerResponse'
 import { IComment } from '../types/comment'
 

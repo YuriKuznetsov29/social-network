@@ -1,5 +1,5 @@
-import { IUser } from 'features/AuthByEmail/model/types/IUser'
-import { MessageData } from 'widgets/Dialog/model/useChat'
+import { IUser } from 'entities/UserData/model/types/IUser'
+import { MessageData } from 'app/hooks/useChat'
 
 export interface MessengerSchema {
     lastMessage: MessageData

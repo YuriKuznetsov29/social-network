@@ -1,15 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { AuthResponse } from '../types/response/AuthResponse'
+import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
+import { userDataActions } from 'entities/UserData'
 
-export const checkAuth = createAsyncThunk('login/checkAuth', async () => {
-    try {
-        const response = await axios.get<AuthResponse>(`http://localhost:8080/api/auth/token`, {
-            withCredentials: true,
-        })
-        localStorage.setItem('token', response.data.accessToken)
-        return response.data
-    } catch (e: unknown) {
-        console.log(e)
+export const checkAuth = createAsyncThunk<void, void, ThunkConfig<string>>(
+    'login/checkAuth',
+    async (_, { dispatch, extra, rejectWithValue }) => {
+        try {
+            const response = await extra.api.get<AuthResponse>(`auth/token`, {
+                withCredentials: true,
+            })
+            localStorage.setItem('token', response.data.accessToken)
+            dispatch(userDataActions.setUserData(response.data.user))
+            // return response.data
+        } catch (e) {
+            console.log(e)
+            return rejectWithValue('error')
+        }
     }
-})
+)

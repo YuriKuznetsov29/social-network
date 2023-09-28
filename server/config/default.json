@@ -6,6 +6,6 @@
   "refreshSecret": "super refresh key",
   "clientURL": "http://localhost:3000",
   "clientURLR": "http://84.38.183.52",
-  "staticPath": "C:\\Users\\Сменный персонал\\Downloads\\wa\\sn\\social-network\\server\\static",
-  "staticPathR": "D:\\webdev\\practice\\socialNetwork\\server\\static"
+  "staticPathR": "C:\\Users\\Сменный персонал\\Downloads\\wa\\sn\\social-network\\server\\static",
+  "staticPath": "D:\\webdev\\practice\\socialNetwork\\server\\static"
 }

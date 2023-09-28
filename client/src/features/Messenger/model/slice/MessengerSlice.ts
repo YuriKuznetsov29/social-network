@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IUser } from 'features/AuthByEmail/model/types/IUser'
+import { IUser } from 'entities/UserData/model/types/IUser'
 import { MessengerSchema } from '../types/messengerSchema'
 import { getConversationUsers } from '../services/getConversationUsers'
 import { getLastMessage } from '../services/getLastMessage'
-import { MessageData } from 'widgets/Dialog/model/useChat'
+import { MessageData } from 'app/hooks/useChat'
 
 export interface signInState {
     value: number

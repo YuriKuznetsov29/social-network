@@ -13,6 +13,8 @@ const schema = new Schema(
         friends: [{ default: [], type: String }],
         posts: [{ default: [], type: Schema.Types.ObjectId, ref: "Post" }],
         likes: [{ default: [], type: Schema.Types.ObjectId, ref: "Like" }],
+        isOnline: { default: false, type: Boolean },
+        lastSeenOnline: { type: Date, default: Date.now },
     },
     {
         timestamps: true,

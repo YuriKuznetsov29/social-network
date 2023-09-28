@@ -1,13 +1,12 @@
-import { ChangeUserDataForm, SignInForm, SignUpForm } from 'features/AuthByEmail'
+import { SignInForm, SignUpForm } from 'features/AuthByEmail'
 import { AnotherUserPage } from 'pages/AnotherUserPage'
 import { ChangeProfilePage } from 'pages/ChangeProfilePage'
 import { ConversationPage } from 'pages/ConversationPage'
-import { MainPage } from 'pages/MainPage'
 import { MessengerPage } from 'pages/MessengerPage'
+import { NewsPage } from 'pages/NewsPage'
 import { NotFoundPage } from 'pages/NotFoundPage'
 import { ProfilePage } from 'pages/ProfilePage'
-import { Route, RouteProps } from 'react-router-dom'
-import { Dialog } from 'widgets/Dialog'
+import { RouteProps } from 'react-router-dom'
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean
@@ -22,6 +21,7 @@ export enum AppRoutes {
     SIGN_IN = 'signIn',
     CHANGE_PROFILE = 'changeProfile',
     ANOTHER_PROFILE = 'anotherProfile',
+    NEWS = 'news',
     NOT_FOUND = 'not-found',
 }
 
@@ -34,6 +34,7 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.SIGN_IN]: '/signIn',
     [AppRoutes.CHANGE_PROFILE]: '/changeProfile',
     [AppRoutes.ANOTHER_PROFILE]: '/:anotherUserId',
+    [AppRoutes.NEWS]: '/news',
     [AppRoutes.NOT_FOUND]: '*',
 }
 
@@ -78,6 +79,11 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.ANOTHER_PROFILE]: {
         path: RoutePath.anotherProfile,
         element: <AnotherUserPage />,
+        authOnly: true,
+    },
+    [AppRoutes.NEWS]: {
+        path: RoutePath.news,
+        element: <NewsPage />,
         authOnly: true,
     },
 }

@@ -1,9 +1,9 @@
 import classNames from 'classnames'
-import cls from './ChangeProfilePage.module.scss'
 import { Header } from 'widgets/Header'
 import Container from 'shared/ui/Container/Container'
 import { SideBar } from 'widgets/SideBar'
-import { ChangeProfile } from 'widgets/ChangeProfile'
+import { ChangeProfile } from 'features/AuthByEmail'
+import cls from './ChangeProfilePage.module.scss'
 
 interface ProfilePageProps {
     className?: string

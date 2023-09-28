@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require("mongoose")
 
 const schema = new Schema(
     {
@@ -7,10 +7,10 @@ const schema = new Schema(
             required: true,
             unique: true,
         },
-        messageType: {
-            type: String,
-            required: true,
-        },
+        // messageType: {
+        //     type: String,
+        //     required: true,
+        // },
         textOrPathToFile: {
             type: String,
             required: true,
@@ -19,22 +19,22 @@ const schema = new Schema(
             type: String,
             required: true,
         },
-        userId: {
+        author: {
             type: String,
             required: true,
         },
-        userName: {
-            type: String,
-            required: true,
-        },
-        avatarPath: {
-            default: "",
-            type: String,
-        },
+        // userName: {
+        //     type: String,
+        //     required: true,
+        // },
+        // avatarPath: {
+        //     default: "",
+        //     type: String,
+        // },
     },
     {
         timestamps: true,
     }
-);
+)
 
-module.exports = model("Message", schema);
+module.exports = model("Message", schema)
