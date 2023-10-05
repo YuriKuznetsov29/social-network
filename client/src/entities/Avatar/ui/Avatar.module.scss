@@ -1,5 +1,6 @@
 .Avatar {
     position: relative;
+    display: inline-block;
 }
 
 .user {
@@ -24,9 +25,14 @@
         height: 60px;
     }
 
+    &.MS {
+        width: 50px;
+        height: 50px;
+    }
+
     &.S {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
 }
 

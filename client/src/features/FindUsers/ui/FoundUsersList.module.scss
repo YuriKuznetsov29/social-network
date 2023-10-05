@@ -1,5 +1,5 @@
 .search {
-    padding: 5px;
+    padding: 0 0 0 30px;
     width: 200px;
     height: 30px;
     background-color: var(--bg-input);
@@ -8,6 +8,28 @@
     border-radius: 6px;
     color: var(--primary-color);
 }
+
+.labelSearch {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+}
+
+.iconWrapper {
+    width: 30px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchIcon {
+    width: 16px;
+    height: 16px;
+    fill: var(--icon-color);
+}
+
 .results {
     padding: 10px;
     width: 900px;
@@ -15,7 +37,7 @@
     margin: 0 auto;
     position: absolute;
     left: 0;
-    top: 42px;
+    top: var(--header-height);
     display: none;
     justify-content: flex-start;
     align-items: flex-start;

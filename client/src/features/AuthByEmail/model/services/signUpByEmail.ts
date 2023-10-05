@@ -13,6 +13,7 @@ export interface RequestAuthData {
     password: string
     gender: 'male' | 'female' | ''
     birthDay: string
+    city: string
 }
 
 // <IUser, RequestAuthData, { rejectValue: string }>
@@ -20,7 +21,7 @@ export interface RequestAuthData {
 export const signUpByEmail = createAsyncThunk<void, RequestAuthData, ThunkConfig<string>>(
     'login/signUp',
     async (
-        { firstName, lastName, email, password, gender, birthDay },
+        { firstName, lastName, email, password, gender, birthDay, city },
         { dispatch, extra, rejectWithValue }
     ) => {
         try {
@@ -31,6 +32,7 @@ export const signUpByEmail = createAsyncThunk<void, RequestAuthData, ThunkConfig
                 password,
                 gender,
                 birthDay,
+                city,
             })
             localStorage.setItem('token', response.data.accessToken)
             dispatch(userDataActions.setUserData(response.data.user))

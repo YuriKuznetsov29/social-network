@@ -4,4 +4,5 @@ export interface AnotherUserSchema {
     isLoading: boolean
     error?: string
     userData: IUser
+    _initialized: boolean
 }

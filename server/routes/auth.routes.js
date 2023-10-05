@@ -74,6 +74,7 @@ router.post("/signUp", [
                     likes: newUser.likes,
                     isOnline: newUser.isOnline,
                     lastSeenOnline: newUser.lastSeenOnline,
+                    city: newUser.city,
                 },
             })
         } catch (e) {
@@ -125,7 +126,7 @@ router.post("/signInWithPassword", [
             if (!isPasswordEqual) {
                 return res.status(400).send({
                     error: {
-                        message: "INVALID_PASSWORD",
+                        message: "Неверный пароль",
                         code: 400,
                     },
                 })
@@ -158,6 +159,7 @@ router.post("/signInWithPassword", [
                     likes: exitingUser.likes,
                     isOnline: true,
                     lastSeenOnline: exitingUser.lastSeenOnline,
+                    city: exitingUser.city,
                 },
             })
         } catch (e) {
@@ -226,6 +228,7 @@ router.get("/token", async (req, res) => {
                 likes: user.likes,
                 isOnline: true,
                 lastSeenOnline: user.lastSeenOnline,
+                city: user.city,
             },
         })
     } catch (e) {

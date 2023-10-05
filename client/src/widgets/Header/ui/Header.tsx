@@ -1,14 +1,12 @@
 import classNames from 'classnames'
-import cls from './Header.module.scss'
 import Container from 'shared/ui/Container/Container'
-import { Input } from 'shared/ui/Input/Input'
-import { Button } from 'shared/ui/Button/Button'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { useNavigate } from 'react-router-dom'
 import { signOut } from 'features/AuthByEmail'
 import { FoundUsersList } from 'features/FindUsers'
-import { useEffect, useState } from 'react'
-import { MouseEvent } from 'react'
+import { Notification } from 'features/Notifications'
+import { SettingBtn } from 'entities/SettingBtn'
+import cls from './Header.module.scss'
 
 interface HeaderProps {
     className?: string
@@ -17,21 +15,16 @@ interface HeaderProps {
 export const Header = ({ className }: HeaderProps) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const onSignOut = () => {
-        dispatch(signOut())
-        navigate('/')
-    }
 
     return (
         <div className={cls.container}>
             <div className={classNames(cls.Header, {}, [className])}>
-                <Container className={cls.contentContainer}>
+                <Container className={cls.contentContainer} headerStyle>
                     <FoundUsersList />
-                    <Button className={cls.outBtn} onClick={onSignOut}>
-                        Выйти
-                    </Button>
+                    <SettingBtn />
                 </Container>
             </div>
+            <Notification />
         </div>
     )
 }

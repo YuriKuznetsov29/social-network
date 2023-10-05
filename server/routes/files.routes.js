@@ -51,6 +51,7 @@ router.post("/uploadAvatar", [
                     likes: user.likes,
                     isOnline: user.isOnline,
                     lastSeenOnline: user.lastSeenOnline,
+                    city: user.city,
                 },
             })
         } catch (e) {
@@ -116,6 +117,11 @@ router.delete("/removeAvatar", auth, async (req, res) => {
                 requests: user.requests,
                 birthDay: user.birthDay,
                 avatarPath: user.avatarPath,
+                conversations: user.conversations,
+                likes: user.likes,
+                isOnline: user.isOnline,
+                lastSeenOnline: user.lastSeenOnline,
+                city: user.city,
             },
         })
     } catch (e) {

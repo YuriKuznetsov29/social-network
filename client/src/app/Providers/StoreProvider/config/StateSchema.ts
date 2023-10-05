@@ -5,6 +5,7 @@ import { SearchUsersSchema } from 'features/FindUsers/model/type/searchUsersSche
 import { AnotherUserSchema } from 'features/GetAnotherUserData/model/types/anotherUserSchema'
 import { FriendsSchema } from 'features/GetFriendsData'
 import { MessengerSchema } from 'features/Messenger'
+import { NotificationsSchema } from 'features/Notifications'
 import { PostHandlerSchema } from 'features/PostHandler/model/types/postHandlerSchema'
 import { NavigateOptions, To } from 'react-router-dom'
 
@@ -16,6 +17,7 @@ export interface StateSchema {
     searchUsers: SearchUsersSchema
     friends: FriendsSchema
     user: UserDataSchema
+    notifications: NotificationsSchema
 }
 
 export interface ThunkExtraArg {

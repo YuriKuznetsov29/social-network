@@ -1,13 +1,18 @@
 import classNames from 'classnames'
 import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
-import { Button } from 'shared/ui/Button/Button'
-import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
-import { Link } from 'react-router-dom'
 import { Avatar } from 'entities/Avatar'
 import dayjs from 'dayjs'
-import cls from './UserData.module.scss'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from '../model/selectors/getUserData'
+import { UserDataLoader } from 'shared/ui/UserDataLoader'
+import { getUserInitied } from '../model/selectors/getUserInited'
+import BirthIcon from 'shared/assets/icons/gift-bold.svg'
+import HomeIcon from 'shared/assets/icons/house-bold.svg'
+import FriendsIcon from 'shared/assets/icons/users-bold.svg'
+import PostIcon from 'shared/assets/icons/note-pencil-bold.svg'
+import { useTranslation } from 'react-i18next'
+import cls from './UserData.module.scss'
+import { getUserDataLoading } from '../model/selectors/getUserDataLoading'
 
 interface UserDataProps {
     className?: string
@@ -15,6 +20,11 @@ interface UserDataProps {
 
 export const UserData = ({ className }: UserDataProps) => {
     const userData = useAppSelector(getUserData)
+    const userInit = useAppSelector(getUserInitied)
+    const loading = useAppSelector(getUserDataLoading)
+    const { t } = useTranslation('pages')
+    console.log(loading)
+    if (loading || !userInit) return <UserDataLoader />
 
     return (
         <div className={classNames(cls.UserData, {}, [className])}>
@@ -33,36 +43,36 @@ export const UserData = ({ className }: UserDataProps) => {
                     </h2>
                 </div>
                 <div className={cls.dataWrapper}>
-                    <div className={cls.valueWrapper}>
-                        <div className={cls.valueContainer}>
-                            <div className={cls.value}>
-                                <div>
-                                    <div className={cls.valueTitle}>День рождения:</div>
-                                    <div className={cls.valueTitle}>Город:</div>
+                    <div className={cls.valueContainer}>
+                        <div className={cls.value}>
+                            <div>
+                                <div className={cls.valueTitle}>
+                                    <BirthIcon className={cls.icon} />
+                                    {t('День рождения')}
                                 </div>
-                                <div>
-                                    <div>
-                                        {dayjs(userData.birthDay.split('.').reverse().join('-'))
-                                            .locale('ru')
-                                            .format('D MMMM YYYY')}
-                                    </div>
-                                    <div>Новодвинск</div>
+                                <div className={cls.valueTitle}>
+                                    <HomeIcon className={cls.icon} />
+                                    {t('Город')}
+                                </div>
+                                <div className={cls.valueTitle}>
+                                    <FriendsIcon className={cls.icon} />
+                                    {t('Друзья ')}
+                                </div>
+                                <div className={cls.valueTitle}>
+                                    <PostIcon className={cls.icon} />
+                                    {t('Посты')}
                                 </div>
                             </div>
-
-                            <Link to={'/changeProfile'}>
-                                <Button className={cls.button}>Редактировать профиль</Button>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className={cls.count}>
-                        <div className={cls.countData}>
-                            <h2 className={cls.countValueTitle}>Друзья</h2>
-                            <div className={cls.countValue}>{userData.friends.length}</div>
-                        </div>
-                        <div className={cls.countData}>
-                            <h2 className={cls.countValueTitle}>Посты</h2>
-                            <div className={cls.countValue}>5</div>
+                            <div>
+                                <div>
+                                    {dayjs(userData.birthDay.split('.').reverse().join('-'))
+                                        .locale('ru')
+                                        .format('D MMMM YYYY')}
+                                </div>
+                                <div>{userData.city}</div>
+                                <div>{userData.friends?.length}</div>
+                                <div>5</div>
+                            </div>
                         </div>
                     </div>
                 </div>

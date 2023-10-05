@@ -19,6 +19,7 @@ module.exports = function userHandlers(io, socket) {
         if (roomId === "1" && user.userId) {
             user.socketId = socket.id
             onlineUsers.push(user)
+            // console.log(user, "isOnline")
             await User.findByIdAndUpdate(user.userId, { isOnline: true })
         }
     })
@@ -32,7 +33,7 @@ module.exports = function userHandlers(io, socket) {
     })
 
     const toOfflineUsers = async (users) => {
-        // console.log(users, "users")
+        // console.log(users, "isOffline")
         await Promise.all(
             users.map((user) =>
                 User.findByIdAndUpdate(user.userId, { isOnline: false, lastSeenOnline: Date.now() })

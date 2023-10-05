@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
 import { AuthResponse } from '../types/response/AuthResponse'
 import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
-import { userDataActions } from 'entities/UserData'
+import { loadUserData, userDataActions } from 'entities/UserData'
+import useChat from 'shared/lib/hook/useChat'
 
 export const checkAuth = createAsyncThunk<void, void, ThunkConfig<string>>(
     'login/checkAuth',
@@ -12,8 +12,8 @@ export const checkAuth = createAsyncThunk<void, void, ThunkConfig<string>>(
                 withCredentials: true,
             })
             localStorage.setItem('token', response.data.accessToken)
-            dispatch(userDataActions.setUserData(response.data.user))
-            // return response.data
+            // dispatch(userDataActions.setUserData(response.data.user))
+            dispatch(loadUserData({ userId: response.data.user.userId }))
         } catch (e) {
             console.log(e)
             return rejectWithValue('error')

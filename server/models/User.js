@@ -15,6 +15,7 @@ const schema = new Schema(
         likes: [{ default: [], type: Schema.Types.ObjectId, ref: "Like" }],
         isOnline: { default: false, type: Boolean },
         lastSeenOnline: { type: Date, default: Date.now },
+        city: { type: String },
     },
     {
         timestamps: true,

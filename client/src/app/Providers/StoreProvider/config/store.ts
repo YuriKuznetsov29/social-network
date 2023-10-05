@@ -9,6 +9,7 @@ import { friendsReducer } from 'features/GetFriendsData'
 import { userDataReducer } from 'entities/UserData'
 import { NavigateOptions, To } from 'react-router-dom'
 import $api from 'shared/api/http'
+import { notificationsReducer } from 'features/Notifications'
 
 export function createReduxStore(
     initialState?: StateSchema,
@@ -22,6 +23,7 @@ export function createReduxStore(
         searchUsers: searchUsersReducer,
         friends: friendsReducer,
         user: userDataReducer,
+        notifications: notificationsReducer,
     }
 
     const extraArg: ThunkExtraArg = {

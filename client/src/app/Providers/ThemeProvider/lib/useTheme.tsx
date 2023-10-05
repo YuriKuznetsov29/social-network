@@ -11,12 +11,12 @@ const useTheme = () => {
         document.body.className = newTheme
     }
 
-    // const initTheme = () => {
-    //     document.body.className = theme
-    // }
-    if (theme) document.body.className = theme
+    const initTheme = () => {
+        document.body.className = theme || Theme.LIGHT
+    }
+    // if (theme) document.body.className = theme
 
-    return { theme, toggleTheme }
+    return { theme, toggleTheme, initTheme }
 }
 
 export default useTheme

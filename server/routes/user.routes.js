@@ -35,6 +35,58 @@ router.get("/:userId", auth, async (req, res) => {
                     likes: user.likes,
                     isOnline: user.isOnline,
                     lastSeenOnline: user.lastSeenOnline,
+                    city: user.city,
+                },
+            })
+        }
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "На сервере произошла ошибка. Попробуйте позже",
+        })
+    }
+})
+
+router.get("/:userId/initUser", auth, async (req, res) => {
+    try {
+        const { userId } = req.params
+        if (req.res.user._id !== userId) {
+            return res.status(400).send({
+                error: {
+                    message: "init error",
+                    code: 400,
+                },
+            })
+        }
+        if (userId) {
+            const user = await User.findById(userId)
+
+            if (!user) {
+                return res.status(400).send({
+                    error: {
+                        message: "Пользователя с таким id не найдено",
+                        code: 400,
+                    },
+                })
+            }
+
+            res.send({
+                user: {
+                    userId: user._id,
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    gender: user.gender,
+                    friends: user.friends,
+                    posts: user.posts,
+                    requests: user.requests,
+                    birthDay: user.birthDay,
+                    avatarPath: user.avatarPath,
+                    conversations: user.conversations,
+                    likes: user.likes,
+                    isOnline: true,
+                    lastSeenOnline: user.lastSeenOnline,
+                    city: user.city,
                 },
             })
         }
@@ -69,6 +121,7 @@ router.patch("/:userId/update", auth, async (req, res) => {
                     likes: updatedUser.likes,
                     isOnline: updatedUser.isOnline,
                     lastSeenOnline: updatedUser.lastSeenOnline,
+                    city: updatedUser.city,
                 },
             })
         }
@@ -115,6 +168,7 @@ router.patch("/:userId/addFriend", async (req, res) => {
                     likes: updatedUser.likes,
                     isOnline: updatedUser.isOnline,
                     lastSeenOnline: updatedUser.lastSeenOnline,
+                    city: updatedUser.city,
                 },
             })
         }
@@ -163,6 +217,7 @@ router.patch("/:userId/removeFriend", async (req, res) => {
                     likes: updatedUser.likes,
                     isOnline: updatedUser.isOnline,
                     lastSeenOnline: updatedUser.lastSeenOnline,
+                    city: updatedUser.city,
                 },
             })
         }
@@ -205,6 +260,7 @@ router.get("/:userId/getAllFriends", async (req, res) => {
                     likes: user.likes,
                     isOnline: user.isOnline,
                     lastSeenOnline: user.lastSeenOnline,
+                    city: user.city,
                 }))
 
                 res.send({
@@ -264,6 +320,7 @@ router.patch("/:userId/addConversation", async (req, res) => {
                     likes: updatedUser.likes,
                     isOnline: updatedUser.isOnline,
                     lastSeenOnline: updatedUser.lastSeenOnline,
+                    city: updatedUser.city,
                 },
             })
         }
@@ -303,6 +360,7 @@ router.get("/:userId/getConversationUsers", async (req, res) => {
                     likes: user.likes,
                     isOnline: user.isOnline,
                     lastSeenOnline: user.lastSeenOnline,
+                    city: user.city,
                 }))
 
                 res.send({
@@ -343,6 +401,7 @@ router.get("/getAllUsers", auth, async (req, res) => {
             likes: user.likes,
             isOnline: user.isOnline,
             lastSeenOnline: user.lastSeenOnline,
+            city: user.city,
         }))
 
         res.status(200).send(users)
@@ -390,6 +449,7 @@ router.post("/findUser", auth, async (req, res) => {
             likes: user.likes,
             isOnline: user.isOnline,
             lastSeenOnline: user.lastSeenOnline,
+            city: user.city,
         }))
 
         res.status(200).send({ users })

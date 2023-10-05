@@ -6,6 +6,7 @@ import { IUser } from 'entities/UserData/model/types/IUser'
 import { API_URL } from '../../../shared/api/http/index'
 import $api from '../../../shared/api/http/index'
 import { Avatar } from 'entities/Avatar'
+import dayjs from 'dayjs'
 
 interface CommentProps {
     className?: string
@@ -36,10 +37,15 @@ export const Comment = ({ className, comment }: CommentProps) => {
 
     return (
         <div className={classNames(cls.Comment, {}, [className])}>
-            <Avatar avatarPath={userData?.avatarPath} />
+            <Avatar avatarPath={userData?.avatarPath} size="MS" className={cls.avatar} />
             <div>
-                <div>{userData?.firstName}</div>
-                <div>{comment.body}</div>
+                <div className={cls.header}>
+                    <div>{userData?.firstName}</div>
+                    <div className={cls.time}>
+                        {dayjs(comment.createdAt).locale('ru').toNow(true) + ' назад'}
+                    </div>
+                </div>
+                <div className={cls.text}>{comment.body}</div>
             </div>
         </div>
     )

@@ -17,3 +17,43 @@
     display: flex;
     flex-direction: column;
 }
+
+.avatar {
+    margin-bottom: 10px;
+}
+
+.friendBtn {
+    margin-bottom: 10px;
+}
+
+.name {
+    margin-bottom: 10px;
+    display: flex;
+    color: var(--font-color);
+    font-weight: 400;
+    gap: 10px;
+}
+
+.valueContainer {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.valueTitle {
+    color: var(--secondary-font-color);
+    display: flex;
+    align-items: center;
+}
+
+.btnBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.icon {
+    margin-right: 10px;
+    width: 22px;
+    height: 22px;
+    fill: var(--secondary-font-color);
+}

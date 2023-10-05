@@ -1,7 +1,7 @@
 import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
 import { useParams } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
-import useChat from 'app/hooks/useChat'
+import useChat from 'shared/lib/hook/useChat'
 import { MessageInput } from './MessageInput'
 import { DialogHeader } from './DialogHeader'
 import { Message } from 'entities/Message'

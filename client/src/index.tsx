@@ -7,6 +7,8 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { StoreProvider } from 'app/Providers/StoreProvider'
+import { ErrorBoundary } from 'app/Providers/ErrorBoundary'
+import 'shared/config/i18n/i18n'
 
 dayjs.extend(relativeTime)
 
@@ -14,12 +16,14 @@ const container = document.getElementById('root')
 const root = createRoot(container!)
 root.render(
     <React.StrictMode>
-        <StoreProvider>
-            <BrowserRouter>
-                <ThemeProvider>
-                    <App />
-                </ThemeProvider>
-            </BrowserRouter>
-        </StoreProvider>
+        <ErrorBoundary>
+            <StoreProvider>
+                <BrowserRouter>
+                    <ThemeProvider>
+                        <App />
+                    </ThemeProvider>
+                </BrowserRouter>
+            </StoreProvider>
+        </ErrorBoundary>
     </React.StrictMode>
 )

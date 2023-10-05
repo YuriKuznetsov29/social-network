@@ -4,4 +4,5 @@ export interface FriendsSchema {
     error?: string
     isLoading: boolean
     friends: IUser[]
+    _initialized: boolean
 }

@@ -3,4 +3,5 @@ export interface IComment {
     author: string
     postId: string
     body: string
+    createdAt: string
 }

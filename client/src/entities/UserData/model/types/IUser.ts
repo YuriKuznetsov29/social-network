@@ -14,4 +14,5 @@ export interface IUser {
     likes: string[]
     isOnline: boolean
     lastSeenOnline: string
+    city: string
 }

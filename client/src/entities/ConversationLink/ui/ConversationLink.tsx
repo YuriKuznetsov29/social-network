@@ -1,9 +1,9 @@
 import { AppLink } from 'shared/ui/AppLink/AppLink'
-import useChat, { MessageData } from 'app/hooks/useChat'
+import useChat, { MessageData } from 'shared/lib/hook/useChat'
 import { useEffect, useState } from 'react'
 import { IUser } from 'entities/UserData/model/types/IUser'
 import dayjs from 'dayjs'
-import { getUserDataById } from 'app/services/getUserDataById'
+import { getUserDataById } from 'shared/api/getUserDataById'
 import { Avatar } from 'entities/Avatar'
 import cls from './ConversationLink.module.scss'
 
@@ -58,8 +58,13 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                         {companion?.firstName} {companion?.lastName}
                     </div>
                     <div className={cls.messageContainer}>
-                        <Avatar avatarPath={author?.avatarPath} />
-                        <div className={cls.lastMessageText}>{lastMessage?.textOrPathToFile}</div>
+                        <Avatar avatarPath={author?.avatarPath} className={cls.avatarMsg} />
+                        <div className={cls.lastMessageText}>
+                            {lastMessage?.textOrPathToFile &&
+                            lastMessage?.textOrPathToFile?.length > 50
+                                ? lastMessage?.textOrPathToFile.slice(0, 50) + '...'
+                                : lastMessage?.textOrPathToFile}
+                        </div>
                     </div>
                 </div>
                 <div className={cls.time}>

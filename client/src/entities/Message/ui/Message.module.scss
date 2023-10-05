@@ -1,8 +1,30 @@
 .Message {
-    padding: 5px;
+    margin-bottom: 10px;
+    padding: 5px 20px;
     display: flex;
+    align-items: center;
 }
 
 .nameWrapper {
     display: flex;
+}
+
+.avatar {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.time {
+    color: var(--secondary-font-color);
+}
+
+.messageText {
+    color: var(--font-color);
+    word-break: break-all;
+}
+
+.name {
+    color: var(--primary-color);
+    margin-right: 10px;
 }

@@ -11,6 +11,7 @@ const initialState: AnotherUserSchema = {
     isLoading: false,
     error: '',
     userData: {} as IUser,
+    _initialized: false,
 }
 
 export const anotherUserSlice = createSlice({
@@ -23,6 +24,7 @@ export const anotherUserSlice = createSlice({
                 state.error = undefined
             })
             .addCase(getAnotherUserData.fulfilled, (state, action) => {
+                state._initialized = true
                 state.isLoading = false
                 if (action.payload?.user) {
                     state.userData = action.payload.user

@@ -11,6 +11,7 @@ const initialState: FriendsSchema = {
     error: '',
     isLoading: false,
     friends: [] as IUser[],
+    _initialized: false,
 }
 
 export const friendSlice = createSlice({
@@ -25,6 +26,7 @@ export const friendSlice = createSlice({
             })
             .addCase(getAllFriends.fulfilled, (state, action) => {
                 state.isLoading = false
+                state._initialized = true
                 if (action.payload?.friends) {
                     state.friends = action.payload.friends
                 }

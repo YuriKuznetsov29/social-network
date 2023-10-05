@@ -1,14 +1,20 @@
 import classNames from 'classnames'
 import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
-import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar } from 'entities/Avatar'
-import { getAllFriends, getFriendsState } from 'features/GetFriendsData'
+import {
+    getAllFriends,
+    getFriendsLoadingStatus,
+    getFriendsState,
+    getInitFriendsStatus,
+} from 'features/GetFriendsData'
 import { IUser, getUserData } from 'entities/UserData'
-import cls from './Friends.module.scss'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
+import { FriendsLoader } from 'shared/ui/FriendLoader'
+import { useTranslation } from 'react-i18next'
+import cls from './Friends.module.scss'
 
 interface FriendsProps {
     className?: string
@@ -17,17 +23,24 @@ interface FriendsProps {
 export const Friends = ({ className }: FriendsProps) => {
     const { userId } = useAppSelector(getUserData)
     const { friends } = useAppSelector(getFriendsState)
+    const loading = useAppSelector(getFriendsLoadingStatus)
+    const initStatus = useAppSelector(getInitFriendsStatus)
+    const { t } = useTranslation('pages')
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
-        dispatch(getAllFriends({ userId }))
-    }, [])
+        if (userId) {
+            dispatch(getAllFriends({ userId }))
+        }
+    }, [userId])
+
+    if (!initStatus) return <FriendsLoader />
 
     return (
         <div className={classNames(cls.Friends, {}, [className])}>
             <ContentContainer className={cls.container}>
-                <h3>Друзья</h3>
+                <h3 className={cls.title}>{t('Друзья')}</h3>
 
                 <div className={cls.friendsWrapper}>
                     {friends

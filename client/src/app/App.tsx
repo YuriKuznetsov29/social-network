@@ -1,15 +1,14 @@
-import classNames from 'classnames'
 import { AppRouter } from './router'
 import { useTheme } from './Providers/ThemeProvider'
 import { checkAuth } from 'features/AuthByEmail'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { useAppDispatch } from '../shared/lib/hook/useAppDispatch'
+import useChat from '../shared/lib/hook/useChat'
 import './styles/index.scss'
-import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
-import useChat from './hooks/useChat'
 
 const App = () => {
-    // useTheme()
+    const { initTheme } = useTheme()
+
     const dispatch = useAppDispatch()
 
     useChat('1')
@@ -19,10 +18,14 @@ const App = () => {
             dispatch(checkAuth())
         }
 
-        // initTheme()
+        initTheme()
     }, [])
 
-    return <AppRouter />
+    return (
+        <Suspense fallback="">
+            <AppRouter />
+        </Suspense>
+    )
 }
 
 export default App

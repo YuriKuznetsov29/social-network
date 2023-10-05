@@ -8,9 +8,11 @@ import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import { Avatar } from 'entities/Avatar'
 import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
-import cls from './FoundUsersList.module.scss'
 import { IUser } from 'entities/UserData'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
+import SearchIcon from 'shared/assets/icons/magnifying-glass-bold.svg'
+import { useTranslation } from 'react-i18next'
+import cls from './FoundUsersList.module.scss'
 
 interface FoundUsersListProps {
     className?: string
@@ -19,7 +21,7 @@ interface FoundUsersListProps {
 export const FoundUsersList = ({ className }: FoundUsersListProps) => {
     const [searchValue, setSearchValue] = useState('')
     const [showResults, setShowResults] = useState(false)
-
+    const { t } = useTranslation('pages')
     const dispatch = useAppDispatch()
     const { users, firstName, lastName } = useAppSelector(getSearchUsersState)
 
@@ -60,25 +62,37 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
 
     return (
         <>
-            <Input
-                id="search"
-                className={cls.search}
-                placeholder="Поиск"
-                type="search"
-                value={searchValue}
-                onChange={onChangeSearch}
-                autoComplete="off"
-            />
+            <label className={cls.labelSearch} htmlFor="search">
+                <div className={cls.iconWrapper}>
+                    <SearchIcon className={cls.searchIcon} />
+                </div>
+                <Input
+                    id="search"
+                    className={cls.search}
+                    placeholder={t('Поиск')}
+                    type="search"
+                    value={searchValue}
+                    onChange={onChangeSearch}
+                    autoComplete="off"
+                />
+            </label>
+
             <ContentContainer
                 id="search"
                 className={classNames(cls.results, { [cls.show]: showResults }, [])}
             >
-                {users ? (
+                {users.length ? (
                     users.map((user: IUser) => {
                         return (
                             <Link to={`/${user.userId}`}>
                                 <div key={user.userId} className={cls.userContainer}>
-                                    <Avatar avatarPath={user.avatarPath} className={cls.avatar} />
+                                    <Avatar
+                                        avatarPath={user.avatarPath}
+                                        className={cls.avatar}
+                                        size="L"
+                                        isOnline={user.isOnline}
+                                        lastSeenOnline={user.lastSeenOnline}
+                                    />
                                     <div>{user.firstName}</div>
                                     <div>{user.lastName}</div>
                                 </div>
@@ -86,7 +100,7 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
                         )
                     })
                 ) : (
-                    <div>Пользователей не найдено</div>
+                    <div>{t('Пользователей не найдено')}</div>
                 )}
             </ContentContainer>
         </>

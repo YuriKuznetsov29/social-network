@@ -1,11 +1,12 @@
 import classNames from 'classnames'
-import { MessageData } from 'app/hooks/useChat'
+import { MessageData } from 'shared/lib/hook/useChat'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import { IUser } from 'entities/UserData/model/types/IUser'
 import $api, { API_URL } from '../../../shared/api/http/index'
 import { Avatar } from 'entities/Avatar'
 import cls from './Message.module.scss'
+import { useTranslation } from 'react-i18next'
 
 interface ResponseUserData {
     user: IUser
@@ -18,6 +19,7 @@ interface MessageProps {
 
 export const Message = ({ className, message }: MessageProps) => {
     const [author, setAuthor] = useState<IUser | null>(null)
+    const { t, i18n } = useTranslation('pages')
 
     useEffect(() => {
         const getUserData = async () => {
@@ -36,16 +38,16 @@ export const Message = ({ className, message }: MessageProps) => {
 
     return (
         <div className={classNames(cls.Message, {}, [className])}>
-            <Avatar avatarPath={author?.avatarPath} />
-            <div>
+            <Avatar avatarPath={author?.avatarPath} size="MS" className={cls.avatar} />
+            <span>
                 <div className={cls.nameWrapper}>
-                    <div>{author?.firstName + ' '}</div>
+                    <div className={cls.name}>{author?.firstName}</div>
                     <div className={cls.time}>
-                        {dayjs(message.createdAt).locale('ru').toNow(true) + ' назад'}
+                        {dayjs(message.createdAt).locale(i18n.language).toNow(true) + t(' назад')}
                     </div>
                 </div>
-                <div>{message.textOrPathToFile}</div>
-            </div>
+                <div className={cls.messageText}>{message.textOrPathToFile}</div>
+            </span>
         </div>
     )
 }

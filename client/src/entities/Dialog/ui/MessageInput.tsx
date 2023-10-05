@@ -3,11 +3,12 @@ import cls from './MessageInput.module.scss'
 import { Input } from 'shared/ui/Input/Input'
 import Plane from 'shared/assets/icons/paper-plane-right-bold.svg'
 import { useCallback, useEffect, useState } from 'react'
-import { MessageData } from '../../../app/hooks/useChat'
+import { MessageData } from '../../../shared/lib/hook/useChat'
 import { nanoid } from 'nanoid'
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
+import { useTranslation } from 'react-i18next'
 
 interface MessageInputProps {
     className?: string
@@ -17,7 +18,7 @@ interface MessageInputProps {
 
 export const MessageInput = (props: MessageInputProps) => {
     const { className, sendMessage, roomId } = props
-
+    const { t } = useTranslation('pages')
     const [text, setText] = useState('')
 
     const userData = useAppSelector(getUserData)
@@ -56,7 +57,7 @@ export const MessageInput = (props: MessageInputProps) => {
     return (
         <div className={classNames(cls.MessageInput, {}, [className])}>
             <Input
-                placeholder="Напишите сообщение..."
+                placeholder={t('Напишите сообщение...')}
                 className={cls.inputMessage}
                 value={text}
                 onChange={setText}

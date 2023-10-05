@@ -1,14 +1,17 @@
 import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
 import Plane from 'shared/assets/icons/paper-plane-right-bold.svg'
 import Image from 'shared/assets/icons/image-bold.svg'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { createPost } from 'features/PostHandler/model/services/createPost'
 import $api from '../../../shared/api/http/index'
-import cls from './CreatePost.module.scss'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { getAuthState } from 'features/AuthByEmail'
 import { getUserData } from 'entities/UserData'
+import cls from './CreatePost.module.scss'
+import { notificationsActions } from 'features/Notifications'
+import { CreatePostLoader } from 'shared/ui/CreatePostLoader'
+import { getPostLoadingStatus } from '../model/selectors/getPostLoadingStatus'
+import { getInitPostStatus } from '../model/selectors/getInitPostStatus'
 
 interface CreatePostProps {
     className?: string
@@ -24,15 +27,24 @@ export const CreatePost = ({ className }: CreatePostProps) => {
 
     const dispatch = useAppDispatch()
     const userData = useAppSelector(getUserData)
+    const loading = useAppSelector(getPostLoadingStatus)
+    const init = useAppSelector(getInitPostStatus)
 
     const onClickCreatePost = () => {
-        dispatch(
-            createPost({ author: userData.userId, imagePath, text: input.current?.innerText || '' })
-        )
-
-        if (input.current?.innerText) {
-            input.current.innerText = ''
+        if (input.current?.innerText.trim() !== '' || imagePath) {
+            dispatch(
+                createPost({
+                    author: userData.userId,
+                    imagePath,
+                    text: input.current?.innerText || '',
+                })
+            )
             setImagePath('')
+            if (input.current?.innerText) {
+                input.current.innerText = ''
+            }
+        } else {
+            dispatch(notificationsActions.setNotification(`Пост должен содержать текст или фото`))
         }
     }
 
@@ -56,29 +68,36 @@ export const CreatePost = ({ className }: CreatePostProps) => {
         }
     }
 
-    return (
-        <ContentContainer className={cls.container}>
-            <div
-                className={cls.area}
-                contentEditable
-                aria-multiline
-                role="textbox"
-                data-placeholder="Что у вас нового?"
-                ref={input}
-            ></div>
-            <div className={cls.buttonContainer}>
-                <input
-                    className={cls.input_file}
-                    id="input-file"
-                    type="file"
-                    onChange={(e) => onChangeUploadImage(e)}
-                />
-                <label className={cls.classLabel} htmlFor="input-file">
-                    <Image className={cls.image} />
-                </label>
+    if (!init) return <CreatePostLoader />
 
-                <Plane className={cls.plane} onClick={onClickCreatePost} />
-            </div>
-        </ContentContainer>
+    return (
+        <>
+            <ContentContainer className={cls.container}>
+                <div
+                    className={cls.area}
+                    contentEditable
+                    aria-multiline
+                    role="textbox"
+                    data-placeholder="Что у вас нового?"
+                    ref={input}
+                ></div>
+                <div className={cls.buttonContainer}>
+                    <input
+                        className={cls.input_file}
+                        accept="image/*"
+                        id="input-file"
+                        type="file"
+                        onChange={(e) => onChangeUploadImage(e)}
+                    />
+                    <label className={cls.classLabel} htmlFor="input-file">
+                        {imagePath && <div className={cls.imageText}>Изображение прикреплено</div>}
+                        <Image className={cls.image} />
+                    </label>
+
+                    <Plane className={cls.plane} onClick={onClickCreatePost} />
+                </div>
+            </ContentContainer>
+            {/* <CreatePostLoader /> */}
+        </>
     )
 }

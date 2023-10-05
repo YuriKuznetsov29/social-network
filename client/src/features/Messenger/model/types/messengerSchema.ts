@@ -1,5 +1,5 @@
 import { IUser } from 'entities/UserData/model/types/IUser'
-import { MessageData } from 'app/hooks/useChat'
+import { MessageData } from 'shared/lib/hook/useChat'
 
 export interface MessengerSchema {
     lastMessage: MessageData

@@ -25,6 +25,7 @@
 .image,
 .plane {
     cursor: pointer;
+    fill: var(--icon-color);
 }
 
 .classLabel {
@@ -37,4 +38,8 @@
     opacity: 0;
     visibility: hidden;
     position: absolute;
+}
+
+.imageText {
+    margin-right: 10px;
 }

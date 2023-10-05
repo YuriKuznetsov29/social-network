@@ -3,7 +3,7 @@ import { IUser } from 'entities/UserData/model/types/IUser'
 import { MessengerSchema } from '../types/messengerSchema'
 import { getConversationUsers } from '../services/getConversationUsers'
 import { getLastMessage } from '../services/getLastMessage'
-import { MessageData } from 'app/hooks/useChat'
+import { MessageData } from 'shared/lib/hook/useChat'
 
 export interface signInState {
     value: number

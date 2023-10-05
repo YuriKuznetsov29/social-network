@@ -12,8 +12,10 @@ export interface signInState {
 }
 
 const initialState: PostHandlerSchema = {
+    isLoading: false,
     comments: [] as IComment[],
     posts: [] as IPost[],
+    _initialized: false,
 }
 
 export const postHandlerSlice = createSlice({
@@ -27,7 +29,15 @@ export const postHandlerSlice = createSlice({
                     state.posts = action.payload.posts
                 }
             })
+            .addCase(getUserPosts.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getUserPosts.rejected, (state, action) => {
+                state.isLoading = false
+            })
             .addCase(getUserPosts.fulfilled, (state, action) => {
+                state.isLoading = false
+                state._initialized = true
                 if (action.payload?.posts) {
                     state.posts = action.payload.posts
                 }

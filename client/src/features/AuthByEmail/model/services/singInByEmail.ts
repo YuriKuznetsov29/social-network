@@ -1,10 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AuthService } from './AuthService'
-import axios, { AxiosError } from 'axios'
-import { IUser } from '../../../../entities/UserData/model/types/IUser'
+import { isAxiosError } from 'axios'
 import { AuthResponse } from '../types/response/AuthResponse'
 import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
-import { userDataActions } from 'entities/UserData'
+import { loadUserData, userDataActions } from 'entities/UserData'
 
 interface RequestAuthData {
     email: string
@@ -20,21 +18,19 @@ export const signInByEmail = createAsyncThunk<AuthResponse, RequestAuthData, Thu
                 authData
             )
             localStorage.setItem('token', response.data.accessToken)
-            dispatch(userDataActions.setUserData(response.data.user))
+            // dispatch(userDataActions.setUserData(response.data.user))
+            dispatch(loadUserData({ userId: response.data.user.userId }))
             if (extra.navigate) {
                 extra.navigate('/profile')
             }
             return response.data
         } catch (e) {
             console.log(e)
-            // if (axios.isAxiosError(e) && e.response) {
-            //     // return e.response?.data.error.message
-            //     // return rejectWithValue(e.response.data.error.message)
-            //     return rejectWithValue('error')
-            // } else {
-            //     return rejectWithValue('error')
-            // }
-            return rejectWithValue('error')
+            if (isAxiosError(e) && e.response) {
+                return rejectWithValue(e.response.data.error.message)
+            } else {
+                return rejectWithValue('error')
+            }
         }
     }
 )
