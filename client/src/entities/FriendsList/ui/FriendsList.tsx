@@ -1,9 +1,8 @@
-import cls from './FriendsList.module.scss'
 import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
 import { Avatar } from 'entities/Avatar'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { IUser, getUserData } from 'entities/UserData'
-import { addFriend, getAllFriends, getFriendsData, removeFriend } from 'features/GetFriendsData'
+import { getAllFriends, getFriendsData, removeFriend } from 'features/GetFriendsData'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { useEffect, useMemo, useTransition } from 'react'
 import { Conversations } from 'features/AuthByEmail/model/types/response/Conversations'
@@ -17,6 +16,7 @@ import HomeIcon from 'shared/assets/icons/house-bold.svg'
 import FriendsIcon from 'shared/assets/icons/users-bold.svg'
 import PostIcon from 'shared/assets/icons/note-pencil-bold.svg'
 import dayjs from 'dayjs'
+import cls from './FriendsList.module.scss'
 
 interface FriendsListProps {
     className?: string
@@ -33,8 +33,12 @@ export const FriendsList = ({ className }: FriendsListProps) => {
         if (userId) dispatch(getAllFriends({ userId }))
     }, [userId])
 
-    const onClickRemoveFriend = (friendId: string) => {
-        dispatch(removeFriend({ friendId, userId }))
+    const onClickRemoveFriend = (
+        friendId: string,
+        friendFirstName: string,
+        friendLastName: string
+    ) => {
+        dispatch(removeFriend({ friendId, userId, friendFirstName, friendLastName }))
     }
 
     const isConversationCreated = (anotherUserId: string) => {
@@ -115,7 +119,13 @@ export const FriendsList = ({ className }: FriendsListProps) => {
 
                                 <Button
                                     className={cls.addFriendBtn}
-                                    onClick={() => onClickRemoveFriend(friend.userId)}
+                                    onClick={() =>
+                                        onClickRemoveFriend(
+                                            friend.userId,
+                                            friend.firstName,
+                                            friend.lastName
+                                        )
+                                    }
                                 >
                                     {t('Удалить из друзей')}
                                 </Button>

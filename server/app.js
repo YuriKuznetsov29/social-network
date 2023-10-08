@@ -36,12 +36,12 @@ app.use(
 )
 app.use("/api", routes)
 
-const PORT = config.get("port") ?? 8080
+const PORT = config.get("port") ?? 8082
 
 if ((process.env.NODE_ENV = "production")) {
     app.use("/", express.static(path.join(__dirname, "client")))
 
-    const indexPath = path.join(__dirname, "index.html")
+    const indexPath = path.join(__dirname, "client", "index.html")
 
     app.get("/*", (req, res) => {
         res.sendFile(indexPath)
@@ -53,7 +53,7 @@ async function start() {
         mongoose.connection.once("open", () => {
             initDatabase()
         })
-        await mongoose.connect(config.get("mongoUri"))
+        await mongoose.connect(config.get("mongoUriR"))
         console.log(chalk.green(`MongoDB has been connected`))
 
         io.on("connection", (socket) => {

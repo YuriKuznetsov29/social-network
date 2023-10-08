@@ -7,5 +7,6 @@ export interface AuthSchema {
     email: string
     password: string
     error?: string
+    regSuccess: boolean
     // userData: IUser
 }

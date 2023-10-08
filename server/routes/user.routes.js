@@ -236,45 +236,44 @@ router.get("/:userId/getAllFriends", async (req, res) => {
         if (userId) {
             let currentUser = await User.findOne({ _id: userId })
 
-            if (currentUser.friends.length !== 0) {
-                // const findStructure = currentUser.friends.map((el) => ({
-                //     _id: el,
-                // }));
+            // if (currentUser.friends.length !== 0) {
+            // const findStructure = currentUser.friends.map((el) => ({
+            //     _id: el,
+            // }));
 
-                const friends = await Promise.all(
-                    currentUser.friends.map((id) => User.findById(id))
-                ) //await User.find({ $or: findStructure })
+            const friends = await Promise.all(currentUser.friends.map((id) => User.findById(id))) //await User.find({ $or: findStructure })
 
-                const modFriends = friends.map((user) => ({
-                    userId: user._id,
-                    email: user.email,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    gender: user.gender,
-                    friends: user.friends,
-                    posts: user.posts,
-                    requests: user.requests,
-                    birthDay: user.birthDay,
-                    avatarPath: user.avatarPath,
-                    conversations: user.conversations,
-                    likes: user.likes,
-                    isOnline: user.isOnline,
-                    lastSeenOnline: user.lastSeenOnline,
-                    city: user.city,
-                }))
+            const modFriends = friends.map((user) => ({
+                userId: user._id,
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                gender: user.gender,
+                friends: user.friends,
+                posts: user.posts,
+                requests: user.requests,
+                birthDay: user.birthDay,
+                avatarPath: user.avatarPath,
+                conversations: user.conversations,
+                likes: user.likes,
+                isOnline: user.isOnline,
+                lastSeenOnline: user.lastSeenOnline,
+                city: user.city,
+            }))
 
-                res.send({
-                    friends: modFriends,
-                })
-            } else {
-                res.status(400).json({
-                    error: {
-                        message: "У вас еще нет друзей",
-                        code: 400,
-                    },
-                })
-            }
+            res.send({
+                friends: modFriends,
+            })
         }
+        // else {
+        //     res.status(400).json({
+        //         error: {
+        //             message: "У вас еще нет друзей",
+        //             code: 400,
+        //         },
+        //     })
+        // }
+        // }
     } catch (e) {
         console.log(e)
         res.status(500).json({

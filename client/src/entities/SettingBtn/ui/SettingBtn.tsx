@@ -63,14 +63,14 @@ export const SettingBtn = ({ className }: SettingBtnProps) => {
             </div>
 
             <div className={classNames(cls.container, { [cls.active]: show }, [])} id="container">
-                <span className={cls.link} onClick={onSignOut}>
-                    <SignOutIcon className={cls.icon_link} />
-                    {t('Выйти')}
-                </span>
                 <Link className={cls.link} to={'/changeProfile'}>
                     <ProfileIcon className={cls.icon_link} />
                     {t('Редактировать профиль')}
                 </Link>
+                <span className={cls.link} onClick={onSignOut}>
+                    <SignOutIcon className={cls.icon_link} />
+                    {t('Выйти')}
+                </span>
                 <div className={cls.themeContainer}>
                     <LangSwitcher short />
                     <ThemeSwitcher />

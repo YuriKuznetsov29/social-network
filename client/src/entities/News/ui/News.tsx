@@ -13,7 +13,7 @@ interface NewsProps {
 }
 
 export const News = ({ className }: NewsProps) => {
-    const [posts, setPosts] = useState<IPost[] | null>(null)
+    const [posts, setPosts] = useState<IPost[]>([] as IPost[])
 
     const userData = useAppSelector(getUserData)
 
@@ -35,7 +35,7 @@ export const News = ({ className }: NewsProps) => {
     }, [])
     return (
         <div className={classNames(cls.News, {}, [className])}>
-            {posts
+            {posts.length
                 ? posts.map((post) => <Post key={post._id} post={post} />)
                 : 'У вас пока нет новостей'}
         </div>

@@ -7,6 +7,8 @@ import { notificationsActions } from 'features/Notifications'
 export interface RequestChangeData {
     userId: string
     friendId: string
+    friendFirstName: string
+    friendLastName: string
 }
 
 export interface ResponseData {
@@ -15,7 +17,10 @@ export interface ResponseData {
 
 export const addFriend = createAsyncThunk<void, RequestChangeData, ThunkConfig<string>>(
     'user/addFriend',
-    async ({ userId, friendId }, { dispatch, extra, rejectWithValue }) => {
+    async (
+        { userId, friendId, friendLastName, friendFirstName },
+        { dispatch, extra, rejectWithValue }
+    ) => {
         try {
             const response = await extra.api.patch<ResponseData>(
                 `${API_URL}/user/${userId}/addFriend`,
@@ -26,7 +31,7 @@ export const addFriend = createAsyncThunk<void, RequestChangeData, ThunkConfig<s
             dispatch(userDataActions.setUserData(response.data.user))
             dispatch(
                 notificationsActions.setNotification(
-                    `Вы добавили пользователя ${response.data.user.firstName} ${response.data.user.lastName} в друзья`
+                    `Вы добавили пользователя ${friendFirstName} ${friendLastName} в друзья`
                 )
             )
         } catch (e: unknown) {

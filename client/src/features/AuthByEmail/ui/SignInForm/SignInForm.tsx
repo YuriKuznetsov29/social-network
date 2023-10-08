@@ -17,6 +17,7 @@ import { Loader } from 'shared/ui/Loader'
 import { getAuthError } from 'features/AuthByEmail/model/selectors/getAuthError'
 import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher'
 import { useTranslation } from 'react-i18next'
+import i18n from 'shared/config/i18n/i18n'
 
 interface SignInFormProps {
     className?: string
@@ -27,10 +28,14 @@ export interface Values {
     password: string
 }
 
-const validationSchema = Yup.object({
-    email: Yup.string().email('Неправильный формат email').required('Введите Email'),
-    password: Yup.string().required('Введите пароль'),
-})
+console.log(i18n.isInitialized)
+
+// const validationSchema = Yup.object({
+//     email: Yup.string()
+//         .email(i18n.t('Неправильный формат email'))
+//         .required(i18n.t('Введите Email')),
+//     password: Yup.string().required(i18n.isInitialized ? i18n.t('Введите пароль') : ''),
+// })
 
 export const SignInForm = ({ className }: SignInFormProps) => {
     const { isAuth } = useAppSelector(getAuthState)
@@ -39,6 +44,11 @@ export const SignInForm = ({ className }: SignInFormProps) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { t } = useTranslation('authForms')
+
+    const validationSchema = Yup.object({
+        email: Yup.string().email(t('Неправильный формат email')).required(t('Введите email')),
+        password: Yup.string().required(t('Введите пароль')),
+    })
 
     const onLoginClick = (email: string, password: string) => {
         dispatch(signInByEmail({ email, password }))
@@ -64,7 +74,7 @@ export const SignInForm = ({ className }: SignInFormProps) => {
                     onLoginClick(email, password)
                 }}
             >
-                <Form className={cls.form}>
+                <Form className={cls.form} autoComplete="off">
                     <label htmlFor="email">{t('Email')}</label>
                     <div className={cls.fieldContainer}>
                         <Field

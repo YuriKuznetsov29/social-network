@@ -11,9 +11,7 @@ export const removeAvatar = createAsyncThunk<void, void, ThunkConfig<string>>(
     'file/removeAvatar',
     async (_, { dispatch, extra, rejectWithValue }) => {
         try {
-            const response = await extra.api.delete<ResponseData>(
-                `http://localhost:8080/api/file/removeAvatar`
-            )
+            const response = await extra.api.delete<ResponseData>(`/file/removeAvatar`)
 
             dispatch(userDataActions.setUserData(response.data.user))
             dispatch(notificationsActions.setNotification(`Аватар успешно удален`))

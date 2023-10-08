@@ -22,17 +22,21 @@ export const DialogHeader = ({ className, roomId }: DialogHeaderProps) => {
     const userData = useAppSelector(getUserData)
 
     useEffect(() => {
-        const friend = userData.conversations.find((conversation) => conversation.roomId === roomId)
+        if (userData.conversations) {
+            const friend = userData.conversations.find(
+                (conversation) => conversation.roomId === roomId
+            )
 
-        if (friend) {
-            const { friendId } = friend
-            getUserDataById(friendId)
-                .then((companion) => {
-                    if (companion) setCompanion(companion)
-                })
-                .catch(console.log)
+            if (friend) {
+                const { friendId } = friend
+                getUserDataById(friendId)
+                    .then((companion) => {
+                        if (companion) setCompanion(companion)
+                    })
+                    .catch(console.log)
+            }
         }
-    }, [])
+    }, [userData.conversations])
 
     return (
         <div className={classNames(cls.DialogHeader, {}, [className])}>

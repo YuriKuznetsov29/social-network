@@ -1,13 +1,11 @@
 import classNames from 'classnames'
 import { SERVER_URL } from '../../../shared/api/http/index'
 import User from 'shared/assets/icons/user.svg'
-import cls from './Avatar.module.scss'
 import Circle from 'shared/assets/icons/dot-bold.svg'
 import dayjs from 'dayjs'
 import updateLocale from 'dayjs/plugin/updateLocale'
-import { number } from 'yup'
 import { useTranslation } from 'react-i18next'
-dayjs.extend(updateLocale)
+import cls from './Avatar.module.scss'
 
 const ru_short = {
     name: 'ru-short', // имя String
@@ -103,6 +101,7 @@ const en_short = {
     },
 }
 
+dayjs.extend(updateLocale)
 dayjs.locale(ru_short, undefined, true)
 dayjs.locale(en_short, undefined, true)
 

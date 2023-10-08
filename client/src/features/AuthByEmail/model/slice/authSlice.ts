@@ -15,6 +15,7 @@ const initialState: AuthSchema = {
     isAuth: false,
     email: '',
     password: '',
+    regSuccess: false,
 }
 
 export const authSlice = createSlice({
@@ -48,9 +49,12 @@ export const authSlice = createSlice({
                 state.error = action.payload
             })
             .addCase(signUpByEmail.pending, (state) => {
+                state.isLoading = true
                 state.error = undefined
             })
             .addCase(signUpByEmail.fulfilled, (state, action) => {
+                state.error = ''
+                state.regSuccess = true
                 state.isLoading = false
                 state.isAuth = true
             })

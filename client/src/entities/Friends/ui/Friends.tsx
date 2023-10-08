@@ -43,7 +43,7 @@ export const Friends = ({ className }: FriendsProps) => {
                 <h3 className={cls.title}>{t('Друзья')}</h3>
 
                 <div className={cls.friendsWrapper}>
-                    {friends
+                    {friends.length
                         ? friends.map((friend: IUser) => {
                               return (
                                   <div

@@ -4,7 +4,7 @@ import Image from 'shared/assets/icons/image-bold.svg'
 import { useRef, useState } from 'react'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { createPost } from 'features/PostHandler/model/services/createPost'
-import $api from '../../../shared/api/http/index'
+import $api, { API_URL } from '../../../shared/api/http/index'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
 import cls from './CreatePost.module.scss'
@@ -58,7 +58,7 @@ export const CreatePost = ({ className }: CreatePostProps) => {
 
         try {
             const response = await $api.post<uploadImageResponse>(
-                `http://localhost:8080/api/file/uploadImage`,
+                `${API_URL}/file/uploadImage`,
                 formData
             )
 

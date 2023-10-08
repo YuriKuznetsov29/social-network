@@ -29,7 +29,7 @@ interface AnotherUserProfileProps {
 }
 
 export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
-    const { userData } = useAppSelector(getAnotherUserState)
+    const { userData, error } = useAppSelector(getAnotherUserState)
     const currentUserData = useAppSelector(getUserData)
     const { t } = useTranslation('pages')
     const { userId, friends } = useAppSelector(getUserData)
@@ -38,26 +38,50 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
     const navigate = useNavigate()
 
     const { anotherUserId } = useParams()
-
-    const { posts } = useAppSelector(getPostHandlerState)
     const anotherUserInit = useAppSelector(getAnotherUserInit)
 
     useEffect(() => {
+        if (error) {
+            navigate('*', { replace: true })
+        }
+    }, [error])
+
+    useEffect(() => {
+        if (userId === anotherUserId) {
+            navigate('/profile', { replace: true })
+        }
+    }, [userId])
+
+    useEffect(() => {
         if (anotherUserId) {
-            dispatch(getUserPosts({ author: anotherUserId }))
             dispatch(getAnotherUserData({ userId: anotherUserId }))
+            dispatch(getUserPosts({ author: anotherUserId }))
         }
     }, [])
 
     const onClickAddFriend = () => {
         if (anotherUserId) {
-            dispatch(addFriend({ friendId: anotherUserId, userId }))
+            dispatch(
+                addFriend({
+                    friendId: anotherUserId,
+                    userId,
+                    friendFirstName: userData.firstName,
+                    friendLastName: userData.lastName,
+                })
+            )
         }
     }
 
     const onClickRemoveFriend = () => {
         if (anotherUserId) {
-            dispatch(removeFriend({ friendId: anotherUserId, userId }))
+            dispatch(
+                removeFriend({
+                    friendId: anotherUserId,
+                    userId,
+                    friendFirstName: userData.firstName,
+                    friendLastName: userData.lastName,
+                })
+            )
         }
     }
 

@@ -22,5 +22,8 @@
     "Удалить аватар": "Remove avatar",
     "Сохранить изменения": "Save changes",
     "Поиск": "Search",
-    "Пользователей не найдено": "Users not found"
+    "Пользователей не найдено": "Users not found",
+    "Неправильный формат email": "wrong email",
+    "Введите пароль": "Type password",
+    "Введите email": "Type email"
 }

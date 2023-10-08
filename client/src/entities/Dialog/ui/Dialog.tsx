@@ -1,10 +1,12 @@
 import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import useChat from 'shared/lib/hook/useChat'
 import { MessageInput } from './MessageInput'
 import { DialogHeader } from './DialogHeader'
 import { Message } from 'entities/Message'
+import { useAppSelector } from 'shared/lib/hook/useAppSelector'
+import { getUserData } from 'entities/UserData'
 import cls from './Dialog.module.scss'
 
 interface DialogProps {
@@ -14,7 +16,18 @@ interface DialogProps {
 export const Dialog = ({ className }: DialogProps) => {
     const scroll = useRef<HTMLDivElement>(null)
 
+    const navigate = useNavigate()
+    const { conversations } = useAppSelector(getUserData)
     const { roomId } = useParams()
+
+    useEffect(() => {
+        if (conversations) {
+            const dialog = conversations.find((conversation) => conversation.roomId === roomId)
+            if (!dialog) {
+                navigate('*', { replace: true })
+            }
+        }
+    }, [conversations])
 
     if (!roomId) {
         return <div>Такого диалога не существует</div>

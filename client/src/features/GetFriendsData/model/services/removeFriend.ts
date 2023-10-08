@@ -8,6 +8,8 @@ import { getAllFriends } from './getAllFriends'
 export interface RequestChangeData {
     userId: string
     friendId: string
+    friendFirstName: string
+    friendLastName: string
 }
 
 export interface ResponseData {
@@ -16,7 +18,10 @@ export interface ResponseData {
 
 export const removeFriend = createAsyncThunk<void, RequestChangeData, ThunkConfig<string>>(
     'user/removeFriend',
-    async ({ userId, friendId }, { rejectWithValue, dispatch, extra }) => {
+    async (
+        { userId, friendId, friendFirstName, friendLastName },
+        { rejectWithValue, dispatch, extra }
+    ) => {
         try {
             const response = await extra.api.patch<ResponseData>(
                 `${API_URL}/user/${userId}/removeFriend`,
@@ -28,7 +33,7 @@ export const removeFriend = createAsyncThunk<void, RequestChangeData, ThunkConfi
             dispatch(getAllFriends({ userId }))
             dispatch(
                 notificationsActions.setNotification(
-                    `Вы удалили пользователя ${response.data.user.firstName}  ${response.data.user.lastName} из друзей`
+                    `Вы удалили пользователя ${friendFirstName} ${friendLastName} из друзей`
                 )
             )
         } catch (e: unknown) {

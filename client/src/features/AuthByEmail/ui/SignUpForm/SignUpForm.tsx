@@ -15,6 +15,8 @@ import { getAuthError } from 'features/AuthByEmail/model/selectors/getAuthError'
 import { Loader } from 'shared/ui/Loader'
 import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+import { getRegStatus } from 'features/AuthByEmail/model/selectors/getRegStatus'
 
 export interface Values {
     firstName: string
@@ -64,6 +66,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
     const dispatch = useAppDispatch()
     const loading = useAppSelector(getLoadingAuthStatus)
     const error = useAppSelector(getAuthError)
+    const regStatus = useAppSelector(getRegStatus)
     const { t } = useTranslation('authForms')
 
     return (
@@ -195,6 +198,12 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                     </div>
 
                     <div className={cls.errorBlock}>
+                        {regStatus && (
+                            <div className={cls.regSuccess}>
+                                {' '}
+                                {t('Вы успешно зарегистрировались, войдите под своим email.')}{' '}
+                            </div>
+                        )}
                         {loading && <Loader size="M" />}
                         {error && !loading && <div className={cls.serverError}>{error}</div>}
                     </div>
@@ -202,6 +211,12 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                     <Button className={cls.submitBtn} type="submit">
                         {t('Зарегистрироваться')}
                     </Button>
+                    <Link className={cls.link} to={'/'}>
+                        <Button className={cls.signInBtn} type="button">
+                            {t('Войти')}
+                        </Button>
+                    </Link>
+
                     <div className={cls.switchersContainer}>
                         <LangSwitcher short />
                         <ThemeSwitcher />
