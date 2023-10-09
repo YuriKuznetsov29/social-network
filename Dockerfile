@@ -10,7 +10,7 @@ COPY server /app
 
 COPY client/build /app/client
 
-COPY client/public/locales /app/client
+COPY client/public/locales /app/client/locales
 
 EXPOSE 8082
 
