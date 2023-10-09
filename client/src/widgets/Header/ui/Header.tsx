@@ -18,7 +18,7 @@ export const Header = ({ className }: HeaderProps) => {
 
     return (
         <div className={cls.container}>
-            <div className={classNames(cls.Header, {}, [className])}>
+            <div className={classNames(cls.Header, {}, [])}>
                 <Container className={cls.contentContainer} headerStyle>
                     <FoundUsersList />
                     <SettingBtn />

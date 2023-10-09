@@ -32,7 +32,7 @@ export const News = ({ className }: NewsProps) => {
         }
 
         getUserDataById()
-    }, [])
+    }, [userData.friends])
     return (
         <div className={classNames(cls.News, {}, [className])}>
             {posts.length

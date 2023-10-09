@@ -12,7 +12,10 @@ router.post("/createPost", auth, async (req, res) => {
             ...req.body,
         })
 
-        const posts = await Post.find({ author: req.body.author }).sort({ createdAt: -1 })
+        const { author } = req.body
+
+        const posts = await Post.find({ author: author }).sort({ createdAt: -1 })
+        await User.findByIdAndUpdate({ _id: author }, { posts: posts.length })
 
         res.send({
             posts,

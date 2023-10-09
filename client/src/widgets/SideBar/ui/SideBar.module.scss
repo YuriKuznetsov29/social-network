@@ -36,3 +36,22 @@
     margin-right: 10px;
     fill: var(--icon-link-color);
 }
+
+.mobileSidebar {
+    // width: 100%;
+    height: 50px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--header-bg-color);
+}
+
+.linkMobile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -19,6 +19,7 @@ import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { PostLoader } from 'shared/ui/PostLoader'
 import cls from './ProfilePage.module.scss'
 import { PostsList } from 'entities/PostsList'
+import { useMobile } from 'shared/lib/hook/useMobile'
 
 interface ProfilePageProps {
     className?: string
@@ -27,6 +28,7 @@ interface ProfilePageProps {
 const ProfilePage = ({ className }: ProfilePageProps) => {
     const dispatch = useAppDispatch()
     const { userId } = useAppSelector(getUserData)
+    const mobile = useMobile()
 
     useEffect(() => {
         if (userId) {
@@ -37,7 +39,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     return (
         <>
             <Header />
-            <Container>
+            <Container mobile>
                 <SideBar />
                 <div className={classNames(cls.contentWrapper, {}, [className])}>
                     <UserData />
