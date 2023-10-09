@@ -32,7 +32,10 @@ router.post("/uploadAvatar", [
             const user = await User.findById(req.res.user._id)
             const extension = path.extname(req.files.file.name).toLowerCase()
             const avatarName = Uuid.v4() + extension
-            file.mv(config.get("staticPath") + "\\" + avatarName)
+            // file.mv(config.get("staticPath") + "\\" + avatarName)
+
+            file.mv(path.join(__dirname, "..", "static", avatarName))
+
             user.avatarPath = avatarName
             await user.save()
             res.status(200).send({
@@ -84,7 +87,8 @@ router.post("/uploadImage", [
             const file = req.files.file
             const extension = path.extname(req.files.file.name).toLowerCase()
             const imagePath = Uuid.v4() + extension
-            file.mv(config.get("staticPath") + "\\" + imagePath)
+            // file.mv(config.get("staticPath") + "\\" + imagePath)
+            file.mv(path.join(__dirname, "..", "static", imagePath))
 
             res.status(200).send({
                 imagePath,
@@ -101,7 +105,9 @@ router.post("/uploadImage", [
 router.delete("/removeAvatar", auth, async (req, res) => {
     try {
         const user = await User.findById(req.res.user._id)
-        fs.unlinkSync(config.get("staticPath") + "\\" + user.avatarPath)
+        // fs.unlinkSync(config.get("staticPath") + "\\" + user.avatarPath)
+        fs.unlinkSync(path.join(__dirname, "..", "static", user.avatarPath))
+
         user.avatarPath = null
         await user.save()
         console.log(user)
