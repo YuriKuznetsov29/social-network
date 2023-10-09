@@ -6,6 +6,6 @@
   "refreshSecret": "super refresh key",
   "clientURL": "http://localhost:3000",
   "clientURLR": "http://84.38.183.52",
-  "staticPath": "\\home\\yura\\socialNetwork\\server\\static",
+  "staticPath": ".\\server\\static",
   "staticPathR": "D:\\webdev\\practice\\socialNetwork\\server\\static"
 }
