@@ -162,7 +162,7 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
                             <div>{userData.birthDay}</div>
                             <div>Новодвинск</div>
                             <div>{userData.friends?.length}</div>
-                            <div>{userData.friends?.length}</div>
+                            <div>{userData?.posts}</div>
                         </div>
                     </div>
                     <div className={cls.btnBlock}>

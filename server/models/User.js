@@ -11,7 +11,7 @@ const schema = new Schema(
         gender: { type: String },
         conversations: [{ roomId: { type: String }, friendId: { type: String } }],
         friends: [{ default: [], type: String }],
-        posts: [{ default: [], type: Schema.Types.ObjectId, ref: "Post" }],
+        posts: { default: 0, type: Number },
         likes: [{ default: [], type: Schema.Types.ObjectId, ref: "Like" }],
         isOnline: { default: false, type: Boolean },
         lastSeenOnline: { type: Date, default: Date.now },
