@@ -13,7 +13,7 @@ export const ChangeProfilePage = ({ className }: ProfilePageProps) => {
     return (
         <>
             <Header />
-            <Container>
+            <Container className={cls.container}>
                 <SideBar />
                 <div className={classNames(cls.contentWrapper, {}, [className])}>
                     <ChangeProfile />

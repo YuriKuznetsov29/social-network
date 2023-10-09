@@ -57,3 +57,17 @@
     height: 22px;
     fill: var(--secondary-font-color);
 }
+
+@media (max-width: 650px) {
+    .contentWrapper {
+        flex-direction: column;
+    }
+
+    .valueContainer {
+        justify-content: center;
+    }
+
+    .dataWrapper {
+        align-items: center;
+    }
+}

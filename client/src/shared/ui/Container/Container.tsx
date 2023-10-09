@@ -7,19 +7,18 @@ interface ContainerProps {
     className?: string
     children: ReactNode
     headerStyle?: boolean
-    mobile?: boolean
 }
 
 const Container = (props: ContainerProps) => {
-    const { className, children, headerStyle, mobile } = props
+    const { className, children, headerStyle } = props
     const isMobile = useMobile()
 
     return (
         <div
             className={classNames(
                 cls.Container,
-                { [cls.header]: headerStyle, [cls.mobile]: mobile && isMobile },
-                []
+                { [cls.header]: headerStyle, [cls.mobile]: isMobile && !headerStyle },
+                [className]
             )}
         >
             {children}

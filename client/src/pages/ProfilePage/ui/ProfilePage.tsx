@@ -28,7 +28,7 @@ interface ProfilePageProps {
 const ProfilePage = ({ className }: ProfilePageProps) => {
     const dispatch = useAppDispatch()
     const { userId } = useAppSelector(getUserData)
-    const mobile = useMobile()
+    const isMobile = useMobile()
 
     useEffect(() => {
         if (userId) {
@@ -39,7 +39,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     return (
         <>
             <Header />
-            <Container mobile>
+            <Container className={isMobile ? cls.container : ''}>
                 <SideBar />
                 <div className={classNames(cls.contentWrapper, {}, [className])}>
                     <UserData />
