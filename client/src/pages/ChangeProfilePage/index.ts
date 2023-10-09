@@ -1,1 +1,1 @@
-export { ChangeProfilePage } from './ui/ChangeProfilePage'
+export { ChangeProfilePageAsync as ChangeProfilePage } from './ui/ChangeProfilePageAsync'

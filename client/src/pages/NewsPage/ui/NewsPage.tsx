@@ -4,21 +4,23 @@ import Container from 'shared/ui/Container/Container'
 import { SideBar } from 'widgets/SideBar'
 import { News } from 'entities/News'
 import cls from './NewsPage.module.scss'
+import { useMobile } from 'shared/lib/hook/useMobile'
 
 interface NewsPageProps {
     className?: string
 }
 
-export const NewsPage = ({ className }: NewsPageProps) => {
+const NewsPage = ({ className }: NewsPageProps) => {
+    const isMobile = useMobile()
     return (
         <>
             <Header />
-            <Container>
+            <Container className={isMobile ? cls.container : ''}>
                 <SideBar />
-                <div className={classNames(cls.contentWrapper, {}, [className])}>
-                    <News />
-                </div>
+                <News />
             </Container>
         </>
     )
 }
+
+export default NewsPage

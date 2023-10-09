@@ -1,4 +1,4 @@
-import { ReducersMapObject, configureStore } from '@reduxjs/toolkit'
+import { CombinedState, Reducer, ReducersMapObject, configureStore } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from './StateSchema'
 import { authReducer } from 'features/AuthByEmail'
 import { messengerReducer } from 'features/Messenger'
@@ -10,12 +10,16 @@ import { userDataReducer } from 'entities/UserData'
 import { NavigateOptions, To } from 'react-router-dom'
 import $api from 'shared/api/http'
 import { notificationsReducer } from 'features/Notifications'
+import { newsReducer } from 'entities/News'
+import { createReducerManager } from './reducerManager'
 
 export function createReduxStore(
     initialState?: StateSchema,
+    asyncReducers?: ReducersMapObject<StateSchema>,
     navigate?: (to: To, options?: NavigateOptions) => void
 ) {
     const rootReducer: ReducersMapObject<StateSchema> = {
+        ...asyncReducers,
         authForm: authReducer,
         anotherUser: anotherUserReducer,
         messenger: messengerReducer,
@@ -24,15 +28,18 @@ export function createReduxStore(
         friends: friendsReducer,
         user: userDataReducer,
         notifications: notificationsReducer,
+        // news: newsReducer,
     }
+
+    const reducerManager = createReducerManager(rootReducer)
 
     const extraArg: ThunkExtraArg = {
         api: $api,
         navigate,
     }
 
-    return configureStore({
-        reducer: rootReducer,
+    const store = configureStore({
+        reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
         devTools: __IS_DEV__,
         preloadedState: initialState,
         middleware: (getDefaultMiddleware) =>
@@ -42,6 +49,11 @@ export function createReduxStore(
                 },
             }),
     })
+
+    // @ts-ignore
+    store.reducerManager = reducerManager
+
+    return store
 }
 
 export const store = createReduxStore()

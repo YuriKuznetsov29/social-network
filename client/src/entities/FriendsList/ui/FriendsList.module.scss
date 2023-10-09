@@ -56,3 +56,19 @@
     display: flex;
     gap: 10px;
 }
+
+@media (max-width: 650px) {
+    .contentWrapper {
+        flex-direction: column;
+    }
+
+    .dataWrapper,
+    .valueWrapper {
+        align-items: center;
+    }
+
+    .addFriendBtn,
+    .messageBtn {
+        width: 100%;
+    }
+}

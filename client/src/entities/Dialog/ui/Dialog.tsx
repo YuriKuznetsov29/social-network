@@ -47,7 +47,11 @@ export const Dialog = ({ className }: DialogProps) => {
                 <DialogHeader roomId={roomId} />
                 <div className={cls.messagesBlock} ref={scroll}>
                     {messages.map((message) => (
-                        <Message message={message} key={message.messageId} />
+                        <Message
+                            message={message}
+                            key={message.messageId}
+                            removeMessage={removeMessage}
+                        />
                     ))}
                 </div>
                 <MessageInput roomId={roomId} sendMessage={sendMessage} />

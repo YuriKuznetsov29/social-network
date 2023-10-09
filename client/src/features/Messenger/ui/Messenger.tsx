@@ -8,6 +8,7 @@ import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
 import { useTranslation } from 'react-i18next'
 import cls from './Messenger.module.scss'
+import { MessengerLoader } from 'shared/ui/MessengerLoader'
 
 interface MessengerProps {
     className?: string

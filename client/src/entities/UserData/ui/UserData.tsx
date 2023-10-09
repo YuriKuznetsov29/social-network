@@ -23,7 +23,7 @@ export const UserData = ({ className }: UserDataProps) => {
     const userInit = useAppSelector(getUserInitied)
     const loading = useAppSelector(getUserDataLoading)
     const { t } = useTranslation('pages')
-    console.log(loading)
+
     if (loading || !userInit) return <UserDataLoader />
 
     return (
@@ -71,7 +71,7 @@ export const UserData = ({ className }: UserDataProps) => {
                                 </div>
                                 <div>{userData.city}</div>
                                 <div>{userData.friends?.length}</div>
-                                <div>5</div>
+                                <div>{userData?.posts}</div>
                             </div>
                         </div>
                     </div>

@@ -15,4 +15,5 @@ export interface IUser {
     isOnline: boolean
     lastSeenOnline: string
     city: string
+    posts: number
 }

@@ -1,3 +1,1 @@
-import { MessengerPage } from './ui/MessengerPage'
-
-export { MessengerPage }
+export { MessengerPageAsync as MessengerPage } from './ui/MessengerPageAsync'

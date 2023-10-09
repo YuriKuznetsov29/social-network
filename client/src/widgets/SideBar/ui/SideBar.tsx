@@ -9,6 +9,7 @@ import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserInitied } from 'entities/UserData'
 import { useTranslation } from 'react-i18next'
 import cls from './SideBar.module.scss'
+import { useMobile } from 'shared/lib/hook/useMobile'
 
 interface SideBarProps {
     className?: string
@@ -17,8 +18,29 @@ interface SideBarProps {
 export const SideBar = ({ className }: SideBarProps) => {
     const userInit = useAppSelector(getUserInitied)
     const { t } = useTranslation('pages')
+    const isMobile = useMobile()
 
-    return (
+    return isMobile ? (
+        <div className={cls.mobileSidebar}>
+            <AppLink to={'/news'} className={cls.linkMobile} active activeClass={cls.activeLink}>
+                <NewsIcon className={cls.mobileIcon} />
+            </AppLink>
+            <AppLink to={'/friends'} className={cls.linkMobile} active activeClass={cls.activeLink}>
+                <UsersIcon className={cls.mobileIcon} />
+            </AppLink>
+            <AppLink
+                to={'/messenger'}
+                className={cls.linkMobile}
+                active
+                activeClass={cls.activeLink}
+            >
+                <ChatIcon className={cls.mobileIcon} />
+            </AppLink>
+            <AppLink to={'/profile'} className={cls.linkMobile} active activeClass={cls.activeLink}>
+                <ProfileIcon className={cls.mobileIcon} />
+            </AppLink>
+        </div>
+    ) : (
         <div className={classNames(cls.SideBar, {}, [className])}>
             <nav className={cls.nav}>
                 {!userInit ? (

@@ -1,1 +1,1 @@
-export { NewsPage } from './ui/NewsPage'
+export { MessengerPageAsync as NewsPage } from './ui/NewsPageAsync'

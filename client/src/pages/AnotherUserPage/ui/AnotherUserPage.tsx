@@ -4,16 +4,18 @@ import Container from 'shared/ui/Container/Container'
 import { SideBar } from 'widgets/SideBar'
 import cls from './AnotherUserPage.module.scss'
 import { AnotherUserProfile } from 'features/GetAnotherUserData/ui/AnotherUserProfile'
+import { useMobile } from 'shared/lib/hook/useMobile'
 
 interface AnotherUserPageProps {
     className?: string
 }
 
-export const AnotherUserPage = ({ className }: AnotherUserPageProps) => {
+const AnotherUserPage = ({ className }: AnotherUserPageProps) => {
+    const isMobile = useMobile()
     return (
         <>
             <Header />
-            <Container>
+            <Container className={isMobile ? cls.container : ''}>
                 <SideBar />
                 <div className={classNames(cls.contentWrapper, {}, [className])}>
                     <AnotherUserProfile />
@@ -22,3 +24,5 @@ export const AnotherUserPage = ({ className }: AnotherUserPageProps) => {
         </>
     )
 }
+
+export default AnotherUserPage

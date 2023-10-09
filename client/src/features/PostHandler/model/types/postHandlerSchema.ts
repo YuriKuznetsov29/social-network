@@ -6,4 +6,5 @@ export interface PostHandlerSchema {
     comments: IComment[]
     posts: IPost[]
     _initialized: boolean
+    error?: string
 }

@@ -15,7 +15,6 @@ import { getUserData } from 'entities/UserData'
 import { addFriend, removeFriend } from 'features/GetFriendsData'
 import { addConversation } from 'features/Messenger'
 import { useTranslation } from 'react-i18next'
-import cls from './AnotherUserProfile.module.scss'
 import { getAnotherUserInit } from '../model/selectors/getAnotherUserInit'
 import { AnotherUserLoader } from 'shared/ui/AnotherUserLoader'
 import { PostsList } from 'entities/PostsList'
@@ -23,6 +22,7 @@ import BirthIcon from 'shared/assets/icons/gift-bold.svg'
 import HomeIcon from 'shared/assets/icons/house-bold.svg'
 import FriendsIcon from 'shared/assets/icons/users-bold.svg'
 import PostIcon from 'shared/assets/icons/note-pencil-bold.svg'
+import cls from './AnotherUserProfile.module.scss'
 
 interface AnotherUserProfileProps {
     className?: string
@@ -104,11 +104,7 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
             navigate(`/messenger/${conversation.roomId}`)
         } else if (anotherUserId) {
             const roomId = nanoid()
-            console.log({
-                roomId,
-                friendId: anotherUserId,
-                userId,
-            })
+
             dispatch(
                 addConversation({
                     roomId,
@@ -162,7 +158,7 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
                             <div>{userData.birthDay}</div>
                             <div>Новодвинск</div>
                             <div>{userData.friends?.length}</div>
-                            <div>{userData.friends?.length}</div>
+                            <div>{userData?.posts}</div>
                         </div>
                     </div>
                     <div className={cls.btnBlock}>

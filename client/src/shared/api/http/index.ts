@@ -2,7 +2,9 @@ import axios from 'axios'
 import { AuthResponse } from 'features/AuthByEmail/model/types/response/AuthResponse'
 
 export const API_URL = `http://localhost:8082/api`
+// export const API_URL = `http://yura.batgen.ru:8082/api`
 export const SERVER_URL = `http://localhost:8082/`
+// export const SERVER_URL = `http://yura.batgen.ru:8082/`
 
 const $api = axios.create({
     withCredentials: true,

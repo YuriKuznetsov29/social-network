@@ -7,6 +7,7 @@ import { FoundUsersList } from 'features/FindUsers'
 import { Notification } from 'features/Notifications'
 import { SettingBtn } from 'entities/SettingBtn'
 import cls from './Header.module.scss'
+import { useMobile } from 'shared/lib/hook/useMobile'
 
 interface HeaderProps {
     className?: string
@@ -15,10 +16,11 @@ interface HeaderProps {
 export const Header = ({ className }: HeaderProps) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const mobile = useMobile()
 
     return (
         <div className={cls.container}>
-            <div className={classNames(cls.Header, {}, [className])}>
+            <div className={classNames(cls.Header, { [cls.mobile]: mobile }, [])}>
                 <Container className={cls.contentContainer} headerStyle>
                     <FoundUsersList />
                     <SettingBtn />
