@@ -1,30 +1,36 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AuthService } from './AuthService'
-import { AxiosError } from 'axios'
-import { IUser } from '../types/IUser'
+import { isAxiosError } from 'axios'
 import { AuthResponse } from '../types/response/AuthResponse'
+import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
+import { loadUserData, userDataActions } from 'entities/UserData'
 
 interface RequestAuthData {
     email: string
     password: string
 }
 
-// <IUser, RequestAuthData, { rejectValue: string }>
-
-export const signInByEmail = createAsyncThunk<
-    AuthResponse,
-    RequestAuthData,
-    { rejectValue: string }
->('login/signIn', async ({ email, password }, thunkAPI) => {
-    try {
-        const response = await AuthService.signIn(email, password)
-        localStorage.setItem('token', response.data.accessToken)
-        return response.data
-    } catch (e) {
-        console.log(e)
-        if (e instanceof AxiosError) {
-            return e.response?.data.error.message
-            // return thunkAPI.rejectWithValue(e.response?.data.error.message)
+export const signInByEmail = createAsyncThunk<AuthResponse, RequestAuthData, ThunkConfig<string>>(
+    'login/signIn',
+    async (authData, { dispatch, extra, rejectWithValue }) => {
+        try {
+            const response = await extra.api.post<AuthResponse>(
+                '/auth/signInWithPassword',
+                authData
+            )
+            localStorage.setItem('token', response.data.accessToken)
+            // dispatch(userDataActions.setUserData(response.data.user))
+            dispatch(loadUserData({ userId: response.data.user.userId }))
+            if (extra.navigate) {
+                extra.navigate('/profile')
+            }
+            return response.data
+        } catch (e) {
+            console.log(e)
+            if (isAxiosError(e) && e.response) {
+                return rejectWithValue(e.response.data.error.message)
+            } else {
+                return rejectWithValue('error')
+            }
         }
     }
-})
+)

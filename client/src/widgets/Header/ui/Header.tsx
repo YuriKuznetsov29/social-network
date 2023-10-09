@@ -1,11 +1,12 @@
 import classNames from 'classnames'
-import cls from './Header.module.scss'
 import Container from 'shared/ui/Container/Container'
-import { Input } from 'shared/ui/Input/Input'
-import { Button } from 'shared/ui/Button/Button'
-import { useAppDispatch } from 'app/Providers/StoreProvider/config/hooks'
-import { redirect, useNavigate } from 'react-router-dom'
+import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
+import { useNavigate } from 'react-router-dom'
 import { signOut } from 'features/AuthByEmail'
+import { FoundUsersList } from 'features/FindUsers'
+import { Notification } from 'features/Notifications'
+import { SettingBtn } from 'entities/SettingBtn'
+import cls from './Header.module.scss'
 
 interface HeaderProps {
     className?: string
@@ -14,21 +15,16 @@ interface HeaderProps {
 export const Header = ({ className }: HeaderProps) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const onSignOut = () => {
-        dispatch(signOut())
-        navigate('/')
-    }
 
     return (
         <div className={cls.container}>
             <div className={classNames(cls.Header, {}, [className])}>
-                <Container className={cls.contentContainer}>
-                    <Input className={cls.search} placeholder="Поиск" type="search"></Input>
-                    <Button className={cls.outBtn} onClick={onSignOut}>
-                        Выйти
-                    </Button>
+                <Container className={cls.contentContainer} headerStyle>
+                    <FoundUsersList />
+                    <SettingBtn />
                 </Container>
             </div>
+            <Notification />
         </div>
     )
 }

@@ -6,14 +6,15 @@ const useTheme = () => {
 
     const toggleTheme = () => {
         const newTheme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
-        setTheme(newTheme)
+        setTheme?.(newTheme)
         localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme)
         document.body.className = newTheme
     }
 
     const initTheme = () => {
-        document.body.className = theme
+        document.body.className = theme || Theme.LIGHT
     }
+    // if (theme) document.body.className = theme
 
     return { theme, toggleTheme, initTheme }
 }

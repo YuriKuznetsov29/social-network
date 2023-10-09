@@ -1,17 +1,19 @@
 import classNames from 'classnames'
 import cls from './Input.module.scss'
-import { HTMLInputTypeAttribute } from 'react'
+import { HTMLInputTypeAttribute, InputHTMLAttributes } from 'react'
 
-interface InputProps {
+type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
+
+interface InputProps extends HTMLInputProps {
     className?: string
     value?: string
-    type?: HTMLInputTypeAttribute
     placeholder?: string
     onChange?: (value: string) => void
+    // id?: 'search'
 }
 
 export const Input = (pros: InputProps) => {
-    const { className, value, type, placeholder, onChange } = pros
+    const { className, value, placeholder, onChange, ...otherProps } = pros
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange?.(e.target.value)
@@ -19,11 +21,12 @@ export const Input = (pros: InputProps) => {
 
     return (
         <input
+            // id={id}
             className={classNames(cls.Input, {}, [className])}
             value={value}
-            type={type}
             placeholder={placeholder}
             onChange={onChangeHandler}
+            {...otherProps}
         />
     )
 }

@@ -17,11 +17,68 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    // align-items: center;
-    background-color: var(--inverted-bg-color);
+    background-color: var(--header-bg-color);
+    border: 1px var(--container-border-color) solid;
     border-radius: 10px;
 }
 
 .input {
+    padding: 8px 12px;
     margin-bottom: 20px;
+    height: 30px;
+    background-color: var(--bg-input);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    color: var(--primary-color);
+    // &:last-child {
+    //     margin-bottom: 30px;
+    // }
+}
+
+.btnWrapper {
+    width: 100%;
+}
+
+.inputBtn {
+    margin-bottom: 10px;
+}
+
+.regBtn {
+    width: 100%;
+}
+
+.switchersContainer {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fieldContainer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.error {
+    position: absolute;
+    top: 32px;
+    color: red;
+    font-size: 14px;
+}
+
+.errorBlock {
+    width: 100%;
+    min-height: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.serverError {
+    color: red;
+    font-size: 14px;
+    text-align: center;
 }

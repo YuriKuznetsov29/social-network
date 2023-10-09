@@ -1,9 +1,6 @@
-import { useCallback } from 'react'
-import { useAppDispatch, useAppSelector } from 'app/Providers/StoreProvider/config/hooks'
+import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
-import { authActions } from 'features/AuthByEmail/model/slice/signInSlice'
 import classNames from 'classnames'
-import { Input } from 'shared/ui/Input/Input'
 import { Button } from 'shared/ui/Button/Button'
 import { RequestAuthData, signUpByEmail } from 'features/AuthByEmail/model/services/signUpByEmail'
 import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik'
@@ -11,6 +8,15 @@ import * as Yup from 'yup'
 import parse from 'date-fns/parse'
 import cls from './SignUpForm.module.scss'
 import { format } from 'date-fns'
+import { useAppSelector } from 'shared/lib/hook/useAppSelector'
+import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ThemeSwitcher'
+import { getLoadingAuthStatus } from 'features/AuthByEmail/model/selectors/getLoadingAuthStatus'
+import { getAuthError } from 'features/AuthByEmail/model/selectors/getAuthError'
+import { Loader } from 'shared/ui/Loader'
+import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+import { getRegStatus } from 'features/AuthByEmail/model/selectors/getRegStatus'
 
 export interface Values {
     firstName: string
@@ -18,31 +24,33 @@ export interface Values {
     email: string
     password: string
     confirmPassword: string
-    gender: 'male' | 'female'
+    gender: 'male' | 'female' | ''
     birthDay: string
+    city: string
 }
 
 interface SignUpFormProps {
     className?: string
 }
 
-const requiredString = Yup.string().required('Введите значение')
-const PersonSchema = Yup.object({
-    firstName: requiredString,
-    lastName: requiredString,
+const validationSchema = Yup.object({
+    firstName: Yup.string().trim().required('Введите имя'),
+    lastName: Yup.string().trim().required('Введите фамилию'),
     email: Yup.string().email('Неправильный формат email').required('Введите Email'),
-    birthDay: Yup.date()
-        .transform(function (value, originalValue) {
-            if (this.isType(value)) {
-                return value
-            }
-            const result = parse(originalValue, 'dd.MM.yyyy', new Date())
-            return result
-        })
-        .typeError('Введите действительную дату рождения')
-        .required('Введите дату рождения')
-        .min('1969-11-13', 'Date is too early')
-        .max(format(new Date(), 'dd-MM-yyyy'), 'Вы еще не родились'),
+    birthDay: Yup.string()
+        .trim()
+        // Yup.date()
+        // .transform(function (value, originalValue) {
+        //     if (this.isType(value)) {
+        //         return value
+        //     }
+        //     const result = parse(originalValue, 'dd.MM.yyyy', new Date())
+        //     return result
+        // })
+        // .typeError('Введите действительную дату рождения')
+        .required('Введите дату рождения'),
+    // .min('1969-11-13', 'Date is too early')
+    // .max(format(new Date(), 'dd-MM-yyyy'), 'Вы еще не родились'),
     password: Yup.string()
         .min(8, 'Пароль не должен быть короче 8 символов')
         .required('Введите пароль'),
@@ -50,38 +58,19 @@ const PersonSchema = Yup.object({
         .oneOf([Yup.ref('password')], 'Пароли не совпадают')
         .min(8, 'Пароль не должен быть короче 8 символов')
         .required('Введите пароль'),
+    city: Yup.string().trim().required('Введите город'),
     gender: Yup.string().required('Выберете значение'),
 })
 
 export const SignUpForm = ({ className }: SignUpFormProps) => {
-    const { email, password } = useAppSelector(getAuthState)
     const dispatch = useAppDispatch()
-
-    const onChangeEmail = useCallback(
-        (value: string) => {
-            dispatch(authActions.setEmail(value))
-        },
-        [dispatch]
-    )
-
-    const onChangePassword = useCallback(
-        (value: string) => {
-            dispatch(authActions.setPassword(value))
-        },
-        [dispatch]
-    )
-
-    const onLoginClick = useCallback(
-        (e: React.MouseEvent<HTMLButtonElement>) => {
-            e.preventDefault()
-            // dispatch(signUpByEmail({ email, password }))
-        },
-        [dispatch, email, password]
-    )
+    const loading = useAppSelector(getLoadingAuthStatus)
+    const error = useAppSelector(getAuthError)
+    const regStatus = useAppSelector(getRegStatus)
+    const { t } = useTranslation('authForms')
 
     return (
         <div className={classNames(cls.SignUpForm, {}, [className])}>
-            {/* <form className={cls.form}> */}
             <Formik
                 initialValues={{
                     firstName: '',
@@ -91,86 +80,149 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                     confirmPassword: '',
                     birthDay: '',
                     gender: '',
+                    city: '',
                 }}
-                validationSchema={PersonSchema}
+                validationSchema={validationSchema}
                 onSubmit={(values: Values) => {
-                    const { firstName, lastName, email, password, gender, birthDay } = values
+                    const { firstName, lastName, email, password, gender, birthDay, city } = values
                     dispatch(
-                        signUpByEmail({ firstName, lastName, email, password, gender, birthDay })
+                        signUpByEmail({
+                            firstName,
+                            lastName,
+                            email,
+                            password,
+                            gender,
+                            birthDay,
+                            city,
+                        })
                     )
                 }}
             >
-                <Form className={cls.form}>
-                    <label htmlFor="firstName">Имя</label>
-                    <Field id="firstName" name="firstName" placeholder="введите имя" />
-                    <ErrorMessage name="firstName" />
+                <Form className={cls.form} autoComplete="off">
+                    <label htmlFor="firstName">{t('Имя')}</label>
+                    <div className={cls.fieldContainer}>
+                        <Field
+                            className={cls.input}
+                            id="firstName"
+                            name="firstName"
+                            placeholder={t('введите имя')}
+                        />
+                        <ErrorMessage className={cls.error} component="div" name="firstName" />
+                    </div>
 
-                    <label htmlFor="lastName">Фамилия</label>
-                    <Field id="lastName" name="lastName" placeholder="введите фамилию" />
-                    <ErrorMessage name="lastName" />
+                    <label htmlFor="lastName">{t('Фамилия')}</label>
+                    <div className={cls.fieldContainer}>
+                        <Field
+                            className={cls.input}
+                            id="lastName"
+                            name="lastName"
+                            placeholder={t('введите фамилию')}
+                        />
+                        <ErrorMessage className={cls.error} component="div" name="lastName" />
+                    </div>
 
                     <label htmlFor="email">Email</label>
-                    <Field id="email" name="email" placeholder="введите email" type="email" />
-                    <ErrorMessage name="email" />
+                    <div className={cls.fieldContainer}>
+                        <Field
+                            className={cls.input}
+                            id="email"
+                            name="email"
+                            placeholder={t('введите email')}
+                            type="email"
+                            autocomplete="off"
+                        />
+                        <ErrorMessage className={cls.error} component="div" name="email" />
+                    </div>
 
-                    <label htmlFor="password">Пароль</label>
-                    <Field
-                        id="password"
-                        name="password"
-                        placeholder="введите пароль"
-                        type="password"
-                    />
-                    <ErrorMessage name="password" />
+                    <label htmlFor="password">{t('Пароль')}</label>
+                    <div className={cls.fieldContainer}>
+                        <Field
+                            className={cls.input}
+                            id="password"
+                            name="password"
+                            placeholder={t('введите пароль')}
+                            type="password"
+                        />
+                        <ErrorMessage className={cls.error} component="div" name="password" />
+                    </div>
 
-                    <label htmlFor="confirmPassword">Повторите пароль</label>
-                    <Field
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        placeholder="повторите пароль"
-                        type="password"
-                    />
-                    <ErrorMessage name="confirmPassword" />
+                    <label htmlFor="confirmPassword">{t('Повторите пароль')}</label>
+                    <div className={cls.fieldContainer}>
+                        <Field
+                            className={cls.input}
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder={t('повторите пароль')}
+                            type="password"
+                        />
+                        <ErrorMessage
+                            className={cls.error}
+                            component="div"
+                            name="confirmPassword"
+                        />
+                    </div>
 
-                    <label htmlFor="confirmPassword">Введите дату рождения</label>
-                    <Field id="birthDay" name="birthDay" placeholder="dd.mm.yyyy" />
-                    <ErrorMessage name="birthDay" />
+                    <label htmlFor="confirmPassword">{t('Введите ваш город')}</label>
+                    <div className={cls.fieldContainer}>
+                        <Field
+                            className={cls.input}
+                            id="city"
+                            name="city"
+                            placeholder={t('ваш город')}
+                            type="text"
+                        />
+                        <ErrorMessage className={cls.error} component="div" name="city" />
+                    </div>
 
-                    <label htmlFor="gender">Пол</label>
-                    <Field id="gender" name="gender" as="select">
-                        <option disabled value="">
-                            Выберете ваш пол
-                        </option>
-                        <option value="male">мужчина</option>
-                        <option value="female">женщина</option>
-                    </Field>
-                    <ErrorMessage className={cls.input} name="gender" />
+                    <label htmlFor="confirmPassword">{t('Введите дату рождения')}</label>
+                    <div className={cls.fieldContainer}>
+                        <Field
+                            className={cls.input}
+                            id="birthDay"
+                            name="birthDay"
+                            placeholder="dd.mm.yyyy"
+                        />
+                        <ErrorMessage className={cls.error} component="div" name="birthDay" />
+                    </div>
 
-                    <button type="submit">Зарегистрироваться</button>
+                    <label htmlFor="gender">{t('Пол')}</label>
+                    <div className={cls.fieldContainer}>
+                        <Field className={cls.select} id="gender" name="gender" as="select">
+                            <option disabled value="">
+                                {t('Выберете ваш пол')}
+                            </option>
+                            <option value="male">{t('мужчина')}</option>
+                            <option value="female">{t('женщина')}</option>
+                        </Field>
+                        <ErrorMessage className={cls.error} component="div" name="gender" />
+                    </div>
+
+                    <div className={cls.errorBlock}>
+                        {regStatus && (
+                            <div className={cls.regSuccess}>
+                                {' '}
+                                {t('Вы успешно зарегистрировались, войдите под своим email.')}{' '}
+                            </div>
+                        )}
+                        {loading && <Loader size="M" />}
+                        {error && !loading && <div className={cls.serverError}>{error}</div>}
+                    </div>
+
+                    <Button className={cls.submitBtn} type="submit">
+                        {t('Зарегистрироваться')}
+                    </Button>
+                    <Link className={cls.link} to={'/'}>
+                        <Button className={cls.signInBtn} type="button">
+                            {t('Войти')}
+                        </Button>
+                    </Link>
+
+                    <div className={cls.switchersContainer}>
+                        <LangSwitcher short />
+                        <ThemeSwitcher />
+                    </div>
                 </Form>
             </Formik>
-            {/* <Input
-                    className={cls.input}
-                    type="text"
-                    placeholder="Введите Email"
-                    value={email}
-                    onChange={onChangeEmail}
-                />
-                <Input
-                    className={cls.input}
-                    type="text"
-                    placeholder="Введите пароль"
-                    value={password}
-                    onChange={onChangePassword}
-                />
-                <Input
-                    className={cls.input}
-                    type="text"
-                    placeholder="Повторите пароль"
-                    value={password}
-                    onChange={onChangePassword}
-                />
-                <Button onClick={(e) => onLoginClick(e)}>Зарегистрироваться</Button> */}
-            {/* </form> */}
         </div>
     )
 }

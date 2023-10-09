@@ -1,0 +1,24 @@
+.contentContainer {
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    height: calc(100vh - 60px);
+    padding-bottom: 10px;
+}
+
+.messagesBlock {
+    // height: calc(100vh - var(--header-height) - 200px);
+    height: calc(100% - 140px);
+    overflow: auto;
+}
+
+.dialogIcon {
+    margin: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    // background-color: var(--bg-user);
+    fill: var(--fill-user);
+}

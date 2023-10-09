@@ -69,6 +69,12 @@ router.post("/signUp", [
                     posts: newUser.posts,
                     requests: newUser.requests,
                     birthDay: newUser.birthDay,
+                    avatarPath: newUser.avatarPath,
+                    conversations: newUser.conversations,
+                    likes: newUser.likes,
+                    isOnline: newUser.isOnline,
+                    lastSeenOnline: newUser.lastSeenOnline,
+                    city: newUser.city,
                 },
             })
         } catch (e) {
@@ -120,7 +126,7 @@ router.post("/signInWithPassword", [
             if (!isPasswordEqual) {
                 return res.status(400).send({
                     error: {
-                        message: "INVALID_PASSWORD",
+                        message: "Неверный пароль",
                         code: 400,
                     },
                 })
@@ -148,6 +154,12 @@ router.post("/signInWithPassword", [
                     posts: exitingUser.posts,
                     requests: exitingUser.requests,
                     birthDay: exitingUser.birthDay,
+                    avatarPath: exitingUser.avatarPath,
+                    conversations: exitingUser.conversations,
+                    likes: exitingUser.likes,
+                    isOnline: true,
+                    lastSeenOnline: exitingUser.lastSeenOnline,
+                    city: exitingUser.city,
                 },
             })
         } catch (e) {
@@ -161,7 +173,6 @@ router.post("/signInWithPassword", [
 router.post("/signOut", async (req, res) => {
     try {
         const { refreshToken } = req.cookies
-        console.log(req.cookies)
         const token = await TokenService.removeToken(refreshToken)
         res.clearCookie("refreshToken")
         res.status(200).json(token)
@@ -199,6 +210,7 @@ router.get("/token", async (req, res) => {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             httpOnly: true,
         })
+
         res.status(200).send({
             ...tokens,
             user: {
@@ -211,6 +223,12 @@ router.get("/token", async (req, res) => {
                 posts: user.posts,
                 requests: user.requests,
                 birthDay: user.birthDay,
+                avatarPath: user.avatarPath,
+                conversations: user.conversations,
+                likes: user.likes,
+                isOnline: true,
+                lastSeenOnline: user.lastSeenOnline,
+                city: user.city,
             },
         })
     } catch (e) {

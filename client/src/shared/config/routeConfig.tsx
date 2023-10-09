@@ -1,10 +1,13 @@
 import { SignInForm, SignUpForm } from 'features/AuthByEmail'
-import { MainPage } from 'pages/MainPage'
+import { AnotherUserPage } from 'pages/AnotherUserPage'
+import { ChangeProfilePage } from 'pages/ChangeProfilePage'
+import { ConversationPage } from 'pages/ConversationPage'
+import { FriendsPage } from 'pages/FriendsPage/ui/FriendsPage'
 import { MessengerPage } from 'pages/MessengerPage'
+import { NewsPage } from 'pages/NewsPage'
 import { NotFoundPage } from 'pages/NotFoundPage'
 import { ProfilePage } from 'pages/ProfilePage'
-import { Route, RouteProps } from 'react-router-dom'
-import { Dialog } from 'widgets/Dialog'
+import { RouteProps } from 'react-router-dom'
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean
@@ -12,23 +15,29 @@ export type AppRoutesProps = RouteProps & {
 
 export enum AppRoutes {
     MAIN = 'main',
+    SIGN_UP = 'signUp',
     PROFILE = 'profile',
     MESSENGER = 'messenger',
-    DIALOG = 'dialog',
-    SIGNUP = 'signUp',
-    SIGNIN = 'signIn',
-    // NEWS = 'news',
+    CONVERSATION = 'conversation',
+    // SIGN_IN = 'signIn',
+    CHANGE_PROFILE = 'changeProfile',
+    ANOTHER_PROFILE = 'anotherProfile',
+    NEWS = 'news',
+    FRIENDS = 'friends',
     NOT_FOUND = 'not-found',
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
+    [AppRoutes.SIGN_UP]: '/signUp',
     [AppRoutes.PROFILE]: 'profile',
     [AppRoutes.MESSENGER]: 'messenger',
-    [AppRoutes.DIALOG]: 'messenger/:id',
-    [AppRoutes.SIGNUP]: '/signUp',
-    [AppRoutes.SIGNIN]: '/signIn',
-    // [AppRoutes.NEWS]: '/news',
+    [AppRoutes.CONVERSATION]: 'messenger/:roomId',
+    // [AppRoutes.SIGN_IN]: '/signIn',
+    [AppRoutes.CHANGE_PROFILE]: '/changeProfile',
+    [AppRoutes.ANOTHER_PROFILE]: '/:anotherUserId',
+    [AppRoutes.NEWS]: '/news',
+    [AppRoutes.FRIENDS]: '/friends',
     [AppRoutes.NOT_FOUND]: '*',
 }
 
@@ -37,6 +46,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: RoutePath.main,
         element: <SignInForm />,
         // authOnly: true,
+    },
+    [AppRoutes.SIGN_UP]: {
+        path: RoutePath.signUp,
+        element: <SignUpForm />,
     },
     [AppRoutes.PROFILE]: {
         path: RoutePath.profile,
@@ -48,22 +61,37 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         element: <MessengerPage />,
         authOnly: true,
     },
-    [AppRoutes.DIALOG]: {
-        path: RoutePath.dialog,
-        element: <Dialog />,
+    [AppRoutes.CONVERSATION]: {
+        path: RoutePath.conversation,
+        element: <ConversationPage />,
+        authOnly: true,
+    },
+    // [AppRoutes.SIGN_IN]: {
+    //     path: RoutePath.signIn,
+    //     element: <SignInForm />,
+    // },
+    [AppRoutes.CHANGE_PROFILE]: {
+        path: RoutePath.changeProfile,
+        element: <ChangeProfilePage />,
+        authOnly: true,
+    },
+    [AppRoutes.ANOTHER_PROFILE]: {
+        path: RoutePath.anotherProfile,
+        element: <AnotherUserPage />,
+        authOnly: true,
+    },
+    [AppRoutes.NEWS]: {
+        path: RoutePath.news,
+        element: <NewsPage />,
+        authOnly: true,
+    },
+    [AppRoutes.FRIENDS]: {
+        path: RoutePath.friends,
+        element: <FriendsPage />,
         authOnly: true,
     },
     [AppRoutes.NOT_FOUND]: {
         path: RoutePath['not-found'],
         element: <NotFoundPage />,
-        authOnly: true,
-    },
-    [AppRoutes.SIGNUP]: {
-        path: RoutePath['signUp'],
-        element: <SignUpForm />,
-    },
-    [AppRoutes.SIGNIN]: {
-        path: RoutePath['signIn'],
-        element: <SignInForm />,
     },
 }

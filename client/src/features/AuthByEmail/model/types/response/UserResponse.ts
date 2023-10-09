@@ -1,4 +1,4 @@
-import { IUser } from '../IUser'
+import { IUser } from '../../../../../entities/UserData/model/types/IUser'
 
 export interface UserResponse {
     // accessToken: string

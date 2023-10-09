@@ -1,9 +1,11 @@
 {
-  "port": 8080,
+  "port": 8082,
   "mongoUri": "mongodb://127.0.0.1:27017/app",
-  "mongoUriR": "mongodb+srv://playeer2905:y8QIYFNXemvBPLh8@cluster0.7bxpwgp.mongodb.net/app?retryWrites=true&w=majority",
+  "mongoUriR": "mongodb+srv://yurikuznetsov2905:jIrjWFYA69iXHFxq@socialnetwork.b3papjy.mongodb.net/?retryWrites=true&w=majority",
   "accessSecret": "super secret from backend",
   "refreshSecret": "super refresh key",
   "clientURL": "http://localhost:3000",
-  "clientURLR": "http://84.38.183.52"
+  "clientURLR": "http://84.38.183.52",
+  "staticPathR": "C:\\Users\\Сменный персонал\\Downloads\\wa\\sn\\social-network\\server\\static",
+  "staticPath": "D:\\webdev\\practice\\socialNetwork\\server\\static"
 }

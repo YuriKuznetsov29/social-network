@@ -6,7 +6,7 @@
         // Это означает лишь, что в подобных ситуация разработчик должен явно писать any,
         "noImplicitAny": true,
         "module": "ESNext",
-        "lib": ["ES2020", "DOM"],
+        "lib": ["ES2020", "DOM", "DOM.Iterable"],
         // В какую спецификацию компилируем: для поддержки большинства браузеров
         "target": "es5",
         "jsx": "react-jsx",
@@ -32,7 +32,8 @@
         // import * as React from 'react';
         // можно писать такой
         // import React from 'react';
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "strict": true
     },
     "ts-node": {
         "compilerOptions": {

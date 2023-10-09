@@ -1,0 +1,58 @@
+.container {
+    padding: 10px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+.avatar {
+    margin-bottom: 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.username {
+    width: 150px;
+    height: 20px;
+    border-radius: 12px;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.btn {
+    margin-bottom: 10px;
+    width: 180px;
+    height: 30px;
+    border-radius: 12px;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dataWrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.textItem {
+    margin-bottom: 10px;
+    width: 120px;
+    height: 15px;
+    animation: skeleton-loading 1s linear infinite alternate;
+    border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 80%);
+    }
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
