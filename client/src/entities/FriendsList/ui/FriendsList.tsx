@@ -130,7 +130,10 @@ export const FriendsList = ({ className }: FriendsListProps) => {
                                     {t('Удалить из друзей')}
                                 </Button>
 
-                                <Button onClick={() => createConversation(friend.userId)}>
+                                <Button
+                                    className={cls.messageBtn}
+                                    onClick={() => createConversation(friend.userId)}
+                                >
                                     {t('Написать сообщение')}
                                 </Button>
                             </div>
