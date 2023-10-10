@@ -23,7 +23,7 @@ export const UserData = ({ className }: UserDataProps) => {
     const userInit = useAppSelector(getUserInitied)
     const loading = useAppSelector(getUserDataLoading)
     const { t } = useTranslation('pages')
-    console.log(loading)
+
     if (loading || !userInit) return <UserDataLoader />
 
     return (

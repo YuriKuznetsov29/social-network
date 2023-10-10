@@ -1,1 +1,1 @@
-export { AnotherUserPage } from './ui/AnotherUserPage'
+export { AnotherUserPageAsync as AnotherUserPage } from './ui/AnotherUserPageAsync'

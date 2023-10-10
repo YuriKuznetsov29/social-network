@@ -5,7 +5,7 @@ import { SideBar } from 'widgets/SideBar'
 import { Messenger } from 'features/Messenger'
 import { useMobile } from 'shared/lib/hook/useMobile'
 
-export const MessengerPage = () => {
+const MessengerPage = () => {
     const isMobile = useMobile()
     return (
         <>
@@ -19,3 +19,5 @@ export const MessengerPage = () => {
         </>
     )
 }
+
+export default MessengerPage

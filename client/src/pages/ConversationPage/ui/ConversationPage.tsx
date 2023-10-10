@@ -21,3 +21,5 @@ export const ConversationPage = ({ className }: ConversationPageProps) => {
         </>
     )
 }
+
+export default ConversationPage

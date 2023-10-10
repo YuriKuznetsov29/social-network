@@ -15,7 +15,6 @@ import { getUserData } from 'entities/UserData'
 import { addFriend, removeFriend } from 'features/GetFriendsData'
 import { addConversation } from 'features/Messenger'
 import { useTranslation } from 'react-i18next'
-import cls from './AnotherUserProfile.module.scss'
 import { getAnotherUserInit } from '../model/selectors/getAnotherUserInit'
 import { AnotherUserLoader } from 'shared/ui/AnotherUserLoader'
 import { PostsList } from 'entities/PostsList'
@@ -23,6 +22,7 @@ import BirthIcon from 'shared/assets/icons/gift-bold.svg'
 import HomeIcon from 'shared/assets/icons/house-bold.svg'
 import FriendsIcon from 'shared/assets/icons/users-bold.svg'
 import PostIcon from 'shared/assets/icons/note-pencil-bold.svg'
+import cls from './AnotherUserProfile.module.scss'
 
 interface AnotherUserProfileProps {
     className?: string
