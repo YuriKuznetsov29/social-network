@@ -10,17 +10,17 @@ interface NewsPageProps {
     className?: string
 }
 
-export const NewsPage = ({ className }: NewsPageProps) => {
+const NewsPage = ({ className }: NewsPageProps) => {
     const isMobile = useMobile()
     return (
         <>
             <Header />
             <Container className={isMobile ? cls.container : ''}>
                 <SideBar />
-                {/* <div className={classNames(cls.contentWrapper, {}, [className])}> */}
                 <News />
-                {/* </div> */}
             </Container>
         </>
     )
 }
+
+export default NewsPage

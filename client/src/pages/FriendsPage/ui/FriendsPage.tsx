@@ -9,7 +9,7 @@ interface FriendsPageProps {
     className?: string
 }
 
-export const FriendsPage = ({ className }: FriendsPageProps) => {
+const FriendsPage = ({ className }: FriendsPageProps) => {
     const isMobile = useMobile()
     return (
         <>
@@ -21,3 +21,5 @@ export const FriendsPage = ({ className }: FriendsPageProps) => {
         </>
     )
 }
+
+export default FriendsPage

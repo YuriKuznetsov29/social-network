@@ -1,1 +1,1 @@
-export { ConversationPage } from './ui/ConversationPage'
+export { ConversationPageAsync as ConversationPage } from './ui/ConversationPageAsync'

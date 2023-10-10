@@ -10,7 +10,7 @@ interface AnotherUserPageProps {
     className?: string
 }
 
-export const AnotherUserPage = ({ className }: AnotherUserPageProps) => {
+const AnotherUserPage = ({ className }: AnotherUserPageProps) => {
     const isMobile = useMobile()
     return (
         <>
@@ -24,3 +24,5 @@ export const AnotherUserPage = ({ className }: AnotherUserPageProps) => {
         </>
     )
 }
+
+export default AnotherUserPage

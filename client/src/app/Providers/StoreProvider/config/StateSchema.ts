@@ -1,4 +1,12 @@
+import {
+    AnyAction,
+    CombinedState,
+    EnhancedStore,
+    Reducer,
+    ReducersMapObject,
+} from '@reduxjs/toolkit'
 import { AxiosError, AxiosInstance } from 'axios'
+import { NewsSchema } from 'entities/News'
 import { UserDataSchema } from 'entities/UserData/model/types/userDataSchema'
 import { AuthSchema } from 'features/AuthByEmail/model/types/authSchema'
 import { SearchUsersSchema } from 'features/FindUsers/model/type/searchUsersSchema'
@@ -18,6 +26,21 @@ export interface StateSchema {
     friends: FriendsSchema
     user: UserDataSchema
     notifications: NotificationsSchema
+    //асинхронные редюсеры
+    news?: NewsSchema
+}
+
+export type StateSchemaKey = keyof StateSchema
+
+export interface ReducerManager {
+    getReducerMap: () => ReducersMapObject<StateSchema>
+    reduce: (state: StateSchema, action: AnyAction) => CombinedState<StateSchema>
+    add: (key: StateSchemaKey, reducer: Reducer) => void
+    remove: (key: StateSchemaKey) => void
+}
+
+export interface ReduxStoreWithManager extends EnhancedStore<StateSchema> {
+    reducerManager: ReducerManager
 }
 
 export interface ThunkExtraArg {
