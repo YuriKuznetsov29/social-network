@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react'
 import { IUser } from 'entities/UserData/model/types/IUser'
 import $api, { API_URL } from '../../../shared/api/http/index'
 import { Avatar } from 'entities/Avatar'
-import cls from './Message.module.scss'
 import { useTranslation } from 'react-i18next'
 import RemoveIcon from 'shared/assets/icons/trash-bold.svg'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
+import cls from './Message.module.scss'
 
 interface ResponseUserData {
     user: IUser

@@ -5,7 +5,13 @@ import { IUser } from 'entities/UserData/model/types/IUser'
 import dayjs from 'dayjs'
 import { getUserDataById } from 'shared/api/getUserDataById'
 import { Avatar } from 'entities/Avatar'
+import RemoveIcon from 'shared/assets/icons/trash-bold.svg'
 import cls from './ConversationLink.module.scss'
+import { useDispatch } from 'react-redux'
+import { removeConversation } from 'features/Messenger'
+import { useAppSelector } from 'shared/lib/hook/useAppSelector'
+import { getUserData } from 'entities/UserData'
+import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 
 interface ConversationLinkProps {
     className?: string
@@ -21,6 +27,10 @@ export const ConversationLink = (props: ConversationLinkProps) => {
     const [author, setAuthor] = useState<IUser | null>(null)
 
     const { messages } = useChat(roomId)
+
+    const userData = useAppSelector(getUserData)
+
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         getUserDataById(companionId)
@@ -42,6 +52,10 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                 .catch(console.log)
         }
     }, [messages])
+
+    const onClickRemoveConversation = () => {
+        dispatch(removeConversation({ companionId, roomId, userId: userData.userId }))
+    }
 
     return (
         <AppLink to={`/messenger/${roomId}`} className={cls.dialog}>
@@ -71,6 +85,7 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                     {dayjs(lastMessage?.createdAt)
                         .locale('ru')
                         .toNow(true) + ' назад'}
+                    <RemoveIcon onClick={onClickRemoveConversation} />
                 </div>
             </div>
         </AppLink>
