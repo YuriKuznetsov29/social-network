@@ -32,8 +32,8 @@ export const ConversationLink = (props: ConversationLinkProps) => {
 
     useEffect(() => {
         const lastMessage = messages[messages.length - 1]
-        console.log(messages, roomId)
         setLastMessage(lastMessage)
+
         if (lastMessage?.author) {
             getUserDataById(lastMessage.author)
                 .then((author) => {
@@ -61,8 +61,8 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                         <Avatar avatarPath={author?.avatarPath} className={cls.avatarMsg} />
                         <div className={cls.lastMessageText}>
                             {lastMessage?.textOrPathToFile &&
-                            lastMessage?.textOrPathToFile?.length > 50
-                                ? lastMessage?.textOrPathToFile.slice(0, 50) + '...'
+                            lastMessage?.textOrPathToFile?.length > 20
+                                ? lastMessage?.textOrPathToFile.slice(0, 20) + '...'
                                 : lastMessage?.textOrPathToFile}
                         </div>
                     </div>

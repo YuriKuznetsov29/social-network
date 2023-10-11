@@ -26,8 +26,6 @@ const initialReducers: ReducersList = {
 }
 
 export const News = ({ className }: NewsProps) => {
-    const [posts, setPosts] = useState<IPost[]>([] as IPost[])
-
     const dispatch = useAppDispatch()
 
     const userData = useAppSelector(getUserData)

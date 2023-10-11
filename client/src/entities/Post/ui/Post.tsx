@@ -15,9 +15,12 @@ import { Avatar } from 'entities/Avatar'
 import { transformText } from '../model/services/transformText'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
-import { getPostLoadingStatus } from 'features/PostHandler'
+import { getPostLoadingStatus, removePost } from 'features/PostHandler'
 import cls from './Post.module.scss'
 import { useTranslation } from 'react-i18next'
+import { getUserDataById } from 'shared/api/getUserDataById'
+import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
+import RemoveIcon from 'shared/assets/icons/trash-bold.svg'
 
 interface PostProps {
     className?: string
@@ -46,20 +49,16 @@ export const Post = ({ className, post }: PostProps) => {
 
     const commentsScroll = useRef<HTMLDivElement>(null)
 
+    const dispatch = useAppDispatch()
     const userData = useAppSelector(getUserData)
     const { t, i18n } = useTranslation('pages')
 
     useEffect(() => {
-        const getUserData = async () => {
-            try {
-                const response = await $api.get<ResponseUserData>(`${API_URL}/user/${post.author}`)
-                setAuthor(response.data.user)
-            } catch (e) {
-                console.log(e)
-            }
-        }
-
-        getUserData()
+        getUserDataById(post.author)
+            .then((companion) => {
+                if (companion) setAuthor(companion)
+            })
+            .catch(console.log)
     }, [])
 
     useEffect(() => {
@@ -128,6 +127,10 @@ export const Post = ({ className, post }: PostProps) => {
         setCommentText('')
     }
 
+    const onClickRemovePost = () => {
+        dispatch(removePost({ postId: post._id }))
+    }
+
     useEffect(() => {
         if (commentsScroll.current) {
             commentsScroll.current.scrollTop = commentsScroll.current.scrollHeight
@@ -140,8 +143,10 @@ export const Post = ({ className, post }: PostProps) => {
                 <div className={cls.authorContainer}>
                     <Avatar avatarPath={author?.avatarPath} className={cls.avatar} size="M" />
                     <div>
-                        <div>
-                            {author?.firstName} {author?.lastName}
+                        <div className={cls.authorWrapper}>
+                            <div>
+                                {author?.firstName} {author?.lastName}
+                            </div>
                         </div>
                         <div className={cls.time}>
                             {dayjs(post.date).locale(i18n.language).toNow(true) + t(' назад')}
@@ -165,13 +170,21 @@ export const Post = ({ className, post }: PostProps) => {
                         []
                     )}
                 >
-                    <div className={cls.likesValue}>{post.comments.length}</div>
-                    <CommentBtn className={cls.commentBtn} onClick={onClickToggleComment} />
-                    <div className={cls.likesValue}>{likes}</div>
-                    <Heart
-                        className={classNames(cls.heart, { [cls.liked]: likesActive })}
-                        onClick={onClickToggleLike}
-                    />
+                    <div>
+                        {userData?.userId === post.author && (
+                            <RemoveIcon className={cls.removeBtn} onClick={onClickRemovePost} />
+                        )}
+                    </div>
+
+                    <div className={cls.likeWrapper}>
+                        <div className={cls.likesValue}>{post.comments.length}</div>
+                        <CommentBtn className={cls.commentBtn} onClick={onClickToggleComment} />
+                        <div className={cls.likesValue}>{likes}</div>
+                        <Heart
+                            className={classNames(cls.heart, { [cls.liked]: likesActive })}
+                            onClick={onClickToggleLike}
+                        />
+                    </div>
                 </div>
                 <div className={classNames(cls.commentBlock, { [cls.show]: showCommentInput }, [])}>
                     <div className={cls.commentsContainer} ref={commentsScroll}>

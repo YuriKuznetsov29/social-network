@@ -5,6 +5,7 @@ import { createPost } from '../services/createPost'
 import { getUserPosts } from '../services/getUserPosts'
 // import { createComment } from '../services/createComment'
 import { IComment } from '../types/comment'
+import { removePost } from '../services/removePost'
 // import { getCommentsForPost } from '../services/getCommentsForPosts'
 
 export interface signInState {
@@ -24,34 +25,39 @@ export const postHandlerSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            .addCase(removePost.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(removePost.rejected, (state, action) => {
+                state.isLoading = false
+                state.error = action.payload
+            })
+            .addCase(removePost.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.posts = action.payload.posts
+            })
+            .addCase(createPost.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(createPost.rejected, (state, action) => {
+                state.isLoading = false
+                state.error = action.payload
+            })
             .addCase(createPost.fulfilled, (state, action) => {
-                if (action.payload?.posts) {
-                    state.posts = action.payload.posts
-                }
+                state.isLoading = false
+                state.posts = action.payload.posts
             })
             .addCase(getUserPosts.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(getUserPosts.rejected, (state, action) => {
+            .addCase(getUserPosts.rejected, (state) => {
                 state.isLoading = false
             })
             .addCase(getUserPosts.fulfilled, (state, action) => {
                 state.isLoading = false
                 state._initialized = true
-                if (action.payload?.posts) {
-                    state.posts = action.payload.posts
-                }
+                state.posts = action.payload.posts
             })
-        // .addCase(createComment.fulfilled, (state, action) => {
-        //     if (action.payload?.posts) {
-        //         state.posts = action.payload.posts
-        //     }
-        // })
-        // .addCase(getCommentsForPost.fulfilled, (state, action) => {
-        //     if (action.payload?.comments) {
-        //         // state.comments = action.payload.comments
-        //     }
-        // })
     },
 })
 

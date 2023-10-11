@@ -12,6 +12,7 @@ import { notificationsActions } from 'features/Notifications'
 import { CreatePostLoader } from 'shared/ui/CreatePostLoader'
 import { getPostLoadingStatus } from '../model/selectors/getPostLoadingStatus'
 import { getInitPostStatus } from '../model/selectors/getInitPostStatus'
+import { useTranslation } from 'react-i18next'
 
 interface CreatePostProps {
     className?: string
@@ -24,10 +25,10 @@ interface uploadImageResponse {
 export const CreatePost = ({ className }: CreatePostProps) => {
     const [imagePath, setImagePath] = useState('')
     const input = useRef<HTMLInputElement | null>(null)
+    const { t } = useTranslation('pages')
 
     const dispatch = useAppDispatch()
     const userData = useAppSelector(getUserData)
-    const loading = useAppSelector(getPostLoadingStatus)
     const init = useAppSelector(getInitPostStatus)
 
     const onClickCreatePost = () => {
@@ -78,7 +79,7 @@ export const CreatePost = ({ className }: CreatePostProps) => {
                     contentEditable
                     aria-multiline
                     role="textbox"
-                    data-placeholder="Что у вас нового?"
+                    data-placeholder={t('Что у вас нового?')}
                     ref={input}
                 ></div>
                 <div className={cls.buttonContainer}>
@@ -97,7 +98,6 @@ export const CreatePost = ({ className }: CreatePostProps) => {
                     <Plane className={cls.plane} onClick={onClickCreatePost} />
                 </div>
             </ContentContainer>
-            {/* <CreatePostLoader /> */}
         </>
     )
 }

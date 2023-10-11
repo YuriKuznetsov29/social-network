@@ -30,11 +30,15 @@
     }
 }
 
-.icon {
+.icon, .mobileIcon {
     width: 22px;
     height: 22px;
-    margin-right: 10px;
     fill: var(--icon-link-color);
+}
+
+.icon {
+    margin-right: 10px;
+
 }
 
 .mobileSidebar {

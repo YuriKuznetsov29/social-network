@@ -90,8 +90,8 @@ export default function useChat(roomId: string) {
         socket.emit('message:add', message)
     }
 
-    const removeMessage = (message: MessageData) => {
-        socket.emit('message:remove', message)
+    const removeMessage = (messageId: string) => {
+        socket.emit('message:remove', messageId)
     }
 
     return { users, messages, log, lastMessage, sendMessage, removeMessage }
