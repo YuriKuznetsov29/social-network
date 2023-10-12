@@ -7,6 +7,7 @@ export interface RequestChangeData {
     userId: string
     friendId: string
     roomId: string
+    navigate: (path: string) => void
 }
 
 export interface ResponseData {
@@ -15,7 +16,7 @@ export interface ResponseData {
 
 export const addConversation = createAsyncThunk<void, RequestChangeData, ThunkConfig<string>>(
     'user/addConversation',
-    async ({ userId, friendId, roomId }, { dispatch, extra, rejectWithValue }) => {
+    async ({ userId, friendId, roomId, navigate }, { dispatch, extra, rejectWithValue }) => {
         try {
             const response = await extra.api.patch<ResponseData>(
                 `${API_URL}/user/${userId}/addConversation`,
@@ -25,6 +26,7 @@ export const addConversation = createAsyncThunk<void, RequestChangeData, ThunkCo
                 }
             )
             dispatch(userDataActions.setUserData(response.data.user))
+            navigate(`/messenger/${roomId}`)
         } catch (e: unknown) {
             console.log(e)
             return rejectWithValue('error')

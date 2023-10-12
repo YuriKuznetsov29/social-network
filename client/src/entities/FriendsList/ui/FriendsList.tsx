@@ -66,9 +66,9 @@ export const FriendsList = ({ className }: FriendsListProps) => {
                     roomId,
                     friendId,
                     userId,
+                    navigate,
                 })
             )
-            navigate(`/messenger/${roomId}`)
         }
     }
 

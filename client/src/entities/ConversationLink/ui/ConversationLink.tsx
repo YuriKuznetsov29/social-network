@@ -53,7 +53,9 @@ export const ConversationLink = (props: ConversationLinkProps) => {
         }
     }, [messages])
 
-    const onClickRemoveConversation = () => {
+    const onClickRemoveConversation = (e: React.MouseEvent) => {
+        e.preventDefault()
+        // e.stopPropagation()
         dispatch(removeConversation({ companionId, roomId, userId: userData.userId }))
     }
 
@@ -85,7 +87,11 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                     {dayjs(lastMessage?.createdAt)
                         .locale('ru')
                         .toNow(true) + ' назад'}
-                    <RemoveIcon onClick={onClickRemoveConversation} />
+                    <RemoveIcon
+                        className={cls.removeBtn}
+                        id="remove"
+                        onClick={(e) => onClickRemoveConversation(e)}
+                    />
                 </div>
             </div>
         </AppLink>
