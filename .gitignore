@@ -1,4 +1,4 @@
 node_modules
 dist
 .idea
-# server/static
+server/static

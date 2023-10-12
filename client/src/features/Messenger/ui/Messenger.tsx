@@ -18,7 +18,7 @@ export const Messenger = ({ className }: MessengerProps) => {
     const userData = useAppSelector(getUserData)
 
     const dispatch = useAppDispatch()
-    const { t } = useTranslation()
+    const { t } = useTranslation('pages')
 
     useEffect(() => {
         dispatch(getConversationUsers({ userId: userData.userId }))

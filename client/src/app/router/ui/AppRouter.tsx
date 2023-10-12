@@ -7,6 +7,7 @@ import { Loader } from 'shared/ui/Loader'
 const AppRouter = () => {
     const renderWithWrapper = useCallback((route: AppRoutesProps) => {
         const element = <Suspense fallback={<Loader center />}>{route.element}</Suspense>
+
         return (
             <Route
                 key={route.path}

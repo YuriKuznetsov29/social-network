@@ -99,7 +99,6 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
 
     const createConversation = () => {
         const conversation = isConversationCreated()
-        console.log('find', conversation)
         if (conversation) {
             navigate(`/messenger/${conversation.roomId}`)
         } else if (anotherUserId) {
@@ -110,9 +109,9 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
                     roomId,
                     friendId: anotherUserId,
                     userId,
+                    navigate,
                 })
             )
-            navigate(`/messenger/${roomId}`)
         }
     }
 
