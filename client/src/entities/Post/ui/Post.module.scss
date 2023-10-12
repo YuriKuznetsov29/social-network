@@ -13,6 +13,12 @@
     overflow-y: auto;
 }
 
+.authorWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .image {
     max-width: 100%;
     border-radius: 10px;
@@ -23,7 +29,7 @@
     width: 100%;
     padding: 10px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -43,6 +49,7 @@
     height: 65px;
     border-top: 1px var(--container-border-color) solid;
     display: flex;
+
     align-items: center;
 }
 
@@ -50,11 +57,21 @@
     display: none;
 }
 
-.commentBtn {
-    margin-right: 20px;
+.commentBtn, .removeBtn {
     cursor: pointer;
     fill: var(--icon-color);
 }
+
+.commentBtn {
+    margin-right: 20px;
+
+}
+
+.removeBtn {
+    width: 22px;
+    height: 22px;
+}
+
 
 .show {
     display: block;
@@ -104,4 +121,9 @@ $red: #ff3252;
 
 .text {
     margin-bottom: 10px;
+}
+
+
+.likeWrapper {
+    display: flex;
 }

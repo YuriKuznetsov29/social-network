@@ -2,9 +2,14 @@ import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
 import { Avatar } from 'entities/Avatar'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { IUser, getUserData } from 'entities/UserData'
-import { getAllFriends, getFriendsData, removeFriend } from 'features/GetFriendsData'
+import {
+    getAllFriends,
+    getFriendsData,
+    getFriendsLoadingStatus,
+    removeFriend,
+} from 'features/GetFriendsData'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
-import { useEffect, useMemo, useTransition } from 'react'
+import { useEffect } from 'react'
 import { Conversations } from 'features/AuthByEmail/model/types/response/Conversations'
 import { useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
@@ -17,6 +22,7 @@ import FriendsIcon from 'shared/assets/icons/users-bold.svg'
 import PostIcon from 'shared/assets/icons/note-pencil-bold.svg'
 import dayjs from 'dayjs'
 import cls from './FriendsList.module.scss'
+import { AnotherUserLoader } from 'shared/ui/AnotherUserLoader'
 
 interface FriendsListProps {
     className?: string
@@ -25,6 +31,7 @@ interface FriendsListProps {
 export const FriendsList = ({ className }: FriendsListProps) => {
     const { userId, conversations } = useAppSelector(getUserData)
     const friends = useAppSelector(getFriendsData) // [] as IUser[]
+    const isLoading = useAppSelector(getFriendsLoadingStatus)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { t } = useTranslation('pages')
@@ -59,10 +66,14 @@ export const FriendsList = ({ className }: FriendsListProps) => {
                     roomId,
                     friendId,
                     userId,
+                    navigate,
                 })
             )
-            navigate(`/messenger/${roomId}`)
         }
+    }
+
+    if (isLoading) {
+        return <AnotherUserLoader />
     }
 
     return (

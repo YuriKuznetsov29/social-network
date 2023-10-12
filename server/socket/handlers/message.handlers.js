@@ -1,39 +1,39 @@
-const Message = require("../../models/Message")
+const Message = require("../../models/Message");
 // import { removeFile } from "../../utils/file.js";
-const onError = require("../../middleware/onError.js")
+const onError = require("../../middleware/onError.js");
 
-const messages = {}
+const messages = {};
 
 module.exports = function messageHandlers(io, socket) {
-    const { roomId } = socket
+    const { roomId } = socket;
 
     const updateMessageList = () => {
-        io.to(roomId).emit("message_list:update", messages[roomId])
+        io.to(roomId).emit("message_list:update", messages[roomId]);
         // console.log(roomId)
-    }
+    };
 
     socket.on("message:get", async () => {
         try {
-            const _messages = await Message.find({ roomId })
+            const _messages = await Message.find({ roomId });
 
-            messages[roomId] = _messages
+            messages[roomId] = _messages;
 
-            updateMessageList()
+            updateMessageList();
         } catch (e) {
-            onError(e)
+            onError(e);
         }
-    })
+    });
 
     socket.on("message:add", (message) => {
-        Message.create(message).catch(onError)
+        Message.create(message).catch(onError);
 
         // message.createdAt = Date.now()
-        messages[roomId].push(message)
-        updateMessageList()
-    })
+        messages[roomId].push(message);
+        updateMessageList();
+    });
 
-    socket.on("message:remove", (message) => {
-        const { messageId, messageType, textOrPathToFile } = message
+    socket.on("message:remove", (messageId) => {
+        // const { messageId, messageType, textOrPathToFile } = message
 
         Message.deleteOne({ messageId })
             // .then(() => {
@@ -41,10 +41,10 @@ module.exports = function messageHandlers(io, socket) {
             //         removeFile(textOrPathToFile);
             //     }
             // })
-            .catch(onError)
+            .catch(onError);
 
-        messages[roomId] = messages[roomId].filter((m) => m.messageId !== messageId)
+        messages[roomId] = messages[roomId].filter((m) => m.messageId !== messageId);
 
-        updateMessageList()
-    })
-}
+        updateMessageList();
+    });
+};

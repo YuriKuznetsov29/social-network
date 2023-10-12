@@ -19,7 +19,6 @@ export enum AppRoutes {
     PROFILE = 'profile',
     MESSENGER = 'messenger',
     CONVERSATION = 'conversation',
-    // SIGN_IN = 'signIn',
     CHANGE_PROFILE = 'changeProfile',
     ANOTHER_PROFILE = 'anotherProfile',
     NEWS = 'news',
@@ -30,10 +29,9 @@ export enum AppRoutes {
 export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
     [AppRoutes.SIGN_UP]: '/signUp',
-    [AppRoutes.PROFILE]: 'profile',
-    [AppRoutes.MESSENGER]: 'messenger',
-    [AppRoutes.CONVERSATION]: 'messenger/:roomId',
-    // [AppRoutes.SIGN_IN]: '/signIn',
+    [AppRoutes.PROFILE]: '/profile',
+    [AppRoutes.MESSENGER]: '/messenger',
+    [AppRoutes.CONVERSATION]: '/messenger/:roomId',
     [AppRoutes.CHANGE_PROFILE]: '/changeProfile',
     [AppRoutes.ANOTHER_PROFILE]: '/:anotherUserId',
     [AppRoutes.NEWS]: '/news',
@@ -66,10 +64,6 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         element: <ConversationPage />,
         authOnly: true,
     },
-    // [AppRoutes.SIGN_IN]: {
-    //     path: RoutePath.signIn,
-    //     element: <SignInForm />,
-    // },
     [AppRoutes.CHANGE_PROFILE]: {
         path: RoutePath.changeProfile,
         element: <ChangeProfilePage />,

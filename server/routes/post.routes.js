@@ -5,6 +5,8 @@ const Like = require("../models/Like")
 const User = require("../models/User")
 const express = require("express")
 const router = express.Router({ mergeParams: true })
+const fs = require("fs")
+const path = require("path")
 
 router.post("/createPost", auth, async (req, res) => {
     try {
@@ -16,6 +18,51 @@ router.post("/createPost", auth, async (req, res) => {
 
         const posts = await Post.find({ author: author }).sort({ createdAt: -1 })
         await User.findByIdAndUpdate({ _id: author }, { posts: posts.length })
+
+        res.send({
+            posts,
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "На сервере произошла ошибка. Попробуйте позже",
+        })
+    }
+})
+
+router.post("/removePost", auth, async (req, res) => {
+    try {
+        const { postId } = req.body
+        const post = await Post.findOne({ _id: postId })
+        console.log(req.res.user)
+        const userId = req.res.user._id
+
+        if (!post) {
+            return res.status(400).send({
+                error: {
+                    message: "Поста с таким id не найдено",
+                    code: 400,
+                },
+            })
+        }
+
+        if (userId !== post.author) {
+            return res.status(400).send({
+                error: {
+                    message: "Вы не являетесь автором поста",
+                    code: 400,
+                },
+            })
+        }
+
+        await Post.deleteOne({ _id: postId })
+
+        const posts = await Post.find({ author: post.author }).sort({ createdAt: -1 })
+        await User.findByIdAndUpdate({ _id: post.author }, { posts: posts.length })
+
+        if (post.imagePath) {
+            fs.unlinkSync(path.join(__dirname, "..", "static", post.imagePath))
+        }
 
         res.send({
             posts,

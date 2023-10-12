@@ -8,7 +8,7 @@
     "Повторите пароль": "Confirm password",
     "повторите пароль": "confirm password",
     "введите пароль": "enter password",
-    "введите email": "enter password",
+    "введите email": "type password",
     "введите имя": "enter first name",
     "введите фамилию": "enter last name",
     "Имя": "First name",
@@ -25,5 +25,6 @@
     "Пользователей не найдено": "Users not found",
     "Неправильный формат email": "wrong email",
     "Введите пароль": "Type password",
-    "Введите email": "Type email"
+    "Введите email": "Type email",
+    "Вы успешно зарегистрировались, войдите под своим email.": "Registration successful"
 }

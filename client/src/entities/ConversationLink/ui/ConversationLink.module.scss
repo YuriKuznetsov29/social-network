@@ -54,3 +54,17 @@
     display: flex;
     align-items: center;
 }
+
+.removeBtn {
+    margin-left: 10px;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    fill: var(--icon-color);
+}
+
+@media (max-width: 650px) {
+    .dialog {
+        font-size: 12px;
+    }
+}

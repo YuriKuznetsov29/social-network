@@ -25,7 +25,7 @@ export const signUpByEmail = createAsyncThunk<void, RequestAuthData, ThunkConfig
         { dispatch, extra, rejectWithValue }
     ) => {
         try {
-            const response = await AuthService.signUp({
+            const response = await extra.api.post('/auth/signUp', {
                 firstName,
                 lastName,
                 email,
@@ -34,8 +34,8 @@ export const signUpByEmail = createAsyncThunk<void, RequestAuthData, ThunkConfig
                 birthDay,
                 city,
             })
-            localStorage.setItem('token', response.data.accessToken)
-            dispatch(userDataActions.setUserData(response.data.user))
+            // localStorage.setItem('token', response.data.accessToken)
+            // dispatch(userDataActions.setUserData(response.data.user))
             // return response.data
         } catch (e) {
             console.log(e)

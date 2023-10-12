@@ -1,7 +1,9 @@
 const express = require("express")
 const User = require("../models/User")
+const Message = require("../models/Message")
 const auth = require("../middleware/auth.middleware")
 const UserService = require("../services/user.service")
+const { findOne } = require("../models/Token")
 const router = express.Router({ mergeParams: true })
 
 router.get("/:userId", auth, async (req, res) => {
@@ -282,11 +284,11 @@ router.get("/:userId/getAllFriends", async (req, res) => {
     }
 })
 
-router.patch("/:userId/addConversation", async (req, res) => {
+router.patch("/:userId/addConversation", auth, async (req, res) => {
     try {
         const { userId } = req.params
         const { roomId, friendId } = req.body
-        console.log(userId, roomId, "fr", friendId)
+
         if (userId && friendId && roomId) {
             let currentUser = await User.findOne({ _id: userId })
             let friend = await User.findOne({ _id: friendId })
@@ -323,6 +325,145 @@ router.patch("/:userId/addConversation", async (req, res) => {
                 },
             })
         }
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "На сервере произошла ошибка. Попробуйте позже",
+        })
+    }
+})
+
+router.patch("/:userId/removeConversation", auth, async (req, res) => {
+    try {
+        const { roomId, companionId } = req.body
+        const userId = req.res.user._id
+
+        const user = await User.findOne({ _id: userId })
+
+        if (!user.conversations.find((conversation) => conversation.roomId === roomId)) {
+            return res.status(400).send({
+                error: {
+                    message: "У вас нет диалога с таким id",
+                    code: 400,
+                },
+            })
+        }
+
+        const companion = await User.findOne({ _id: companionId })
+        console.log(companion.conversations, user.conversations, "no filtered")
+        const companionConversations = companion.conversations.filter(
+            (conversation) => conversation.roomId !== roomId
+        )
+        const userConversations = user.conversations.filter(
+            (conversation) => conversation.roomId !== roomId
+        )
+
+        console.log(companion.conversations, user.conversations, "filtered")
+
+        await User.findByIdAndUpdate(
+            companionId,
+            { conversations: companionConversations },
+            {
+                new: true,
+            }
+        )
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { conversations: userConversations },
+            {
+                new: true,
+            }
+        )
+
+        await Message.deleteMany({ roomId })
+
+        res.send({
+            user: {
+                userId: updatedUser._id,
+                email: updatedUser.email,
+                firstName: updatedUser.firstName,
+                lastName: updatedUser.lastName,
+                gender: updatedUser.gender,
+                friends: updatedUser.friends,
+                posts: updatedUser.posts,
+                requests: updatedUser.requests,
+                birthDay: updatedUser.birthDay,
+                avatarPath: updatedUser.avatarPath,
+                conversations: updatedUser.conversations,
+                likes: updatedUser.likes,
+                isOnline: updatedUser.isOnline,
+                lastSeenOnline: updatedUser.lastSeenOnline,
+                city: updatedUser.city,
+            },
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "На сервере произошла ошибка. Попробуйте позже",
+        })
+    }
+})
+
+router.patch("/:userId/removeConversation", async (req, res) => {
+    try {
+        const { roomId, companionId } = req.body
+        const userId = req.res.user._id
+
+        const user = await findOne({ _id: userId })
+
+        if (!user.conversations.find((conversation) => conversation.roomId === roomId)) {
+            return res.status(400).send({
+                error: {
+                    message: "У вас нет диалога с таким id",
+                    code: 400,
+                },
+            })
+        }
+
+        const companion = User.findOne({ _id: companionId })
+        const companionConversations = companion.conversations.filter(
+            (conversation) => conversation.roomId !== roomId
+        )
+        const userConversations = user.conversations.filter(
+            (conversation) => conversation.roomId !== roomId
+        )
+
+        await User.findByIdAndUpdate(
+            companionId,
+            { conversations: companionConversations },
+            {
+                new: true,
+            }
+        )
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { conversations: userConversations },
+            {
+                new: true,
+            }
+        )
+
+        await Message.deleteMany({ roomId })
+
+        res.send({
+            user: {
+                userId: updatedUser._id,
+                email: updatedUser.email,
+                firstName: updatedUser.firstName,
+                lastName: updatedUser.lastName,
+                gender: updatedUser.gender,
+                friends: updatedUser.friends,
+                posts: updatedUser.posts,
+                requests: updatedUser.requests,
+                birthDay: updatedUser.birthDay,
+                avatarPath: updatedUser.avatarPath,
+                conversations: updatedUser.conversations,
+                likes: updatedUser.likes,
+                isOnline: updatedUser.isOnline,
+                lastSeenOnline: updatedUser.lastSeenOnline,
+                city: updatedUser.city,
+            },
+        })
     } catch (e) {
         console.log(e)
         res.status(500).json({

@@ -5,7 +5,13 @@ import { IUser } from 'entities/UserData/model/types/IUser'
 import dayjs from 'dayjs'
 import { getUserDataById } from 'shared/api/getUserDataById'
 import { Avatar } from 'entities/Avatar'
+import RemoveIcon from 'shared/assets/icons/trash-bold.svg'
 import cls from './ConversationLink.module.scss'
+import { useDispatch } from 'react-redux'
+import { removeConversation } from 'features/Messenger'
+import { useAppSelector } from 'shared/lib/hook/useAppSelector'
+import { getUserData } from 'entities/UserData'
+import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 
 interface ConversationLinkProps {
     className?: string
@@ -22,6 +28,10 @@ export const ConversationLink = (props: ConversationLinkProps) => {
 
     const { messages } = useChat(roomId)
 
+    const userData = useAppSelector(getUserData)
+
+    const dispatch = useAppDispatch()
+
     useEffect(() => {
         getUserDataById(companionId)
             .then((companion) => {
@@ -32,8 +42,8 @@ export const ConversationLink = (props: ConversationLinkProps) => {
 
     useEffect(() => {
         const lastMessage = messages[messages.length - 1]
-        console.log(messages, roomId)
         setLastMessage(lastMessage)
+
         if (lastMessage?.author) {
             getUserDataById(lastMessage.author)
                 .then((author) => {
@@ -42,6 +52,11 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                 .catch(console.log)
         }
     }, [messages])
+
+    const onClickRemoveConversation = (e: React.MouseEvent) => {
+        e.preventDefault()
+        dispatch(removeConversation({ companionId, roomId, userId: userData.userId }))
+    }
 
     return (
         <AppLink to={`/messenger/${roomId}`} className={cls.dialog}>
@@ -61,8 +76,8 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                         <Avatar avatarPath={author?.avatarPath} className={cls.avatarMsg} />
                         <div className={cls.lastMessageText}>
                             {lastMessage?.textOrPathToFile &&
-                            lastMessage?.textOrPathToFile?.length > 50
-                                ? lastMessage?.textOrPathToFile.slice(0, 50) + '...'
+                            lastMessage?.textOrPathToFile?.length > 20
+                                ? lastMessage?.textOrPathToFile.slice(0, 20) + '...'
                                 : lastMessage?.textOrPathToFile}
                         </div>
                     </div>
@@ -71,6 +86,12 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                     {dayjs(lastMessage?.createdAt)
                         .locale('ru')
                         .toNow(true) + ' назад'}
+
+                    <RemoveIcon
+                        className={cls.removeBtn}
+                        id="remove"
+                        onClick={(e) => onClickRemoveConversation(e)}
+                    />
                 </div>
             </div>
         </AppLink>

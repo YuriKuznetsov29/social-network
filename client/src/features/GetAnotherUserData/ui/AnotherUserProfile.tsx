@@ -99,24 +99,19 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
 
     const createConversation = () => {
         const conversation = isConversationCreated()
-        console.log('find', conversation)
         if (conversation) {
             navigate(`/messenger/${conversation.roomId}`)
         } else if (anotherUserId) {
             const roomId = nanoid()
-            console.log({
-                roomId,
-                friendId: anotherUserId,
-                userId,
-            })
+
             dispatch(
                 addConversation({
                     roomId,
                     friendId: anotherUserId,
                     userId,
+                    navigate,
                 })
             )
-            navigate(`/messenger/${roomId}`)
         }
     }
 
