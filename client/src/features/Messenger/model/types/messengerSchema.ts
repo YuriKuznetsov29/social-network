@@ -1,7 +1,7 @@
-import { IUser } from 'entities/UserData/model/types/IUser'
-import { MessageData } from 'shared/lib/hook/useChat'
+import { Dialog } from './dialog'
 
 export interface MessengerSchema {
-    lastMessage: MessageData
-    users: IUser[]
+    dialogs: Dialog[]
+    isLoading: boolean
+    error?: string
 }

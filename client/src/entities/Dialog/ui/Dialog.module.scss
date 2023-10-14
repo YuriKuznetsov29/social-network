@@ -4,12 +4,11 @@
 
 .container {
     width: 100%;
-    height: calc(100vh - 110px);//calc(100vh - 60px);
-    padding-bottom: 10px;
+    height: calc(100vh - 120px);
+    overflow: hidden;
 }
 
 .messagesBlock {
-    // height: calc(100vh - var(--header-height) - 200px);
     height: calc(100% - 140px);
     max-height: calc(100% - 140px);
     overflow: auto;
