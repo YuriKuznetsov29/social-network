@@ -6,5 +6,5 @@ export interface IMessage {
     roomId: string
     author: string
     createdAt?: string
-    user: IUser
+    user: IUser[]
 }
