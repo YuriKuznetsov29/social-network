@@ -12,6 +12,7 @@ interface ContainerProps {
 const Container = (props: ContainerProps) => {
     const { className, children, headerStyle } = props
     const isMobile = useMobile()
+    console.log(isMobile, 'mobile')
 
     return (
         <div

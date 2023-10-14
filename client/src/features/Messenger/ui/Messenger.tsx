@@ -9,6 +9,12 @@ import { getUserData } from 'entities/UserData'
 import { useTranslation } from 'react-i18next'
 import cls from './Messenger.module.scss'
 import { MessengerLoader } from 'shared/ui/MessengerLoader'
+import { Button } from 'shared/ui/Button/Button'
+import $api, { API_URL } from 'shared/api/http'
+import { getDialogs } from '../model/services/getDialogs'
+import { getDialogsData } from '../model/selectors/getDialogsData'
+import { getLoadingAuthStatus } from 'features/AuthByEmail'
+import { getLoadingDialogStatus } from '../model/services/getLoadingDialogStatus'
 
 interface MessengerProps {
     className?: string
@@ -16,21 +22,32 @@ interface MessengerProps {
 
 export const Messenger = ({ className }: MessengerProps) => {
     const userData = useAppSelector(getUserData)
+    const dialogs = useAppSelector(getDialogsData)
+    const isLoading = useAppSelector(getLoadingDialogStatus)
 
     const dispatch = useAppDispatch()
     const { t } = useTranslation('pages')
 
     useEffect(() => {
-        dispatch(getConversationUsers({ userId: userData.userId }))
-    }, [])
+        if (userData.conversations && userData.conversations.length) {
+            dispatch(getDialogs(userData.conversations))
+        }
+    }, [userData.conversations])
+
+    if (isLoading) return <MessengerLoader />
 
     return (
         <div className={classNames(cls.Messenger, {}, [className])}>
             {userData?.conversations?.length ? (
                 <ContentContainer className={cls.contentContainer}>
-                    {userData.conversations.map(({ roomId, friendId }) => {
+                    {dialogs.map(({ message, companion, conversation }) => {
                         return (
-                            <ConversationLink roomId={roomId} companionId={friendId} key={roomId} />
+                            <ConversationLink
+                                key={conversation.roomId}
+                                message={message}
+                                companion={companion}
+                                conversation={conversation}
+                            />
                         )
                     })}
                 </ContentContainer>

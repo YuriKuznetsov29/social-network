@@ -8,6 +8,7 @@ import { Message } from 'entities/Message'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
 import cls from './Dialog.module.scss'
+import { useTranslation } from 'react-i18next'
 
 interface DialogProps {
     className?: string
@@ -15,7 +16,6 @@ interface DialogProps {
 
 export const Dialog = ({ className }: DialogProps) => {
     const scroll = useRef<HTMLDivElement>(null)
-
     const navigate = useNavigate()
     const { conversations } = useAppSelector(getUserData)
     const { roomId } = useParams()

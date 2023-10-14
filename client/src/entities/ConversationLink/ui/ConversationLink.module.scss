@@ -44,6 +44,21 @@
     align-items: center;
 }
 
+.name {
+    width: 100%;
+}
+
+.companionName {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time {
+    display: flex;
+    align-items: center;
+}
+
 .lastMessageText,
 .time {
     color: var(--secondary-font-color);

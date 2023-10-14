@@ -4,14 +4,18 @@ import { MessengerSchema } from '../types/messengerSchema'
 import { getConversationUsers } from '../services/getConversationUsers'
 import { getLastMessage } from '../services/getLastMessage'
 import { MessageData } from 'shared/lib/hook/useChat'
+import { getDialogs } from '../services/getDialogs'
+import { Dialog } from '../types/dialog'
+import { ICompanion } from '../types/companion'
+import { IMessage } from '../types/message'
 
 export interface signInState {
     value: number
 }
 
 const initialState: MessengerSchema = {
-    lastMessage: {} as MessageData,
-    users: [] as IUser[],
+    dialogs: [] as Dialog[],
+    isLoading: false,
 }
 
 export const messengerSlice = createSlice({
@@ -20,15 +24,16 @@ export const messengerSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getConversationUsers.fulfilled, (state, action) => {
-                if (action.payload?.users) {
-                    state.users = action.payload.users
-                }
+            .addCase(getDialogs.pending, (state, action) => {
+                state.isLoading = true
             })
-            .addCase(getLastMessage.fulfilled, (state, action) => {
-                if (action.payload?.message) {
-                    state.lastMessage = action.payload.message
-                }
+            .addCase(getDialogs.rejected, (state, action) => {
+                state.isLoading = false
+                state.error = action.payload
+            })
+            .addCase(getDialogs.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.dialogs = action.payload.dialogs
             })
     },
 })

@@ -14,7 +14,7 @@ const FriendsPage = ({ className }: FriendsPageProps) => {
     return (
         <>
             <Header />
-            <Container className={isMobile ? cls.contentContainer : ''}>
+            <Container>
                 <SideBar />
                 <FriendsList />
             </Container>
