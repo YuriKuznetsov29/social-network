@@ -6,13 +6,13 @@
 .user {
     width: 40px;
     height: 40px;
-    // margin: 0 5px 0 5px;
     border-radius: 50%;
     fill: var(--fill-user);
 
     &.XL {
         width: 150px;
         height: 150px;
+        cursor: pointer;
     }
 
     &.L {

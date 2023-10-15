@@ -37,8 +37,10 @@ const validationSchema = Yup.object({
     firstName: Yup.string().trim().required('Введите имя'),
     lastName: Yup.string().trim().required('Введите фамилию'),
     email: Yup.string().email('Неправильный формат email').required('Введите Email'),
-    birthDay: Yup.string()
-        .trim()
+    birthDay: Yup.date()
+        .max(new Date(), 'Please choose past date')
+        // Yup.string()
+        // .trim(),
         // Yup.date()
         // .transform(function (value, originalValue) {
         //     if (this.isType(value)) {

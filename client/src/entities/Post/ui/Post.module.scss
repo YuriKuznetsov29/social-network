@@ -22,6 +22,7 @@
 .image {
     max-width: 100%;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .btnContainer {
@@ -57,21 +58,20 @@
     display: none;
 }
 
-.commentBtn, .removeBtn {
+.commentBtn,
+.removeBtn {
     cursor: pointer;
     fill: var(--icon-color);
 }
 
 .commentBtn {
     margin-right: 20px;
-
 }
 
 .removeBtn {
     width: 22px;
     height: 22px;
 }
-
 
 .show {
     display: block;
@@ -122,7 +122,6 @@ $red: #ff3252;
 .text {
     margin-bottom: 10px;
 }
-
 
 .likeWrapper {
     display: flex;

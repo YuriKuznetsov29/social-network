@@ -6,6 +6,8 @@ import dayjs from 'dayjs'
 import updateLocale from 'dayjs/plugin/updateLocale'
 import { useTranslation } from 'react-i18next'
 import cls from './Avatar.module.scss'
+import { ImageModal } from 'shared/ui/ImageModal/ImageModal'
+import { useCallback, useState } from 'react'
 
 const ru_short = {
     name: 'ru-short', // имя String
@@ -116,16 +118,36 @@ interface AvatarProps {
 export const Avatar = (props: AvatarProps) => {
     const { className, avatarPath, isOnline, lastSeenOnline, size = 'S' } = props
     const { t, i18n } = useTranslation('pages')
+    const [isOpenImage, setIsOpenImage] = useState(false)
+
+    const onCloseModal = useCallback(() => {
+        setIsOpenImage(false)
+    }, [])
+
+    const onShowModal = useCallback(() => {
+        setIsOpenImage(true)
+    }, [])
 
     return (
         <span>
             <div className={classNames(cls.Avatar, {}, [className])}>
                 {avatarPath ? (
-                    <img
-                        className={classNames(cls.user, {}, [[cls[size]]])}
-                        src={SERVER_URL + avatarPath}
-                        alt="avatar"
-                    />
+                    <>
+                        <img
+                            className={classNames(cls.user, {}, [[cls[size]]])}
+                            src={SERVER_URL + avatarPath}
+                            alt="avatar"
+                            onClick={onShowModal}
+                        />
+                        {size === 'XL' && avatarPath && (
+                            <ImageModal
+                                imagePath={avatarPath}
+                                isOpen={isOpenImage}
+                                onClose={onCloseModal}
+                                alt="avatar"
+                            />
+                        )}
+                    </>
                 ) : (
                     <User className={classNames(cls.user, {}, [[cls[size]]])} />
                 )}

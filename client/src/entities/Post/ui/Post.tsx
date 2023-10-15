@@ -4,7 +4,7 @@ import { IPost } from 'features/PostHandler/model/types/post'
 import $api, { API_URL, SERVER_URL } from '../../../shared/api/http/index'
 import { Input } from 'shared/ui/Input/Input'
 import Plane from 'shared/assets/icons/paper-plane-right-bold.svg'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Comment } from 'entities/Comment'
 import { IComment } from 'features/PostHandler/model/types/comment'
 import Heart from 'shared/assets/icons/iconmonstr-favorite-5.svg'
@@ -15,12 +15,13 @@ import { Avatar } from 'entities/Avatar'
 import { transformText } from '../model/services/transformText'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
-import { getPostLoadingStatus, removePost } from 'features/PostHandler'
-import cls from './Post.module.scss'
+import { removePost } from 'features/PostHandler'
 import { useTranslation } from 'react-i18next'
 import { getUserDataById } from 'shared/api/getUserDataById'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import RemoveIcon from 'shared/assets/icons/trash-bold.svg'
+import { ImageModal } from 'shared/ui/ImageModal/ImageModal'
+import cls from './Post.module.scss'
 
 interface PostProps {
     className?: string
@@ -46,12 +47,21 @@ export const Post = ({ className, post }: PostProps) => {
     const [likes, setLikes] = useState(post.likes)
     const [likesActive, setLikesActive] = useState(false)
     const [author, setAuthor] = useState<IUser | null>(null)
+    const [isOpenImage, setIsOpenImage] = useState(false)
 
     const commentsScroll = useRef<HTMLDivElement>(null)
 
     const dispatch = useAppDispatch()
     const userData = useAppSelector(getUserData)
     const { t, i18n } = useTranslation('pages')
+
+    const onCloseModal = useCallback(() => {
+        setIsOpenImage(false)
+    }, [])
+
+    const onShowModal = useCallback(() => {
+        setIsOpenImage(true)
+    }, [])
 
     useEffect(() => {
         getUserDataById(post.author)
@@ -159,7 +169,19 @@ export const Post = ({ className, post }: PostProps) => {
                         dangerouslySetInnerHTML={transformText(post.text || '')}
                     />
                     {post.imagePath && (
-                        <img className={cls.image} src={SERVER_URL + post.imagePath} alt="image" />
+                        <>
+                            <img
+                                className={cls.image}
+                                src={SERVER_URL + post.imagePath}
+                                alt="image"
+                                onClick={onShowModal}
+                            />
+                            <ImageModal
+                                imagePath={post.imagePath}
+                                isOpen={isOpenImage}
+                                onClose={onCloseModal}
+                            />
+                        </>
                     )}
                 </div>
 
