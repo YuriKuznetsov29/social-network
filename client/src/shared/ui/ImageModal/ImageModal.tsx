@@ -20,7 +20,7 @@ export const ImageModal = ({
     onClose,
 }: ImageProps) => {
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} className={cls.background}>
             <img className={cls.image} src={SERVER_URL + imagePath} alt={alt} />
         </Modal>
     )

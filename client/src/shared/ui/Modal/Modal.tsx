@@ -1,7 +1,8 @@
 import React, { MutableRefObject, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import { Portal } from '../Portal/Portal'
-import cls from './Modal.module.scss'
 import classNames from 'classnames'
+import CloseIcon from 'shared/assets/icons/close.svg'
+import cls from './Modal.module.scss'
 
 interface ModalProps {
     className?: string
@@ -26,6 +27,7 @@ export const Modal = (props: ModalProps) => {
             timeRef.current = setTimeout(() => {
                 onClose()
                 setIsClosing(false)
+                document.body.style.overflow = 'auto'
             }, ANIMATION_DELAY)
         }
     }, [onClose])
@@ -52,6 +54,7 @@ export const Modal = (props: ModalProps) => {
     useEffect(() => {
         if (isOpen) {
             window.addEventListener('keydown', onKeyDown)
+            document.body.style.overflow = 'hidden'
         }
 
         return () => {
@@ -76,6 +79,7 @@ export const Modal = (props: ModalProps) => {
                     [className]
                 )}
             >
+                <CloseIcon className={cls.closeIcon} onClick={closeHandler} />
                 <div className={cls.overlay} onClick={closeHandler}>
                     <div className={cls.content} onClick={onContentClick}>
                         {children}

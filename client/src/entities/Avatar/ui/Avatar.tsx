@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import cls from './Avatar.module.scss'
 import { ImageModal } from 'shared/ui/ImageModal/ImageModal'
 import { useCallback, useState } from 'react'
+import CircleXL from 'shared/assets/icons/xl-dot.svg'
 
 const ru_short = {
     name: 'ru-short', // имя String
@@ -155,8 +156,9 @@ export const Avatar = (props: AvatarProps) => {
                 {lastSeenOnline &&
                     size === 'XL' &&
                     (isOnline ? (
-                        <Circle className={cls.online} />
+                        <CircleXL className={cls.onlineXL} />
                     ) : (
+                        // <Circle className={cls.online} />
                         <span className={cls.offlineWrapper}>
                             <span className={cls.offline}>
                                 {dayjs(lastSeenOnline)

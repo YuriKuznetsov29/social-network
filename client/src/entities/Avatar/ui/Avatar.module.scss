@@ -36,6 +36,15 @@
     }
 }
 
+.onlineXL {
+    position: absolute;
+    top: 118px;
+    left: 118px;
+    fill: #4bb34b;
+    stroke: var(--header-bg-color);
+    stroke-width: 4px;
+}
+
 .online {
     width: 150px;
     height: 150px;
