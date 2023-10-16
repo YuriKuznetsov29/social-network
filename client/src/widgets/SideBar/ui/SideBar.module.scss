@@ -33,10 +33,14 @@
 .icon, .mobileIcon {
     width: 22px;
     height: 22px;
-    fill: var(--icon-link-color);
+}
+
+.mobileIcon {
+    fill: var(--icon-color);
 }
 
 .icon {
+    fill: var(--icon-link-color);
     margin-right: 10px;
 
 }

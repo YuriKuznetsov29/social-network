@@ -20,7 +20,9 @@ import { useTranslation } from 'react-i18next'
 import { getUserDataById } from 'shared/api/getUserDataById'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import RemoveIcon from 'shared/assets/icons/trash-bold.svg'
+import OptionsIcon from 'shared/assets/icons/options.svg'
 import { ImageModal } from 'shared/ui/ImageModal/ImageModal'
+import { PostOptionsBtn } from 'entities/PostOptionsBtn'
 import cls from './Post.module.scss'
 
 interface PostProps {
@@ -152,15 +154,16 @@ export const Post = ({ className, post }: PostProps) => {
             <ContentContainer className={cls.container}>
                 <div className={cls.authorContainer}>
                     <Avatar avatarPath={author?.avatarPath} className={cls.avatar} size="M" />
-                    <div>
+                    <div className={cls.headerContainer}>
                         <div className={cls.authorWrapper}>
                             <div>
                                 {author?.firstName} {author?.lastName}
                             </div>
+                            <div className={cls.time}>
+                                {dayjs(post.date).locale(i18n.language).toNow(true) + t(' назад')}
+                            </div>
                         </div>
-                        <div className={cls.time}>
-                            {dayjs(post.date).locale(i18n.language).toNow(true) + t(' назад')}
-                        </div>
+                        <PostOptionsBtn postId={post._id} author={post.author} />
                     </div>
                 </div>
                 <div className={cls.contentContainer}>
@@ -216,7 +219,7 @@ export const Post = ({ className, post }: PostProps) => {
                     </div>
                     <div className={cls.inputBlock}>
                         <Input
-                            placeholder="Напиcать комментарий..."
+                            placeholder={t('Напиcать комментарий...')}
                             className={cls.inputMessage}
                             value={commentText}
                             onChange={setCommentText}

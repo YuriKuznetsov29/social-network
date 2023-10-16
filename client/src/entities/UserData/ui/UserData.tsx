@@ -11,8 +11,8 @@ import HomeIcon from 'shared/assets/icons/house-bold.svg'
 import FriendsIcon from 'shared/assets/icons/users-bold.svg'
 import PostIcon from 'shared/assets/icons/note-pencil-bold.svg'
 import { useTranslation } from 'react-i18next'
-import cls from './UserData.module.scss'
 import { getUserDataLoading } from '../model/selectors/getUserDataLoading'
+import cls from './UserData.module.scss'
 
 interface UserDataProps {
     className?: string
