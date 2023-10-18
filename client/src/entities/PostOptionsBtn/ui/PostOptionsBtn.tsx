@@ -1,12 +1,13 @@
 import classNames from 'classnames'
 import OptionsIcon from 'shared/assets/icons/options.svg'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { useTranslation } from 'react-i18next'
 import { removePost } from 'features/PostHandler'
 import cls from './PostOptionsBtn.module.scss'
+import { WhoLikesIt } from 'entities/WhoLikesIt/ui/WhoLikesIt'
 
 interface PostOptionsBtnProps {
     className?: string
@@ -19,6 +20,15 @@ export const PostOptionsBtn = ({ className, postId, author }: PostOptionsBtnProp
     const { t } = useTranslation('pages')
     const dispatch = useAppDispatch()
     const userData = useAppSelector(getUserData)
+    const [isOpenWhoLikes, setIsOpenWhoLikes] = useState(false)
+
+    const onCloseModal = useCallback(() => {
+        setIsOpenWhoLikes(false)
+    }, [])
+
+    const onShowModal = useCallback(() => {
+        setIsOpenWhoLikes(true)
+    }, [])
 
     const onClickToggleSetting = (e: React.MouseEvent) => {
         if (!(e.target as HTMLElement).closest('#container')) {
@@ -59,8 +69,12 @@ export const PostOptionsBtn = ({ className, postId, author }: PostOptionsBtnProp
                     </span>
                 )}
 
-                <span className={cls.btn}>{t('Кому нравится')}</span>
+                <span className={cls.btn} onClick={onShowModal}>
+                    {t('Кому нравится')}
+                </span>
             </div>
+
+            <WhoLikesIt isOpen={isOpenWhoLikes} onClose={onCloseModal} />
         </div>
     )
 }

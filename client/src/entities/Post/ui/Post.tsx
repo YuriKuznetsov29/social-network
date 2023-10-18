@@ -195,11 +195,11 @@ export const Post = ({ className, post }: PostProps) => {
                         []
                     )}
                 >
-                    <div>
+                    {/* <div>
                         {userData?.userId === post.author && (
                             <RemoveIcon className={cls.removeBtn} onClick={onClickRemovePost} />
                         )}
-                    </div>
+                    </div> */}
 
                     <div className={cls.likeWrapper}>
                         <div className={cls.likesValue}>{post.comments.length}</div>
