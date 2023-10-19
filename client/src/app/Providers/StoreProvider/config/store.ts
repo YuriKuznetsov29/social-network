@@ -12,6 +12,7 @@ import $api from 'shared/api/http'
 import { notificationsReducer } from 'features/Notifications'
 import { newsReducer } from 'entities/News'
 import { createReducerManager } from './reducerManager'
+import { likesReducer } from 'entities/WhoLikesIt'
 
 export function createReduxStore(
     initialState?: StateSchema,
@@ -28,6 +29,7 @@ export function createReduxStore(
         friends: friendsReducer,
         user: userDataReducer,
         notifications: notificationsReducer,
+        likes: likesReducer,
         // news: newsReducer,
     }
 

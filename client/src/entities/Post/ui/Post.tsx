@@ -139,10 +139,6 @@ export const Post = ({ className, post }: PostProps) => {
         setCommentText('')
     }
 
-    const onClickRemovePost = () => {
-        dispatch(removePost({ postId: post._id }))
-    }
-
     useEffect(() => {
         if (commentsScroll.current) {
             commentsScroll.current.scrollTop = commentsScroll.current.scrollHeight
@@ -195,12 +191,6 @@ export const Post = ({ className, post }: PostProps) => {
                         []
                     )}
                 >
-                    {/* <div>
-                        {userData?.userId === post.author && (
-                            <RemoveIcon className={cls.removeBtn} onClick={onClickRemovePost} />
-                        )}
-                    </div> */}
-
                     <div className={cls.likeWrapper}>
                         <div className={cls.likesValue}>{post.comments.length}</div>
                         <CommentBtn className={cls.commentBtn} onClick={onClickToggleComment} />

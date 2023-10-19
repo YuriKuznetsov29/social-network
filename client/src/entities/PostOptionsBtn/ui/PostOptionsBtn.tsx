@@ -74,7 +74,7 @@ export const PostOptionsBtn = ({ className, postId, author }: PostOptionsBtnProp
                 </span>
             </div>
 
-            <WhoLikesIt isOpen={isOpenWhoLikes} onClose={onCloseModal} />
+            <WhoLikesIt isOpen={isOpenWhoLikes} onClose={onCloseModal} postId={postId} />
         </div>
     )
 }

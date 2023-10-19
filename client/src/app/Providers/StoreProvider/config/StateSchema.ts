@@ -8,6 +8,7 @@ import {
 import { AxiosError, AxiosInstance } from 'axios'
 import { NewsSchema } from 'entities/News'
 import { UserDataSchema } from 'entities/UserData/model/types/userDataSchema'
+import { LikesSchema } from 'entities/WhoLikesIt'
 import { AuthSchema } from 'features/AuthByEmail/model/types/authSchema'
 import { SearchUsersSchema } from 'features/FindUsers/model/type/searchUsersSchema'
 import { AnotherUserSchema } from 'features/GetAnotherUserData/model/types/anotherUserSchema'
@@ -26,6 +27,7 @@ export interface StateSchema {
     friends: FriendsSchema
     user: UserDataSchema
     notifications: NotificationsSchema
+    likes: LikesSchema
     //асинхронные редюсеры
     news?: NewsSchema
 }
