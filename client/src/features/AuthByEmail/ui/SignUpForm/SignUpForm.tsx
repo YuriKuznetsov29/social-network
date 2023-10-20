@@ -17,6 +17,7 @@ import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { getRegStatus } from 'features/AuthByEmail/model/selectors/getRegStatus'
+import dayjs from 'dayjs'
 
 export interface Values {
     firstName: string
@@ -38,21 +39,17 @@ const validationSchema = Yup.object({
     lastName: Yup.string().trim().required('Введите фамилию'),
     email: Yup.string().email('Неправильный формат email').required('Введите Email'),
     birthDay: Yup.date()
+        .transform(function (value, originalValue) {
+            if (this.isType(value)) {
+                return value
+            }
+            const result = dayjs(value).format('D MMMM YYYY')
+            return result
+        })
+        .typeError('please enter a valid date')
         .max(new Date(), 'Please choose past date')
-        // Yup.string()
-        // .trim(),
-        // Yup.date()
-        // .transform(function (value, originalValue) {
-        //     if (this.isType(value)) {
-        //         return value
-        //     }
-        //     const result = parse(originalValue, 'dd.MM.yyyy', new Date())
-        //     return result
-        // })
-        // .typeError('Введите действительную дату рождения')
+        .min('1969-11-13', 'Date is too early')
         .required('Введите дату рождения'),
-    // .min('1969-11-13', 'Date is too early')
-    // .max(format(new Date(), 'dd-MM-yyyy'), 'Вы еще не родились'),
     password: Yup.string()
         .min(8, 'Пароль не должен быть короче 8 символов')
         .required('Введите пароль'),

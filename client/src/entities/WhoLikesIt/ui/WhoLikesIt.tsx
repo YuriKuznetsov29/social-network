@@ -14,6 +14,7 @@ import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { getWhoLikesUsers } from '../model/services/getWhoLikesUsers'
 import { Loader } from 'shared/ui/Loader'
 import { getLikesLoading } from '../model/selectors/getLikesLoading'
+import { WhoLikesItLoader } from 'shared/ui/WhoLikesItLoader/WhoLikesItLoader'
 
 interface WhoLikesItProps {
     isOpen: boolean
@@ -36,7 +37,7 @@ export const WhoLikesIt = ({ isOpen, onClose, postId }: WhoLikesItProps) => {
         <Modal isOpen={isOpen} onClose={onClose} className={cls.background}>
             <div className={cls.usersWrapper}>
                 {isLoading ? (
-                    <Loader />
+                    <WhoLikesItLoader />
                 ) : users.length ? (
                     users.map((friend: IUser) => {
                         return (

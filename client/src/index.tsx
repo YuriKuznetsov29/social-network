@@ -6,10 +6,12 @@ import { ThemeProvider } from 'app/Providers/ThemeProvider'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { StoreProvider } from 'app/Providers/StoreProvider'
 import { ErrorBoundary } from 'app/Providers/ErrorBoundary'
 import 'shared/config/i18n/i18n'
 
+dayjs.extend(customParseFormat)
 dayjs.extend(relativeTime)
 
 const container = document.getElementById('root')
