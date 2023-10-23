@@ -56,6 +56,7 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                 companionId: conversation.friendId,
                 roomId: conversation.roomId,
                 userId: userData.userId,
+                t,
             })
         )
     }

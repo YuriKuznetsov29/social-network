@@ -4,12 +4,14 @@ import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
 import { IUser, userDataActions } from 'entities/UserData'
 import { notificationsActions } from 'features/Notifications'
 import { getAllFriends } from './getAllFriends'
+import { TFunction } from 'i18next'
 
 export interface RequestChangeData {
     userId: string
     friendId: string
     friendFirstName: string
     friendLastName: string
+    t?: TFunction<'pages', undefined>
 }
 
 export interface ResponseData {
@@ -19,7 +21,7 @@ export interface ResponseData {
 export const removeFriend = createAsyncThunk<void, RequestChangeData, ThunkConfig<string>>(
     'user/removeFriend',
     async (
-        { userId, friendId, friendFirstName, friendLastName },
+        { userId, friendId, friendFirstName, friendLastName, t },
         { rejectWithValue, dispatch, extra }
     ) => {
         try {
@@ -31,11 +33,16 @@ export const removeFriend = createAsyncThunk<void, RequestChangeData, ThunkConfi
             )
             dispatch(userDataActions.setUserData(response.data.user))
             dispatch(getAllFriends(userId))
-            dispatch(
-                notificationsActions.setNotification(
-                    `Вы удалили пользователя ${friendFirstName} ${friendLastName} из друзей`
+            if (t) {
+                dispatch(
+                    notificationsActions.setNotification(
+                        t(`Вы удалили пользователя из друзей`, {
+                            firstName: friendFirstName,
+                            lastName: friendLastName,
+                        })
+                    )
                 )
-            )
+            }
         } catch (e: unknown) {
             console.log(e)
             return rejectWithValue('error')

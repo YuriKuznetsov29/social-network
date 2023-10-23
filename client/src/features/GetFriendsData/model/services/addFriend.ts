@@ -3,14 +3,14 @@ import { API_URL } from '../../../../shared/api/http/index'
 import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
 import { IUser, userDataActions } from 'entities/UserData'
 import { notificationsActions } from 'features/Notifications'
-import { i18n } from 'i18next'
+import { TFunction, i18n } from 'i18next'
 
 export interface RequestChangeData {
     userId: string
     friendId: string
     friendFirstName: string
     friendLastName: string
-    i18n?: i18n
+    t?: TFunction<'pages', undefined>
 }
 
 export interface ResponseData {
@@ -20,7 +20,7 @@ export interface ResponseData {
 export const addFriend = createAsyncThunk<void, RequestChangeData, ThunkConfig<string>>(
     'user/addFriend',
     async (
-        { userId, friendId, friendLastName, friendFirstName, i18n },
+        { userId, friendId, friendLastName, friendFirstName, t },
         { dispatch, extra, rejectWithValue }
     ) => {
         try {
@@ -31,12 +31,13 @@ export const addFriend = createAsyncThunk<void, RequestChangeData, ThunkConfig<s
                 }
             )
             dispatch(userDataActions.setUserData(response.data.user))
-            if (i18n) {
+            if (t) {
                 dispatch(
                     notificationsActions.setNotification(
-                        i18n?.t(
-                            `Вы добавили пользователя ${friendFirstName} ${friendLastName} в друзья`
-                        )
+                        t(`Вы добавили пользователя в друзья`, {
+                            firstName: friendFirstName,
+                            lastName: friendLastName,
+                        })
                     )
                 )
             }

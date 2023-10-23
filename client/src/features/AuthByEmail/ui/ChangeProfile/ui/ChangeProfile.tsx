@@ -28,11 +28,11 @@ export const ChangeProfile = () => {
 
     const onChangeLoadAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
-        if (file instanceof File) dispatch(uploadAvatar(file))
+        if (file instanceof File) dispatch(uploadAvatar({ file, t }))
     }
 
     const onClickRemoveAvatar = () => {
-        dispatch(removeAvatar())
+        dispatch(removeAvatar(t))
     }
 
     const validationSchema = Yup.object({
@@ -133,14 +133,16 @@ export const ChangeProfile = () => {
                     </div>
 
                     <label htmlFor="gender">{t('Пол')}</label>
-                    <Field className={cls.select} id="gender" name="gender" as="select">
-                        <option disabled value="">
-                            {t('Выберете ваш пол')}
-                        </option>
-                        <option value="male">{t('мужчина')}</option>
-                        <option value="female">{t('женщина')}</option>
-                    </Field>
-                    <ErrorMessage className={cls.input} name="gender" />
+                    <div className={cls.fieldContainer}>
+                        <Field className={cls.select} id="gender" name="gender" as="select">
+                            <option disabled value="">
+                                {t('Выберете ваш пол')}
+                            </option>
+                            <option value="male">{t('мужчина')}</option>
+                            <option value="female">{t('женщина')}</option>
+                        </Field>
+                        <ErrorMessage className={cls.error} name="gender" />
+                    </div>
 
                     <div className={cls.avatarBlock}>
                         <Avatar avatarPath={avatarPath} size="XL" className={cls.avatar} />

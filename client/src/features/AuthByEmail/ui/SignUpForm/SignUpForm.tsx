@@ -32,8 +32,6 @@ interface SignUpFormProps {
     className?: string
 }
 
-const transformDate = dayjs().format('YYYY-MM-DD')
-
 export const SignUpForm = ({ className }: SignUpFormProps) => {
     const dispatch = useAppDispatch()
     const loading = useAppSelector(getLoadingAuthStatus)

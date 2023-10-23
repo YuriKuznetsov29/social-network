@@ -67,7 +67,7 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
                     userId,
                     friendFirstName: userData.firstName,
                     friendLastName: userData.lastName,
-                    i18n,
+                    t,
                 })
             )
         }
@@ -81,6 +81,7 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
                     userId,
                     friendFirstName: userData.firstName,
                     friendLastName: userData.lastName,
+                    t,
                 })
             )
         }
