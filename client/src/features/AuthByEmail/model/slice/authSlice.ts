@@ -52,11 +52,10 @@ export const authSlice = createSlice({
                 state.isLoading = true
                 state.error = undefined
             })
-            .addCase(signUpByEmail.fulfilled, (state, action) => {
+            .addCase(signUpByEmail.fulfilled, (state) => {
                 state.error = ''
                 state.regSuccess = true
                 state.isLoading = false
-                state.isAuth = true
             })
             .addCase(signUpByEmail.rejected, (state, action) => {
                 state.isLoading = false
@@ -67,16 +66,17 @@ export const authSlice = createSlice({
                 state.initAuth = true
                 state.error = undefined
             })
-            .addCase(checkAuth.fulfilled, (state, action) => {
+            .addCase(checkAuth.fulfilled, (state) => {
                 state.isLoading = false
                 state.isAuth = true
             })
             .addCase(checkAuth.rejected, (state, action) => {
                 state.isLoading = false
-                // state.error = action.payload
+                state.error = action.payload
             })
             .addCase(signOut.fulfilled, (state) => {
                 state.isAuth = false
+                state.initAuth = false
             })
     },
 })

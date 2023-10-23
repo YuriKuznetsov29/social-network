@@ -30,13 +30,6 @@ export interface Values {
     password: string
 }
 
-// const validationSchema = Yup.object({
-//     email: Yup.string()
-//         .email(i18n.t('Неправильный формат email'))
-//         .required(i18n.t('Введите Email')),
-//     password: Yup.string().required(i18n.isInitialized ? i18n.t('Введите пароль') : ''),
-// })
-
 export const SignInForm = ({ className }: SignInFormProps) => {
     const { isAuth } = useAppSelector(getAuthState)
     const loading = useAppSelector(getLoadingAuthStatus)
@@ -60,8 +53,7 @@ export const SignInForm = ({ className }: SignInFormProps) => {
     })
 
     const onLoginClick = (email: string, password: string) => {
-        dispatch(signInByEmail({ email, password }))
-        if (isAuth) navigate('/profile')
+        dispatch(signInByEmail({ email, password, navigate }))
     }
 
     useEffect(() => {

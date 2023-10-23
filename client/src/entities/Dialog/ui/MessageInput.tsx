@@ -1,14 +1,13 @@
 import classNames from 'classnames'
-import cls from './MessageInput.module.scss'
 import { Input } from 'shared/ui/Input/Input'
 import Plane from 'shared/assets/icons/paper-plane-right-bold.svg'
-import { useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { MessageData } from '../../../shared/lib/hook/useChat'
 import { nanoid } from 'nanoid'
-import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
 import { useTranslation } from 'react-i18next'
+import cls from './MessageInput.module.scss'
 
 interface MessageInputProps {
     className?: string
@@ -16,7 +15,7 @@ interface MessageInputProps {
     roomId: string
 }
 
-export const MessageInput = (props: MessageInputProps) => {
+export const MessageInput = memo((props: MessageInputProps) => {
     const { className, sendMessage, roomId } = props
     const { t } = useTranslation('pages')
     const [text, setText] = useState('')
@@ -30,8 +29,6 @@ export const MessageInput = (props: MessageInputProps) => {
             textOrPathToFile: text,
             roomId: roomId,
             author: userData.userId,
-            // userName: userData.firstName,
-            // avatarPath: userData.avatarPath,
         }
 
         sendMessage(message)
@@ -65,4 +62,4 @@ export const MessageInput = (props: MessageInputProps) => {
             <Plane className={cls.plane} onClick={onClickSendMessage} />
         </div>
     )
-}
+})

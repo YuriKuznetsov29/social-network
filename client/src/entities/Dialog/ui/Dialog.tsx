@@ -17,6 +17,7 @@ interface DialogProps {
 export const Dialog = ({ className }: DialogProps) => {
     const scroll = useRef<HTMLDivElement>(null)
     const navigate = useNavigate()
+    const { t } = useTranslation()
     const { conversations } = useAppSelector(getUserData)
     const { roomId } = useParams()
 
@@ -30,10 +31,10 @@ export const Dialog = ({ className }: DialogProps) => {
     }, [conversations])
 
     if (!roomId) {
-        return <div>Такого диалога не существует</div>
+        return <div>{t('Такого диалога не существует')}</div>
     }
 
-    const { log, messages, users, sendMessage, removeMessage } = useChat(roomId)
+    const { messages, sendMessage, removeMessage } = useChat(roomId)
 
     useEffect(() => {
         if (scroll.current) {

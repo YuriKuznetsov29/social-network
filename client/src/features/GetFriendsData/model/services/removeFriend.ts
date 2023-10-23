@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import $api, { API_URL } from '../../../../shared/api/http/index'
+import { API_URL } from '../../../../shared/api/http/index'
 import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
 import { IUser, userDataActions } from 'entities/UserData'
 import { notificationsActions } from 'features/Notifications'
@@ -30,7 +30,7 @@ export const removeFriend = createAsyncThunk<void, RequestChangeData, ThunkConfi
                 }
             )
             dispatch(userDataActions.setUserData(response.data.user))
-            dispatch(getAllFriends({ userId }))
+            dispatch(getAllFriends(userId))
             dispatch(
                 notificationsActions.setNotification(
                     `Вы удалили пользователя ${friendFirstName} ${friendLastName} из друзей`

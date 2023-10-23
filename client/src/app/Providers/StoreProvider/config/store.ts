@@ -10,9 +10,9 @@ import { userDataReducer } from 'entities/UserData'
 import { NavigateOptions, To } from 'react-router-dom'
 import $api from 'shared/api/http'
 import { notificationsReducer } from 'features/Notifications'
-import { newsReducer } from 'entities/News'
 import { createReducerManager } from './reducerManager'
 import { likesReducer } from 'entities/WhoLikesIt'
+import { type } from 'os'
 
 export function createReduxStore(
     initialState?: StateSchema,

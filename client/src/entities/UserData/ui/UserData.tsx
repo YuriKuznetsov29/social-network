@@ -22,7 +22,7 @@ export const UserData = ({ className }: UserDataProps) => {
     const userData = useAppSelector(getUserData)
     const userInit = useAppSelector(getUserInitied)
     const loading = useAppSelector(getUserDataLoading)
-    const { t } = useTranslation('pages')
+    const { t, i18n } = useTranslation('pages')
 
     if (loading || !userInit) return <UserDataLoader />
 
@@ -66,7 +66,7 @@ export const UserData = ({ className }: UserDataProps) => {
                             <div>
                                 <div>
                                     {dayjs(userData.birthDay.split('.').reverse().join('-'))
-                                        .locale('ru')
+                                        .locale(i18n.language)
                                         .format('D MMMM YYYY')}
                                 </div>
                                 <div>{userData.city}</div>

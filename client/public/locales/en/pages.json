@@ -15,8 +15,8 @@
     "Напишите сообщение...": "Write a message...",
     "Написать сообщение": "Message",
     "Удалить из друзей": "Unfriend",
-    "Что у вас нового?": "What's new?"
+    "Что у вас нового?": "What's new?",
+    "Такого диалога не существует": "There is no such dialogue",
+    "Вы добавили пользователя ${friendFirstName} ${friendLastName} в друзья": "You add user ${friendFirstName} ${friendLastName} to friend"
     
-
-
 }

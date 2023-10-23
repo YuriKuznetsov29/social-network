@@ -31,7 +31,7 @@ interface AnotherUserProfileProps {
 export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
     const { userData, error } = useAppSelector(getAnotherUserState)
     const currentUserData = useAppSelector(getUserData)
-    const { t } = useTranslation('pages')
+    const { t, i18n } = useTranslation('pages')
     const { userId, friends } = useAppSelector(getUserData)
 
     const dispatch = useAppDispatch()
@@ -57,7 +57,7 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
             dispatch(getAnotherUserData({ userId: anotherUserId }))
             dispatch(getUserPosts({ author: anotherUserId }))
         }
-    }, [])
+    }, [anotherUserId])
 
     const onClickAddFriend = () => {
         if (anotherUserId) {
@@ -67,6 +67,7 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
                     userId,
                     friendFirstName: userData.firstName,
                     friendLastName: userData.lastName,
+                    i18n,
                 })
             )
         }

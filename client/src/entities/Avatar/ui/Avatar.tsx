@@ -7,7 +7,7 @@ import updateLocale from 'dayjs/plugin/updateLocale'
 import { useTranslation } from 'react-i18next'
 import cls from './Avatar.module.scss'
 import { ImageModal } from 'shared/ui/ImageModal/ImageModal'
-import { useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import CircleXL from 'shared/assets/icons/xl-dot.svg'
 
 const ru_short = {
@@ -116,7 +116,7 @@ interface AvatarProps {
     size?: 'XL' | 'L' | 'M' | 'MS' | 'S'
 }
 
-export const Avatar = (props: AvatarProps) => {
+export const Avatar = memo((props: AvatarProps) => {
     const { className, avatarPath, isOnline, lastSeenOnline, size = 'S' } = props
     const { t, i18n } = useTranslation('pages')
     const [isOpenImage, setIsOpenImage] = useState(false)
@@ -125,9 +125,9 @@ export const Avatar = (props: AvatarProps) => {
         setIsOpenImage(false)
     }, [])
 
-    const onShowModal = useCallback(() => {
+    const onShowModal = () => {
         setIsOpenImage(true)
-    }, [])
+    }
 
     return (
         <span>
@@ -158,7 +158,6 @@ export const Avatar = (props: AvatarProps) => {
                     (isOnline ? (
                         <CircleXL className={cls.onlineXL} />
                     ) : (
-                        // <Circle className={cls.online} />
                         <span className={cls.offlineWrapper}>
                             <span className={cls.offline}>
                                 {dayjs(lastSeenOnline)
@@ -174,4 +173,4 @@ export const Avatar = (props: AvatarProps) => {
             </div>
         </span>
     )
-}
+})

@@ -5,9 +5,7 @@ import { Button } from 'shared/ui/Button/Button'
 import { RequestAuthData, signUpByEmail } from 'features/AuthByEmail/model/services/signUpByEmail'
 import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import parse from 'date-fns/parse'
 import cls from './SignUpForm.module.scss'
-import { format } from 'date-fns'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ThemeSwitcher'
 import { getLoadingAuthStatus } from 'features/AuthByEmail/model/selectors/getLoadingAuthStatus'
@@ -34,32 +32,7 @@ interface SignUpFormProps {
     className?: string
 }
 
-const validationSchema = Yup.object({
-    firstName: Yup.string().trim().required('Введите имя'),
-    lastName: Yup.string().trim().required('Введите фамилию'),
-    email: Yup.string().email('Неправильный формат email').required('Введите Email'),
-    birthDay: Yup.date()
-        .transform(function (value, originalValue) {
-            if (this.isType(value)) {
-                return value
-            }
-            const result = dayjs(value).format('D MMMM YYYY')
-            return result
-        })
-        .typeError('please enter a valid date')
-        .max(new Date(), 'Please choose past date')
-        .min('1969-11-13', 'Date is too early')
-        .required('Введите дату рождения'),
-    password: Yup.string()
-        .min(8, 'Пароль не должен быть короче 8 символов')
-        .required('Введите пароль'),
-    confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password')], 'Пароли не совпадают')
-        .min(8, 'Пароль не должен быть короче 8 символов')
-        .required('Введите пароль'),
-    city: Yup.string().trim().required('Введите город'),
-    gender: Yup.string().required('Выберете значение'),
-})
+const transformDate = dayjs().format('YYYY-MM-DD')
 
 export const SignUpForm = ({ className }: SignUpFormProps) => {
     const dispatch = useAppDispatch()
@@ -67,6 +40,25 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
     const error = useAppSelector(getAuthError)
     const regStatus = useAppSelector(getRegStatus)
     const { t } = useTranslation('authForms')
+
+    const validationSchema = Yup.object({
+        firstName: Yup.string().trim().required(t('Введите имя')),
+        lastName: Yup.string().trim().required(t('Введите фамилию')),
+        email: Yup.string().email(t('Неправильный формат email')).required(t('Введите Email')),
+        birthDay: Yup.date()
+            .max(new Date(), t('Введите корректную дату'))
+            .min('1969-11-13', t('Date is too early'))
+            .required(t('Введите дату рождения')),
+        password: Yup.string()
+            .min(8, t('Пароль не должен быть короче 8 символов'))
+            .required(t('Введите пароль')),
+        confirmPassword: Yup.string()
+            .oneOf([Yup.ref('password')], t('Пароли не совпадают'))
+            .min(8, t('Пароль не должен быть короче 8 символов'))
+            .required('Введите пароль'),
+        city: Yup.string().trim().required(t('Введите город')),
+        gender: Yup.string().required(t('Выберете значение')),
+    })
 
     return (
         <div className={classNames(cls.SignUpForm, {}, [className])}>
@@ -180,6 +172,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                             id="birthDay"
                             name="birthDay"
                             placeholder="dd.mm.yyyy"
+                            type="date"
                         />
                         <ErrorMessage className={cls.error} component="div" name="birthDay" />
                     </div>

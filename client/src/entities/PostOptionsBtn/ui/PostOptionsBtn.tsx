@@ -26,9 +26,9 @@ export const PostOptionsBtn = ({ className, postId, author }: PostOptionsBtnProp
         setIsOpenWhoLikes(false)
     }, [])
 
-    const onShowModal = useCallback(() => {
+    const onShowModal = () => {
         setIsOpenWhoLikes(true)
-    }, [])
+    }
 
     const onClickToggleSetting = (e: React.MouseEvent) => {
         if (!(e.target as HTMLElement).closest('#container')) {

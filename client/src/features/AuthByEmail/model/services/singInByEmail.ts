@@ -2,27 +2,25 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { isAxiosError } from 'axios'
 import { AuthResponse } from '../types/response/AuthResponse'
 import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
-import { loadUserData, userDataActions } from 'entities/UserData'
+import { loadUserData } from 'entities/UserData'
 
 interface RequestAuthData {
     email: string
     password: string
+    navigate: (path: string) => void
 }
 
 export const signInByEmail = createAsyncThunk<AuthResponse, RequestAuthData, ThunkConfig<string>>(
     'login/signIn',
-    async (authData, { dispatch, extra, rejectWithValue }) => {
+    async ({ email, password, navigate }, { dispatch, extra, rejectWithValue }) => {
         try {
-            const response = await extra.api.post<AuthResponse>(
-                '/auth/signInWithPassword',
-                authData
-            )
+            const response = await extra.api.post<AuthResponse>('/auth/signInWithPassword', {
+                email,
+                password,
+            })
             localStorage.setItem('token', response.data.accessToken)
-            // dispatch(userDataActions.setUserData(response.data.user))
             dispatch(loadUserData({ userId: response.data.user.userId }))
-            if (extra.navigate) {
-                extra.navigate('/profile')
-            }
+            navigate('/profile')
             return response.data
         } catch (e) {
             console.log(e)

@@ -11,8 +11,8 @@ import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { IMessage } from 'features/Messenger/model/types/message'
-import cls from './ConversationLink.module.scss'
 import { useTranslation } from 'react-i18next'
+import cls from './ConversationLink.module.scss'
 
 interface ConversationLinkProps {
     className?: string
@@ -59,8 +59,6 @@ export const ConversationLink = (props: ConversationLinkProps) => {
             })
         )
     }
-
-    console.log(message)
 
     return (
         <AppLink to={`/messenger/${conversation.roomId}`} className={cls.dialog}>

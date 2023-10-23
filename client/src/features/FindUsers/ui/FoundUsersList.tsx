@@ -34,14 +34,14 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
         }
     }, [firstName, lastName])
 
-    useEffect(() => {
-        const closeSearch = (e: MouseEvent) => {
-            if ((e.target as HTMLElement).id !== 'search') {
-                setShowResults(false)
-                setSearchValue('')
-            }
+    const closeSearch = (e: MouseEvent) => {
+        if ((e.target as HTMLElement).id !== 'search') {
+            setShowResults(false)
+            setSearchValue('')
         }
+    }
 
+    useEffect(() => {
         document.body.addEventListener<'click'>('click', closeSearch)
 
         return () => {

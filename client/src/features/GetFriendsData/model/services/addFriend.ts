@@ -3,12 +3,14 @@ import { API_URL } from '../../../../shared/api/http/index'
 import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
 import { IUser, userDataActions } from 'entities/UserData'
 import { notificationsActions } from 'features/Notifications'
+import { i18n } from 'i18next'
 
 export interface RequestChangeData {
     userId: string
     friendId: string
     friendFirstName: string
     friendLastName: string
+    i18n?: i18n
 }
 
 export interface ResponseData {
@@ -18,7 +20,7 @@ export interface ResponseData {
 export const addFriend = createAsyncThunk<void, RequestChangeData, ThunkConfig<string>>(
     'user/addFriend',
     async (
-        { userId, friendId, friendLastName, friendFirstName },
+        { userId, friendId, friendLastName, friendFirstName, i18n },
         { dispatch, extra, rejectWithValue }
     ) => {
         try {
@@ -29,11 +31,15 @@ export const addFriend = createAsyncThunk<void, RequestChangeData, ThunkConfig<s
                 }
             )
             dispatch(userDataActions.setUserData(response.data.user))
-            dispatch(
-                notificationsActions.setNotification(
-                    `Вы добавили пользователя ${friendFirstName} ${friendLastName} в друзья`
+            if (i18n) {
+                dispatch(
+                    notificationsActions.setNotification(
+                        i18n?.t(
+                            `Вы добавили пользователя ${friendFirstName} ${friendLastName} в друзья`
+                        )
+                    )
                 )
-            )
+            }
         } catch (e: unknown) {
             console.log(e)
             return rejectWithValue('error')

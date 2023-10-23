@@ -1,38 +1,29 @@
 import classNames from 'classnames'
-import cls from './Comment.module.scss'
 import { IComment } from 'features/PostHandler/model/types/comment'
 import { useEffect, useState } from 'react'
 import { IUser } from 'entities/UserData/model/types/IUser'
-import { API_URL } from '../../../shared/api/http/index'
-import $api from '../../../shared/api/http/index'
 import { Avatar } from 'entities/Avatar'
 import dayjs from 'dayjs'
+import { getUserDataById } from 'shared/api/getUserDataById'
+import cls from './Comment.module.scss'
+import { useTranslation } from 'react-i18next'
 
 interface CommentProps {
     className?: string
     comment: IComment
 }
 
-interface ResponseDataUser {
-    user: IUser
-}
-
 export const Comment = ({ className, comment }: CommentProps) => {
     const [userData, setUserData] = useState<IUser | null>(null)
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await $api.get<ResponseDataUser>(
-                    `${API_URL}/user/${comment.author}`
-                )
-                setUserData(response.data.user)
-            } catch (e: unknown) {
-                console.log(e)
-            }
-        }
+    const { t, i18n } = useTranslation('pages')
 
-        fetchUserData()
+    useEffect(() => {
+        getUserDataById(comment.author)
+            .then((user) => {
+                if (user) setUserData(user)
+            })
+            .catch(console.log)
     }, [])
 
     return (
@@ -42,7 +33,7 @@ export const Comment = ({ className, comment }: CommentProps) => {
                 <div className={cls.header}>
                     <div>{userData?.firstName}</div>
                     <div className={cls.time}>
-                        {dayjs(comment.createdAt).locale('ru').toNow(true) + ' назад'}
+                        {dayjs(comment.createdAt).locale(i18n.language).toNow(true) + t(' назад')}
                     </div>
                 </div>
                 <div className={cls.text}>{comment.body}</div>
