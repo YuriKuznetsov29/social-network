@@ -10,7 +10,7 @@ interface RequestAuthData {
     navigate: (path: string) => void
 }
 
-export const signInByEmail = createAsyncThunk<AuthResponse, RequestAuthData, ThunkConfig<string>>(
+export const signInByEmail = createAsyncThunk<void, RequestAuthData, ThunkConfig<string>>(
     'login/signIn',
     async ({ email, password, navigate }, { dispatch, extra, rejectWithValue }) => {
         try {
@@ -21,7 +21,6 @@ export const signInByEmail = createAsyncThunk<AuthResponse, RequestAuthData, Thu
             localStorage.setItem('token', response.data.accessToken)
             dispatch(loadUserData({ userId: response.data.user.userId }))
             navigate('/profile')
-            return response.data
         } catch (e) {
             console.log(e)
             if (isAxiosError(e) && e.response) {

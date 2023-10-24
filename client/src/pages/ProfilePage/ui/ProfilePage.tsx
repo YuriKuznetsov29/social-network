@@ -3,23 +3,14 @@ import { Header } from 'widgets/Header'
 import Container from 'shared/ui/Container/Container'
 import { SideBar } from 'widgets/SideBar'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
-import {
-    CreatePost,
-    IPost,
-    getInitPostStatus,
-    getPostHandlerState,
-    getPostLoadingStatus,
-    getUserPosts,
-} from 'features/PostHandler'
-import { Post } from 'entities/Post'
+import { CreatePost, getUserPosts } from 'features/PostHandler'
 import { useEffect } from 'react'
 import { Friends } from 'entities/Friends'
 import { UserData, getUserData } from 'entities/UserData'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { PostLoader } from 'shared/ui/PostLoader'
-import cls from './ProfilePage.module.scss'
 import { PostsList } from 'entities/PostsList'
 import { useMobile } from 'shared/lib/hook/useMobile'
+import cls from './ProfilePage.module.scss'
 
 interface ProfilePageProps {
     className?: string

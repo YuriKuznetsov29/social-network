@@ -28,6 +28,9 @@ export const authSlice = createSlice({
         setPassword: (state, action: PayloadAction<string>) => {
             state.password = action.payload
         },
+        setInit: (state) => {
+            state.initAuth = true
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -36,13 +39,9 @@ export const authSlice = createSlice({
                 state.isLoading = true
                 state.error = undefined
             })
-            .addCase(signInByEmail.fulfilled, (state, action) => {
+            .addCase(signInByEmail.fulfilled, (state) => {
                 state.isLoading = false
-                if (action.payload?.user) {
-                    state.isAuth = true
-                } else {
-                    state.isAuth = false
-                }
+                state.isAuth = true
             })
             .addCase(signInByEmail.rejected, (state, action) => {
                 state.isLoading = false

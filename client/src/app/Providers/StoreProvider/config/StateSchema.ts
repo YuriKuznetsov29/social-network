@@ -29,7 +29,7 @@ export interface StateSchema {
     notifications: NotificationsSchema
     likes: LikesSchema
     //асинхронные редюсеры
-    news?: NewsSchema
+    news: NewsSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

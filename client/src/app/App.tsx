@@ -5,6 +5,7 @@ import { Suspense, useEffect } from 'react'
 import { useAppDispatch } from '../shared/lib/hook/useAppDispatch'
 import useChat from '../shared/lib/hook/useChat'
 import './styles/index.scss'
+import { authActions } from 'features/AuthByEmail/model/slice/authSlice'
 
 const App = () => {
     const { initTheme } = useTheme()
@@ -16,6 +17,8 @@ const App = () => {
     useEffect(() => {
         if (localStorage.getItem('token')) {
             dispatch(checkAuth())
+        } else {
+            dispatch(authActions.setInit())
         }
 
         initTheme()
