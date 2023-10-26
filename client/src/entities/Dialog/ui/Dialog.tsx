@@ -14,9 +14,6 @@ interface DialogProps {
     className?: string
 }
 
-let vh = window.innerHeight * 0.01
-document.documentElement.style.setProperty('--vh', `${vh}px`)
-
 export const Dialog = ({ className }: DialogProps) => {
     const scroll = useRef<HTMLDivElement>(null)
     const navigate = useNavigate()
@@ -44,6 +41,20 @@ export const Dialog = ({ className }: DialogProps) => {
             scroll.current.scrollTop = scroll.current.scrollHeight
         }
     }, [messages])
+
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            let vh = window.innerHeight * 0.01
+            document.documentElement.style.setProperty('--vh', `${vh}px`)
+        })
+
+        return () => {
+            window.removeEventListener('resize', () => {
+                let vh = window.innerHeight * 0.01
+                document.documentElement.style.setProperty('--vh', `${vh}px`)
+            })
+        }
+    })
 
     return (
         <div className={cls.container}>
