@@ -6,13 +6,13 @@
 .user {
     width: 40px;
     height: 40px;
-    // margin: 0 5px 0 5px;
     border-radius: 50%;
     fill: var(--fill-user);
 
     &.XL {
         width: 150px;
         height: 150px;
+        cursor: pointer;
     }
 
     &.L {
@@ -34,6 +34,15 @@
         width: 35px;
         height: 35px;
     }
+}
+
+.onlineXL {
+    position: absolute;
+    top: 118px;
+    left: 118px;
+    fill: #4bb34b;
+    stroke: var(--header-bg-color);
+    stroke-width: 4px;
 }
 
 .online {

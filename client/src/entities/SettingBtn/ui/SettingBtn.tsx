@@ -10,9 +10,9 @@ import { useEffect, useState } from 'react'
 import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ThemeSwitcher'
 import SignOutIcon from 'shared/assets/icons/sign-out-bold.svg'
 import ProfileIcon from 'shared/assets/icons/user-circle-bold.svg'
-import cls from './SettingBtn.module.scss'
 import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher'
 import { useTranslation } from 'react-i18next'
+import cls from './SettingBtn.module.scss'
 
 interface SettingBtnProps {
     className?: string
@@ -26,12 +26,10 @@ export const SettingBtn = ({ className }: SettingBtnProps) => {
     const { t } = useTranslation('pages')
 
     const onSignOut = () => {
-        dispatch(signOut())
-        navigate('/')
+        dispatch(signOut({ navigate }))
     }
 
     const onClickToggleSetting = (e: React.MouseEvent) => {
-        // if ((e.target as HTMLElement).id !== 'container') {
         if (!(e.target as HTMLElement).closest('#container')) {
             setShow((prev) => !prev)
         }

@@ -15,8 +15,15 @@
     "Напишите сообщение...": "Write a message...",
     "Написать сообщение": "Message",
     "Удалить из друзей": "Unfriend",
-    "Что у вас нового?": "What's new?"
-    
-
+    "Что у вас нового?": "What's new?",
+    "Такого диалога не существует": "There is no such dialogue",
+    "Вы добавили пользователя в друзья": "You add user {{firstName}} {{lastName}} to friend",
+    "Вы удалили пользователя из друзей": "You have removed the user {{firstName}} {{lastName}} from your friends",
+    "Диалог успешно удален": "Dialogue successfully removed",
+    "Пост должен содержать текст или фото": "The post must contain content",
+    "Вы опубликовали новую запись": "You have published a new post",
+    "Удалить пост": "Remove post",
+    "Кому нравится": "Who likes it",
+    "Пост еще никому не понравился": "No one has liked the post yet"
 
 }

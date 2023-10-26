@@ -3,50 +3,24 @@ import * as Yup from 'yup'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { changeUserData } from 'features/AuthByEmail/model/services/changeUserData'
-import { Values } from 'features/AuthByEmail/ui/SignUpForm/SignUpForm'
-import User from 'shared/assets/icons/user.svg'
 import { removeAvatar, uploadAvatar } from 'features/UploadAvatar'
 import { Button } from 'shared/ui/Button/Button'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
-import cls from './ChangeProfile.module.scss'
-import { useState } from 'react'
 import { Avatar } from 'entities/Avatar'
 import { useTranslation } from 'react-i18next'
+import cls from './ChangeProfile.module.scss'
 
-const requiredString = Yup.string().required('Введите значение')
-const PersonSchema = Yup.object({
-    firstName: requiredString,
-    lastName: requiredString,
-    email: Yup.string().email('Неправильный формат email').required('Введите Email'),
-    birthDay: Yup.string()
-        // Yup.date()
-        //     .transform(function (value, originalValue) {
-        //         if (this.isType(value)) {
-        //             return value
-        //         }
-        //         const result = parse(originalValue, 'dd.MM.yyyy', new Date())
-        //         return result
-        //     })
-        //     .typeError('Введите действительную дату рождения')
-        .required('Введите дату рождения'),
-    //     .min('1969-11-13', 'Date is too early')
-    //     .max(format(new Date(), 'dd-MM-yyyy'), 'Вы еще не родились'),
-    password: Yup.string().min(8, 'Пароль не должен быть короче 8 символов'),
-    // .required('Введите пароль'),
-    confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password')], 'Пароли не совпадают')
-        .min(8, 'Пароль не должен быть короче 8 символов'),
-    // .required('Введите пароль'),
-    city: Yup.string().required('Введите город'),
-    gender: Yup.string().required('Выберете значение'),
-})
-
-interface ChangeProfileProps {
-    className?: string
+export interface Values {
+    firstName: string
+    lastName: string
+    email: string
+    gender: 'male' | 'female' | ''
+    birthDay: string
+    city: string
 }
 
-export const ChangeProfile = ({ className }: ChangeProfileProps) => {
+export const ChangeProfile = () => {
     const { birthDay, email, firstName, lastName, gender, userId, avatarPath, city } =
         useAppSelector(getUserData)
     const { t } = useTranslation('authForms')
@@ -54,12 +28,24 @@ export const ChangeProfile = ({ className }: ChangeProfileProps) => {
 
     const onChangeLoadAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
-        if (file instanceof File) dispatch(uploadAvatar(file))
+        if (file instanceof File) dispatch(uploadAvatar({ file, t }))
     }
 
     const onClickRemoveAvatar = () => {
-        dispatch(removeAvatar())
+        dispatch(removeAvatar(t))
     }
+
+    const validationSchema = Yup.object({
+        firstName: Yup.string().trim().required(t('Введите имя')),
+        lastName: Yup.string().trim().required(t('Введите фамилию')),
+        email: Yup.string().email(t('Неправильный формат email')).required(t('Введите Email')),
+        birthDay: Yup.date()
+            .max(new Date(), t('Введите корректную дату'))
+            .min('1969-11-13', t('Date is too early'))
+            .required(t('Введите дату рождения')),
+        city: Yup.string().trim().required(t('Введите город')),
+        gender: Yup.string().required(t('Выберете значение')),
+    })
 
     return (
         <ContentContainer className={cls.contentWrapper}>
@@ -68,13 +54,11 @@ export const ChangeProfile = ({ className }: ChangeProfileProps) => {
                     firstName,
                     lastName,
                     email,
-                    password: '',
-                    confirmPassword: '',
                     birthDay,
                     gender,
                     city,
                 }}
-                validationSchema={PersonSchema}
+                validationSchema={validationSchema}
                 onSubmit={(values: Values) => {
                     const { firstName, lastName, email, gender, birthDay, city } = values
                     dispatch(
@@ -144,19 +128,22 @@ export const ChangeProfile = ({ className }: ChangeProfileProps) => {
                             id="birthDay"
                             name="birthDay"
                             placeholder="dd.mm.yyyy"
+                            type="date"
                         />
                         <ErrorMessage className={cls.error} component="div" name="birthDay" />
                     </div>
 
                     <label htmlFor="gender">{t('Пол')}</label>
-                    <Field className={cls.select} id="gender" name="gender" as="select">
-                        <option disabled value="">
-                            {t('Выберете ваш пол')}
-                        </option>
-                        <option value="male">{t('мужчина')}</option>
-                        <option value="female">{t('женщина')}</option>
-                    </Field>
-                    <ErrorMessage className={cls.input} name="gender" />
+                    <div className={cls.fieldContainer}>
+                        <Field className={cls.select} id="gender" name="gender" as="select">
+                            <option disabled value="">
+                                {t('Выберете ваш пол')}
+                            </option>
+                            <option value="male">{t('мужчина')}</option>
+                            <option value="female">{t('женщина')}</option>
+                        </Field>
+                        <ErrorMessage className={cls.error} name="gender" />
+                    </div>
 
                     <div className={cls.avatarBlock}>
                         <Avatar avatarPath={avatarPath} size="XL" className={cls.avatar} />

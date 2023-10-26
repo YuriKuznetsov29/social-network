@@ -23,7 +23,6 @@ interface FriendsProps {
 export const Friends = ({ className }: FriendsProps) => {
     const { userId } = useAppSelector(getUserData)
     const { friends } = useAppSelector(getFriendsState)
-    const loading = useAppSelector(getFriendsLoadingStatus)
     const initStatus = useAppSelector(getInitFriendsStatus)
     const { t } = useTranslation('pages')
     const dispatch = useAppDispatch()
@@ -31,7 +30,8 @@ export const Friends = ({ className }: FriendsProps) => {
 
     useEffect(() => {
         if (userId) {
-            dispatch(getAllFriends({ userId }))
+            console.log('get friends', userId)
+            dispatch(getAllFriends(userId))
         }
     }, [userId])
 
@@ -61,7 +61,7 @@ export const Friends = ({ className }: FriendsProps) => {
                                   </div>
                               )
                           })
-                        : 'У вас еще нет друзей'}
+                        : t('У вас еще нет друзей')}
                 </div>
             </ContentContainer>
         </div>

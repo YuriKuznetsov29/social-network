@@ -6,6 +6,9 @@ import dayjs from 'dayjs'
 import updateLocale from 'dayjs/plugin/updateLocale'
 import { useTranslation } from 'react-i18next'
 import cls from './Avatar.module.scss'
+import { ImageModal } from 'shared/ui/ImageModal/ImageModal'
+import { memo, useCallback, useState } from 'react'
+import CircleXL from 'shared/assets/icons/xl-dot.svg'
 
 const ru_short = {
     name: 'ru-short', // имя String
@@ -113,19 +116,39 @@ interface AvatarProps {
     size?: 'XL' | 'L' | 'M' | 'MS' | 'S'
 }
 
-export const Avatar = (props: AvatarProps) => {
+export const Avatar = memo((props: AvatarProps) => {
     const { className, avatarPath, isOnline, lastSeenOnline, size = 'S' } = props
     const { t, i18n } = useTranslation('pages')
+    const [isOpenImage, setIsOpenImage] = useState(false)
+
+    const onCloseModal = useCallback(() => {
+        setIsOpenImage(false)
+    }, [])
+
+    const onShowModal = () => {
+        setIsOpenImage(true)
+    }
 
     return (
         <span>
             <div className={classNames(cls.Avatar, {}, [className])}>
                 {avatarPath ? (
-                    <img
-                        className={classNames(cls.user, {}, [[cls[size]]])}
-                        src={SERVER_URL + avatarPath}
-                        alt="avatar"
-                    />
+                    <>
+                        <img
+                            className={classNames(cls.user, {}, [[cls[size]]])}
+                            src={SERVER_URL + avatarPath}
+                            alt="avatar"
+                            onClick={onShowModal}
+                        />
+                        {size === 'XL' && avatarPath && (
+                            <ImageModal
+                                imagePath={avatarPath}
+                                isOpen={isOpenImage}
+                                onClose={onCloseModal}
+                                alt="avatar"
+                            />
+                        )}
+                    </>
                 ) : (
                     <User className={classNames(cls.user, {}, [[cls[size]]])} />
                 )}
@@ -133,7 +156,7 @@ export const Avatar = (props: AvatarProps) => {
                 {lastSeenOnline &&
                     size === 'XL' &&
                     (isOnline ? (
-                        <Circle className={cls.online} />
+                        <CircleXL className={cls.onlineXL} />
                     ) : (
                         <span className={cls.offlineWrapper}>
                             <span className={cls.offline}>
@@ -150,4 +173,4 @@ export const Avatar = (props: AvatarProps) => {
             </div>
         </span>
     )
-}
+})

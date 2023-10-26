@@ -2,20 +2,20 @@ import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import { Avatar } from 'entities/Avatar'
 import Arrow from 'shared/assets/icons/caret-left-bold.svg'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { getUserDataById } from 'shared/api/getUserDataById'
 import { IUser } from 'entities/UserData/model/types/IUser'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
-import cls from './DialogHeader.module.scss'
 import { useTranslation } from 'react-i18next'
+import cls from './DialogHeader.module.scss'
 
 interface DialogHeaderProps {
     className?: string
     roomId: string
 }
 
-export const DialogHeader = ({ className, roomId }: DialogHeaderProps) => {
+export const DialogHeader = memo(({ className, roomId }: DialogHeaderProps) => {
     const [companion, setCompanion] = useState<IUser | null>(null)
     const { t } = useTranslation('pages')
 
@@ -47,4 +47,4 @@ export const DialogHeader = ({ className, roomId }: DialogHeaderProps) => {
             <Avatar avatarPath={companion?.avatarPath} size="M" isOnline={companion?.isOnline} />
         </div>
     )
-}
+})

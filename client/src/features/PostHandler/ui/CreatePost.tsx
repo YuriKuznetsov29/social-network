@@ -7,12 +7,11 @@ import { createPost } from 'features/PostHandler/model/services/createPost'
 import $api, { API_URL } from '../../../shared/api/http/index'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
-import cls from './CreatePost.module.scss'
 import { notificationsActions } from 'features/Notifications'
 import { CreatePostLoader } from 'shared/ui/CreatePostLoader'
-import { getPostLoadingStatus } from '../model/selectors/getPostLoadingStatus'
 import { getInitPostStatus } from '../model/selectors/getInitPostStatus'
 import { useTranslation } from 'react-i18next'
+import cls from './CreatePost.module.scss'
 
 interface CreatePostProps {
     className?: string
@@ -38,6 +37,7 @@ export const CreatePost = ({ className }: CreatePostProps) => {
                     author: userData.userId,
                     imagePath,
                     text: input.current?.innerText || '',
+                    t,
                 })
             )
             setImagePath('')
@@ -45,7 +45,9 @@ export const CreatePost = ({ className }: CreatePostProps) => {
                 input.current.innerText = ''
             }
         } else {
-            dispatch(notificationsActions.setNotification(`Пост должен содержать текст или фото`))
+            dispatch(
+                notificationsActions.setNotification(t('Пост должен содержать текст или фото'))
+            )
         }
     }
 

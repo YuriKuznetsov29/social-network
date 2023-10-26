@@ -12,9 +12,8 @@ const useTheme = () => {
     }
 
     const initTheme = () => {
-        document.body.className = theme || Theme.LIGHT
+        document.body.className = theme || Theme.DARK
     }
-    // if (theme) document.body.className = theme
 
     return { theme, toggleTheme, initTheme }
 }

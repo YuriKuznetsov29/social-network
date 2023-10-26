@@ -30,14 +30,14 @@ interface FriendsListProps {
 
 export const FriendsList = ({ className }: FriendsListProps) => {
     const { userId, conversations } = useAppSelector(getUserData)
-    const friends = useAppSelector(getFriendsData) // [] as IUser[]
+    const friends = useAppSelector(getFriendsData)
     const isLoading = useAppSelector(getFriendsLoadingStatus)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { t } = useTranslation('pages')
 
     useEffect(() => {
-        if (userId) dispatch(getAllFriends({ userId }))
+        if (userId) dispatch(getAllFriends(userId))
     }, [userId])
 
     const onClickRemoveFriend = (

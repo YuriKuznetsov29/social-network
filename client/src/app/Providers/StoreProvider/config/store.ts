@@ -10,8 +10,9 @@ import { userDataReducer } from 'entities/UserData'
 import { NavigateOptions, To } from 'react-router-dom'
 import $api from 'shared/api/http'
 import { notificationsReducer } from 'features/Notifications'
-import { newsReducer } from 'entities/News'
 import { createReducerManager } from './reducerManager'
+import { likesReducer } from 'entities/WhoLikesIt'
+import { newsReducer } from 'entities/News'
 
 export function createReduxStore(
     initialState?: StateSchema,
@@ -28,7 +29,8 @@ export function createReduxStore(
         friends: friendsReducer,
         user: userDataReducer,
         notifications: notificationsReducer,
-        // news: newsReducer,
+        likes: likesReducer,
+        news: newsReducer,
     }
 
     const reducerManager = createReducerManager(rootReducer)

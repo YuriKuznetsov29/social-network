@@ -3,17 +3,13 @@ import { MessageData } from 'shared/lib/hook/useChat'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import { IUser } from 'entities/UserData/model/types/IUser'
-import $api, { API_URL } from '../../../shared/api/http/index'
 import { Avatar } from 'entities/Avatar'
 import { useTranslation } from 'react-i18next'
 import RemoveIcon from 'shared/assets/icons/trash-bold.svg'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
 import cls from './Message.module.scss'
-
-interface ResponseUserData {
-    user: IUser
-}
+import { getUserDataById } from 'shared/api/getUserDataById'
 
 interface MessageProps {
     className?: string
@@ -27,18 +23,11 @@ export const Message = ({ className, message, removeMessage }: MessageProps) => 
     const userData = useAppSelector(getUserData)
 
     useEffect(() => {
-        const getUserData = async () => {
-            try {
-                const response = await $api.get<ResponseUserData>(
-                    `${API_URL}/user/${message.author}`
-                )
-                setAuthor(response.data.user)
-            } catch (e) {
-                console.log(e)
-            }
-        }
-
-        getUserData()
+        getUserDataById(message.author)
+            .then((user) => {
+                if (user) setAuthor(user)
+            })
+            .catch(console.log)
     }, [])
 
     return (

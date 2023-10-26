@@ -21,7 +21,7 @@ const io = new Server(server, {
 
 app.use(fileUpload())
 app.use(express.json())
-app.use(express.static("static"))
+app.use("/", express.static(path.join(__dirname, "static")))
 app.use(
     express.urlencoded({
         extended: false,

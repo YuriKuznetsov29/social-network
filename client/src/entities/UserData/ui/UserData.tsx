@@ -11,8 +11,8 @@ import HomeIcon from 'shared/assets/icons/house-bold.svg'
 import FriendsIcon from 'shared/assets/icons/users-bold.svg'
 import PostIcon from 'shared/assets/icons/note-pencil-bold.svg'
 import { useTranslation } from 'react-i18next'
-import cls from './UserData.module.scss'
 import { getUserDataLoading } from '../model/selectors/getUserDataLoading'
+import cls from './UserData.module.scss'
 
 interface UserDataProps {
     className?: string
@@ -22,7 +22,7 @@ export const UserData = ({ className }: UserDataProps) => {
     const userData = useAppSelector(getUserData)
     const userInit = useAppSelector(getUserInitied)
     const loading = useAppSelector(getUserDataLoading)
-    const { t } = useTranslation('pages')
+    const { t, i18n } = useTranslation('pages')
 
     if (loading || !userInit) return <UserDataLoader />
 
@@ -66,7 +66,7 @@ export const UserData = ({ className }: UserDataProps) => {
                             <div>
                                 <div>
                                     {dayjs(userData.birthDay.split('.').reverse().join('-'))
-                                        .locale('ru')
+                                        .locale(i18n.language)
                                         .format('D MMMM YYYY')}
                                 </div>
                                 <div>{userData.city}</div>
