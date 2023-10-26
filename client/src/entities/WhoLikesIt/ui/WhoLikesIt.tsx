@@ -57,7 +57,7 @@ export const WhoLikesIt = ({ isOpen, onClose, postId }: WhoLikesItProps) => {
                         )
                     })
                 ) : (
-                    'Пост еще никому не понравился'
+                    t('Пост еще никому не понравился')
                 )}
             </div>
         </Modal>

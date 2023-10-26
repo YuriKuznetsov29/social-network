@@ -128,6 +128,7 @@ export const ChangeProfile = () => {
                             id="birthDay"
                             name="birthDay"
                             placeholder="dd.mm.yyyy"
+                            type="date"
                         />
                         <ErrorMessage className={cls.error} component="div" name="birthDay" />
                     </div>

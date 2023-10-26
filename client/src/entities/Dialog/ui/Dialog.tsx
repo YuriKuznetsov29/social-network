@@ -14,6 +14,9 @@ interface DialogProps {
     className?: string
 }
 
+let vh = window.innerHeight * 0.01
+document.documentElement.style.setProperty('--vh', `${vh}px`)
+
 export const Dialog = ({ className }: DialogProps) => {
     const scroll = useRef<HTMLDivElement>(null)
     const navigate = useNavigate()
