@@ -7,8 +7,8 @@ import { DialogHeader } from './DialogHeader'
 import { Message } from 'entities/Message'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
-import cls from './Dialog.module.scss'
 import { useTranslation } from 'react-i18next'
+import cls from './Dialog.module.scss'
 
 interface DialogProps {
     className?: string
@@ -41,20 +41,6 @@ export const Dialog = ({ className }: DialogProps) => {
             scroll.current.scrollTop = scroll.current.scrollHeight
         }
     }, [messages])
-
-    useEffect(() => {
-        window.addEventListener('resize', () => {
-            let vh = window.innerHeight * 0.01
-            document.documentElement.style.setProperty('--vh', `${vh}px`)
-        })
-
-        return () => {
-            window.removeEventListener('resize', () => {
-                let vh = window.innerHeight * 0.01
-                document.documentElement.style.setProperty('--vh', `${vh}px`)
-            })
-        }
-    })
 
     return (
         <div className={cls.container}>
