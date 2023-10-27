@@ -24,10 +24,3 @@
     border-radius: 50%;
     fill: var(--fill-user);
 }
-
-@media (max-width: 650px) {
-    .container {
-        // height: calc(100vh - 70px);
-        height: calc((var(--vh, 1vh) * 100) - 70px);
-    }
-}

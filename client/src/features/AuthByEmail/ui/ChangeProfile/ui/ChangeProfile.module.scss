@@ -1,5 +1,5 @@
 .form {
-    width: 200px;
+    width: 220px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,10 +46,14 @@
     outline: none;
     border-radius: 6px;
     color: var(--primary-color);
+    &:focus {
+        outline: 1px solid var(--icon-link-color);
+    }
 }
 
 .input {
     padding: 8px 12px;
+
 }
 
 .fieldContainer {
