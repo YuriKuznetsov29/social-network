@@ -28,5 +28,8 @@
     "Введите email": "Type email",
     "Вы успешно зарегистрировались, войдите под своим email.": "Registration successful",
     "Аватар успешно загружен": "Upload successful",
-    "Аватар успешно удален": "Avatar successfully deleted"
+    "Аватар успешно удален": "Avatar successfully deleted",
+    "Вы успешно обновили данные": "You have successfully updated your data",
+    "dd.mm.yyyy": "dd.mm.yyyy"
+
 }

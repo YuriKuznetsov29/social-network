@@ -3,6 +3,7 @@ import { AuthResponse } from '../types/response/AuthResponse'
 import $api, { API_URL } from '../../../../shared/api/http/index'
 import { RequestAuthData } from './signUpByEmail'
 import { notificationsActions } from 'features/Notifications'
+import { TFunction } from 'i18next'
 
 export interface RequestChangeData {
     firstName: string
@@ -12,6 +13,7 @@ export interface RequestChangeData {
     birthDay: string
     userId: string
     city: string
+    t?: TFunction<'authForms', undefined>
 }
 
 export const changeUserData = createAsyncThunk<
@@ -21,7 +23,7 @@ export const changeUserData = createAsyncThunk<
 >(
     'user/changeUserData',
     async (
-        { firstName, lastName, email, gender, birthDay, userId, city },
+        { firstName, lastName, email, gender, birthDay, userId, city, t },
         { rejectWithValue, dispatch }
     ) => {
         try {
@@ -33,7 +35,10 @@ export const changeUserData = createAsyncThunk<
                 birthDay,
                 city,
             })
-            dispatch(notificationsActions.setNotification(`Вы успешно обновили данные`))
+
+            if (t) {
+                dispatch(notificationsActions.setNotification(t(`Вы успешно обновили данные`)))
+            }
             return response.data
         } catch (e: unknown) {
             console.log(e)

@@ -12,7 +12,7 @@
 }
 
 .form {
-    width: 320px;
+    width: 300px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -31,9 +31,9 @@
     outline: none;
     border-radius: 6px;
     color: var(--primary-color);
-    // &:last-child {
-    //     margin-bottom: 30px;
-    // }
+    &:focus {
+        outline: 1px solid var(--icon-link-color);
+    }
 }
 
 .btnWrapper {

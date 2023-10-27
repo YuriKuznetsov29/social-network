@@ -1,11 +1,9 @@
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
-import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 import classNames from 'classnames'
 import { Button } from 'shared/ui/Button/Button'
-import { RequestAuthData, signUpByEmail } from 'features/AuthByEmail/model/services/signUpByEmail'
-import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik'
+import { signUpByEmail } from 'features/AuthByEmail/model/services/signUpByEmail'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import cls from './SignUpForm.module.scss'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ThemeSwitcher'
 import { getLoadingAuthStatus } from 'features/AuthByEmail/model/selectors/getLoadingAuthStatus'
@@ -16,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { getRegStatus } from 'features/AuthByEmail/model/selectors/getRegStatus'
 import dayjs from 'dayjs'
+import cls from './SignUpForm.module.scss'
 
 export interface Values {
     firstName: string
@@ -44,6 +43,12 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
         lastName: Yup.string().trim().required(t('Введите фамилию')),
         email: Yup.string().email(t('Неправильный формат email')).required(t('Введите Email')),
         birthDay: Yup.date()
+            .transform((value, originalValue, context) => {
+                if (context.isType(value)) return value
+
+                value = originalValue.split('.').reverse().join('-')
+                return dayjs(value).isValid() ? dayjs(value).toDate() : new Date('')
+            })
             .max(new Date(), t('Введите корректную дату'))
             .min('1969-11-13', t('Date is too early'))
             .required(t('Введите дату рождения')),
@@ -53,8 +58,8 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
         confirmPassword: Yup.string()
             .oneOf([Yup.ref('password')], t('Пароли не совпадают'))
             .min(8, t('Пароль не должен быть короче 8 символов'))
-            .required('Введите пароль'),
-        city: Yup.string().trim().required(t('Введите город')),
+            .required(t('Введите пароль')),
+        city: Yup.string().trim().required(t('Введите ваш город')),
         gender: Yup.string().required(t('Выберете значение')),
     })
 
@@ -169,7 +174,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                             className={cls.input}
                             id="birthDay"
                             name="birthDay"
-                            placeholder="dd.mm.yyyy"
+                            placeholder={t('dd.mm.yyyy')}
                             type="date"
                         />
                         <ErrorMessage className={cls.error} component="div" name="birthDay" />

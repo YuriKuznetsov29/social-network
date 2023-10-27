@@ -9,6 +9,7 @@ import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
 import { Avatar } from 'entities/Avatar'
 import { useTranslation } from 'react-i18next'
+import dayjs from 'dayjs'
 import cls from './ChangeProfile.module.scss'
 
 export interface Values {
@@ -40,6 +41,12 @@ export const ChangeProfile = () => {
         lastName: Yup.string().trim().required(t('Введите фамилию')),
         email: Yup.string().email(t('Неправильный формат email')).required(t('Введите Email')),
         birthDay: Yup.date()
+            .transform((value, originalValue, context) => {
+                if (context.isType(value)) return value
+
+                value = originalValue.split('.').reverse().join('-')
+                return dayjs(value).isValid() ? dayjs(value).toDate() : new Date('')
+            })
             .max(new Date(), t('Введите корректную дату'))
             .min('1969-11-13', t('Date is too early'))
             .required(t('Введите дату рождения')),
