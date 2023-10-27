@@ -14,6 +14,15 @@ import 'shared/config/i18n/i18n'
 dayjs.extend(customParseFormat)
 dayjs.extend(relativeTime)
 
+const appHeight = () => {
+    window.addEventListener('resize', () => {
+        document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`)
+    })
+}
+
+window.addEventListener('resize', appHeight)
+appHeight()
+
 const container = document.getElementById('root')
 const root = createRoot(container!)
 root.render(
