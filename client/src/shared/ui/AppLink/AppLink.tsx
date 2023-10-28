@@ -15,6 +15,7 @@ interface AppLinkProps extends LinkProps {
     theme?: AppLinkTheme
     active?: boolean
     activeClass?: string
+    scroll?: boolean
 }
 
 export const AppLink: FC<AppLinkProps> = (props) => {
@@ -25,8 +26,13 @@ export const AppLink: FC<AppLinkProps> = (props) => {
         theme = AppLinkTheme.PRIMARY,
         active,
         activeClass,
+        scroll,
         ...otherProps
     } = props
+
+    const onClickResetScroll = () => {
+        if (scroll) document.documentElement.scrollTop = 0
+    }
 
     return (
         <>
@@ -40,6 +46,7 @@ export const AppLink: FC<AppLinkProps> = (props) => {
                             cls[theme],
                         ])
                     }}
+                    onClick={onClickResetScroll}
                 >
                     {children}
                 </NavLink>

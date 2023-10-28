@@ -22,10 +22,22 @@ export const SideBar = ({ className }: SideBarProps) => {
 
     return isMobile ? (
         <div className={cls.mobileSidebar}>
-            <AppLink to={'/news'} className={cls.linkMobile} active activeClass={cls.activeLink}>
+            <AppLink
+                to={'/news'}
+                className={cls.linkMobile}
+                active
+                activeClass={cls.activeLink}
+                scroll
+            >
                 <NewsIcon className={cls.mobileIcon} />
             </AppLink>
-            <AppLink to={'/friends'} className={cls.linkMobile} active activeClass={cls.activeLink}>
+            <AppLink
+                to={'/friends'}
+                className={cls.linkMobile}
+                active
+                activeClass={cls.activeLink}
+                scroll
+            >
                 <UsersIcon className={cls.mobileIcon} />
             </AppLink>
             <AppLink
@@ -33,10 +45,17 @@ export const SideBar = ({ className }: SideBarProps) => {
                 className={cls.linkMobile}
                 active
                 activeClass={cls.activeLink}
+                scroll
             >
                 <ChatIcon className={cls.mobileIcon} />
             </AppLink>
-            <AppLink to={'/profile'} className={cls.linkMobile} active activeClass={cls.activeLink}>
+            <AppLink
+                to={'/profile'}
+                className={cls.linkMobile}
+                active
+                activeClass={cls.activeLink}
+                scroll
+            >
                 <ProfileIcon className={cls.mobileIcon} />
             </AppLink>
         </div>
