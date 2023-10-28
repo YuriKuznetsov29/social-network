@@ -20,14 +20,14 @@ dayjs.extend(updateLocale)
 dayjs.locale(ru_short, undefined, true)
 dayjs.locale(en_short, undefined, true)
 
-const appHeight = () => {
-    window.addEventListener('resize', () => {
-        document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`)
-    })
-}
+// const appHeight = () => {
+//     window.addEventListener('resize', () => {
+//         document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`)
+//     })
+// }
 
-window.addEventListener('resize', appHeight)
-appHeight()
+// window.addEventListener('resize', appHeight)
+// appHeight()
 
 const container = document.getElementById('root')
 const root = createRoot(container!)

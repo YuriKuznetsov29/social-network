@@ -1,11 +1,11 @@
-const express = require("express")
-const bcrypt = require("bcryptjs")
-const { check, validationResult } = require("express-validator")
-const TokenService = require("../services/token.service")
-const User = require("../models/User")
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const { check, validationResult } = require("express-validator");
+const TokenService = require("../services/token.service");
+const User = require("../models/User");
 const router = express.Router({
     mergeParams: true,
-})
+});
 
 router.post("/signUp", [
     check("email", "Некорректный email").isEmail(),
@@ -14,7 +14,7 @@ router.post("/signUp", [
     }),
     async (req, res) => {
         try {
-            const errors = validationResult(req)
+            const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({
                     error: {
@@ -22,13 +22,13 @@ router.post("/signUp", [
                         code: 400,
                         // errors: errors.array()
                     },
-                })
+                });
             }
 
-            const { email, password } = req.body
+            const { email, password } = req.body;
             const exitingUser = await User.findOne({
                 email,
-            })
+            });
 
             if (exitingUser) {
                 return res.status(400).json({
@@ -36,26 +36,26 @@ router.post("/signUp", [
                         message: "Пользователь с таким email уже существует",
                         code: 400,
                     },
-                })
+                });
             }
 
-            const hashedPassword = await bcrypt.hash(password, 12)
+            const hashedPassword = await bcrypt.hash(password, 12);
             const newUser = await User.create({
                 ...req.body,
                 password: hashedPassword,
-            })
+            });
 
             const tokens = TokenService.generate({
                 _id: newUser._id,
-            })
-            await TokenService.save(newUser._id, tokens.refreshToken)
+            });
+            await TokenService.save(newUser._id, tokens.refreshToken);
 
             res.cookie("refreshToken", tokens.refreshToken, {
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
                 sameSite: "None",
                 secure: true,
-            }) // for https add flag secure
+            }); // for https add flag secure
 
             res.status(201).send({
                 ...tokens,
@@ -76,15 +76,15 @@ router.post("/signUp", [
                     lastSeenOnline: newUser.lastSeenOnline,
                     city: newUser.city,
                 },
-            })
+            });
         } catch (e) {
-            console.log(e)
+            console.log(e);
             res.status(500).json({
                 message: "На сервере произошла ошибка. Попробуйте позже",
-            })
+            });
         }
     },
-])
+]);
 
 // 1. validate
 // 2. find user
@@ -96,7 +96,7 @@ router.post("/signInWithPassword", [
     check("password", "Пароль не может быть пустым").exists(),
     async (req, res) => {
         try {
-            const errors = validationResult(req)
+            const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({
                     error: {
@@ -104,14 +104,14 @@ router.post("/signInWithPassword", [
                         code: 400,
                         // errors: errors.array()
                     },
-                })
+                });
             }
 
-            const { email, password } = req.body
+            const { email, password } = req.body;
 
             const exitingUser = await User.findOne({
                 email,
-            })
+            });
 
             if (!exitingUser) {
                 return res.status(400).send({
@@ -119,28 +119,28 @@ router.post("/signInWithPassword", [
                         message: "Пользователя с таким email не найдено",
                         code: 400,
                     },
-                })
+                });
             }
 
-            const isPasswordEqual = await bcrypt.compare(password, exitingUser.password)
+            const isPasswordEqual = await bcrypt.compare(password, exitingUser.password);
             if (!isPasswordEqual) {
                 return res.status(400).send({
                     error: {
                         message: "Неверный пароль",
                         code: 400,
                     },
-                })
+                });
             }
 
             const tokens = TokenService.generate({
                 _id: exitingUser._id,
-            })
-            await TokenService.save(exitingUser._id, tokens.refreshToken)
+            });
+            await TokenService.save(exitingUser._id, tokens.refreshToken);
 
             res.cookie("refreshToken", tokens.refreshToken, {
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
-            }) // for https add flag secure
+            }); // for https add flag secure
 
             res.status(200).send({
                 ...tokens,
@@ -161,55 +161,55 @@ router.post("/signInWithPassword", [
                     lastSeenOnline: exitingUser.lastSeenOnline,
                     city: exitingUser.city,
                 },
-            })
+            });
         } catch (e) {
             res.status(500).json({
                 message: "На сервере произошла ошибка. Попробуйте позже",
-            })
+            });
         }
     },
-])
+]);
 
 router.post("/signOut", async (req, res) => {
     try {
-        const { refreshToken } = req.cookies
-        const token = await TokenService.removeToken(refreshToken)
-        res.clearCookie("refreshToken")
-        res.status(200).json(token)
+        const { refreshToken } = req.cookies;
+        const token = await TokenService.removeToken(refreshToken);
+        res.clearCookie("refreshToken");
+        res.status(200).json(token);
     } catch (e) {
         res.status(500).json({
             message: "На сервере произошла ошибка. Попробуйте позже",
-        })
+        });
     }
-})
+});
 
 function isTokenInvalid(data, dbToken) {
-    return !data || !dbToken
+    return !data || !dbToken;
 }
 
 router.get("/token", async (req, res) => {
     try {
-        const { refreshToken } = req.cookies
-        const data = TokenService.validateRefresh(refreshToken)
-        const dbToken = await TokenService.findToken(refreshToken)
+        const { refreshToken } = req.cookies;
+        const data = TokenService.validateRefresh(refreshToken);
+        const dbToken = await TokenService.findToken(refreshToken);
 
         if (isTokenInvalid(data, dbToken)) {
             return res.status(401).json({
                 message: "Unauthorized",
-            })
+            });
         }
 
-        const user = await User.findById(data._id)
+        const user = await User.findById(data._id);
 
         const tokens = TokenService.generate({
             _id: data._id,
-        })
-        await TokenService.save(data._id, tokens.refreshToken)
+        });
+        await TokenService.save(data._id, tokens.refreshToken);
 
         res.cookie("refreshToken", tokens.refreshToken, {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             httpOnly: true,
-        })
+        });
 
         res.status(200).send({
             ...tokens,
@@ -230,12 +230,12 @@ router.get("/token", async (req, res) => {
                 lastSeenOnline: user.lastSeenOnline,
                 city: user.city,
             },
-        })
+        });
     } catch (e) {
         res.status(500).json({
             message: "На сервере произошла ошибка. Попробуйте позже",
-        })
+        });
     }
-})
+});
 
-module.exports = router
+module.exports = router;

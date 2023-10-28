@@ -33,6 +33,11 @@ export const WhoLikesIt = ({ isOpen, onClose, postId }: WhoLikesItProps) => {
         if (isOpen) dispatch(getWhoLikesUsers(postId))
     }, [isOpen])
 
+    const onClickShowUser = (userId: string) => {
+        navigate(`/${userId}`)
+        document.body.style.overflow = 'auto'
+    }
+
     return (
         <Modal isOpen={isOpen} onClose={onClose} className={cls.background}>
             <div className={cls.usersWrapper}>
@@ -44,7 +49,7 @@ export const WhoLikesIt = ({ isOpen, onClose, postId }: WhoLikesItProps) => {
                             <div
                                 className={cls.friend}
                                 key={friend.userId}
-                                onClick={() => navigate(`/${friend.userId}`)}
+                                onClick={() => onClickShowUser(friend.userId)}
                             >
                                 <Avatar
                                     avatarPath={friend.avatarPath}
