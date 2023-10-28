@@ -25,6 +25,7 @@
     background: var(--bg-color);
     transition: 0.3s transform;
     transform: scale(0.5);
+    display: flex;
     // max-width: 60%;
 }
 
@@ -49,4 +50,10 @@
     top: 20px;
     right: 20px;
     cursor: pointer;
+}
+
+@media (max-width: 650px) {
+    .content {
+        padding: 10px;
+    }
 }

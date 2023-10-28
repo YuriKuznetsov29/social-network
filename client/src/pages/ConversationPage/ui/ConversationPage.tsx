@@ -15,7 +15,7 @@ export const ConversationPage = ({ className }: ConversationPageProps) => {
         <>
             <Header />
             <Container className={isMobile ? cls.contentContainer : ''}>
-                <SideBar />
+                {/* <SideBar /> */}
                 <Dialog />
             </Container>
         </>
