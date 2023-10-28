@@ -30,7 +30,6 @@
 .input,
 .select {
     margin-bottom: 20px;
-
     padding: 0 12px;
     height: 30px;
     background-color: var(--bg-input);
@@ -44,6 +43,7 @@
 }
 
 .input {
+    width: 100%;
     padding: 8px 12px;
 }
 
