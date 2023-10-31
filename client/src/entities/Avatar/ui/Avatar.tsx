@@ -43,7 +43,11 @@ export const Avatar = memo((props: AvatarProps) => {
     return (
         <span>
             <div
-                className={classNames(cls.Avatar, { [cls.click]: [click && userId] }, [className])}
+                className={classNames(
+                    cls.Avatar,
+                    { [cls.click]: [click && userId && size !== 'XL'] },
+                    [className]
+                )}
                 onClick={onClickNavigate}
             >
                 {avatarPath ? (

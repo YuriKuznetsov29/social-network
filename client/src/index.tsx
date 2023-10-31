@@ -7,14 +7,17 @@ import { StoreProvider } from 'app/Providers/StoreProvider'
 import { ErrorBoundary } from 'app/Providers/ErrorBoundary'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import updateLocale from 'dayjs/plugin/updateLocale'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { ru_short } from 'shared/config/dayjs/locales/ru_short'
 import { en_short } from 'shared/config/dayjs/locales/en_short'
 import { thresholds } from 'shared/config/dayjs/thresholds'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import updateLocale from 'dayjs/plugin/updateLocale'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import 'shared/config/i18n/i18n'
 
+dayjs.extend(relativeTime, {
+    thresholds: thresholds,
+})
 dayjs.extend(updateLocale)
 dayjs.extend(customParseFormat)
 dayjs.locale(ru_short, undefined, true)
@@ -33,10 +36,6 @@ dayjs.updateLocale('ru', {
         ...localeList['ru'].relativeTime,
         ss: 'несколько секунд',
     },
-})
-
-dayjs.extend(relativeTime, {
-    thresholds: thresholds,
 })
 
 const container = document.getElementById('root')
