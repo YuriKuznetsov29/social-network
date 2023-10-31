@@ -163,13 +163,13 @@ export const FriendsList = ({ className }: FriendsListProps) => {
                             </div>
                         </ContentContainer>
                     ))}
-                    <Input value={time} onChange={setTime} />
+                    {/* <Input value={time} onChange={setTime} />
                     <div>{new Date(+time).toDateString()}</div>
                     <button onClick={up}>+</button>
                     <button onClick={down}>-</button>
                     {dayjs(new Date(+time))
                         .locale(i18n.language + '-short')
-                        .toNow(true)}
+                        .toNow(true)} */}
                 </div>
             ) : (
                 <div>{t('У вас еще нет друзей')}</div>

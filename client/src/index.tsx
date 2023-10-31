@@ -15,14 +15,10 @@ import { en_short } from 'shared/config/dayjs/locales/en_short'
 import { thresholds } from 'shared/config/dayjs/thresholds'
 import 'shared/config/i18n/i18n'
 
-dayjs.extend(relativeTime, {
-    thresholds: thresholds,
-})
-
 dayjs.extend(updateLocale)
+dayjs.extend(customParseFormat)
 dayjs.locale(ru_short, undefined, true)
 dayjs.locale(en_short, undefined, true)
-dayjs.extend(customParseFormat)
 const localeList = dayjs.Ls
 
 dayjs.updateLocale('en', {
@@ -37,6 +33,10 @@ dayjs.updateLocale('ru', {
         ...localeList['ru'].relativeTime,
         ss: 'несколько секунд',
     },
+})
+
+dayjs.extend(relativeTime, {
+    thresholds: thresholds,
 })
 
 const container = document.getElementById('root')
