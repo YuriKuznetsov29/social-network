@@ -44,7 +44,13 @@ export const DialogHeader = memo(({ className, roomId }: DialogHeaderProps) => {
                 <Arrow className={cls.icon} /> {t('Назад')}
             </Link>
             {companion?.firstName} {companion?.lastName}
-            <Avatar avatarPath={companion?.avatarPath} size="M" isOnline={companion?.isOnline} />
+            <Avatar
+                avatarPath={companion?.avatarPath}
+                size="M"
+                isOnline={companion?.isOnline}
+                click
+                userId={companion?.userId}
+            />
         </div>
     )
 })

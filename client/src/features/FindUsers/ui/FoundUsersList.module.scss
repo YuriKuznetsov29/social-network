@@ -32,12 +32,14 @@
 
 .results {
     padding: 10px;
+    max-height: 360px;
     width: 900px;
-    // height: 300px;
     margin: 0 auto;
     position: absolute;
     left: 0;
     top: var(--header-height);
+    overflow-x: hidden;
+    overflow-y: auto;
     display: none;
     justify-content: flex-start;
     align-items: flex-start;
@@ -72,5 +74,6 @@
 @media (max-width: 900px) {
     .results {
         width: auto;
+        justify-content: center;
     }
 }

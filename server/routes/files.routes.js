@@ -4,7 +4,6 @@ const router = express.Router({
     mergeParams: true,
 })
 const auth = require("../middleware/auth.middleware")
-const config = require("config")
 const fs = require("fs")
 const Uuid = require("uuid")
 const { check, validationResult } = require("express-validator")

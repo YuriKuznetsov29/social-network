@@ -28,7 +28,13 @@ export const Comment = ({ className, comment }: CommentProps) => {
 
     return (
         <div className={classNames(cls.Comment, {}, [className])}>
-            <Avatar avatarPath={userData?.avatarPath} size="MS" className={cls.avatar} />
+            <Avatar
+                avatarPath={userData?.avatarPath}
+                size="MS"
+                className={cls.avatar}
+                click
+                userId={comment.author}
+            />
             <div>
                 <div className={cls.header}>
                     <div>{userData?.firstName}</div>

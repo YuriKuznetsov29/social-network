@@ -43,7 +43,13 @@ export const Post = memo(({ post }: PostProps) => {
         <>
             <ContentContainer className={cls.container}>
                 <div className={cls.authorContainer}>
-                    <Avatar avatarPath={author?.avatarPath} className={cls.avatar} size="M" />
+                    <Avatar
+                        avatarPath={author?.avatarPath}
+                        className={cls.avatar}
+                        size="M"
+                        click
+                        userId={author?.userId}
+                    />
                     <div className={cls.headerContainer}>
                         <div className={cls.authorWrapper}>
                             <div>

@@ -8,6 +8,7 @@ import { ImageModal } from 'shared/ui/ImageModal/ImageModal'
 import { memo, useCallback, useState } from 'react'
 import CircleXL from 'shared/assets/icons/xl-dot.svg'
 import cls from './Avatar.module.scss'
+import { useNavigate } from 'react-router'
 
 interface AvatarProps {
     className?: string
@@ -15,12 +16,15 @@ interface AvatarProps {
     isOnline?: boolean
     lastSeenOnline?: string
     size?: 'XL' | 'L' | 'M' | 'MS' | 'S'
+    click?: boolean
+    userId?: string
 }
 
 export const Avatar = memo((props: AvatarProps) => {
-    const { className, avatarPath, isOnline, lastSeenOnline, size = 'S' } = props
+    const { className, avatarPath, isOnline, lastSeenOnline, size = 'S', click, userId } = props
     const { t, i18n } = useTranslation('pages')
     const [isOpenImage, setIsOpenImage] = useState(false)
+    const navigate = useNavigate()
 
     const onCloseModal = useCallback(() => {
         setIsOpenImage(false)
@@ -30,9 +34,18 @@ export const Avatar = memo((props: AvatarProps) => {
         setIsOpenImage(true)
     }
 
+    const onClickNavigate = () => {
+        if (click && userId && size !== 'XL') {
+            navigate(`/${userId}`)
+        }
+    }
+
     return (
         <span>
-            <div className={classNames(cls.Avatar, {}, [className])}>
+            <div
+                className={classNames(cls.Avatar, { [cls.click]: [click && userId] }, [className])}
+                onClick={onClickNavigate}
+            >
                 {avatarPath ? (
                     <>
                         <img

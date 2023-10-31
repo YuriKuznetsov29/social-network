@@ -3,6 +3,7 @@ import Container from 'shared/ui/Container/Container'
 import { Dialog } from 'entities/Dialog'
 import { useMobile } from 'shared/lib/hook/useMobile'
 import cls from './ConversationPage.module.scss'
+import { SideBar } from 'widgets/SideBar'
 
 interface ConversationPageProps {
     className?: string
@@ -14,7 +15,7 @@ export const ConversationPage = ({ className }: ConversationPageProps) => {
         <>
             <Header />
             <Container className={isMobile ? cls.contentContainer : ''}>
-                {/* <SideBar /> */}
+                {!isMobile && <SideBar />}
                 <Dialog />
             </Container>
         </>

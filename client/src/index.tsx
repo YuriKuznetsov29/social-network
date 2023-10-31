@@ -14,20 +14,49 @@ import 'shared/config/i18n/i18n'
 import { ru_short } from 'shared/config/i18n/locales/ru_short'
 import { en_short } from 'shared/config/i18n/locales/en_short'
 
-dayjs.extend(customParseFormat)
-dayjs.extend(relativeTime)
+const thresholds = [
+    { l: 's', r: 1 },
+    { l: 'ss', r: 45, d: 'second' },
+    { l: 'm', r: 1 },
+    { l: 'mm', r: 59, d: 'minute' },
+    { l: 'h', r: 1 },
+    { l: 'hh', r: 23, d: 'hour' },
+    { l: 'd', r: 1 },
+    { l: 'dd', r: 29, d: 'day' },
+    { l: 'M', r: 1 },
+    { l: 'MM', r: 11, d: 'month' },
+    { l: 'y', r: 1 },
+    { l: 'yy', d: 'year' },
+]
+
+const config = {
+    thresholds: thresholds,
+}
+
+dayjs.extend(relativeTime, config)
+
 dayjs.extend(updateLocale)
 dayjs.locale(ru_short, undefined, true)
 dayjs.locale(en_short, undefined, true)
+dayjs.extend(customParseFormat)
 
-// const appHeight = () => {
-//     window.addEventListener('resize', () => {
-//         document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`)
-//     })
-// }
+const localeList = dayjs.Ls
 
-// window.addEventListener('resize', appHeight)
-// appHeight()
+localeList['en'].relativeTime
+
+dayjs.updateLocale('en', {
+    relativeTime: {
+        ...localeList['en'].relativeTime,
+        ss: 'a few seconds',
+    },
+})
+
+dayjs.updateLocale('ru', {
+    relativeTime: {
+        ...localeList['ru'].relativeTime,
+        ss: 'несколько секунд',
+    },
+})
 
 const container = document.getElementById('root')
 const root = createRoot(container!)

@@ -9,7 +9,7 @@ import {
     removeFriend,
 } from 'features/GetFriendsData'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Conversations } from 'features/AuthByEmail/model/types/response/Conversations'
 import { useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
@@ -23,6 +23,7 @@ import PostIcon from 'shared/assets/icons/note-pencil-bold.svg'
 import dayjs from 'dayjs'
 import cls from './FriendsList.module.scss'
 import { AnotherUserLoader } from 'shared/ui/AnotherUserLoader'
+import { Input } from 'shared/ui/Input/Input'
 
 interface FriendsListProps {
     className?: string
@@ -34,7 +35,9 @@ export const FriendsList = ({ className }: FriendsListProps) => {
     const isLoading = useAppSelector(getFriendsLoadingStatus)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const { t } = useTranslation('pages')
+    const { t, i18n } = useTranslation('pages')
+
+    const [time, setTime] = useState(Date.now() + '')
 
     useEffect(() => {
         if (userId) dispatch(getAllFriends(userId))
@@ -74,6 +77,16 @@ export const FriendsList = ({ className }: FriendsListProps) => {
 
     if (isLoading) {
         return <AnotherUserLoader />
+    }
+
+    console.log(Date.now())
+
+    const up = () => {
+        setTime((prev) => +prev + 1000 + '')
+    }
+
+    const down = () => {
+        setTime((prev) => +prev - 1000 + '')
     }
 
     return (
@@ -150,6 +163,13 @@ export const FriendsList = ({ className }: FriendsListProps) => {
                             </div>
                         </ContentContainer>
                     ))}
+                    <Input value={time} onChange={setTime} />
+                    <div>{new Date(+time).toDateString()}</div>
+                    <button onClick={up}>+</button>
+                    <button onClick={down}>-</button>
+                    {dayjs(new Date(+time))
+                        .locale(i18n.language + '-short')
+                        .toNow(true)}
                 </div>
             ) : (
                 <div>{t('У вас еще нет друзей')}</div>
