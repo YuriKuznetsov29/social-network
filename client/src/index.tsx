@@ -10,39 +10,20 @@ import 'dayjs/locale/ru'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import updateLocale from 'dayjs/plugin/updateLocale'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { ru_short } from 'shared/config/dayjs/locales/ru_short'
+import { en_short } from 'shared/config/dayjs/locales/en_short'
+import { thresholds } from 'shared/config/dayjs/thresholds'
 import 'shared/config/i18n/i18n'
-import { ru_short } from 'shared/config/i18n/locales/ru_short'
-import { en_short } from 'shared/config/i18n/locales/en_short'
 
-const thresholds = [
-    { l: 's', r: 1 },
-    { l: 'ss', r: 45, d: 'second' },
-    { l: 'm', r: 1 },
-    { l: 'mm', r: 59, d: 'minute' },
-    { l: 'h', r: 1 },
-    { l: 'hh', r: 23, d: 'hour' },
-    { l: 'd', r: 1 },
-    { l: 'dd', r: 29, d: 'day' },
-    { l: 'M', r: 1 },
-    { l: 'MM', r: 11, d: 'month' },
-    { l: 'y', r: 1 },
-    { l: 'yy', d: 'year' },
-]
-
-const config = {
+dayjs.extend(relativeTime, {
     thresholds: thresholds,
-}
-
-dayjs.extend(relativeTime, config)
+})
 
 dayjs.extend(updateLocale)
 dayjs.locale(ru_short, undefined, true)
 dayjs.locale(en_short, undefined, true)
 dayjs.extend(customParseFormat)
-
 const localeList = dayjs.Ls
-
-localeList['en'].relativeTime
 
 dayjs.updateLocale('en', {
     relativeTime: {
