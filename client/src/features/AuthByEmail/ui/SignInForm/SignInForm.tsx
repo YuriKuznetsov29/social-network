@@ -62,6 +62,11 @@ export const SignInForm = ({ className }: SignInFormProps) => {
 
     return (
         <div className={classNames(cls.SignInForm, {}, [className])}>
+            <div className={cls.loginData}>
+                <h1>Тестовый пользователь</h1>
+                <h1>Email: t@t.ru</h1>
+                <h1>Пароль: 12345678</h1>
+            </div>
             <Formik
                 initialValues={{
                     email: '',

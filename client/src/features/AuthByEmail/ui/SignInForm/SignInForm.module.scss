@@ -97,3 +97,13 @@
     cursor: pointer;
     fill: var(--icon-color);
 }
+
+.loginData {
+    color: red;
+    position: absolute;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
