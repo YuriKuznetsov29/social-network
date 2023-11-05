@@ -21,7 +21,12 @@ export const ImageModal = ({
 }: ImageProps) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose} className={cls.background}>
-            <img className={cls.image} src={SERVER_URL + imagePath} alt={alt} />
+            <img
+                data-testid="avatar-modal"
+                className={cls.image}
+                src={SERVER_URL + imagePath}
+                alt={alt}
+            />
         </Modal>
     )
 }

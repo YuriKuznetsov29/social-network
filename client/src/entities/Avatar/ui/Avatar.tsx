@@ -43,6 +43,7 @@ export const Avatar = memo((props: AvatarProps) => {
     return (
         <span>
             <div
+                data-testid="avatar"
                 className={classNames(
                     cls.Avatar,
                     { [cls.click]: [click && userId && size !== 'XL'] },
@@ -53,6 +54,7 @@ export const Avatar = memo((props: AvatarProps) => {
                 {avatarPath ? (
                     <>
                         <img
+                            data-testid="user-avatar"
                             className={classNames(cls.user, {}, [[cls[size]]])}
                             src={SERVER_URL + avatarPath}
                             alt="avatar"
