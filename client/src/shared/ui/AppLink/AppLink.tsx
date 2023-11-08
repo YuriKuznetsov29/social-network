@@ -47,6 +47,7 @@ export const AppLink: FC<AppLinkProps> = (props) => {
                         ])
                     }}
                     onClick={onClickResetScroll}
+                    {...otherProps}
                 >
                     {children}
                 </NavLink>

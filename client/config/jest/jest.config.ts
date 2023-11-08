@@ -36,6 +36,10 @@ export default {
         '\\.s?css$': 'identity-obj-proxy',
         '\\.svg': path.resolve(__dirname, 'jestEmptyComponent.tsx'),
     },
+    // transform: {
+    //     '^.+\\.[jt]sx?$': 'babel-jest',
+    //     '.+\\.(css|styl|less|sass|scss)$': 'jest-css-modules-transform',
+    // },
     // Indicates whether the coverage information should be collected while executing the test
     // collectCoverage: false,
 

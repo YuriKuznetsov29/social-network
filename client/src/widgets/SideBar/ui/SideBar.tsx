@@ -32,6 +32,7 @@ export const SideBar = ({ className }: SideBarProps) => {
                 <NewsIcon className={cls.mobileIcon} />
             </AppLink>
             <AppLink
+                data-testid="friends-link"
                 to={'/friends'}
                 className={cls.linkMobile}
                 active
