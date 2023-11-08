@@ -16,23 +16,14 @@ describe('Avatar', () => {
         expect(screen.getByTestId('user-avatar')).toBeInTheDocument()
     })
 
-    // test('test increment', () => {
-    //     componentRender(<Avatar avatarPath="123" />)
+    test('test offline function', () => {
+        const time = new Date(Date.now() - 3600 * 1000).toString()
 
-    //     userEvent.click(screen.getByTestId('user-avatar'))
-    //     expect(screen.getByTestId('avatar-modal')).toBeInTheDocument()
-    // })
+        componentRender(
+            <Avatar avatarPath="123" lastSeenOnline={time} isOnline={false} size="XL" />
+        )
 
-    // test('test decrement', () => {
-    //     componentRender(<Counter />, {
-    //         initialState: {
-    //             counter: {
-    //                 value: 10,
-    //             },
-    //         },
-    //     })
-
-    //     userEvent.click(screen.getByTestId('decrement-btn'))
-    //     expect(screen.getByTestId('value-title')).toHaveTextContent('9')
-    // })
+        expect(screen.getByTestId('lastSeenOnline')).toBeInTheDocument()
+        expect(screen.getByTestId('lastSeenOnline')).toHaveTextContent('1 ч')
+    })
 })

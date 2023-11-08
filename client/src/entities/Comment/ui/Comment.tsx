@@ -27,7 +27,7 @@ export const Comment = ({ className, comment }: CommentProps) => {
     }, [])
 
     return (
-        <div className={classNames(cls.Comment, {}, [className])}>
+        <div data-testid="comment" className={classNames(cls.Comment, {}, [className])}>
             <Avatar
                 avatarPath={userData?.avatarPath}
                 size="MS"
@@ -38,11 +38,13 @@ export const Comment = ({ className, comment }: CommentProps) => {
             <div>
                 <div className={cls.header}>
                     <div>{userData?.firstName}</div>
-                    <div className={cls.time}>
+                    <div className={cls.time} data-testid="time">
                         {dayjs(comment.createdAt).locale(i18n.language).toNow(true) + t(' назад')}
                     </div>
                 </div>
-                <div className={cls.text}>{comment.body}</div>
+                <div data-testid="body" className={cls.text}>
+                    {comment.body}
+                </div>
             </div>
         </div>
     )

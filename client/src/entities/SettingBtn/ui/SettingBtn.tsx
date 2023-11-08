@@ -51,6 +51,7 @@ export const SettingBtn = ({ className }: SettingBtnProps) => {
 
     return (
         <div
+            data-testid="toggle-btn"
             className={classNames(cls.SettingBtn, {}, [className])}
             onClick={onClickToggleSetting}
             id="profileBtn"
@@ -60,7 +61,11 @@ export const SettingBtn = ({ className }: SettingBtnProps) => {
                 <ArrowDown className={cls.icon} />
             </div>
 
-            <div className={classNames(cls.container, { [cls.active]: show }, [])} id="container">
+            <div
+                data-testid="toggle-elem"
+                className={classNames(cls.container, { [cls.active]: show }, [])}
+                id="container"
+            >
                 <Link className={cls.link} to={'/changeProfile'}>
                     <ProfileIcon className={cls.icon_link} />
                     {t('Редактировать профиль')}

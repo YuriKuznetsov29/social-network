@@ -79,7 +79,7 @@ export const Avatar = memo((props: AvatarProps) => {
                         <CircleXL className={cls.onlineXL} />
                     ) : (
                         <span className={cls.offlineWrapper}>
-                            <span className={cls.offline}>
+                            <span data-testid="lastSeenOnline" className={cls.offline}>
                                 {dayjs(lastSeenOnline)
                                     .locale(i18n.language + '-short')
                                     .toNow(true)}

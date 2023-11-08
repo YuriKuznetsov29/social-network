@@ -1,0 +1,41 @@
+import { fireEvent, screen } from '@testing-library/react'
+import { componentRender } from 'shared/lib/tests/componentRender/componentRender'
+import userEvent from '@testing-library/user-event'
+import { Comment } from './Comment'
+
+describe('Avatar', () => {
+    test('test render', () => {
+        componentRender(
+            <Comment
+                comment={{
+                    _id: '123',
+                    author: '123',
+                    body: '123',
+                    createdAt: new Date().toDateString(),
+                    postId: '123',
+                }}
+            />
+        )
+
+        expect(screen.getByTestId('comment')).toBeInTheDocument()
+        expect(screen.getByTestId('body')).toHaveTextContent('123')
+    })
+
+    test('test time function', () => {
+        const time = new Date(Date.now() - 3600 * 1000).toString()
+
+        componentRender(
+            <Comment
+                comment={{
+                    _id: '123',
+                    author: '123',
+                    body: '123',
+                    createdAt: time,
+                    postId: '123',
+                }}
+            />
+        )
+
+        expect(screen.getByTestId('time')).toHaveTextContent('час назад')
+    })
+})
