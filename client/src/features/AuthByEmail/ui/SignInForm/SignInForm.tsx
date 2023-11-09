@@ -61,7 +61,7 @@ export const SignInForm = ({ className }: SignInFormProps) => {
     }, [isAuth])
 
     return (
-        <div className={classNames(cls.SignInForm, {}, [className])}>
+        <div data-testid="login-form" className={classNames(cls.SignInForm, {}, [className])}>
             <div className={cls.loginData}>
                 <h1>Тестовый пользователь</h1>
                 <h1>Email: t@t.ru</h1>
