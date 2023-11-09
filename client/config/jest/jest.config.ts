@@ -5,6 +5,8 @@
 
 import path from 'path'
 
+const esModules = ['nanoid'].join('|')
+
 export default {
     // All imported modules in your tests should be mocked automatically
     // automock: false,
@@ -32,9 +34,11 @@ export default {
     ],
     rootDir: '../../',
     setupFilesAfterEnv: ['<rootDir>config/jest/setupTests.ts'],
+    transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
     moduleNameMapper: {
         '\\.s?css$': 'identity-obj-proxy',
         '\\.svg': path.resolve(__dirname, 'jestEmptyComponent.tsx'),
+        '^nanoid(/(.*)|$)': 'nanoid$1',
     },
     // transform: {
     //     '^.+\\.[jt]sx?$': 'babel-jest',

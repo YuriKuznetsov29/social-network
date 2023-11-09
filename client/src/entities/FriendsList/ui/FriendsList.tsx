@@ -79,20 +79,18 @@ export const FriendsList = ({ className }: FriendsListProps) => {
         return <AnotherUserLoader />
     }
 
-    console.log(Date.now())
+    // const up = () => {
+    //     setTime((prev) => +prev + 1000 + '')
+    // }
 
-    const up = () => {
-        setTime((prev) => +prev + 1000 + '')
-    }
-
-    const down = () => {
-        setTime((prev) => +prev - 1000 + '')
-    }
+    // const down = () => {
+    //     setTime((prev) => +prev - 1000 + '')
+    // }
 
     return (
         <>
             {friends.length ? (
-                <div data-testid="friends-page" className={cls.listContainer}>
+                <div className={cls.listContainer}>
                     {friends.map((friend: IUser) => (
                         <ContentContainer className={cls.contentWrapper} key={friend.userId}>
                             <div className={cls.dataWrapper}>
@@ -172,7 +170,7 @@ export const FriendsList = ({ className }: FriendsListProps) => {
                         .toNow(true)} */}
                 </div>
             ) : (
-                <div>{t('У вас еще нет друзей')}</div>
+                <div data-testid="friends-page">{t('У вас еще нет друзей')}</div>
             )}
         </>
     )

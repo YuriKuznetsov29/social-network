@@ -26,8 +26,6 @@ export const UserData = ({ className }: UserDataProps) => {
 
     if (loading || !userInit) return <UserDataLoader />
 
-    console.log(userData)
-
     return (
         <div className={classNames(cls.UserData, {}, [className])}>
             <ContentContainer className={cls.contentWrapper}>
