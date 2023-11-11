@@ -13,15 +13,11 @@ import { getInitPostStatus } from '../model/selectors/getInitPostStatus'
 import { useTranslation } from 'react-i18next'
 import cls from './CreatePost.module.scss'
 
-interface CreatePostProps {
-    className?: string
-}
-
 interface uploadImageResponse {
     imagePath: string
 }
 
-export const CreatePost = ({ className }: CreatePostProps) => {
+export const CreatePost = () => {
     const [imagePath, setImagePath] = useState('')
     const input = useRef<HTMLInputElement | null>(null)
     const { t } = useTranslation('pages')

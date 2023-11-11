@@ -40,7 +40,6 @@ export const AppLink: FC<AppLinkProps> = (props) => {
                 <NavLink
                     to={to}
                     className={({ isActive, isPending }) => {
-                        console.log(activeClass, isActive, 'active')
                         return classNames(cls.navbar, { [cls.activeClass]: isActive }, [
                             className,
                             cls[theme],

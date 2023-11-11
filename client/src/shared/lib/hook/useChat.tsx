@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { io } from 'socket.io-client'
 import { SERVER_URL } from '../../api/http/index'
-import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 import { IUser } from 'entities/UserData/model/types/IUser'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData, getUserInitied } from 'entities/UserData'
+import { getAuthStatus } from 'features/AuthByEmail'
 
 export interface MessageData {
     messageId: string
@@ -15,7 +15,7 @@ export interface MessageData {
 }
 
 export default function useChat(roomId: string) {
-    const { isAuth } = useAppSelector(getAuthState)
+    const isAuth = useAppSelector(getAuthStatus)
     const userData = useAppSelector(getUserData)
     const userInit = useAppSelector(getUserInitied)
 

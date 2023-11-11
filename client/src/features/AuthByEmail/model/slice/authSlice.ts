@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { signInByEmail } from '../services/singInByEmail'
 import { AuthSchema } from '../types/authSchema'
 import { signUpByEmail } from '../services/signUpByEmail'
@@ -22,12 +22,6 @@ export const authSlice = createSlice({
     name: 'authorization',
     initialState,
     reducers: {
-        setEmail: (state, action: PayloadAction<string>) => {
-            state.email = action.payload
-        },
-        setPassword: (state, action: PayloadAction<string>) => {
-            state.password = action.payload
-        },
         setInit: (state) => {
             state.initAuth = true
         },

@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import { Button } from 'shared/ui/Button/Button'
-import { getAuthState } from 'features/AuthByEmail/model/selectors/getAuthState/getAuthState'
 import { useEffect, useState } from 'react'
 import { signInByEmail } from 'features/AuthByEmail/model/services/singInByEmail'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
@@ -10,14 +9,15 @@ import { AppLink } from 'shared/ui/AppLink/AppLink'
 import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ThemeSwitcher'
 import { ErrorMessage, Field, Formik, Form } from 'formik'
 import * as Yup from 'yup'
-import { getLoadingAuthStatus } from 'features/AuthByEmail/model/selectors/getLoadingAuthStatus'
+import { getLoadingAuthStatus } from 'features/AuthByEmail/model/selectors/getLoadingAuthStatus/getLoadingAuthStatus'
 import { Loader } from 'shared/ui/Loader'
-import { getAuthError } from 'features/AuthByEmail/model/selectors/getAuthError'
+import { getAuthError } from 'features/AuthByEmail/model/selectors/getAuthError/getAuthError'
 import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher'
 import { useTranslation } from 'react-i18next'
 import Eye from 'shared/assets/icons/eye.svg'
 import EyeSlash from 'shared/assets/icons/eye-slash.svg'
 import cls from './SignInForm.module.scss'
+import { getAuthStatus } from 'features/AuthByEmail/model/selectors/getAuthStatus/getAuthStatus'
 
 interface SignInFormProps {
     className?: string
@@ -29,7 +29,7 @@ export interface Values {
 }
 
 export const SignInForm = ({ className }: SignInFormProps) => {
-    const { isAuth } = useAppSelector(getAuthState)
+    const isAuth = useAppSelector(getAuthStatus)
     const loading = useAppSelector(getLoadingAuthStatus)
     const error = useAppSelector(getAuthError)
     const [showPassword, setShowPassword] = useState('password')
