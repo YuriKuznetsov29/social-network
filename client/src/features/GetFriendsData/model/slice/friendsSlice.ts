@@ -27,9 +27,7 @@ export const friendSlice = createSlice({
             .addCase(getAllFriends.fulfilled, (state, action) => {
                 state.isLoading = false
                 state._initialized = true
-                if (action.payload?.friends) {
-                    state.friends = action.payload.friends
-                }
+                state.friends = action.payload
             })
             .addCase(getAllFriends.rejected, (state, action) => {
                 state.isLoading = false
