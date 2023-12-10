@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { isAxiosError } from 'axios'
-import { AuthResponse } from '../types/response/AuthResponse'
+import { AuthResponse } from '../../types/response/AuthResponse'
 import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
 import { loadUserData } from 'entities/UserData'
 
 interface RequestAuthData {
     email: string
     password: string
-    navigate: (path: string) => void
+    navigate?: (path: string) => void
 }
 
 export const signInByEmail = createAsyncThunk<void, RequestAuthData, ThunkConfig<string>>(
@@ -20,7 +20,10 @@ export const signInByEmail = createAsyncThunk<void, RequestAuthData, ThunkConfig
             })
             localStorage.setItem('token', response.data.accessToken)
             dispatch(loadUserData({ userId: response.data.user.userId }))
-            navigate('/profile')
+
+            if (navigate) {
+                navigate('/profile')
+            }
         } catch (e) {
             console.log(e)
             if (isAxiosError(e) && e.response) {

@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { Button } from 'shared/ui/Button/Button'
 import { useEffect, useState } from 'react'
-import { signInByEmail } from 'features/AuthByEmail/model/services/singInByEmail'
+import { signInByEmail } from 'features/AuthByEmail/model/services/signInByEmail/singInByEmail'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
