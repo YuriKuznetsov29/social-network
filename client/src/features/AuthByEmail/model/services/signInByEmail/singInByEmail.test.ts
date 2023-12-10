@@ -1,10 +1,6 @@
 import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
 import { signInByEmail } from './singInByEmail'
 import axios from 'axios'
-import $api from 'shared/api/http'
-import { useNavigate } from 'react-router-dom'
-import { StateSchema } from 'app/Providers/StoreProvider'
-import { Dispatch } from '@reduxjs/toolkit'
 
 const userData = {
     accessToken:
@@ -40,55 +36,35 @@ const userData = {
     },
 }
 
-jest.mock('axios', () => {
-    return {
-        create: jest.fn(() => ({
-            get: jest.fn(),
-            interceptors: {
-                request: { use: jest.fn(), eject: jest.fn() },
-                response: { use: jest.fn(), eject: jest.fn() },
-            },
-        })),
-    }
-})
-
-const mockedAxios = jest.mocked(axios, true)
+const mockedAxios = jest.mocked(axios, { shallow: true })
 
 describe('signInByEmail.test', () => {
-    let dispatch: Dispatch
-    let getState: () => StateSchema
-
-    beforeEach(() => {
-        dispatch = jest.fn()
-        getState = jest.fn()
-    })
-
     test('success login', async () => {
-        // const thunk = new TestAsyncThunk(signInByEmail)
-        // thunk.api.post.mockReturnValue(Promise.resolve({ data: userData }))
+        const thunk = new TestAsyncThunk(signInByEmail)
+        // thunk.api.post = jest.fn().mockReturnValue(Promise.resolve({ data: userData }))
 
-        // const result = await thunk.callThunk({ email: 't1@t.ru', password: '12345678' })
+        const result = await thunk.callThunk({ email: 't1@t.ru', password: '12345678' })
+        console.log(result)
+        expect(mockedAxios.post).toHaveBeenCalled()
+        // expect(thunk.dispatch).toHaveBeenCalledWith(
+        //     loadUserData({ userId: '65232001e84843c3b5a6404e' })
+        // )
 
-        mockedAxios.post.mockReturnValue(Promise.resolve({ data: userData }))
-        const action = signInByEmail({ email: 't1@t.ru', password: '12345678' })
-        const result = await action(dispatch, getState, { api: $api })
-
-        // expect(thunk.dispatch).toHaveBeenCalledWith(userActions.setAuthData(userValue))
-        // expect(thunk.dispatch).toHaveBeenCalledTimes(3)
-        // expect(mockedAxios.post).toHaveBeenCalled()
+        // первый вызов dispatch при вызове signInByEmail, второй вызов внутри asyncthunk с экшеном loadUserData, третий при успешном выполнении signInByEmail(то есть при статусе fulfilled)
+        expect(thunk.dispatch).toHaveBeenCalledTimes(3)
         expect(result.meta.requestStatus).toBe('fulfilled')
-        expect(result.payload).toEqual(userData)
     })
 
-    // test('error login', async () => {
-    //     const thunk = new TestAsyncThunk(loginByUsername)
-    //     thunk.api.post.mockReturnValue(Promise.resolve({ status: 403 }))
+    test('error login', async () => {
+        const thunk = new TestAsyncThunk(signInByEmail)
+        thunk.api.post = jest.fn().mockReturnValue(Promise.resolve({}))
 
-    //     const result = await thunk.callThunk({ username: '123', password: '123' })
+        const result = await thunk.callThunk({ email: 't1@t.ru', password: '12345678' })
 
-    //     expect(thunk.dispatch).toHaveBeenCalledTimes(2)
-    //     expect(mockedAxios.post).toHaveBeenCalled()
-    //     expect(result.meta.requestStatus).toBe('rejected')
-    //     expect(result.payload).toBe('error')
-    // })
+        expect(mockedAxios.post).toHaveBeenCalled()
+        // первый вызов для signInByEmail, второй при неуспешном выполнении
+        expect(thunk.dispatch).toHaveBeenCalledTimes(2)
+        expect(result.meta.requestStatus).toBe('rejected')
+        expect(result.payload).toBe('error')
+    })
 })

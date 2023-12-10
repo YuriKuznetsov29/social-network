@@ -31,7 +31,9 @@ export const signUpByEmail = createAsyncThunk<void, RequestAuthData, ThunkConfig
         } catch (e) {
             console.log(e)
             if (e instanceof AxiosError) {
-                return e.response?.data.error.message
+                return rejectWithValue(e.response?.data.error.message)
+            } else {
+                return rejectWithValue('error')
             }
         }
     }
