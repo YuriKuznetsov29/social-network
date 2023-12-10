@@ -1,6 +1,6 @@
 import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
-import { signInByEmail } from './singInByEmail'
 import axios from 'axios'
+import { loadUserData } from './loadUserData'
 
 const userData = {
     accessToken:
@@ -38,30 +38,26 @@ const userData = {
 
 const mockedAxios = jest.mocked(axios)
 
-describe('signInByEmail.test', () => {
-    test('success login', async () => {
-        const thunk = new TestAsyncThunk(signInByEmail)
-        thunk.api.post = jest.fn().mockReturnValue(Promise.resolve({ data: userData }))
+describe('loadUserData.test', () => {
+    test('load data', async () => {
+        const thunk = new TestAsyncThunk(loadUserData)
+        thunk.api.get = jest.fn().mockReturnValue(Promise.resolve({ data: userData }))
 
-        const result = await thunk.callThunk({ email: 't1@t.ru', password: '12345678' })
+        const result = await thunk.callThunk({ userId: '65232001e84843c3b5a6404e' })
 
-        expect(mockedAxios.post).toHaveBeenCalled()
-        // expect(thunk.dispatch).toHaveBeenCalledWith(
-        //     loadUserData({ userId: '65232001e84843c3b5a6404e' })
-        // )
-        expect(thunk.dispatch).toHaveBeenCalledTimes(3)
+        expect(mockedAxios.get).toHaveBeenCalled()
         expect(result.meta.requestStatus).toBe('fulfilled')
+        expect(result.payload).toEqual(userData)
     })
 
-    test('error login', async () => {
-        const thunk = new TestAsyncThunk(signInByEmail)
-        thunk.api.post = jest.fn().mockReturnValue(Promise.resolve({}))
+    // test('load data error', async () => {
+    //     const thunk = new TestAsyncThunk(loadUserData)
+    //     thunk.api.get = jest.fn().mockReturnValue(Promise.resolve({ status: 403 }))
 
-        const result = await thunk.callThunk({ email: 't1@t.ru', password: '12345678' })
+    //     const result = await thunk.callThunk({ userId: '65232001e84843c3b5a6404e' })
 
-        expect(mockedAxios.post).toHaveBeenCalled()
-        expect(thunk.dispatch).toHaveBeenCalledTimes(2)
-        expect(result.meta.requestStatus).toBe('rejected')
-        expect(result.payload).toBe('error')
-    })
+    //     expect(mockedAxios.get).toHaveBeenCalled()
+    //     expect(result.meta.requestStatus).toBe('rejected')
+    //     expect(result.payload).toBe('error')
+    // })
 })
