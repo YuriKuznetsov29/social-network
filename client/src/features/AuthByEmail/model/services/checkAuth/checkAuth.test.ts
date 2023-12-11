@@ -1,7 +1,6 @@
 import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
-import { signInByEmail } from './singInByEmail'
 import axios from 'axios'
-import { loadUserData } from 'entities/UserData'
+import { checkAuth } from './checkAuth'
 
 const userData = {
     accessToken:
@@ -40,29 +39,24 @@ const userData = {
 const mockedAxios = jest.mocked(axios)
 
 describe('signInByEmail.test', () => {
-    test('success login', async () => {
-        const thunk = new TestAsyncThunk(signInByEmail)
-        thunk.api.post = jest.fn().mockReturnValue(Promise.resolve({ data: userData }))
+    test('success check auth', async () => {
+        const thunk = new TestAsyncThunk(checkAuth)
+        thunk.api.get = jest.fn().mockReturnValue(Promise.resolve({ data: userData }))
 
-        const result = await thunk.callThunk({ email: 't1@t.ru', password: '12345678' })
-        console.log(result)
-        expect(mockedAxios.post).toHaveBeenCalled()
-        // expect(thunk.dispatch).toHaveBeenCalledWith(loadUserData({ userId: userData.user.userId }))
+        const result = await thunk.callThunk()
 
-        // первый вызов dispatch при вызове signInByEmail, второй вызов внутри asyncthunk с экшеном loadUserData, третий при успешном выполнении signInByEmail(то есть при статусе fulfilled)
+        expect(mockedAxios.get).toHaveBeenCalled()
         expect(thunk.dispatch).toHaveBeenCalledTimes(3)
         expect(result.meta.requestStatus).toBe('fulfilled')
-        expect(result.payload).toEqual(userData)
     })
 
-    test('error login', async () => {
-        const thunk = new TestAsyncThunk(signInByEmail)
-        thunk.api.post = jest.fn().mockReturnValue(Promise.resolve({}))
+    test('error check auth', async () => {
+        const thunk = new TestAsyncThunk(checkAuth)
+        thunk.api.get = jest.fn().mockReturnValue(Promise.resolve({}))
 
-        const result = await thunk.callThunk({ email: 't1@t.ru', password: '12345678' })
+        const result = await thunk.callThunk()
 
-        expect(mockedAxios.post).toHaveBeenCalled()
-        // первый вызов для signInByEmail, второй при неуспешном выполнении
+        expect(mockedAxios.get).toHaveBeenCalled()
         expect(thunk.dispatch).toHaveBeenCalledTimes(2)
         expect(result.meta.requestStatus).toBe('rejected')
         expect(result.payload).toBe('error')

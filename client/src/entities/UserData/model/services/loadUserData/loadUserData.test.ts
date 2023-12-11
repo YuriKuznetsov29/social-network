@@ -50,14 +50,14 @@ describe('loadUserData.test', () => {
         expect(result.payload).toEqual(userData)
     })
 
-    // test('load data error', async () => {
-    //     const thunk = new TestAsyncThunk(loadUserData)
-    //     thunk.api.get = jest.fn().mockReturnValue(Promise.resolve({ status: 403 }))
+    test('load data error', async () => {
+        const thunk = new TestAsyncThunk(loadUserData)
+        thunk.api.get = jest.fn().mockReturnValue(Promise.reject({ status: 403 }))
 
-    //     const result = await thunk.callThunk({ userId: '65232001e84843c3b5a6404e' })
+        const result = await thunk.callThunk({ userId: '65232001e84843c3b5a6404e' })
 
-    //     expect(mockedAxios.get).toHaveBeenCalled()
-    //     expect(result.meta.requestStatus).toBe('rejected')
-    //     expect(result.payload).toBe('error')
-    // })
+        expect(mockedAxios.get).toHaveBeenCalled()
+        expect(result.meta.requestStatus).toBe('rejected')
+        expect(result.payload).toBe('error')
+    })
 })

@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { signInByEmail } from '../services/signInByEmail/singInByEmail'
 import { AuthSchema } from '../types/authSchema'
-import { signUpByEmail } from '../services/signUpByEmail'
-import { checkAuth } from '../services/checkAuth'
-import { signOut } from '../services/signOut'
+import { signUpByEmail } from '../services/signUpByEmail/signUpByEmail'
+import { checkAuth } from '../services/checkAuth/checkAuth'
+import { signOut } from '../services/signOut/signOut'
 
 export interface signInState {
     value: number

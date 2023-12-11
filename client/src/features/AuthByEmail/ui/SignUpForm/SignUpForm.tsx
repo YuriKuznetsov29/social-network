@@ -1,7 +1,7 @@
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import classNames from 'classnames'
 import { Button } from 'shared/ui/Button/Button'
-import { signUpByEmail } from 'features/AuthByEmail/model/services/signUpByEmail'
+import { signUpByEmail } from 'features/AuthByEmail/model/services/signUpByEmail/signUpByEmail'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'

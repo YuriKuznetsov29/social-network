@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AuthResponse } from '../types/response/AuthResponse'
-import $api, { API_URL } from '../../../../shared/api/http/index'
-import { RequestAuthData } from './signUpByEmail'
+import { AuthResponse } from '../../types/response/AuthResponse'
+import $api, { API_URL } from '../../../../../shared/api/http/index'
+import { RequestAuthData } from '../signUpByEmail/signUpByEmail'
 import { notificationsActions } from 'features/Notifications'
 import { TFunction } from 'i18next'
+import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
 
 export interface RequestChangeData {
     firstName: string
@@ -19,22 +20,25 @@ export interface RequestChangeData {
 export const changeUserData = createAsyncThunk<
     AuthResponse,
     RequestChangeData,
-    { rejectValue: string }
+    ThunkConfig<string>
 >(
     'user/changeUserData',
     async (
         { firstName, lastName, email, gender, birthDay, userId, city, t },
-        { rejectWithValue, dispatch }
+        { rejectWithValue, dispatch, extra }
     ) => {
         try {
-            const response = await $api.patch<AuthResponse>(`${API_URL}/user/${userId}/update`, {
-                firstName,
-                lastName,
-                email,
-                gender,
-                birthDay,
-                city,
-            })
+            const response = await extra.api.patch<AuthResponse>(
+                `${API_URL}/user/${userId}/update`,
+                {
+                    firstName,
+                    lastName,
+                    email,
+                    gender,
+                    birthDay,
+                    city,
+                }
+            )
 
             if (t) {
                 dispatch(notificationsActions.setNotification(t(`Вы успешно обновили данные`)))
