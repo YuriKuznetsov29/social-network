@@ -41,7 +41,7 @@ router.post("/getDialogs", auth, async (req, res) => {
         }
 
         const dialogs = await Promise.all(
-            conversations.map(async ({ roomId, friendId }) => {
+            conversations.map(async ({ roomId, friendId, _id }) => {
                 const message = await Message.aggregate([
                     { $match: { roomId } },
                     { $sort: { createdAt: -1 } },
@@ -58,6 +58,7 @@ router.post("/getDialogs", auth, async (req, res) => {
                 ])
 
                 return {
+                    id: roomId,
                     message: message[0],
                     companion: await User.findOne({ _id: friendId }),
                     conversation: { roomId, friendId },

@@ -2,19 +2,15 @@ import classNames from 'classnames'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
 import { useEffect } from 'react'
-import { getConversationUsers } from '../model/services/getConversationUsers'
 import { ConversationLink } from 'entities/ConversationLink'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
 import { useTranslation } from 'react-i18next'
-import cls from './Messenger.module.scss'
 import { MessengerLoader } from 'shared/ui/MessengerLoader'
-import { Button } from 'shared/ui/Button/Button'
-import $api, { API_URL } from 'shared/api/http'
-import { getDialogs } from '../model/services/getDialogs'
-import { getDialogsData } from '../model/selectors/getDialogsData'
-import { getLoadingAuthStatus } from 'features/AuthByEmail'
 import { getLoadingDialogStatus } from '../model/services/getLoadingDialogStatus'
+import { getDialogs } from '../model/slice/MessengerSlice'
+import { fetchDialogs } from '../model/services/fetchDialogs'
+import cls from './Messenger.module.scss'
 
 interface MessengerProps {
     className?: string
@@ -22,7 +18,7 @@ interface MessengerProps {
 
 export const Messenger = ({ className }: MessengerProps) => {
     const userData = useAppSelector(getUserData)
-    const dialogs = useAppSelector(getDialogsData)
+    const dialogs = useAppSelector(getDialogs.selectAll)
     const isLoading = useAppSelector(getLoadingDialogStatus)
 
     const dispatch = useAppDispatch()
@@ -30,7 +26,7 @@ export const Messenger = ({ className }: MessengerProps) => {
 
     useEffect(() => {
         if (userData.conversations && userData.conversations.length) {
-            dispatch(getDialogs(userData.conversations))
+            dispatch(fetchDialogs(userData.conversations))
         }
     }, [userData.conversations])
 

@@ -74,6 +74,11 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
                     value={searchValue}
                     onChange={onChangeSearch}
                     autoComplete="off"
+                    name="search"
+                    readOnly
+                    onFocus={(e) => {
+                        e.target.readOnly = false
+                    }}
                 />
             </label>
 

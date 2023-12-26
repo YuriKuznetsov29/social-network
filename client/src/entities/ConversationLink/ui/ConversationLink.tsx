@@ -16,7 +16,7 @@ import cls from './ConversationLink.module.scss'
 
 interface ConversationLinkProps {
     className?: string
-    message: IMessage
+    message?: IMessage
     companion: IUser
     conversation: { roomId: string; friendId: string }
 }
@@ -115,8 +115,9 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                                 </div>
 
                                 <div className={cls.time}>
-                                    {dayjs(message.createdAt).locale(i18n.language).toNow(true) +
-                                        t(' назад')}
+                                    {message &&
+                                        dayjs(message.createdAt).locale(i18n.language).toNow(true) +
+                                            t(' назад')}
 
                                     <RemoveIcon
                                         className={cls.removeBtn}
@@ -125,18 +126,20 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                                     />
                                 </div>
                             </div>
-                            <div className={cls.messageContainer}>
-                                <Avatar
-                                    avatarPath={message.user[0].avatarPath}
-                                    className={cls.avatarMsg}
-                                />
-                                <div className={cls.lastMessageText}>
-                                    {message.textOrPathToFile &&
-                                    message.textOrPathToFile?.length > 30
-                                        ? message.textOrPathToFile.slice(0, 30) + '...'
-                                        : message.textOrPathToFile}
+                            {message && (
+                                <div className={cls.messageContainer}>
+                                    <Avatar
+                                        avatarPath={message.user[0].avatarPath}
+                                        className={cls.avatarMsg}
+                                    />
+                                    <div className={cls.lastMessageText}>
+                                        {message.textOrPathToFile &&
+                                        message.textOrPathToFile?.length > 30
+                                            ? message.textOrPathToFile.slice(0, 30) + '...'
+                                            : message.textOrPathToFile}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </>

@@ -13,15 +13,15 @@ interface ResponseData {
     dialogs: Dialog[]
 }
 
-export const getDialogs = createAsyncThunk<ResponseData, RequestAuthData, ThunkConfig<string>>(
-    'messenger/getDialogs',
+export const fetchDialogs = createAsyncThunk<Dialog[], RequestAuthData, ThunkConfig<string>>(
+    'messenger/fetchDialogs',
     async (conversations, { dispatch, extra, rejectWithValue }) => {
         try {
             const response = await extra.api.post(`/messenger/getDialogs`, {
                 conversations,
             })
 
-            return response.data
+            return response.data.dialogs
         } catch (e) {
             console.log(e)
             if (isAxiosError(e) && e.response) {

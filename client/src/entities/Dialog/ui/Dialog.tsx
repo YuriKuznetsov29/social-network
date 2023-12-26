@@ -10,6 +10,8 @@ import { getUserData } from 'entities/UserData'
 import { useTranslation } from 'react-i18next'
 import cls from './Dialog.module.scss'
 import { useMobile } from 'shared/lib/hook/useMobile'
+import { getDialogs } from 'features/Messenger/model/slice/MessengerSlice'
+import { store } from 'app/Providers/StoreProvider/config/store'
 
 interface DialogProps {
     className?: string
