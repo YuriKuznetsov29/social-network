@@ -8,8 +8,8 @@ import { useEffect } from 'react'
 import { Friends } from 'entities/Friends'
 import { UserData, getUserData } from 'entities/UserData'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { PostsList } from 'entities/PostsList'
 import { useMobile } from 'shared/lib/hook/useMobile'
+import { PostsList } from 'entities/Post'
 import cls from './ProfilePage.module.scss'
 
 interface ProfilePageProps {

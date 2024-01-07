@@ -6,12 +6,12 @@ import { IComment } from 'features/PostHandler/model/types/comment'
 import Plane from 'shared/assets/icons/paper-plane-right-bold.svg'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
-import $api, { API_URL } from '../../../shared/api/http/index'
+import $api, { API_URL } from '../../../../shared/api/http/index'
 import { IPost } from 'features/PostHandler'
 import { useTranslation } from 'react-i18next'
 import Heart from 'shared/assets/icons/iconmonstr-favorite-5.svg'
 import CommentBtn from 'shared/assets/icons/chat-bold.svg'
-import cls from './Post.module.scss'
+import cls from './PostFooter.module.scss'
 
 interface PostFooterProps {
     className?: string
