@@ -14,6 +14,11 @@ export interface MessageData {
     createdAt?: string
 }
 
+export interface MessageDataWithLimit {
+    data: MessageData[]
+    hasMore: boolean
+}
+
 export default function useChat(roomId: string) {
     const isAuth = useAppSelector(getAuthStatus)
     const userData = useAppSelector(getUserData)
@@ -21,6 +26,7 @@ export default function useChat(roomId: string) {
 
     const [users, setUsers] = useState<IUser[]>([])
     const [messages, setMessages] = useState<MessageData[]>([])
+    const [hasMore, setHasMore] = useState(false)
     const [log, setLog] = useState<string>('')
     const [lastMessage, setLastMessage] = useState<MessageData>({} as MessageData)
 
@@ -54,8 +60,9 @@ export default function useChat(roomId: string) {
 
         socket.on('user_list:update', onUsersUpdate)
 
-        const onMessageUpdate = (messages: MessageData[]) => {
+        const onMessageUpdate = (messages: MessageData[], hasMore: boolean) => {
             setMessages(messages)
+            setHasMore(hasMore)
         }
         socket.on('message_list:update', onMessageUpdate)
 
@@ -86,6 +93,10 @@ export default function useChat(roomId: string) {
         }
     }, [isAuth, userInit])
 
+    const loadMore = () => {
+        socket.emit('message:loadMore')
+    }
+
     const sendMessage = (message: MessageData) => {
         socket.emit('message:add', message)
     }
@@ -94,5 +105,5 @@ export default function useChat(roomId: string) {
         socket.emit('message:remove', messageId)
     }
 
-    return { users, messages, log, lastMessage, sendMessage, removeMessage }
+    return { users, messages, log, lastMessage, sendMessage, loadMore, hasMore, removeMessage }
 }

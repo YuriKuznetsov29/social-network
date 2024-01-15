@@ -9,6 +9,7 @@ import { MessageList } from 'entities/Message/ui/MessageList/MessageList'
 import { MessageInput } from '../MessageInput/MessageInput'
 import { DialogHeader } from '../DialogHeader/DialogHeader'
 import cls from './Dialog.module.scss'
+import { Button } from 'shared/ui/Button/Button'
 
 interface DialogProps {
     className?: string
@@ -33,13 +34,18 @@ export const Dialog = ({ className }: DialogProps) => {
         return <div>{t('Такого диалога не существует')}</div>
     }
 
-    const { messages, sendMessage, removeMessage } = useChat(roomId)
+    const { messages, sendMessage, removeMessage, loadMore, hasMore } = useChat(roomId)
 
     return (
         <div className={cls.container}>
             <ContentContainer className={cls.contentContainer}>
                 <DialogHeader roomId={roomId} />
-                <MessageList messages={messages} removeMessage={removeMessage} />
+                <MessageList
+                    messages={messages}
+                    hasMore={hasMore}
+                    removeMessage={removeMessage}
+                    loadMore={loadMore}
+                />
                 <MessageInput roomId={roomId} sendMessage={sendMessage} />
             </ContentContainer>
         </div>
