@@ -1,11 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { PostHandlerSchema } from '../types/postHandlerSchema'
 import { IPost } from '../types/post'
 import { createPost } from '../services/createPost'
-import { getUserPosts } from '../services/getUserPosts'
+import { fetchUserPosts } from '../services/fetchUserPosts'
 // import { createComment } from '../services/createComment'
 import { IComment } from '../types/comment'
 import { removePost } from '../services/removePost'
+import { boolean } from 'yup'
 // import { getCommentsForPost } from '../services/getCommentsForPosts'
 
 export interface signInState {
@@ -16,13 +17,19 @@ const initialState: PostHandlerSchema = {
     isLoading: false,
     comments: [] as IComment[],
     posts: [] as IPost[],
+    page: 1,
+    hasMore: true,
     _initialized: false,
 }
 
 export const postHandlerSlice = createSlice({
     name: 'posts',
     initialState,
-    reducers: {},
+    reducers: {
+        setPage: (state, action: PayloadAction<number>) => {
+            state.page = action.payload
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(removePost.pending, (state) => {
@@ -47,16 +54,17 @@ export const postHandlerSlice = createSlice({
                 state.isLoading = false
                 state.posts = action.payload.posts
             })
-            .addCase(getUserPosts.pending, (state) => {
+            .addCase(fetchUserPosts.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(getUserPosts.rejected, (state) => {
+            .addCase(fetchUserPosts.rejected, (state) => {
                 state.isLoading = false
             })
-            .addCase(getUserPosts.fulfilled, (state, action) => {
+            .addCase(fetchUserPosts.fulfilled, (state, action) => {
                 state.isLoading = false
                 state._initialized = true
                 state.posts = action.payload.posts
+                state.hasMore = action.payload.hasMore
             })
     },
 })

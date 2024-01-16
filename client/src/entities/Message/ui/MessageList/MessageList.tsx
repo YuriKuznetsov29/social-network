@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { MutableRefObject, useEffect, useRef } from 'react'
+import { MutableRefObject, useEffect, useLayoutEffect, useRef } from 'react'
 import { Message } from '../Message/Message'
 import { MessageData } from 'shared/lib/hook/useChat'
 import { useInfiniteScroll } from 'shared/lib/hook/useInfiniteScroll'
@@ -14,16 +14,19 @@ interface MessageListProps {
 }
 
 export const MessageList = (props: MessageListProps) => {
-    const scroll = useRef<HTMLDivElement>(null)
-
     const { className, messages, removeMessage, loadMore, hasMore } = props
 
+    const lastMessage = messages[messages.length - 1]
+
+    const firstMessage = useRef() as MutableRefObject<HTMLDivElement>
     const triggerRef = useRef() as MutableRefObject<HTMLDivElement>
     const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>
 
     const onScrollLoadMore = () => {
         if (hasMore) {
+            const scrollHeight = wrapperRef.current.scrollHeight
             loadMore()
+            wrapperRef.current.scrollTop = wrapperRef.current.scrollHeight - scrollHeight
         }
     }
 
@@ -33,19 +36,37 @@ export const MessageList = (props: MessageListProps) => {
         if (wrapperRef.current) {
             wrapperRef.current.scrollTop = wrapperRef.current.scrollHeight
         }
+    }, [lastMessage?.messageId])
+
+    useLayoutEffect(() => {
+        console.log(firstMessage.current)
+        firstMessage.current?.scrollIntoView()
     }, [messages])
 
     return (
         <div className={classNames(cls.MessageList, {}, [className])} ref={wrapperRef}>
             <div ref={triggerRef} />
             {messages.length > 0 &&
-                messages.map((message) => (
-                    <Message
-                        message={message}
-                        key={message.messageId}
-                        removeMessage={removeMessage}
-                    />
-                ))}
+                messages.map((message, i) => {
+                    if (i === messages.length - (messages.length - 20)) {
+                        return (
+                            <Message
+                                scrollRef={firstMessage}
+                                message={message}
+                                key={message.messageId}
+                                removeMessage={removeMessage}
+                            />
+                        )
+                    }
+
+                    return (
+                        <Message
+                            message={message}
+                            key={message.messageId}
+                            removeMessage={removeMessage}
+                        />
+                    )
+                })}
         </div>
     )
 }

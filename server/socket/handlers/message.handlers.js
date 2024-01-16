@@ -10,7 +10,7 @@ module.exports = function messageHandlers(io, socket) {
 
     const updateMessageList = async () => {
         let messages = await Message.find({ roomId });
-        const limit = messages.length - page * 12 > 0 ? messages.length - page * 12 : 0;
+        const limit = messages.length - page * 20 > 0 ? messages.length - page * 20 : 0;
         const pageMessages = messages.slice(limit, messages.length);
         const hasMore = pageMessages.length !== messages.length;
 

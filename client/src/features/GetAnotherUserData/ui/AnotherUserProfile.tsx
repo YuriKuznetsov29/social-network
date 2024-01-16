@@ -1,7 +1,7 @@
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { getAnotherUserState } from '../model/selectors/getAnotherUserState'
 import { useNavigate, useParams } from 'react-router-dom'
-import { IPost, getPostHandlerState, getUserPosts } from 'features/PostHandler'
+import { fetchUserPosts } from 'features/PostHandler'
 import { useEffect } from 'react'
 import { getAnotherUserData } from '../model/services/getAnotherUserData'
 import { nanoid } from 'nanoid'
@@ -55,7 +55,7 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
     useEffect(() => {
         if (anotherUserId) {
             dispatch(getAnotherUserData({ userId: anotherUserId }))
-            dispatch(getUserPosts({ author: anotherUserId }))
+            dispatch(fetchUserPosts({ author: anotherUserId }))
         }
     }, [anotherUserId])
 

@@ -121,11 +121,23 @@ router.post("/getCommentsForPost", auth, async (req, res) => {
 
 router.post("/getUserPosts", auth, async (req, res) => {
     try {
-        const posts = await Post.find({ author: req.body.author }).sort({ createdAt: -1 });
+        const author = req.body.author;
+        const limit = req.query._limit;
+        const page = req.query._page;
 
-        res.send({
-            posts,
-        });
+        const posts = await Post.find({ author }).sort({ createdAt: -1 });
+
+        if (page && limit) {
+            const end = page * limit;
+            const pageFriends = posts.slice(0, end);
+            const hasMore = posts.length !== end;
+
+            res.send({ posts: pageFriends, hasMore });
+        } else {
+            res.send({
+                posts,
+            });
+        }
     } catch (e) {
         console.log(e);
         res.status(500).json({
@@ -137,15 +149,25 @@ router.post("/getUserPosts", auth, async (req, res) => {
 router.post("/getNews", auth, async (req, res) => {
     try {
         const { usersList } = req.body;
+        const limit = req.query._limit;
+        const page = req.query._page;
 
         let posts = await Promise.all(
             usersList.map((id) => Post.find({ author: id }).sort({ createdAt: -1 }))
         );
         posts = posts.flat(1);
 
-        res.send({
-            posts,
-        });
+        if (page && limit) {
+            const end = page * limit;
+            const pageFriends = posts.slice(0, end);
+            const hasMore = posts.length !== end;
+
+            res.send({ posts: pageFriends, hasMore });
+        } else {
+            res.send({
+                posts,
+            });
+        }
     } catch (e) {
         console.log(e);
         res.status(500).json({

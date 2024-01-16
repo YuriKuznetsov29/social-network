@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { MessageData } from 'shared/lib/hook/useChat'
 import dayjs from 'dayjs'
-import { useEffect, useState } from 'react'
+import { MutableRefObject, useEffect, useState } from 'react'
 import { IUser } from 'entities/UserData/model/types/IUser'
 import { Avatar } from 'entities/Avatar'
 import { useTranslation } from 'react-i18next'
@@ -15,9 +15,10 @@ interface MessageProps {
     className?: string
     message: MessageData
     removeMessage: (messageId: string) => void
+    scrollRef?: MutableRefObject<HTMLDivElement>
 }
 
-export const Message = ({ className, message, removeMessage }: MessageProps) => {
+export const Message = ({ className, message, removeMessage, scrollRef }: MessageProps) => {
     const [author, setAuthor] = useState<IUser | null>(null)
     const { t, i18n } = useTranslation('pages')
     const userData = useAppSelector(getUserData)
@@ -31,7 +32,7 @@ export const Message = ({ className, message, removeMessage }: MessageProps) => 
     }, [])
 
     return (
-        <div className={classNames(cls.Message, {}, [className])}>
+        <div className={classNames(cls.Message, {}, [className])} ref={scrollRef}>
             <Avatar avatarPath={author?.avatarPath} size="MS" className={cls.avatar} />
             <span className={cls.messageWrapper}>
                 <div className={cls.nameWrapper}>
