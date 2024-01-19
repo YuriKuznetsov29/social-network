@@ -83,12 +83,10 @@ export default function useChat(roomId: string) {
 
     useEffect(() => {
         if (roomId === '1' && isAuth) {
-            console.log('isOnline')
             socket.emit('user:connect', roomId, userData)
         }
 
         if (roomId === '1' && !isAuth) {
-            console.log('isOffline')
             socket.emit('user:disconnect', roomId, userData)
         }
     }, [isAuth, userInit])

@@ -17,8 +17,8 @@ const initialState: PostHandlerSchema = {
     isLoading: false,
     comments: [] as IComment[],
     posts: [] as IPost[],
-    page: 1,
-    hasMore: true,
+    page: 0,
+    hasMore: false,
     _initialized: false,
 }
 

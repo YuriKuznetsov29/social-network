@@ -17,9 +17,9 @@ export const fetchUserPosts = createAsyncThunk<
     const page = getPostsPage(getState())
 
     try {
-        const response = await $api.post<PostHandlerResponse>(`${API_URL}/post/getUserPosts`, {
-            author,
+        const response = await $api.get<PostHandlerResponse>(`${API_URL}/post/getUserPosts`, {
             params: {
+                author,
                 page: page + 1,
                 limit: 3,
             },

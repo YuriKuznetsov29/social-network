@@ -30,7 +30,6 @@ export const Friends = ({ className }: FriendsProps) => {
 
     useEffect(() => {
         if (userId) {
-            console.log('get friends', userId)
             dispatch(getAllFriends(userId))
         }
     }, [userId])

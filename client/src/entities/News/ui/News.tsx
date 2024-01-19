@@ -5,7 +5,7 @@ import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { getUserData } from 'entities/UserData'
 import { getNewsList } from '../model/selectors/getNewsList'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
-import { getNews } from '../model/services/getNews'
+import { fetchNews } from '../model/services/fetchNews'
 import { getNewsLoadingStatus } from '../model/selectors/getNewsLoadingStatus'
 import { PostLoader } from 'shared/ui/PostLoader'
 import {
@@ -15,6 +15,7 @@ import {
 import { newsReducer } from '../model/slice/newsSlice'
 import { useTranslation } from 'react-i18next'
 import cls from './News.module.scss'
+import { IPost } from 'features/PostHandler'
 
 interface NewsProps {
     className?: string
@@ -31,11 +32,11 @@ export const News = ({ className }: NewsProps) => {
     const news = useAppSelector(getNewsList)
     const isLoading = useAppSelector(getNewsLoadingStatus)
 
-    useEffect(() => {
-        if (userData.friends) {
-            dispatch(getNews({ friendList: userData.friends }))
-        }
-    }, [userData.friends])
+    // useEffect(() => {
+    //     if (userData.friends) {
+    //         dispatch(fetchNews({ friendList: userData.friends }))
+    //     }
+    // }, [userData.friends])
 
     if (isLoading) {
         return <PostLoader />

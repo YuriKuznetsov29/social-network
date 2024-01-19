@@ -3,8 +3,8 @@ import { Header } from 'widgets/Header'
 import Container from 'shared/ui/Container/Container'
 import { SideBar } from 'widgets/SideBar'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
-import { CreatePost } from 'features/PostHandler'
-import { useCallback, useEffect } from 'react'
+import { CreatePost, getPostHasMore } from 'features/PostHandler'
+import { MutableRefObject, useCallback, useEffect, useRef } from 'react'
 import { Friends } from 'entities/Friends'
 import { UserData, getUserData } from 'entities/UserData'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
@@ -13,6 +13,7 @@ import { PostsList } from 'entities/Post'
 import cls from './ProfilePage.module.scss'
 import { Page } from 'shared/ui/Page/Page'
 import { fetchUserPosts } from 'features/PostHandler/model/services/fetchUserPosts'
+import { useInfiniteScroll } from 'shared/lib/hook/useInfiniteScroll'
 
 interface ProfilePageProps {
     className?: string
@@ -21,7 +22,18 @@ interface ProfilePageProps {
 const ProfilePage = ({ className }: ProfilePageProps) => {
     const dispatch = useAppDispatch()
     const { userId } = useAppSelector(getUserData)
+    const hasMore = useAppSelector(getPostHasMore)
     const isMobile = useMobile()
+
+    const triggerRef = useRef() as MutableRefObject<HTMLDivElement>
+
+    const onLoadNextPart = () => {
+        console.log('load')
+        if (hasMore) {
+            dispatch(fetchUserPosts({ author: userId }))
+        }
+    }
+    useInfiniteScroll({ triggerRef, wrapperRef: null, callback: onLoadNextPart })
 
     useEffect(() => {
         if (userId) {
@@ -29,23 +41,20 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
         }
     }, [userId])
 
-    const onLoadNextPart = useCallback(() => {
-        dispatch(fetchUserPosts({ author: userId }))
-    }, [dispatch])
-
     return (
-        <Page onScrollEnd={onLoadNextPart}>
+        <div>
             <Header />
             <Container className={isMobile ? cls.container : ''}>
                 <SideBar />
-                <div className={classNames(cls.contentWrapper, {}, [className])}>
+                <section className={classNames(cls.contentWrapper, {}, [className])}>
                     <UserData />
                     <Friends />
                     <CreatePost />
                     <PostsList />
-                </div>
+                    <div ref={triggerRef}></div>
+                </section>
             </Container>
-        </Page>
+        </div>
     )
 }
 

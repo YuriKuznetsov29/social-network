@@ -1,18 +1,18 @@
 import classNames from 'classnames'
 import cls from './Container.module.scss'
-import { ReactNode } from 'react'
+import { MutableRefObject, ReactNode } from 'react'
 import { useMobile } from 'shared/lib/hook/useMobile'
 
 interface ContainerProps {
     className?: string
     children: ReactNode
     headerStyle?: boolean
+    wrapperRef?: MutableRefObject<HTMLDivElement>
 }
 
 const Container = (props: ContainerProps) => {
-    const { className, children, headerStyle } = props
+    const { className, children, headerStyle, wrapperRef } = props
     const isMobile = useMobile()
-    console.log(isMobile, 'mobile')
 
     return (
         <div
@@ -21,6 +21,7 @@ const Container = (props: ContainerProps) => {
                 { [cls.header]: headerStyle, [cls.mobile]: isMobile && !headerStyle },
                 [className]
             )}
+            ref={wrapperRef}
         >
             {children}
         </div>

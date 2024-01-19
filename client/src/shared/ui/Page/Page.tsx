@@ -16,9 +16,9 @@ export const Page = ({ className, children, onScrollEnd }: PageProps) => {
     useInfiniteScroll({ triggerRef, wrapperRef, callback: onScrollEnd })
 
     return (
-        <section ref={wrapperRef} className={classNames(cls.Page, {}, [className])}>
+        <span ref={wrapperRef} className={classNames(cls.Page, {}, [className])}>
             {children}
-            <div ref={triggerRef} />
-        </section>
+            <div className={cls.trigger} ref={triggerRef} />
+        </span>
     )
 }
