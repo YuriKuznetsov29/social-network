@@ -6,4 +6,5 @@ export interface NewsSchema {
     error?: string
     hasMore: boolean
     page: number
+    _initialized: boolean
 }

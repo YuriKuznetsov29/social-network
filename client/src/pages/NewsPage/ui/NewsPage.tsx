@@ -28,7 +28,6 @@ const NewsPage = ({ className }: NewsPageProps) => {
     const triggerRef = useRef() as MutableRefObject<HTMLDivElement>
 
     const onLoadNextPart = () => {
-        console.log('load')
         if (hasMore && userData.friends) {
             dispatch(fetchNews({ friendList: userData.friends }))
         }

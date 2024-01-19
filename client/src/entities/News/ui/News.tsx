@@ -15,7 +15,7 @@ import {
 import { newsReducer } from '../model/slice/newsSlice'
 import { useTranslation } from 'react-i18next'
 import cls from './News.module.scss'
-import { IPost } from 'features/PostHandler'
+import { getNewsInitialized } from '../model/selectors/getNewsInitialized'
 
 interface NewsProps {
     className?: string
@@ -26,19 +26,12 @@ const initialReducers: ReducersList = {
 }
 
 export const News = ({ className }: NewsProps) => {
-    const dispatch = useAppDispatch()
     const { t } = useTranslation()
-    const userData = useAppSelector(getUserData)
     const news = useAppSelector(getNewsList)
     const isLoading = useAppSelector(getNewsLoadingStatus)
+    const initialized = useAppSelector(getNewsInitialized)
 
-    // useEffect(() => {
-    //     if (userData.friends) {
-    //         dispatch(fetchNews({ friendList: userData.friends }))
-    //     }
-    // }, [userData.friends])
-
-    if (isLoading) {
+    if (isLoading && !initialized) {
         return <PostLoader />
     }
 

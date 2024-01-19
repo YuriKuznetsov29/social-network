@@ -8,6 +8,7 @@ const initialState: NewsSchema = {
     isLoading: false,
     hasMore: false,
     page: 0,
+    _initialized: false,
 }
 
 export const newsSlice = createSlice({
@@ -32,6 +33,7 @@ export const newsSlice = createSlice({
                 state.isLoading = false
                 state.news = action.payload.news
                 state.hasMore = action.payload.hasMore
+                state._initialized = true
             })
     },
 })

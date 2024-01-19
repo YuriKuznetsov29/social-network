@@ -4,16 +4,15 @@ import Container from 'shared/ui/Container/Container'
 import { SideBar } from 'widgets/SideBar'
 import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
 import { CreatePost, getPostHasMore } from 'features/PostHandler'
-import { MutableRefObject, useCallback, useEffect, useRef } from 'react'
+import { MutableRefObject, useEffect, useRef } from 'react'
 import { Friends } from 'entities/Friends'
 import { UserData, getUserData } from 'entities/UserData'
 import { useAppSelector } from 'shared/lib/hook/useAppSelector'
 import { useMobile } from 'shared/lib/hook/useMobile'
 import { PostsList } from 'entities/Post'
-import cls from './ProfilePage.module.scss'
-import { Page } from 'shared/ui/Page/Page'
 import { fetchUserPosts } from 'features/PostHandler/model/services/fetchUserPosts'
 import { useInfiniteScroll } from 'shared/lib/hook/useInfiniteScroll'
+import cls from './ProfilePage.module.scss'
 
 interface ProfilePageProps {
     className?: string
@@ -28,7 +27,6 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     const triggerRef = useRef() as MutableRefObject<HTMLDivElement>
 
     const onLoadNextPart = () => {
-        console.log('load')
         if (hasMore) {
             dispatch(fetchUserPosts({ author: userId }))
         }
