@@ -39,7 +39,6 @@ export const MessageList = (props: MessageListProps) => {
     }, [lastMessage?.messageId])
 
     useLayoutEffect(() => {
-        console.log(firstMessage.current)
         firstMessage.current?.scrollIntoView()
     }, [messages])
 
