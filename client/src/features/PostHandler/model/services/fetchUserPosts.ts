@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import $api, { API_URL } from '../../../../shared/api/http/index'
 import { PostHandlerResponse } from '../types/postHandlerResponse'
 import { getPostsPage } from '../selectors/getPostsPage'
-import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
 import { postHandlerActions } from '../slice/postHandlerSlice'
 
 interface RequestData {

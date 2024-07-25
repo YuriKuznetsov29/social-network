@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { isAxiosError } from 'axios'
-import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
-import { IPost } from 'features/PostHandler'
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { IPost } from '@/features/PostHandler'
 import { getNewsPage } from '../selectors/getNewsPage'
 import { newsActions } from '../slice/newsSlice'
 

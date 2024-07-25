@@ -2,9 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AuthResponse } from '../../types/response/AuthResponse'
 import $api, { API_URL } from '../../../../../shared/api/http/index'
 import { RequestAuthData } from '../signUpByEmail/signUpByEmail'
-import { notificationsActions } from 'features/Notifications'
+import { notificationsActions } from '@/features/Notifications'
 import { TFunction } from 'i18next'
-import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
 
 export interface RequestChangeData {
     firstName: string

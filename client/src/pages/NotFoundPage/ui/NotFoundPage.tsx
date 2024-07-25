@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import cls from './NotFoundPage.module.scss'
-import { Input } from 'shared/ui/Input/Input'
+import { Input } from '@/shared/ui/Input/Input'
 
 interface NotFoundPageProps {
     className?: string

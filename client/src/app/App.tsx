@@ -1,11 +1,11 @@
 import { AppRouter } from './router'
 import { useTheme } from './Providers/ThemeProvider'
-import { checkAuth } from 'features/AuthByEmail'
+import { checkAuth } from '@/features/AuthByEmail'
 import { Suspense, useEffect } from 'react'
 import { useAppDispatch } from '../shared/lib/hook/useAppDispatch'
 import useChat from '../shared/lib/hook/useChat'
 import './styles/index.scss'
-import { authActions } from 'features/AuthByEmail/model/slice/authSlice'
+import { authActions } from '@/features/AuthByEmail/model/slice/authSlice'
 
 const App = () => {
     const { initTheme } = useTheme()

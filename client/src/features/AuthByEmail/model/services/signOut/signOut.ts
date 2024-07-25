@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { IUser, userDataActions } from 'entities/UserData'
-import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
+import { IUser, userDataActions } from '@/entities/UserData'
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
 
 interface RequestData {
     navigate?: (path: string) => void

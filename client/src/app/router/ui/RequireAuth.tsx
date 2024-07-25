@@ -1,9 +1,9 @@
 import { Navigate, useLocation } from 'react-router-dom'
-import { RoutePath } from 'shared/config/routeConfig'
-import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { getAuthStatus, getInitAuthStatus, getLoadingAuthStatus } from 'features/AuthByEmail'
-import { Loader } from 'shared/ui/Loader'
-import { getUserInitied } from 'entities/UserData'
+import { RoutePath } from '@/shared/config/routeConfig'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { getAuthStatus, getInitAuthStatus, getLoadingAuthStatus } from '@/features/AuthByEmail'
+import { Loader } from '@/shared/ui/Loader'
+import { getUserInitied } from '@/entities/UserData'
 
 export function RequireAuth({ children }: { children: JSX.Element }) {
     const auth = useAppSelector(getAuthStatus)

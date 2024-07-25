@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AuthResponse } from 'features/AuthByEmail/model/types/response/AuthResponse'
+import { AuthResponse } from '@/features/AuthByEmail/model/types/response/AuthResponse'
 import $api, { API_URL } from '../../../../shared/api/http'
 
 export interface RequestChangeData {

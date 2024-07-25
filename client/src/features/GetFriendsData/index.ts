@@ -1,6 +1,6 @@
 export { friendsReducer } from './model/slice/friendsSlice'
 export { getAllFriends } from './model/services/getAllFriends'
-export { FriendsSchema } from './model/types/friendSchema'
+export type { FriendsSchema } from './model/types/friendSchema'
 export { getFriendsState } from './model/selectors/getFriendsState'
 export { addFriend } from './model/services/addFriend'
 export { removeFriend } from './model/services/removeFriend'

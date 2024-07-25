@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import { MutableRefObject, useEffect, useLayoutEffect, useRef } from 'react'
 import { Message } from '../Message/Message'
-import { MessageData } from 'shared/lib/hook/useChat'
-import { useInfiniteScroll } from 'shared/lib/hook/useInfiniteScroll'
+import { MessageData } from '@/shared/lib/hook/useChat'
+import { useInfiniteScroll } from '@/shared/lib/hook/useInfiniteScroll'
 import cls from './MessageList.module.scss'
 
 interface MessageListProps {

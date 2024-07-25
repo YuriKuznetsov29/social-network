@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import $api, { API_URL } from '../../../../shared/api/http/index'
-import { IUser } from 'entities/UserData/model/types/IUser'
-import { MessageData } from 'shared/lib/hook/useChat'
+import { IUser } from '@/entities/UserData/model/types/IUser'
+import { MessageData } from '@/shared/lib/hook/useChat'
 
 export interface RequestData {
     roomId: string

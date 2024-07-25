@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { FriendsSchema } from '../types/friendSchema'
-import { IUser } from 'entities/UserData/model/types/IUser'
+import { IUser } from '@/entities/UserData/model/types/IUser'
 import { getAllFriends } from '../services/getAllFriends'
 
 export interface signInState {

@@ -1,4 +1,4 @@
-import { IUser } from 'entities/UserData/model/types/IUser'
+import { IUser } from '@/entities/UserData/model/types/IUser'
 import { SearchUsersSchema } from '../type/searchUsersSchema'
 import { createSlice } from '@reduxjs/toolkit'
 import { findUsers } from '../services/findUsers'

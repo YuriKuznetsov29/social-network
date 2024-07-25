@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import cls from './Container.module.scss'
 import { MutableRefObject, ReactNode } from 'react'
-import { useMobile } from 'shared/lib/hook/useMobile'
+import { useMobile } from '@/shared/lib/hook/useMobile'
 
 interface ContainerProps {
     className?: string

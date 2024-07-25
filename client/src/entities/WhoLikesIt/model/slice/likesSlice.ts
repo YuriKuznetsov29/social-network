@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { LikesSchema } from '../types/likesSchema'
-import { IUser } from 'entities/UserData'
+import { IUser } from '@/entities/UserData'
 import { getWhoLikesUsers } from '../services/getWhoLikesUsers'
 
 const initialState: LikesSchema = {

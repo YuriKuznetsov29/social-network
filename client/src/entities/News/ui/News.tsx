@@ -1,17 +1,17 @@
 import classNames from 'classnames'
 import { useEffect } from 'react'
-import { Post } from 'entities/Post'
-import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { getUserData } from 'entities/UserData'
+import { Post } from '@/entities/Post'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { getUserData } from '@/entities/UserData'
 import { getNewsList } from '../model/selectors/getNewsList'
-import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import { fetchNews } from '../model/services/fetchNews'
 import { getNewsLoadingStatus } from '../model/selectors/getNewsLoadingStatus'
-import { PostLoader } from 'shared/ui/PostLoader'
+import { PostLoader } from '@/shared/ui/PostLoader'
 import {
     DynamicModuleLoader,
     ReducersList,
-} from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
+} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
 import { newsReducer } from '../model/slice/newsSlice'
 import { useTranslation } from 'react-i18next'
 import cls from './News.module.scss'

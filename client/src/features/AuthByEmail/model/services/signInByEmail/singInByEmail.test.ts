@@ -1,7 +1,7 @@
-import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
+import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
 import { signInByEmail } from './singInByEmail'
 import axios from 'axios'
-import { loadUserData } from 'entities/UserData'
+import { loadUserData } from '@/entities/UserData'
 
 const userData = {
     accessToken:

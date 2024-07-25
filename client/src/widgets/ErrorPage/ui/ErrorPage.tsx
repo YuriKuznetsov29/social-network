@@ -1,4 +1,4 @@
-import { Button } from 'shared/ui/Button/Button'
+import { Button } from '@/shared/ui/Button/Button'
 import cls from './ErrorPage.module.scss'
 import classNames from 'classnames'
 

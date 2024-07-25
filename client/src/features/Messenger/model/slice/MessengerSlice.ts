@@ -8,7 +8,7 @@ import {
 import { MessengerSchema } from '../types/messengerSchema'
 import { fetchDialogs } from '../services/fetchDialogs'
 import { Dialog } from '../types/dialog'
-import { StateSchema } from 'app/Providers/StoreProvider'
+import { StateSchema } from '@/app/Providers/StoreProvider'
 
 const messengerAdapter = createEntityAdapter<Dialog>({
     selectId: (dialog) => dialog.id,

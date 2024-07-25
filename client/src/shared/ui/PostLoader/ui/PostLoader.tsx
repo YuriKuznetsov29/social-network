@@ -1,5 +1,5 @@
 import cls from './PostLoader.module.scss'
-import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 
 export const PostLoader = () => {
     return (

@@ -1,13 +1,13 @@
 import classNames from 'classnames'
-import Container from 'shared/ui/Container/Container'
-import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
+import Container from '@/shared/ui/Container/Container'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import { useNavigate } from 'react-router-dom'
-import { signOut } from 'features/AuthByEmail'
-import { FoundUsersList } from 'features/FindUsers'
-import { Notification } from 'features/Notifications'
-import { SettingBtn } from 'entities/SettingBtn'
+import { signOut } from '@/features/AuthByEmail'
+import { FoundUsersList } from '@/features/FindUsers'
+import { Notification } from '@/features/Notifications'
+import { SettingBtn } from '@/entities/SettingBtn'
 import cls from './Header.module.scss'
-import { useMobile } from 'shared/lib/hook/useMobile'
+import { useMobile } from '@/shared/lib/hook/useMobile'
 
 interface HeaderProps {
     className?: string

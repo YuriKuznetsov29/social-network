@@ -1,4 +1,4 @@
-import { IUser } from 'entities/UserData/model/types/IUser'
+import { IUser } from '@/entities/UserData/model/types/IUser'
 import $api, { API_URL } from './http/index'
 
 interface ResponseUserData {

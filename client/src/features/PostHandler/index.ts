@@ -1,5 +1,5 @@
 export { postHandlerReducer } from './model/slice/postHandlerSlice'
-export { IPost } from './model/types/post'
+export type { IPost } from './model/types/post'
 export { getPostHandlerState } from './model/selectors/getPostHandlerState'
 export { createPost } from './model/services/createPost'
 export { fetchUserPosts } from './model/services/fetchUserPosts'

@@ -1,4 +1,4 @@
-import { IUser } from 'entities/UserData'
+import { IUser } from '@/entities/UserData'
 
 export interface IMessage {
     messageId: string

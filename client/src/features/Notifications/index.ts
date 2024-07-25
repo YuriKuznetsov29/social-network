@@ -1,5 +1,5 @@
 export { notificationsReducer } from './model/slice/notificationsSlice'
 export { notificationsActions } from './model/slice/notificationsSlice'
-export { NotificationsSchema } from './model/types/notiticationsSchema'
+export type { NotificationsSchema } from './model/types/notiticationsSchema'
 export { getNotification } from './model/selectors/getNotification'
 export { Notification } from './ui/Notification'

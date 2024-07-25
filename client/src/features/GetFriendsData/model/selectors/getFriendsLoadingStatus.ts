@@ -1,3 +1,3 @@
-import { StateSchema } from 'app/Providers/StoreProvider'
+import { StateSchema } from '@/app/Providers/StoreProvider'
 
 export const getFriendsLoadingStatus = (state: StateSchema) => state.friends?.isLoading

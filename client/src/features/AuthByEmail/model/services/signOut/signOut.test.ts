@@ -1,6 +1,6 @@
-import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
+import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
 import axios from 'axios'
-import { loadUserData } from 'entities/UserData'
+import { loadUserData } from '@/entities/UserData'
 import { signOut } from './signOut'
 
 const mockedAxios = jest.mocked(axios)

@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
-import { componentRender } from 'shared/lib/tests/componentRender/componentRender'
-import { AppRouter } from 'app/router'
+import { componentRender } from '@/shared/lib/tests/componentRender/componentRender'
+import { AppRouter } from '@/app/router'
 
 describe('navigation test', () => {
     test('test without authorization', async () => {

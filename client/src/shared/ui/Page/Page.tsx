@@ -1,5 +1,5 @@
 import { MutableRefObject, ReactNode, useRef } from 'react'
-import { useInfiniteScroll } from 'shared/lib/hook/useInfiniteScroll'
+import { useInfiniteScroll } from '@/shared/lib/hook/useInfiniteScroll'
 import classNames from 'classnames'
 import cls from './Page.module.scss'
 

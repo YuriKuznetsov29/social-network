@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import cls from './CreatePostLoader.module.scss'
-import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 
 interface CreatePostLoaderProps {
     className?: string

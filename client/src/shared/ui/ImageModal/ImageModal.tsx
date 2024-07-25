@@ -2,7 +2,7 @@ import { ReactNode, useCallback, useState } from 'react'
 import { Modal } from '../Modal/Modal'
 import classNames from 'classnames'
 import cls from './ImageModal.module.scss'
-import { SERVER_URL } from 'shared/api/http'
+import { SERVER_URL } from '@/shared/api/http'
 
 interface ImageProps {
     className?: string

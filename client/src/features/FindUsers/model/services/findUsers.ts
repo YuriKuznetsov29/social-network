@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import $api, { API_URL } from '../../../../shared/api/http/index'
-import { AuthResponse } from 'features/AuthByEmail/model/types/response/AuthResponse'
-import { IUser } from 'entities/UserData/model/types/IUser'
+import { AuthResponse } from '@/features/AuthByEmail/model/types/response/AuthResponse'
+import { IUser } from '@/entities/UserData/model/types/IUser'
 
 export interface RequestData {
     firstName: string

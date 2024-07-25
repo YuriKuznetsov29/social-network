@@ -1,4 +1,4 @@
-import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import cls from './MessengerLoader.module.scss'
 
 export const MessengerLoader = () => {

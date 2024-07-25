@@ -1,7 +1,7 @@
 import React, { MutableRefObject, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import { Portal } from '../Portal/Portal'
 import classNames from 'classnames'
-import CloseIcon from 'shared/assets/icons/close.svg'
+import CloseIcon from '@/shared/assets/icons/close.svg'
 import cls from './Modal.module.scss'
 
 interface ModalProps {

@@ -1,9 +1,9 @@
-import { Header } from 'widgets/Header'
-import Container from 'shared/ui/Container/Container'
-import { Dialog } from 'entities/Dialog'
-import { useMobile } from 'shared/lib/hook/useMobile'
+import { Header } from '@/widgets/Header'
+import Container from '@/shared/ui/Container/Container'
+import { Dialog } from '@/entities/Dialog'
+import { useMobile } from '@/shared/lib/hook/useMobile'
 import cls from './ConversationPage.module.scss'
-import { SideBar } from 'widgets/SideBar'
+import { SideBar } from '@/widgets/SideBar'
 
 interface ConversationPageProps {
     className?: string

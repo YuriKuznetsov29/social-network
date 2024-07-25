@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { io } from 'socket.io-client'
 import { SERVER_URL } from '../../api/http/index'
-import { IUser } from 'entities/UserData/model/types/IUser'
-import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { getUserData, getUserInitied } from 'entities/UserData'
-import { getAuthStatus } from 'features/AuthByEmail'
+import { IUser } from '@/entities/UserData/model/types/IUser'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { getUserData, getUserInitied } from '@/entities/UserData'
+import { getAuthStatus } from '@/features/AuthByEmail'
 
 export interface MessageData {
     messageId: string

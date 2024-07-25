@@ -1,6 +1,6 @@
-import { useMobile } from 'shared/lib/hook/useMobile'
+import { useMobile } from '@/shared/lib/hook/useMobile'
 import cls from './FriendsLoader.module.scss'
-import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 
 export const FriendsLoader = () => {
     const isMobile = useMobile()

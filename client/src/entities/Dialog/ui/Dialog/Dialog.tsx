@@ -1,15 +1,15 @@
-import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
-import useChat from 'shared/lib/hook/useChat'
-import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { getUserData } from 'entities/UserData'
+import useChat from '@/shared/lib/hook/useChat'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { getUserData } from '@/entities/UserData'
 import { useTranslation } from 'react-i18next'
-import { MessageList } from 'entities/Message/ui/MessageList/MessageList'
+import { MessageList } from '@/entities/Message/ui/MessageList/MessageList'
 import { MessageInput } from '../MessageInput/MessageInput'
 import { DialogHeader } from '../DialogHeader/DialogHeader'
 import cls from './Dialog.module.scss'
-import { Button } from 'shared/ui/Button/Button'
+import { Button } from '@/shared/ui/Button/Button'
 
 interface DialogProps {
     className?: string
