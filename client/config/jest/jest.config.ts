@@ -39,6 +39,7 @@ export default {
         '\\.s?css$': 'identity-obj-proxy',
         '\\.svg': path.resolve(__dirname, 'jestEmptyComponent.tsx'),
         '^nanoid(/(.*)|$)': 'nanoid$1',
+        '^@/(.*)$': '<rootDir>/src/$1',
     },
     // transform: {
     //     '^.+\\.[jt]sx?$': 'babel-jest',
