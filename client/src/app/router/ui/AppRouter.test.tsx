@@ -17,7 +17,7 @@ describe('navigation test', () => {
     })
 
     test('test render not found page', async () => {
-        componentRender(<AppRouter />, {
+        const res = componentRender(<AppRouter />, {
             route: '/gergreeern',
             initialState: {
                 authForm: {
@@ -25,6 +25,8 @@ describe('navigation test', () => {
                 },
             },
         })
+
+        console.log(res)
         const notFoundPage = await screen.findByTestId('not-found')
         expect(notFoundPage).toBeInTheDocument()
     })
