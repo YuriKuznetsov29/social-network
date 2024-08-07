@@ -105,7 +105,7 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
                         )
                     })
                 ) : (
-                    <div>{t('Пользователей не найдено')}</div>
+                    <div data-testid="not-found-users">{t('Пользователей не найдено')}</div>
                 )}
             </ContentContainer>
         </>
