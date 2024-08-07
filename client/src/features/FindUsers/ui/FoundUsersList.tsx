@@ -79,6 +79,7 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
                     onFocus={(e) => {
                         e.target.readOnly = false
                     }}
+                    data-testid="search-input"
                 />
             </label>
 

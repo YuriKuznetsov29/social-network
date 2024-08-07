@@ -89,8 +89,14 @@ export const ChangeProfile = () => {
                             id="firstName"
                             name="firstName"
                             placeholder={t('введите имя')}
+                            data-testid="firstName"
                         />
-                        <ErrorMessage className={cls.error} component="div" name="firstName" />
+                        <ErrorMessage
+                            className={cls.error}
+                            component="div"
+                            name="firstName"
+                            data-testid="firstName-error"
+                        />
                     </div>
 
                     <label htmlFor="lastName">{t('Фамилия')}</label>
@@ -100,8 +106,15 @@ export const ChangeProfile = () => {
                             id="lastName"
                             name="lastName"
                             placeholder={t('введите фамилию')}
+                            data-testid="lastName"
                         />
-                        <ErrorMessage className={cls.error} component="div" name="lastName" />
+
+                        <ErrorMessage
+                            data-testid="lastName-error"
+                            className={cls.error}
+                            component="div"
+                            name="lastName"
+                        />
                     </div>
 
                     <label htmlFor="email">Email</label>
@@ -112,11 +125,17 @@ export const ChangeProfile = () => {
                             name="email"
                             placeholder={t('введите email')}
                             type="email"
+                            data-testid="email"
                         />
-                        <ErrorMessage className={cls.error} component="div" name="email" />
+                        <ErrorMessage
+                            data-testid="email-error"
+                            className={cls.error}
+                            component="div"
+                            name="email"
+                        />
                     </div>
 
-                    <label htmlFor="confirmPassword">{t('Введите ваш город')}</label>
+                    <label htmlFor="city">{t('Введите ваш город')}</label>
                     <div className={cls.fieldContainer}>
                         <Field
                             className={cls.input}
@@ -124,11 +143,17 @@ export const ChangeProfile = () => {
                             name="city"
                             placeholder={t('ваш город')}
                             type="text"
+                            data-testid="city"
                         />
-                        <ErrorMessage className={cls.error} component="div" name="city" />
+                        <ErrorMessage
+                            data-testid="city-error"
+                            className={cls.error}
+                            component="div"
+                            name="city"
+                        />
                     </div>
 
-                    <label htmlFor="confirmPassword">{t('Введите дату рождения')}</label>
+                    <label htmlFor="birthDay">{t('Введите дату рождения')}</label>
                     <div className={cls.fieldContainer}>
                         <Field
                             className={cls.input}
@@ -136,20 +161,36 @@ export const ChangeProfile = () => {
                             name="birthDay"
                             placeholder="dd.mm.yyyy"
                             type="date"
+                            data-testid="date"
                         />
-                        <ErrorMessage className={cls.error} component="div" name="birthDay" />
+                        <ErrorMessage
+                            data-testid="date-error"
+                            className={cls.error}
+                            component="div"
+                            name="birthDay"
+                        />
                     </div>
 
                     <label htmlFor="gender">{t('Пол')}</label>
                     <div className={cls.fieldContainer}>
-                        <Field className={cls.select} id="gender" name="gender" as="select">
+                        <Field
+                            data-testid="gender"
+                            className={cls.select}
+                            id="gender"
+                            name="gender"
+                            as="select"
+                        >
                             <option disabled value="">
                                 {t('Выберете ваш пол')}
                             </option>
                             <option value="male">{t('мужчина')}</option>
                             <option value="female">{t('женщина')}</option>
                         </Field>
-                        <ErrorMessage className={cls.error} name="gender" />
+                        <ErrorMessage
+                            data-testid="gender-error"
+                            className={cls.error}
+                            name="gender"
+                        />
                     </div>
 
                     <div className={cls.avatarBlock}>
@@ -170,7 +211,7 @@ export const ChangeProfile = () => {
                         </Button>
                     </div>
 
-                    <Button className={cls.saveBtn} type="submit">
+                    <Button data-testid="submit" className={cls.saveBtn} type="submit">
                         {t('Сохранить изменения')}
                     </Button>
                 </Form>

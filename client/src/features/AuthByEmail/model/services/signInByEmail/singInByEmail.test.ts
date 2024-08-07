@@ -48,7 +48,10 @@ describe('signInByEmail.test', () => {
         // console.log(result)
         expect(thunk.api.post).toHaveBeenCalled()
         // console.log(thunk.api.post.mock.calls)
-        // expect(thunk.dispatch).toHaveBeenCalledWith(loadUserData({ userId: userData.user.userId }))
+        // expect(thunk.dispatch).toHaveBeenNthCalledWith(
+        //     2,
+        //     loadUserData({ userId: userData.user.userId })
+        // )
 
         expect(thunk.api.post).toHaveReturnedWith(Promise.resolve({ data: userData }))
 
