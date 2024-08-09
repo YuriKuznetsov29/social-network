@@ -30,7 +30,13 @@ export const addFriend = createAsyncThunk<void, RequestChangeData, ThunkConfig<s
                     friendId,
                 }
             )
+
+            if (!response.data) {
+                throw new Error()
+            }
+
             dispatch(userDataActions.setUserData(response.data.user))
+
             if (t) {
                 dispatch(
                     notificationsActions.setNotification(

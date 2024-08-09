@@ -13,11 +13,16 @@ interface RequestData {
 
 export const getAllFriends = createAsyncThunk<Response, string, ThunkConfig<string>>(
     'user/getAllFriends',
-    async (userId, { rejectWithValue }) => {
+    async (userId, { rejectWithValue, extra }) => {
         try {
-            const response = await $api.get<Response>(
+            const response = await extra.api.get<Response>(
                 `${API_URL}/user/${userId}/getAllFriends?_limit=3&_page=1`
             )
+
+            if (!response.data) {
+                throw new Error()
+            }
+
             return response.data
         } catch (e) {
             console.log(e)

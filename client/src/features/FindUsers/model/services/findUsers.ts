@@ -21,6 +21,11 @@ export const findUsers = createAsyncThunk<ResponseData, RequestData, ThunkConfig
                 firstName,
                 lastName,
             })
+
+            if (!response.data) {
+                throw new Error()
+            }
+
             return response.data
         } catch (e: unknown) {
             console.log(e)

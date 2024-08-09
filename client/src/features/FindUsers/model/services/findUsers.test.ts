@@ -82,4 +82,13 @@ describe('findUsers.test', () => {
         expect(result.meta.requestStatus).toBe('fulfilled')
         expect(result.payload).toEqual([])
     })
+
+    test('error', async () => {
+        const thunk = new TestAsyncThunk(findUsers)
+        thunk.api.post.mockReturnValue(Promise.resolve({ status: 403 }))
+
+        const result = await thunk.callThunk({ firstName: '', lastName: '' })
+
+        expect(result.meta.requestStatus).toBe('rejected')
+    })
 })
