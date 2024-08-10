@@ -16,4 +16,7 @@ export default defineConfig({
         __IS_DEV__: JSON.stringify(true),
     },
     base: '/',
+    server: {
+        port: 3000,
+    },
 })

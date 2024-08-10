@@ -25,6 +25,11 @@ export const addConversation = createAsyncThunk<void, RequestChangeData, ThunkCo
                     friendId,
                 }
             )
+
+            if (!response.data) {
+                throw new Error()
+            }
+
             dispatch(userDataActions.setUserData(response.data.user))
             navigate(`/messenger/${roomId}`)
         } catch (e: unknown) {

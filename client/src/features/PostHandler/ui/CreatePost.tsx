@@ -79,6 +79,7 @@ export const CreatePost = () => {
                     role="textbox"
                     data-placeholder={t('Что у вас нового?')}
                     ref={input}
+                    data-testid="post-input"
                 ></div>
                 <div className={cls.buttonContainer}>
                     <input
@@ -92,8 +93,7 @@ export const CreatePost = () => {
                         {imagePath && <div className={cls.imageText}>Изображение прикреплено</div>}
                         <Image className={cls.image} />
                     </label>
-
-                    <Plane className={cls.plane} onClick={onClickCreatePost} />
+                    <Plane data-testid="send" className={cls.plane} onClick={onClickCreatePost} />
                 </div>
             </ContentContainer>
         </>

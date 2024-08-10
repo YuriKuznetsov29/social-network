@@ -31,6 +31,11 @@ export const removeFriend = createAsyncThunk<void, RequestChangeData, ThunkConfi
                     friendId,
                 }
             )
+
+            if (!response.data) {
+                throw new Error()
+            }
+
             dispatch(userDataActions.setUserData(response.data.user))
             dispatch(getAllFriends(userId))
             if (t) {

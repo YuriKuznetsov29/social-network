@@ -21,6 +21,10 @@ export const fetchDialogs = createAsyncThunk<Dialog[], RequestAuthData, ThunkCon
                 conversations,
             })
 
+            if (!response.data) {
+                throw new Error()
+            }
+
             return response.data.dialogs
         } catch (e) {
             console.log(e)

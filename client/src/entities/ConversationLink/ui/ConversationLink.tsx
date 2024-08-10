@@ -76,7 +76,7 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                     <div className={cls.dialogData}>
                         <div className={cls.name}>
                             <div className={cls.companionName}>
-                                <div>
+                                <div data-testid="name">
                                     {companion?.firstName} {companion?.lastName}
                                 </div>
                                 <div className={cls.time}>
@@ -110,7 +110,7 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                     <div className={cls.dialogData}>
                         <div className={cls.name}>
                             <div className={cls.companionName}>
-                                <div>
+                                <div data-testid="name">
                                     {companion?.firstName} {companion?.lastName}
                                 </div>
 

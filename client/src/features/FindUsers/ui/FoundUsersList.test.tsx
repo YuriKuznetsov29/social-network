@@ -58,7 +58,7 @@ const users = [
     },
 ]
 
-describe('FoundUsersLdist.test', () => {
+describe('FoundUsersList.test', () => {
     test('test render users', async () => {
         componentRender(<FoundUsersList />, {
             initialState: {

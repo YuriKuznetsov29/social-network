@@ -13,11 +13,16 @@ export interface Response {
 
 export const getConversationUsers = createAsyncThunk<Response, RequestData, ThunkConfig<string>>(
     'messenger/getConversationUsers',
-    async ({ userId }, { rejectWithValue }) => {
+    async ({ userId }, { rejectWithValue, extra }) => {
         try {
-            const response = await $api.get<Response>(
+            const response = await extra.api.get<Response>(
                 `${API_URL}/user/${userId}/getConversationUsers`
             )
+
+            if (!response.data) {
+                throw new Error()
+            }
+
             return response.data
         } catch (e: unknown) {
             console.log(e)

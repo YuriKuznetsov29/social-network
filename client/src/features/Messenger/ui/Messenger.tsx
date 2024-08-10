@@ -33,7 +33,7 @@ export const Messenger = ({ className }: MessengerProps) => {
     if (isLoading) return <MessengerLoader />
 
     return (
-        <div className={classNames(cls.Messenger, {}, [className])}>
+        <div data-testid="dialogs" className={classNames(cls.Messenger, {}, [className])}>
             {userData?.conversations?.length ? (
                 <ContentContainer className={cls.contentContainer}>
                     {dialogs.map(({ message, companion, conversation }) => {
