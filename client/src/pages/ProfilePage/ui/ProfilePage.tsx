@@ -40,7 +40,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     }, [userId])
 
     return (
-        <div>
+        <div data-testid="profile">
             <Header />
             <Container className={isMobile ? cls.container : ''}>
                 <SideBar />

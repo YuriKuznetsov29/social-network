@@ -64,7 +64,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
     })
 
     return (
-        <div className={classNames(cls.SignUpForm, {}, [className])}>
+        <div data-testid="signUp-form" className={classNames(cls.SignUpForm, {}, [className])}>
             <Formik
                 initialValues={{
                     firstName: '',

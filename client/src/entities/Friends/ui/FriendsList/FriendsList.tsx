@@ -90,7 +90,7 @@ export const FriendsList = ({ className }: FriendsListProps) => {
     return (
         <>
             {friends.length ? (
-                <div className={cls.listContainer}>
+                <div data-testid="friends" className={cls.listContainer}>
                     {friends.map((friend: IUser) => (
                         <ContentContainer className={cls.contentWrapper} key={friend.userId}>
                             <div className={cls.dataWrapper}>

@@ -37,7 +37,7 @@ export const News = ({ className }: NewsProps) => {
 
     return (
         // <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
-        <div className={classNames(cls.News, {}, [className])}>
+        <div data-testid="news" className={classNames(cls.News, {}, [className])}>
             {news && news.length
                 ? news.map((post) => <Post key={post._id} post={post} />)
                 : t('У вас пока нет новостей')}

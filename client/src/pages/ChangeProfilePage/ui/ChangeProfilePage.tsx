@@ -17,7 +17,10 @@ const ChangeProfilePage = ({ className }: ProfilePageProps) => {
             <Header />
             <Container className={isMobile ? cls.container : ''}>
                 <SideBar />
-                <div className={classNames(cls.contentWrapper, {}, [className])}>
+                <div
+                    data-testid="edit-profile"
+                    className={classNames(cls.contentWrapper, {}, [className])}
+                >
                     <ChangeProfile />
                 </div>
             </Container>

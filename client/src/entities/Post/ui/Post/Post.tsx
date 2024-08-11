@@ -41,7 +41,7 @@ export const Post = memo(({ post }: PostProps) => {
 
     return (
         <>
-            <ContentContainer className={cls.container}>
+            <ContentContainer data-testid="post" className={cls.container}>
                 <div className={cls.authorContainer}>
                     <Avatar
                         avatarPath={author?.avatarPath}
@@ -64,6 +64,7 @@ export const Post = memo(({ post }: PostProps) => {
                 </div>
                 <div className={cls.contentContainer}>
                     <div
+                        data-testid="post-text"
                         className={cls.text}
                         dangerouslySetInnerHTML={transformText(post.text || '')}
                     />

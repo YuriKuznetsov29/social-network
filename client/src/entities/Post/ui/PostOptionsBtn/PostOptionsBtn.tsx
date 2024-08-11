@@ -59,12 +59,13 @@ export const PostOptionsBtn = ({ className, postId, author }: PostOptionsBtnProp
             className={classNames(cls.PostOptionsBtn, {}, [className])}
             onClick={onClickToggleSetting}
             id="optionBtn"
+            data-testid="post-btn"
         >
             <OptionsIcon className={cls.options} />
 
             <div className={classNames(cls.container, { [cls.active]: show }, [])} id="container">
                 {userData?.userId === author && (
-                    <span className={cls.btn} onClick={onClickRemovePost}>
+                    <span data-testid="remove-post" className={cls.btn} onClick={onClickRemovePost}>
                         {t('Удалить пост')}
                     </span>
                 )}

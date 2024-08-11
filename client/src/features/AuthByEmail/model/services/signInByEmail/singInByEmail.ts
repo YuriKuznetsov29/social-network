@@ -19,8 +19,6 @@ export const signInByEmail = createAsyncThunk<void, RequestAuthData, ThunkConfig
                 password,
             })
 
-            console.log(response, 'response')
-
             localStorage.setItem('token', response.data.accessToken)
             dispatch(loadUserData({ userId: response.data.user.userId }))
 
