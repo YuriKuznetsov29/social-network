@@ -1,8 +1,7 @@
 import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import classNames from 'classnames'
-import { Button } from '@/shared/ui/Button/Button'
 import { signUpByEmail } from '@/features/AuthByEmail/model/services/signUpByEmail/signUpByEmail'
-import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { ErrorMessage, Field, Form, Formik, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import ThemeSwitcher from '@/shared/ui/ThemeSwitcher/ThemeSwitcher'
@@ -11,10 +10,32 @@ import { getAuthError } from '@/features/AuthByEmail/model/selectors/getAuthErro
 import { Loader } from '@/shared/ui/Loader'
 import { LangSwitcher } from '@/shared/ui/LangSwitcher/LangSwitcher'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { getRegStatus } from '@/features/AuthByEmail/model/selectors/getRegStatus/getRegStatus'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import cls from './SignUpForm.module.scss'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { SignUpForm as SignUpFormDeprecated } from '../deprecated/SignUpForm/SignUpForm'
+import {
+    Avatar,
+    Box,
+    Checkbox,
+    Container,
+    FormControlLabel,
+    Grid,
+    TextField,
+    Typography,
+    Link,
+    Button,
+    Select,
+    MenuItem,
+    TextFieldProps,
+    InputLabel,
+} from '@mui/material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { DateField } from '@mui/x-date-pickers'
 
 export interface Values {
     firstName: string
@@ -23,7 +44,7 @@ export interface Values {
     password: string
     confirmPassword: string
     gender: 'male' | 'female' | ''
-    birthDay: string
+    birthDay: Dayjs
     city: string
 }
 
@@ -43,12 +64,12 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
         lastName: Yup.string().trim().required(t('Введите фамилию')),
         email: Yup.string().email(t('Неправильный формат email')).required(t('Введите Email')),
         birthDay: Yup.date()
-            .transform((value, originalValue, context) => {
-                if (context.isType(value)) return value
+            // .transform((value, originalValue, context) => {
+            //     if (context.isType(value)) return value
 
-                value = originalValue.split('.').reverse().join('-')
-                return dayjs(value).isValid() ? dayjs(value).toDate() : new Date('')
-            })
+            //     value = originalValue.split('.').reverse().join('-')
+            //     return dayjs(value).isValid() ? dayjs(value).toDate() : new Date('')
+            // })
             .max(new Date(), t('Введите корректную дату'))
             .min('1969-11-13', t('Date is too early'))
             .required(t('Введите дату рождения')),
@@ -63,161 +84,249 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
         gender: Yup.string().required(t('Выберете значение')),
     })
 
+    const formik = useFormik({
+        initialValues: {
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            birthDay: '' as unknown as Dayjs,
+            gender: '',
+            city: '',
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values: Values) => {
+            const { firstName, lastName, email, password, gender, birthDay, city } = values
+            // dispatch(
+            //     signUpByEmail({
+            //         firstName,
+            //         lastName,
+            //         email,
+            //         password,
+            //         gender,
+            //         birthDay,
+            //         city,
+            //     })
+            // )
+
+            console.log(values, 'values')
+        },
+    })
+
     return (
-        <div data-testid="signUp-form" className={classNames(cls.SignUpForm, {}, [className])}>
-            <Formik
-                initialValues={{
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    password: '',
-                    confirmPassword: '',
-                    birthDay: '',
-                    gender: '',
-                    city: '',
-                }}
-                validationSchema={validationSchema}
-                onSubmit={(values: Values) => {
-                    const { firstName, lastName, email, password, gender, birthDay, city } = values
-                    dispatch(
-                        signUpByEmail({
-                            firstName,
-                            lastName,
-                            email,
-                            password,
-                            gender,
-                            birthDay,
-                            city,
-                        })
-                    )
-                }}
-            >
-                <Form className={cls.form} autoComplete="off">
-                    <label htmlFor="firstName">{t('Имя')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="firstName"
-                            name="firstName"
-                            placeholder={t('введите имя')}
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="firstName" />
-                    </div>
-
-                    <label htmlFor="lastName">{t('Фамилия')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="lastName"
-                            name="lastName"
-                            placeholder={t('введите фамилию')}
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="lastName" />
-                    </div>
-
-                    <label htmlFor="email">Email</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="email"
-                            name="email"
-                            placeholder={t('введите email')}
-                            type="email"
-                            autocomplete="off"
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="email" />
-                    </div>
-
-                    <label htmlFor="password">{t('Пароль')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="password"
-                            name="password"
-                            placeholder={t('введите пароль')}
-                            type="password"
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="password" />
-                    </div>
-
-                    <label htmlFor="confirmPassword">{t('Повторите пароль')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            placeholder={t('повторите пароль')}
-                            type="password"
-                        />
-                        <ErrorMessage
-                            className={cls.error}
-                            component="div"
-                            name="confirmPassword"
-                        />
-                    </div>
-
-                    <label htmlFor="confirmPassword">{t('Введите ваш город')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="city"
-                            name="city"
-                            placeholder={t('ваш город')}
-                            type="text"
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="city" />
-                    </div>
-
-                    <label htmlFor="confirmPassword">{t('Введите дату рождения')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="birthDay"
-                            name="birthDay"
-                            placeholder={t('dd.mm.yyyy')}
-                            type="date"
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="birthDay" />
-                    </div>
-
-                    <label htmlFor="gender">{t('Пол')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field className={cls.select} id="gender" name="gender" as="select">
-                            <option disabled value="">
-                                {t('Выберете ваш пол')}
-                            </option>
-                            <option value="male">{t('мужчина')}</option>
-                            <option value="female">{t('женщина')}</option>
-                        </Field>
-                        <ErrorMessage className={cls.error} component="div" name="gender" />
-                    </div>
-
-                    <div className={cls.errorBlock}>
-                        {regStatus && (
-                            <div className={cls.regSuccess}>
-                                {' '}
-                                {t('Вы успешно зарегистрировались, войдите под своим email.')}{' '}
-                            </div>
-                        )}
-                        {loading && <Loader size="M" />}
-                        {error && !loading && <div className={cls.serverError}>{error}</div>}
-                    </div>
-
-                    <Button className={cls.submitBtn} type="submit">
-                        {t('Зарегистрироваться')}
-                    </Button>
-                    <Link className={cls.link} to={'/'}>
-                        <Button className={cls.signInBtn} type="button">
-                            {t('Войти')}
-                        </Button>
-                    </Link>
-
-                    <div className={cls.switchersContainer}>
-                        <LangSwitcher short />
-                        <ThemeSwitcher />
-                    </div>
-                </Form>
-            </Formik>
-        </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Container component="main" maxWidth="xs">
+                    <Box
+                        sx={{
+                            marginTop: 8,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                            Sign up
+                        </Typography>
+                        <Box
+                            component="form"
+                            noValidate
+                            onSubmit={formik.handleSubmit}
+                            sx={{ mt: 3 }}
+                        >
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="firstName"
+                                        required
+                                        fullWidth
+                                        id="firstName"
+                                        label="First Name"
+                                        autoFocus
+                                        value={formik.values.email}
+                                        onChange={formik.handleChange}
+                                        error={
+                                            formik.touched.firstName &&
+                                            Boolean(formik.errors.firstName)
+                                        }
+                                        helperText={
+                                            formik.touched.firstName && formik.errors.firstName
+                                        }
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        id="lastName"
+                                        label="Last Name"
+                                        name="lastName"
+                                        autoComplete="family-name"
+                                        value={formik.values.lastName}
+                                        onChange={formik.handleChange}
+                                        error={
+                                            formik.touched.lastName &&
+                                            Boolean(formik.errors.lastName)
+                                        }
+                                        helperText={
+                                            formik.touched.lastName && formik.errors.lastName
+                                        }
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                        name="email"
+                                        autoComplete="email"
+                                        value={formik.values.email}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.email && Boolean(formik.errors.email)}
+                                        helperText={formik.touched.email && formik.errors.email}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="new-password"
+                                        value={formik.values.password}
+                                        onChange={formik.handleChange}
+                                        error={
+                                            formik.touched.password &&
+                                            Boolean(formik.errors.password)
+                                        }
+                                        helperText={
+                                            formik.touched.password && formik.errors.password
+                                        }
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        name="confirmPassword"
+                                        label="Confirm Password"
+                                        type="password"
+                                        id="confirmPassword"
+                                        autoComplete="new-password"
+                                        value={formik.values.confirmPassword}
+                                        onChange={formik.handleChange}
+                                        error={
+                                            formik.touched.confirmPassword &&
+                                            Boolean(formik.errors.confirmPassword)
+                                        }
+                                        helperText={
+                                            formik.touched.confirmPassword &&
+                                            formik.errors.confirmPassword
+                                        }
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        name="city"
+                                        label={t('Введите ваш город')}
+                                        type="text"
+                                        id="city"
+                                        autoComplete="address-level2"
+                                        value={formik.values.city}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.city && Boolean(formik.errors.city)}
+                                        helperText={formik.touched.city && formik.errors.city}
+                                    />
+                                </Grid>
+                                {/* <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        name="birthDay"
+                                        label={t('Введите дату рождения')}
+                                        placeholder={t('Введите дату рождения')}
+                                        type="date"
+                                        id="birthDay"
+                                        autoComplete="bday"
+                                    />
+                                </Grid> */}
+                                <Grid item xs={12}>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DatePicker
+                                            disableFuture
+                                            sx={{ width: '100%' }}
+                                            name="birthDay"
+                                            label={t('Введите дату рождения')}
+                                            onChange={(value) => {
+                                                formik.setFieldValue(
+                                                    'birthDay',
+                                                    dayjs(value).format('YYYY-MM-DD')
+                                                )
+                                            }}
+                                        />
+                                    </LocalizationProvider>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Select
+                                        required
+                                        fullWidth
+                                        id="gender"
+                                        name="gender"
+                                        value={formik.values.gender}
+                                        onChange={formik.handleChange}
+                                        error={
+                                            formik.touched.gender && Boolean(formik.errors.gender)
+                                        }
+                                        // helperText={formik.touched.gender && formik.errors.gender}
+                                    >
+                                        <MenuItem value="male">{t('мужчина')}</MenuItem>
+                                        <MenuItem value="female">{t('женщина')}</MenuItem>
+                                    </Select>
+                                </Grid>
+                                {/* <Grid item xs={12}>
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox value="allowExtraEmails" color="primary" />
+                                        }
+                                        label="I want to receive inspiration, marketing promotions and updates via email."
+                                    />
+                                </Grid> */}
+                            </Grid>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                {t('Зарегистрироваться')}
+                            </Button>
+                            <Grid container>
+                                <Grid item xs>
+                                    <LangSwitcher />
+                                </Grid>
+                                <Grid item>
+                                    <Link href="/" variant="body2">
+                                        {t('У вас уже есть аккаунт? Войти')}
+                                    </Link>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Box>
+                    {/* <Copyright sx={{ mt: 5 }} /> */}
+                </Container>
+            }
+            off={<SignUpFormDeprecated className={className} />}
+        />
     )
 }

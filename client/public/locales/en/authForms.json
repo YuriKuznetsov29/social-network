@@ -3,6 +3,8 @@
     "Пароль": "Password",
     "Зарегистрироваться": "Register",
     "Войти": "Sign in",
+    "Вход": "Sign in",
+    "У вас уже есть аккаунт? Войти": "Already have an account? Sign in",
     "мужчина": "male",
     "женщина": "female",
     "Повторите пароль": "Confirm password",

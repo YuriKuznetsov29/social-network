@@ -119,7 +119,11 @@ export const PostFooter = memo(({ post, className }: PostFooterProps) => {
             >
                 <div className={cls.likeWrapper}>
                     <div className={cls.likesValue}>{post.comments.length}</div>
-                    <CommentBtn className={cls.commentBtn} onClick={onClickToggleComment} />
+                    <CommentBtn
+                        data-testid="comment-btn"
+                        className={cls.commentBtn}
+                        onClick={onClickToggleComment}
+                    />
                     <div className={cls.likesValue}>{likes}</div>
                     <Heart
                         className={classNames(cls.heart, { [cls.liked]: likesActive })}
@@ -137,8 +141,13 @@ export const PostFooter = memo(({ post, className }: PostFooterProps) => {
                         className={cls.inputMessage}
                         value={commentText}
                         onChange={setCommentText}
+                        data-testId="comment-input"
                     />
-                    <Plane className={cls.plane} onClick={onClickWriteComment} />
+                    <Plane
+                        data-testId="send-comment-btn"
+                        className={cls.plane}
+                        onClick={onClickWriteComment}
+                    />
                 </div>
             </div>
         </>

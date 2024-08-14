@@ -61,10 +61,12 @@ export const ConversationLink = (props: ConversationLinkProps) => {
         )
     }
 
+    console.log(companion)
+
     return (
         <AppLink to={`/messenger/${conversation.roomId}`} className={cls.dialog}>
             <Avatar
-                avatarPath={companion.avatarPath}
+                avatarPath={companion?.avatarPath}
                 size="M"
                 isOnline={companion.isOnline}
                 lastSeenOnline={companion.lastSeenOnline}
@@ -92,7 +94,7 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                             </div>
                             <div className={cls.messageContainer}>
                                 <Avatar
-                                    avatarPath={newAuthorLastMessage.avatarPath}
+                                    avatarPath={newAuthorLastMessage?.avatarPath}
                                     className={cls.avatarMsg}
                                 />
                                 <div className={cls.lastMessageText}>
@@ -129,7 +131,7 @@ export const ConversationLink = (props: ConversationLinkProps) => {
                             {message && (
                                 <div className={cls.messageContainer}>
                                     <Avatar
-                                        avatarPath={message.user[0].avatarPath}
+                                        avatarPath={message.user[0]?.avatarPath}
                                         className={cls.avatarMsg}
                                     />
                                     <div className={cls.lastMessageText}>

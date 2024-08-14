@@ -17,7 +17,7 @@ describe('Comment', () => {
         )
 
         expect(screen.getByTestId('comment')).toBeInTheDocument()
-        expect(screen.getByTestId('body')).toHaveTextContent('123')
+        expect(screen.getByTestId('comment-text')).toHaveTextContent('123')
     })
 
     test('test time function', () => {

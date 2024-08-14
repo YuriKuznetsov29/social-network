@@ -56,6 +56,9 @@ router.post("/removePost", auth, async (req, res) => {
         }
 
         await Post.deleteOne({ _id: postId })
+        if (post.comments.length) {
+            await Comments.deleteMany({ postId })
+        }
 
         const posts = await Post.find({ author: post.author }).sort({ createdAt: -1 })
         await User.findByIdAndUpdate({ _id: post.author }, { posts: posts.length })

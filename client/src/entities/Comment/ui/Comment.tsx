@@ -42,7 +42,7 @@ export const Comment = ({ className, comment }: CommentProps) => {
                         {dayjs(comment.createdAt).locale(i18n.language).toNow(true) + t(' назад')}
                     </div>
                 </div>
-                <div data-testid="body" className={cls.text}>
+                <div data-testid="comment-text" className={cls.text}>
                     {comment.body}
                 </div>
             </div>

@@ -8,6 +8,8 @@
     height: 40px;
     border-radius: 50%;
     fill: var(--fill-user);
+    object-position: center;
+    object-fit: cover;
 
     &.XL {
         width: 150px;

@@ -13,7 +13,10 @@ import { thresholds } from '@/shared/config/dayjs/thresholds'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import updateLocale from 'dayjs/plugin/updateLocale'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { ToggleFeatures } from './shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
 import '@/shared/config/i18n/i18n'
+import { CssBaseline } from '@mui/material'
 
 dayjs.extend(relativeTime, {
     thresholds: thresholds,
@@ -38,6 +41,12 @@ dayjs.updateLocale('ru', {
     },
 })
 
+const theme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+})
+
 const container = document.getElementById('root')
 const root = createRoot(container!)
 root.render(
@@ -45,9 +54,20 @@ root.render(
         <ErrorBoundary>
             <StoreProvider>
                 <BrowserRouter>
-                    <ThemeProvider>
-                        <App />
-                    </ThemeProvider>
+                    <ToggleFeatures
+                        feature="isAppRedesigned"
+                        on={
+                            <MuiThemeProvider theme={theme}>
+                                <CssBaseline />
+                                <App />
+                            </MuiThemeProvider>
+                        }
+                        off={
+                            <ThemeProvider>
+                                <App />
+                            </ThemeProvider>
+                        }
+                    />
                 </BrowserRouter>
             </StoreProvider>
         </ErrorBoundary>
