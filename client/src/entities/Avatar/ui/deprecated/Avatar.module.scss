@@ -6,11 +6,10 @@
 .user {
     width: 40px;
     height: 40px;
-    cursor: pointer;
-    // border-radius: 50%;
-    // fill: var(--fill-user);
-    // object-position: center;
-    // object-fit: cover;
+    border-radius: 50%;
+    fill: var(--fill-user);
+    object-position: center;
+    object-fit: cover;
 
     &.XL {
         width: 150px;

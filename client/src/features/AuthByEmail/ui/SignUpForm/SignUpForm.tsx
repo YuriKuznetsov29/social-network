@@ -18,9 +18,7 @@ import { SignUpForm as SignUpFormDeprecated } from '../deprecated/SignUpForm/Sig
 import {
     Avatar,
     Box,
-    Checkbox,
     Container,
-    FormControlLabel,
     Grid,
     TextField,
     Typography,
@@ -30,12 +28,14 @@ import {
     MenuItem,
     TextFieldProps,
     InputLabel,
+    Alert,
 } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DateField } from '@mui/x-date-pickers'
+import { LoadingButton } from '@mui/lab'
 
 export interface Values {
     firstName: string
@@ -140,6 +140,18 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                             sx={{ mt: 3 }}
                         >
                             <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    {regStatus && (
+                                        <Alert severity="success">
+                                            {t(
+                                                'Вы успешно зарегистрировались, войдите под своим email.'
+                                            )}
+                                        </Alert>
+                                    )}
+                                </Grid>
+                                <Grid item xs={12}>
+                                    {error && !loading && <Alert severity="error">{error}</Alert>}
+                                </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         autoComplete="given-name"
@@ -147,7 +159,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                                         required
                                         fullWidth
                                         id="firstName"
-                                        label="First Name"
+                                        label={t('введите имя')}
                                         autoFocus
                                         value={formik.values.email}
                                         onChange={formik.handleChange}
@@ -165,7 +177,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                                         required
                                         fullWidth
                                         id="lastName"
-                                        label="Last Name"
+                                        label={t('введите фамилию')}
                                         name="lastName"
                                         autoComplete="family-name"
                                         value={formik.values.lastName}
@@ -184,7 +196,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                                         required
                                         fullWidth
                                         id="email"
-                                        label="Email Address"
+                                        label={t('введите email')}
                                         name="email"
                                         autoComplete="email"
                                         value={formik.values.email}
@@ -198,7 +210,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                                         required
                                         fullWidth
                                         name="password"
-                                        label="Password"
+                                        label={t('введите пароль')}
                                         type="password"
                                         id="password"
                                         autoComplete="new-password"
@@ -218,7 +230,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                                         required
                                         fullWidth
                                         name="confirmPassword"
-                                        label="Confirm Password"
+                                        label={t('повторите пароль')}
                                         type="password"
                                         id="confirmPassword"
                                         autoComplete="new-password"
@@ -249,18 +261,6 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                                         helperText={formik.touched.city && formik.errors.city}
                                     />
                                 </Grid>
-                                {/* <Grid item xs={12}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        name="birthDay"
-                                        label={t('Введите дату рождения')}
-                                        placeholder={t('Введите дату рождения')}
-                                        type="date"
-                                        id="birthDay"
-                                        autoComplete="bday"
-                                    />
-                                </Grid> */}
                                 <Grid item xs={12}>
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DatePicker
@@ -303,15 +303,17 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
                                     />
                                 </Grid> */}
                             </Grid>
-                            <Button
+                            <LoadingButton
+                                sx={{ mt: 3, mb: 2 }}
                                 type="submit"
                                 fullWidth
+                                loading={loading}
+                                loadingIndicator="Loading…"
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
                             >
                                 {t('Зарегистрироваться')}
-                            </Button>
-                            <Grid container>
+                            </LoadingButton>
+                            <Grid sx={{ mb: 2 }} container>
                                 <Grid item xs>
                                     <LangSwitcher />
                                 </Grid>

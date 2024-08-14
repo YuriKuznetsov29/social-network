@@ -15,6 +15,8 @@ import {
     Paper,
     InputAdornment,
     IconButton,
+    FormHelperText,
+    Alert,
 } from '@mui/material'
 import { Copyright, Visibility, VisibilityOff } from '@mui/icons-material'
 import { t } from 'i18next'
@@ -30,6 +32,7 @@ import { getAuthError } from '../../model/selectors/getAuthError/getAuthError'
 import { getLoadingAuthStatus } from '../../model/selectors/getLoadingAuthStatus/getLoadingAuthStatus'
 import { getAuthStatus } from '../../model/selectors/getAuthStatus/getAuthStatus'
 import { LangSwitcher } from '@/shared/ui/LangSwitcher/LangSwitcher'
+import LoadingButton from '@mui/lab/LoadingButton'
 
 interface SignInFormProps {
     className?: string
@@ -125,6 +128,7 @@ export const SignInForm = ({ className }: SignInFormProps) => {
                                 onSubmit={formik.handleSubmit}
                                 sx={{ mt: 1 }}
                             >
+                                {error && !loading && <Alert severity="error">{error}</Alert>}
                                 <TextField
                                     margin="normal"
                                     required
@@ -177,14 +181,24 @@ export const SignInForm = ({ className }: SignInFormProps) => {
                                     control={<Checkbox value="remember" color="primary" />}
                                     label="Remember me"
                                 /> */}
-                                <Button
+                                {/* <Button
                                     type="submit"
                                     fullWidth
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
                                 >
                                     {t('Войти')}
-                                </Button>
+                                </Button> */}
+                                <LoadingButton
+                                    sx={{ mt: 3, mb: 2 }}
+                                    type="submit"
+                                    fullWidth
+                                    loading={loading}
+                                    loadingIndicator="Loading…"
+                                    variant="contained"
+                                >
+                                    {t('Войти')}
+                                </LoadingButton>
                                 <Grid container>
                                     <Grid item xs>
                                         {/* <Link href="#" variant="body2">
