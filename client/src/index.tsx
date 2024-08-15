@@ -41,12 +41,6 @@ dayjs.updateLocale('ru', {
     },
 })
 
-const theme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-})
-
 const container = document.getElementById('root')
 const root = createRoot(container!)
 root.render(
@@ -54,20 +48,7 @@ root.render(
         <ErrorBoundary>
             <StoreProvider>
                 <BrowserRouter>
-                    <ToggleFeatures
-                        feature="isAppRedesigned"
-                        on={
-                            <MuiThemeProvider theme={theme}>
-                                <CssBaseline />
-                                <App />
-                            </MuiThemeProvider>
-                        }
-                        off={
-                            <ThemeProvider>
-                                <App />
-                            </ThemeProvider>
-                        }
-                    />
+                    <App />
                 </BrowserRouter>
             </StoreProvider>
         </ErrorBoundary>

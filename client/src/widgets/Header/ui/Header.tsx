@@ -13,6 +13,7 @@ import { AppBar, Box, IconButton, InputBase, Container } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { styled, alpha } from '@mui/material/styles'
 import { LangSwitcher } from '@/shared/ui/LangSwitcher/LangSwitcher'
+import ThemeSwitcher from '@/shared/ui/ThemeSwitcher/ThemeSwitcher'
 
 interface HeaderProps {
     className?: string
@@ -59,10 +60,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 export const Header = ({ className }: HeaderProps) => {
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
-    const mobile = useMobile()
-
     return (
         <ToggleFeatures
             feature="isAppRedesigned"
@@ -77,17 +74,9 @@ export const Header = ({ className }: HeaderProps) => {
                                 pb: 1,
                             }}
                         >
-                            {/* <Search>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    inputProps={{ 'aria-label': 'search' }}
-                                />
-                            </Search> */}
                             <FoundUsersList />
                             <Box display="flex" alignItems="center" gap={2}>
+                                <ThemeSwitcher />
                                 <LangSwitcher icon />
                                 <SettingBtn />
                             </Box>

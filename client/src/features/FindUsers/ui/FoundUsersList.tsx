@@ -27,6 +27,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import { styled, alpha } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import React from 'react'
+import { useTheme } from '@mui/material/styles'
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -80,11 +81,11 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
     const navigate = useNavigate()
     const { users, firstName, lastName } = useAppSelector(getSearchUsersState)
 
+    const theme = useTheme()
+
     useEffect(() => {
         dispatch(findUsers({ firstName, lastName }))
         if (firstName) {
-            console.log(firstName, 'first')
-
             setShowResults(true)
         }
     }, [firstName, lastName])
@@ -119,7 +120,7 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
         <ToggleFeatures
             feature="isAppRedesigned"
             on={
-                <Search sx={{ position: 'relative' }}>
+                <Search id="search" sx={{ position: 'relative' }}>
                     <SearchIconWrapper>
                         <SearchIcon />
                     </SearchIconWrapper>
@@ -130,10 +131,12 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
                     />
                     <List
                         sx={{
+                            display: showResults ? 'block' : 'none',
                             width: '100%',
                             maxWidth: 360,
                             bgcolor: 'background.paper',
                             position: 'absolute',
+                            // bgcolor: theme.palette.grey,
                         }}
                     >
                         {users.length ? (
@@ -143,6 +146,8 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
                                         <ListItem
                                             sx={{
                                                 cursor: 'pointer',
+                                                // bgcolor: theme.palette.divider,
+                                                ':hover': { bgcolor: theme.palette.action.hover },
                                             }}
                                             alignItems="flex-start"
                                             onClick={() => navigate(`/${user.userId}`)}
