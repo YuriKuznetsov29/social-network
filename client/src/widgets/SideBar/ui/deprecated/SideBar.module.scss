@@ -1,0 +1,70 @@
+.SideBar {
+    margin: 0 10px 0 0;
+    // padding: 10px 0;
+    min-width: 150px;
+    height: calc(100vh - (var(--header-height) + 10px));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.link {
+    padding: 0 5px;
+    width: 100%;
+    height: 30px;
+    color: var(--font-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    &:hover {
+        background-color: var(--bg-link);
+    }
+}
+
+.icon, .mobileIcon {
+    width: 22px;
+    height: 22px;
+}
+
+.mobileIcon {
+    fill: var(--icon-color);
+}
+
+.icon {
+    fill: var(--icon-link-color);
+    margin-right: 10px;
+
+}
+
+.mobileSidebar {
+    // width: 100%;
+    height: 50px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--header-bg-color);
+    z-index: 1000;
+}
+
+.linkMobile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.activeLink {
+    background-color: var(--bg-dialog-hover);
+}

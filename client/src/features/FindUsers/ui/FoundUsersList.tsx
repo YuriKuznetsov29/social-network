@@ -28,6 +28,7 @@ import { styled, alpha } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import React from 'react'
 import { useTheme } from '@mui/material/styles'
+import { SERVER_URL } from '@/shared/api/http'
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -154,8 +155,8 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
                                         >
                                             <ListItemAvatar>
                                                 <Avatar
-                                                    alt="Remy Sharp"
-                                                    src="/static/images/avatar/1.jpg"
+                                                    alt={user.firstName}
+                                                    src={SERVER_URL + user.avatarPath}
                                                 />
                                             </ListItemAvatar>
                                             <ListItemText

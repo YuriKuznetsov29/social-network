@@ -13,6 +13,8 @@ import { PostsList } from '@/entities/Post'
 import { fetchUserPosts } from '@/features/PostHandler/model/services/fetchUserPosts'
 import { useInfiniteScroll } from '@/shared/lib/hook/useInfiniteScroll'
 import cls from './ProfilePage.module.scss'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { Container as MuiContainer } from '@mui/material'
 
 interface ProfilePageProps {
     className?: string
@@ -40,19 +42,39 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     }, [userId])
 
     return (
-        <div data-testid="profile">
-            <Header />
-            <Container className={isMobile ? cls.container : ''}>
-                <SideBar />
-                <section className={classNames(cls.contentWrapper, {}, [className])}>
-                    <UserData />
-                    <Friends />
-                    <CreatePost />
-                    <PostsList />
-                    <div ref={triggerRef}></div>
-                </section>
-            </Container>
-        </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <>
+                    <Header />
+                    <MuiContainer sx={{ display: 'flex' }}>
+                        <SideBar />
+                        <section className={classNames(cls.contentWrapper, {}, [className])}>
+                            <UserData />
+                            <Friends />
+                            <CreatePost />
+                            <PostsList />
+                            <div ref={triggerRef}></div>
+                        </section>
+                    </MuiContainer>
+                </>
+            }
+            off={
+                <div data-testid="profile">
+                    <Header />
+                    <Container className={isMobile ? cls.container : ''}>
+                        <SideBar />
+                        <section className={classNames(cls.contentWrapper, {}, [className])}>
+                            <UserData />
+                            <Friends />
+                            <CreatePost />
+                            <PostsList />
+                            <div ref={triggerRef}></div>
+                        </section>
+                    </Container>
+                </div>
+            }
+        />
     )
 }
 

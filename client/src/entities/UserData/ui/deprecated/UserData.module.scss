@@ -1,0 +1,110 @@
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    fill: var(--fill-user);
+}
+
+.contentWrapper {
+    margin-top: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dataWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.valueContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.value {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button {
+    padding: 0 10px;
+    height: 32px;
+    background-color: var(--bg-button);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: background-color 0.2s;
+    &:hover {
+        background-color: var(--bg-button-hover);
+    }
+}
+
+.avatarContainer {
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    display: flex;
+    color: var(--font-color);
+    font-weight: 400;
+    gap: 10px;
+}
+
+.count {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.countValueTitle {
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.countValue {
+    font-size: 20px;
+}
+
+.valueTitle {
+    color: var(--secondary-font-color);
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    margin-right: 10px;
+    width: 22px;
+    height: 22px;
+    fill: var(--secondary-font-color);
+}
+
+.countData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 650px) {
+    .contentWrapper {
+        flex-direction: column;
+    }
+
+    .dataWrapper {
+        justify-content: center;
+    }
+
+    .name {
+        margin-bottom: 10px;
+    }
+}
