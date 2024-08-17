@@ -14,7 +14,7 @@ import { fetchUserPosts } from '@/features/PostHandler/model/services/fetchUserP
 import { useInfiniteScroll } from '@/shared/lib/hook/useInfiniteScroll'
 import cls from './ProfilePage.module.scss'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Container as MuiContainer } from '@mui/material'
+import { Container as MuiContainer, Stack } from '@mui/material'
 
 interface ProfilePageProps {
     className?: string
@@ -49,13 +49,13 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
                     <Header />
                     <MuiContainer sx={{ display: 'flex' }}>
                         <SideBar />
-                        <section className={classNames(cls.contentWrapper, {}, [className])}>
+                        <Stack spacing={2} width="100%">
                             <UserData />
                             <Friends />
                             <CreatePost />
                             <PostsList />
                             <div ref={triggerRef}></div>
-                        </section>
+                        </Stack>
                     </MuiContainer>
                 </>
             }

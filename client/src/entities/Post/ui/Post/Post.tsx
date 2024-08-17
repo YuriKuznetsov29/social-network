@@ -7,11 +7,10 @@ import { transformText } from '../../model/services/transformText/transformText'
 import { useTranslation } from 'react-i18next'
 import { getUserDataById } from '@/shared/api/getUserDataById'
 import { ImageModal } from '@/shared/ui/ImageModal/ImageModal'
-import { PostFooter } from '../PostFooter/PostFooter'
 import { PostOptionsBtn } from '../PostOptionsBtn/PostOptionsBtn'
 import cls from './Post.module.scss'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Post as PostDeprecated } from './deprecated/Post'
+import { Post as PostDeprecated } from '../deprecated/Post/Post'
 import {
     Avatar,
     Box,
@@ -39,6 +38,7 @@ import SendIcon from '@mui/icons-material/Send'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
 import { IComment } from '@/features/PostHandler/model/types/comment'
+import { PostFooter } from '../PostFooter/PostFooter'
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean
@@ -59,11 +59,6 @@ interface ResponseCommentsData {
 export const Post = memo(({ post }: PostProps) => {
     const [author, setAuthor] = useState<IUser | null>(null)
     const [isOpenImage, setIsOpenImage] = useState(false)
-    const [expanded, setExpanded] = useState(false)
-
-    const handleExpandClick = () => {
-        setExpanded(!expanded)
-    }
 
     const { t, i18n } = useTranslation('pages')
 
@@ -160,66 +155,7 @@ export const Post = memo(({ post }: PostProps) => {
                             dangerouslySetInnerHTML={transformText(post.text || '')}
                         />
                     </CardContent>
-                    <CardActions
-                        sx={{
-                            justifyContent: 'flex-end',
-                        }}
-                    >
-                        {/* <IconButton aria-label="share">
-                            <ShareIcon />
-                        </IconButton> */}
-                        <IconButton onClick={handleExpandClick}>
-                            <CommentIcon />
-                        </IconButton>
-                        <IconButton aria-label="add to favorites">
-                            <FavoriteIcon sx={{ fill: red[500] }} />
-                        </IconButton>
-                    </CardActions>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                        <CardContent
-                            sx={{
-                                maxHeight: '200px',
-                                overflowY: 'auto',
-                            }}
-                        >
-                            {comments?.map((comment) => {
-                                return (
-                                    <Stack>
-                                        <Box>
-                                            <Avatar
-                                                src={SERVER_URL + author?.avatarPath}
-                                                sx={{ bgcolor: red[500] }}
-                                                alt={author?.firstName}
-                                            />
-                                        </Box>
-                                        <Typography paragraph>{comment.body}</Typography>
-                                    </Stack>
-                                )
-                            })}
-                            <Typography paragraph>Method:</Typography>
-                            <Typography paragraph>
-                                Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-                                set aside for 10 minutes.
-                            </Typography>
-                        </CardContent>
-                        <CardContent>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    gap: 2,
-                                }}
-                            >
-                                <TextField
-                                    fullWidth
-                                    placeholder={t('Напиcать комментарий...')}
-                                    variant="standard"
-                                />
-                                <IconButton aria-label="add to favorites">
-                                    <SendIcon />
-                                </IconButton>
-                            </Box>
-                        </CardContent>
-                    </Collapse>
+                    <PostFooter post={post} />
                 </Card>
             }
             off={<PostDeprecated post={post} />}

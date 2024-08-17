@@ -12,6 +12,24 @@ import { CreatePostLoader } from '@/shared/ui/CreatePostLoader'
 import { getInitPostStatus } from '../model/selectors/getInitPostStatus'
 import { useTranslation } from 'react-i18next'
 import cls from './CreatePost.module.scss'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { CreatePost as CreatePostDeprecated } from './deprecated/CreatePost'
+import { Box, IconButton, Paper, TextField } from '@mui/material'
+import SendIcon from '@mui/icons-material/Send'
+import { styled } from '@mui/material/styles'
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+})
 
 interface uploadImageResponse {
     imagePath: string
@@ -28,11 +46,12 @@ export const CreatePost = () => {
 
     const onClickCreatePost = () => {
         if (input.current?.innerText.trim() !== '' || imagePath) {
+            console.log(input.current?.innerText)
             dispatch(
                 createPost({
                     author: userData.userId,
                     imagePath,
-                    text: input.current?.innerText || '',
+                    text: input.current?.value || '',
                     t,
                 })
             )
@@ -70,32 +89,48 @@ export const CreatePost = () => {
     if (!init) return <CreatePostLoader />
 
     return (
-        <>
-            <ContentContainer className={cls.container}>
-                <div
-                    className={cls.area}
-                    contentEditable
-                    aria-multiline
-                    role="textbox"
-                    data-placeholder={t('Что у вас нового?')}
-                    ref={input}
-                    data-testid="post-input"
-                ></div>
-                <div className={cls.buttonContainer}>
-                    <input
-                        className={cls.input_file}
-                        accept="image/*"
-                        id="input-file"
-                        type="file"
-                        onChange={(e) => onChangeUploadImage(e)}
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Paper
+                    sx={{
+                        width: '100%',
+                        padding: '16px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 2,
+                    }}
+                    elevation={1}
+                >
+                    <TextField
+                        placeholder={t('Что у вас нового?')}
+                        multiline
+                        maxRows={4}
+                        fullWidth
+                        ref={input}
                     />
-                    <label className={cls.classLabel} htmlFor="input-file">
-                        {imagePath && <div className={cls.imageText}>Изображение прикреплено</div>}
-                        <Image className={cls.image} />
-                    </label>
-                    <Plane data-testid="send" className={cls.plane} onClick={onClickCreatePost} />
-                </div>
-            </ContentContainer>
-        </>
+                    <Box
+                        sx={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            gap: 2,
+                        }}
+                    >
+                        <IconButton component="label">
+                            <AddPhotoAlternateIcon />
+                            <VisuallyHiddenInput
+                                type="file"
+                                onChange={(e) => onChangeUploadImage(e)}
+                            />
+                        </IconButton>
+                        <IconButton onClick={onClickCreatePost}>
+                            <SendIcon />
+                        </IconButton>
+                    </Box>
+                </Paper>
+            }
+            off={<CreatePostDeprecated />}
+        />
     )
 }

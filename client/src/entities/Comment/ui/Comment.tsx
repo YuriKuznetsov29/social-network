@@ -2,11 +2,14 @@ import classNames from 'classnames'
 import { IComment } from '@/features/PostHandler/model/types/comment'
 import { useEffect, useState } from 'react'
 import { IUser } from '@/entities/UserData/model/types/IUser'
-import { Avatar } from '@/entities/Avatar'
 import dayjs from 'dayjs'
 import { getUserDataById } from '@/shared/api/getUserDataById'
-import cls from './Comment.module.scss'
 import { useTranslation } from 'react-i18next'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { Comment as CommentDeprecated } from './deprecated/Comment'
+import { Avatar, Box, Stack, Typography } from '@mui/material'
+import { SERVER_URL } from '@/shared/api/http'
+import { red } from '@mui/material/colors'
 
 interface CommentProps {
     className?: string
@@ -27,25 +30,38 @@ export const Comment = ({ className, comment }: CommentProps) => {
     }, [])
 
     return (
-        <div data-testid="comment" className={classNames(cls.Comment, {}, [className])}>
-            <Avatar
-                avatarPath={userData?.avatarPath}
-                size="MS"
-                className={cls.avatar}
-                click
-                userId={comment.author}
-            />
-            <div>
-                <div className={cls.header}>
-                    <div>{userData?.firstName}</div>
-                    <div className={cls.time} data-testid="time">
-                        {dayjs(comment.createdAt).locale(i18n.language).toNow(true) + t(' назад')}
-                    </div>
-                </div>
-                <div data-testid="comment-text" className={cls.text}>
-                    {comment.body}
-                </div>
-            </div>
-        </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Stack spacing={1} key={comment._id}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'flex-start',
+                            gap: 2,
+                        }}
+                    >
+                        <Avatar
+                            src={SERVER_URL + userData?.avatarPath}
+                            sx={{ bgcolor: red[500] }}
+                            alt={userData?.firstName}
+                        />
+                        <Stack>
+                            <Typography variant="body2">
+                                {`${userData?.firstName} ${userData?.lastName}`}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {dayjs(comment.createdAt).locale(i18n.language).toNow(true) +
+                                    t(' назад')}
+                            </Typography>
+                        </Stack>
+                    </Box>
+                    <Typography variant="body2" color="text.secondary">
+                        {comment.body}
+                    </Typography>
+                </Stack>
+            }
+            off={<CommentDeprecated comment={comment} />}
+        />
     )
 }
