@@ -15,7 +15,7 @@ interface AvatarProps {
     avatarPath?: string
     isOnline?: boolean
     lastSeenOnline?: string
-    size?: 'XL' | 'L' | 'M' | 'MS' | 'S'
+    size?: 'XL' | 'L' | 'M' | 'MS' | 'S' | string
     click?: boolean
     userId?: string
 }

@@ -20,6 +20,7 @@ import {
     CardActions,
     CardContent,
     Collapse,
+    Divider,
     IconButton,
     IconButtonProps,
     Stack,
@@ -106,21 +107,23 @@ export const PostFooter = memo(({ post, className }: PostFooterProps) => {
     }, [comments])
 
     const onClickWriteComment = async () => {
-        try {
-            const response = await $api.post<ResponseCommentsData>(
-                `${API_URL}/post/createComment`,
-                {
-                    author: userData.userId,
-                    body: commentText,
-                    postId: post._id,
-                }
-            )
-            setComments(response.data.comments)
-        } catch (e: unknown) {
-            console.log(e)
-        }
+        if (commentText.trim()) {
+            try {
+                const response = await $api.post<ResponseCommentsData>(
+                    `${API_URL}/post/createComment`,
+                    {
+                        author: userData.userId,
+                        body: commentText,
+                        postId: post._id,
+                    }
+                )
+                setComments(response.data.comments)
+            } catch (e: unknown) {
+                console.log(e)
+            }
 
-        setCommentText('')
+            setCommentText('')
+        }
     }
 
     const onClickToggleLike = async () => {
@@ -147,9 +150,6 @@ export const PostFooter = memo(({ post, className }: PostFooterProps) => {
                             justifyContent: 'flex-end',
                         }}
                     >
-                        {/* <IconButton aria-label="share">
-                            <ShareIcon />
-                        </IconButton> */}
                         <Typography>{post.comments.length}</Typography>
                         <IconButton onClick={handleExpandClick}>
                             <CommentIcon />
@@ -159,6 +159,7 @@ export const PostFooter = memo(({ post, className }: PostFooterProps) => {
                             <FavoriteIcon sx={{ fill: likesActive ? red[500] : null }} />
                         </IconButton>
                     </CardActions>
+                    {expanded && <Divider />}
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <CardContent
                             sx={{
@@ -167,8 +168,12 @@ export const PostFooter = memo(({ post, className }: PostFooterProps) => {
                             }}
                         >
                             <Stack spacing={3}>
-                                {comments?.map((comment) => {
-                                    return <Comment comment={comment} />
+                                {comments?.map((comment, i) => {
+                                    return (
+                                        <>
+                                            <Comment key={comment._id} comment={comment} />
+                                        </>
+                                    )
                                 })}
                             </Stack>
                         </CardContent>
@@ -186,6 +191,7 @@ export const PostFooter = memo(({ post, className }: PostFooterProps) => {
                                     variant="standard"
                                     multiline
                                     maxRows={4}
+                                    onChange={(e) => setCommentText(e.target.value)}
                                 />
                                 <IconButton onClick={onClickWriteComment}>
                                     <SendIcon />

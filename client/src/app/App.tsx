@@ -47,6 +47,8 @@ const App = () => {
         [mode]
     )
 
+    console.log(theme)
+
     return (
         <ToggleFeatures
             feature="isAppRedesigned"

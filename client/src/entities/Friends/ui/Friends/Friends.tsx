@@ -1,9 +1,6 @@
-import classNames from 'classnames'
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { useEffect } from 'react'
+import { forwardRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Avatar } from '@/entities/Avatar'
 import {
     getAllFriends,
     getFriendsLoadingStatus,
@@ -14,7 +11,11 @@ import { IUser, getUserData } from '@/entities/UserData'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { FriendsLoader } from '@/shared/ui/FriendsLoader'
 import { useTranslation } from 'react-i18next'
-import cls from './Friends.module.scss'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { Friends as FriendsDeprecated } from '../deprecated/Friends/Friends'
+import { Badge, Box, IconButton, Paper, Stack, Tooltip, Typography } from '@mui/material'
+import { Avatar } from '@/entities/Avatar'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 interface FriendsProps {
     className?: string
@@ -37,32 +38,49 @@ export const Friends = ({ className }: FriendsProps) => {
     if (!initStatus) return <FriendsLoader />
 
     return (
-        <div className={classNames(cls.Friends, {}, [className])}>
-            <ContentContainer className={cls.container}>
-                <h3 className={cls.title}>{t('Друзья')}</h3>
-
-                <div className={cls.friendsWrapper}>
-                    {friends.length
-                        ? friends.map((friend: IUser) => {
-                              return (
-                                  <div
-                                      className={cls.friend}
-                                      key={friend.userId}
-                                      onClick={() => navigate(`/${friend.userId}`)}
-                                  >
-                                      <Avatar
-                                          avatarPath={friend.avatarPath}
-                                          size="M"
-                                          isOnline={friend.isOnline}
-                                          lastSeenOnline={friend.lastSeenOnline}
-                                      />
-                                      <div>{friend.firstName}</div>
-                                  </div>
-                              )
-                          })
-                        : t('У вас еще нет друзей')}
-                </div>
-            </ContentContainer>
-        </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Paper
+                    sx={{
+                        width: '100%',
+                        padding: '16px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        gap: 2,
+                        overflowX: 'auto',
+                    }}
+                    elevation={1}
+                >
+                    <Typography variant="h5">{t('Друзья')}</Typography>
+                    <Box
+                        sx={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'flex-start',
+                            gap: 2,
+                        }}
+                    >
+                        {friends.map((friend) => {
+                            return (
+                                <Stack key={friend.userId} alignItems="center" spacing={1}>
+                                    <Avatar
+                                        avatarPath={friend.avatarPath}
+                                        isOnline={friend.isOnline}
+                                        size="60px"
+                                        firstName={friend.firstName}
+                                        link
+                                        userId={friend.userId}
+                                    />
+                                    <Typography>{friend.firstName}</Typography>
+                                </Stack>
+                            )
+                        })}
+                    </Box>
+                </Paper>
+            }
+            off={<FriendsDeprecated />}
+        />
     )
 }

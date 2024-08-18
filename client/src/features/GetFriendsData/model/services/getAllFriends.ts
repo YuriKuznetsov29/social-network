@@ -9,6 +9,7 @@ interface RequestData {
     userId: string
     limit?: number
     page?: number
+    noLimit?: boolean
 }
 
 export const getAllFriends = createAsyncThunk<Response, string, ThunkConfig<string>>(
@@ -16,7 +17,7 @@ export const getAllFriends = createAsyncThunk<Response, string, ThunkConfig<stri
     async (userId, { rejectWithValue, extra }) => {
         try {
             const response = await extra.api.get<Response>(
-                `${API_URL}/user/${userId}/getAllFriends?_limit=3&_page=1`
+                `${API_URL}/user/${userId}/getAllFriends`
             )
 
             if (!response.data) {

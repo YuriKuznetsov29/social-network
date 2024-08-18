@@ -46,7 +46,13 @@ export const Comment = ({ className, comment }: CommentProps) => {
                             sx={{ bgcolor: red[500] }}
                             alt={userData?.firstName}
                         />
-                        <Stack>
+                        <Box
+                            sx={{
+                                width: '100%',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                            }}
+                        >
                             <Typography variant="body2">
                                 {`${userData?.firstName} ${userData?.lastName}`}
                             </Typography>
@@ -54,7 +60,7 @@ export const Comment = ({ className, comment }: CommentProps) => {
                                 {dayjs(comment.createdAt).locale(i18n.language).toNow(true) +
                                     t(' назад')}
                             </Typography>
-                        </Stack>
+                        </Box>
                     </Box>
                     <Typography variant="body2" color="text.secondary">
                         {comment.body}

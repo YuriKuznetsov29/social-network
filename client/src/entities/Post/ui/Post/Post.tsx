@@ -22,6 +22,7 @@ import {
     Collapse,
     IconButton,
     IconButtonProps,
+    Popover,
     Stack,
     TextField,
     Typography,
@@ -39,6 +40,7 @@ import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
 import { IComment } from '@/features/PostHandler/model/types/comment'
 import { PostFooter } from '../PostFooter/PostFooter'
+import { PostAddOutlined } from '@mui/icons-material'
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean
@@ -133,11 +135,7 @@ export const Post = memo(({ post }: PostProps) => {
                                 alt={author?.firstName}
                             />
                         }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon />
-                            </IconButton>
-                        }
+                        action={<PostOptionsBtn author={post.author} postId={post._id} />}
                         title={`${author?.firstName} ${author?.lastName}`}
                         subheader={dayjs(post.date).locale(i18n.language).toNow(true) + t(' назад')}
                     />

@@ -8,6 +8,18 @@ import { useTranslation } from 'react-i18next'
 import { removePost } from '@/features/PostHandler'
 import cls from './PostOptionsBtn.module.scss'
 import { WhoLikesIt } from '@/entities/WhoLikesIt/ui/WhoLikesIt'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { PostOptionsBtn as PostOptionsBtnDeprecated } from '../deprecated//PostOptionBtn/PostOptionsBtn'
+import {
+    IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+    Popover,
+    Typography,
+} from '@mui/material'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 interface PostOptionsBtnProps {
     className?: string
@@ -54,28 +66,57 @@ export const PostOptionsBtn = ({ className, postId, author }: PostOptionsBtnProp
         dispatch(removePost({ postId }))
     }
 
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget)
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
+
+    const open = Boolean(anchorEl)
+
     return (
-        <div
-            className={classNames(cls.PostOptionsBtn, {}, [className])}
-            onClick={onClickToggleSetting}
-            id="optionBtn"
-            data-testid="post-btn"
-        >
-            <OptionsIcon className={cls.options} />
-
-            <div className={classNames(cls.container, { [cls.active]: show }, [])} id="container">
-                {userData?.userId === author && (
-                    <span data-testid="remove-post" className={cls.btn} onClick={onClickRemovePost}>
-                        {t('Удалить пост')}
-                    </span>
-                )}
-
-                <span className={cls.btn} onClick={onShowModal}>
-                    {t('Кому нравится')}
-                </span>
-            </div>
-
-            <WhoLikesIt isOpen={isOpenWhoLikes} onClose={onCloseModal} postId={postId} />
-        </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <>
+                    <IconButton aria-label="settings" onClick={handleClick}>
+                        <MoreVertIcon />
+                    </IconButton>
+                    <Popover
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                    >
+                        <List>
+                            {userData?.userId === author && (
+                                <ListItem disablePadding onClick={onClickRemovePost}>
+                                    <ListItemButton>
+                                        <ListItemText primary={t('Удалить пост')} />
+                                    </ListItemButton>
+                                </ListItem>
+                            )}
+                            <ListItem disablePadding onClick={onShowModal}>
+                                <ListItemButton>
+                                    <ListItemText primary={t('Кому нравится')} />
+                                </ListItemButton>
+                            </ListItem>
+                        </List>
+                    </Popover>
+                </>
+            }
+            off={<PostOptionsBtnDeprecated postId={postId} author={author} />}
+        />
     )
 }

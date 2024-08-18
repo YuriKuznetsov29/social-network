@@ -89,7 +89,11 @@ export const SettingBtn = ({ className }: SettingBtnProps) => {
                         onClose={handleClose}
                         anchorOrigin={{
                             vertical: 'bottom',
-                            horizontal: 'center',
+                            horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
                         }}
                     >
                         <ButtonGroup orientation="vertical" variant="text">

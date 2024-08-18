@@ -15,6 +15,7 @@ import { useInfiniteScroll } from '@/shared/lib/hook/useInfiniteScroll'
 import cls from './ProfilePage.module.scss'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { Container as MuiContainer, Stack } from '@mui/material'
+import { MobileNavigation } from '@/widgets/MobileNavigation/ui/MobileNavigation'
 
 interface ProfilePageProps {
     className?: string
@@ -49,7 +50,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
                     <Header />
                     <MuiContainer sx={{ display: 'flex' }}>
                         <SideBar />
-                        <Stack spacing={2} width="100%">
+                        <Stack spacing={2} width="100%" maxWidth="892px">
                             <UserData />
                             <Friends />
                             <CreatePost />
@@ -57,6 +58,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
                             <div ref={triggerRef}></div>
                         </Stack>
                     </MuiContainer>
+                    <MobileNavigation />
                 </>
             }
             off={

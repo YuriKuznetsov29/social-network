@@ -89,6 +89,11 @@ export const UserData = ({ className }: UserDataProps) => {
                 >
                     <Stack alignItems={'flex-start'} spacing={2}>
                         <StyledBadge
+                            sx={{
+                                '& .MuiBadge-badge': {
+                                    display: userData.isOnline ? 'block' : 'none',
+                                },
+                            }}
                             overlap="circular"
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             variant="dot"

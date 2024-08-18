@@ -1,7 +1,4 @@
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-import Plane from '@/shared/assets/icons/paper-plane-right-bold.svg'
-import Image from '@/shared/assets/icons/image-bold.svg'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import { createPost } from '@/features/PostHandler/model/services/createPost'
 import $api, { API_URL } from '../../../shared/api/http/index'
@@ -11,7 +8,6 @@ import { notificationsActions } from '@/features/Notifications'
 import { CreatePostLoader } from '@/shared/ui/CreatePostLoader'
 import { getInitPostStatus } from '../model/selectors/getInitPostStatus'
 import { useTranslation } from 'react-i18next'
-import cls from './CreatePost.module.scss'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { CreatePost as CreatePostDeprecated } from './deprecated/CreatePost'
 import { Box, IconButton, Paper, TextField } from '@mui/material'
@@ -36,8 +32,8 @@ interface uploadImageResponse {
 }
 
 export const CreatePost = () => {
+    const [postText, setPostText] = useState('')
     const [imagePath, setImagePath] = useState('')
-    const input = useRef<HTMLInputElement | null>(null)
     const { t } = useTranslation('pages')
 
     const dispatch = useAppDispatch()
@@ -45,20 +41,18 @@ export const CreatePost = () => {
     const init = useAppSelector(getInitPostStatus)
 
     const onClickCreatePost = () => {
-        if (input.current?.innerText.trim() !== '' || imagePath) {
-            console.log(input.current?.innerText)
+        console.log(postText)
+        if (postText.trim() !== '' || imagePath) {
             dispatch(
                 createPost({
                     author: userData.userId,
                     imagePath,
-                    text: input.current?.value || '',
+                    text: postText,
                     t,
                 })
             )
             setImagePath('')
-            if (input.current?.innerText) {
-                input.current.innerText = ''
-            }
+            setPostText('')
         } else {
             dispatch(
                 notificationsActions.setNotification(t('Пост должен содержать текст или фото'))
@@ -107,7 +101,7 @@ export const CreatePost = () => {
                         multiline
                         maxRows={4}
                         fullWidth
-                        ref={input}
+                        onChange={(e) => setPostText(e.target.value)}
                     />
                     <Box
                         sx={{
