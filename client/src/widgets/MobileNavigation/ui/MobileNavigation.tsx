@@ -1,17 +1,31 @@
 import classNames from 'classnames'
 import cls from './MobileNavigation.module.scss'
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material'
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 import RestoreIcon from '@mui/icons-material/Restore'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ArchiveIcon from '@mui/icons-material/Archive'
+import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom'
+import PersonIcon from '@mui/icons-material/Person'
+import FeedIcon from '@mui/icons-material/Feed'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+
+const Link = forwardRef<HTMLAnchorElement, RouterLinkProps>(function Link(itemProps, ref) {
+    return <RouterLink ref={ref} {...itemProps} role={undefined} />
+})
 
 interface MobileNavigationProps {
     className?: string
+    activeBtn?: number
 }
 
-export const MobileNavigation = ({ className }: MobileNavigationProps) => {
-    const [value, setValue] = useState(0)
+export const MobileNavigation = ({ className, activeBtn }: MobileNavigationProps) => {
+    const [value, setValue] = useState(activeBtn || 0)
+
+    // let location = useLocation()
+
+    // console.log(location)
 
     return (
         <Paper
@@ -20,7 +34,8 @@ export const MobileNavigation = ({ className }: MobileNavigationProps) => {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                display: { xl: 'none', lg: 'none', md: 'block' },
+                display: { xl: 'none', lg: 'none', md: 'none' },
+                zIndex: 10,
             }}
             elevation={3}
         >
@@ -28,12 +43,34 @@ export const MobileNavigation = ({ className }: MobileNavigationProps) => {
                 showLabels
                 value={value}
                 onChange={(event, newValue) => {
+                    // console.log(event, newValue)
                     setValue(newValue)
                 }}
             >
-                <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-                <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-                <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+                <BottomNavigationAction
+                    component={Link}
+                    to={'/profile'}
+                    // label="Профиль"
+                    icon={<PersonIcon />}
+                />
+                <BottomNavigationAction
+                    component={Link}
+                    to={'/news'}
+                    // label="Favorites"
+                    icon={<FeedIcon />}
+                />
+                <BottomNavigationAction
+                    component={Link}
+                    to={'/messenger'}
+                    // label="Archive"
+                    icon={<ChatBubbleIcon />}
+                />
+                <BottomNavigationAction
+                    component={Link}
+                    to={'/friends'}
+                    // label="Archive"
+                    icon={<PeopleAltIcon />}
+                />
             </BottomNavigation>
         </Paper>
     )

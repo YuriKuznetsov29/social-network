@@ -7,6 +7,7 @@ import { AnotherUserProfile } from '@/features/GetAnotherUserData/ui/AnotherUser
 import { useMobile } from '@/shared/lib/hook/useMobile'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { Container as MuiContainer, Stack } from '@mui/material'
+import { MobileNavigation } from '@/widgets/MobileNavigation/ui/MobileNavigation'
 
 interface AnotherUserPageProps {
     className?: string
@@ -22,10 +23,15 @@ const AnotherUserPage = ({ className }: AnotherUserPageProps) => {
                     <Header />
                     <MuiContainer sx={{ display: 'flex' }}>
                         <SideBar />
-                        <Stack spacing={2} width="100%" maxWidth="892px">
+                        <Stack
+                            spacing={2}
+                            width="100%"
+                            sx={{ maxWidth: { xl: '892px', lg: '892px', md: '892px' } }}
+                        >
                             <AnotherUserProfile />
                         </Stack>
                     </MuiContainer>
+                    <MobileNavigation />
                 </>
             }
             off={

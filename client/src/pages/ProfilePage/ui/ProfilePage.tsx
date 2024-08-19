@@ -48,9 +48,21 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
             on={
                 <>
                     <Header />
-                    <MuiContainer sx={{ display: 'flex' }}>
+                    <MuiContainer
+                        sx={{
+                            display: 'flex',
+                            pb: {
+                                xs: '56px',
+                                sm: '56px',
+                            },
+                        }}
+                    >
                         <SideBar />
-                        <Stack spacing={2} width="100%" maxWidth="892px">
+                        <Stack
+                            spacing={2}
+                            width="100%"
+                            sx={{ maxWidth: { xl: '892px', lg: '892px', md: '892px' } }}
+                        >
                             <UserData />
                             <Friends />
                             <CreatePost />

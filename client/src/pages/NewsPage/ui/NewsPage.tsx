@@ -13,6 +13,9 @@ import { getNewsLoadingStatus } from '@/entities/News/model/selectors/getNewsLoa
 import { fetchNews } from '@/entities/News/model/services/fetchNews'
 import { MutableRefObject, useEffect, useRef } from 'react'
 import { useInfiniteScroll } from '@/shared/lib/hook/useInfiniteScroll'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { Container as MuiContainer, Box } from '@mui/material'
+import { MobileNavigation } from '@/widgets/MobileNavigation/ui/MobileNavigation'
 
 interface NewsPageProps {
     className?: string
@@ -41,16 +44,37 @@ const NewsPage = ({ className }: NewsPageProps) => {
     }, [userData.friends])
 
     return (
-        <>
-            <Header />
-            <Container className={isMobile ? cls.container : ''}>
-                <SideBar />
-                <section className={cls.contentWrapper}>
-                    <News />
-                    <div ref={triggerRef}></div>
-                </section>
-            </Container>
-        </>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <>
+                    <Header />
+                    <MuiContainer sx={{ display: 'flex' }}>
+                        <SideBar />
+                        <Box
+                            width="100%"
+                            sx={{ maxWidth: { xl: '892px', lg: '892px', md: '892px' } }}
+                        >
+                            <News />
+                            <div ref={triggerRef}></div>
+                        </Box>
+                    </MuiContainer>
+                    <MobileNavigation activeBtn={1} />
+                </>
+            }
+            off={
+                <>
+                    <Header />
+                    <Container className={isMobile ? cls.container : ''}>
+                        <SideBar />
+                        <section className={cls.contentWrapper}>
+                            <News />
+                            <div ref={triggerRef}></div>
+                        </section>
+                    </Container>
+                </>
+            }
+        />
     )
 }
 

@@ -137,6 +137,7 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
                             maxWidth: 360,
                             bgcolor: 'background.paper',
                             position: 'absolute',
+                            zIndex: 10,
                             // bgcolor: theme.palette.grey,
                         }}
                     >

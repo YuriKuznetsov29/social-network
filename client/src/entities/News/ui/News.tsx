@@ -16,6 +16,8 @@ import { newsReducer } from '../model/slice/newsSlice'
 import { useTranslation } from 'react-i18next'
 import cls from './News.module.scss'
 import { getNewsInitialized } from '../model/selectors/getNewsInitialized'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { Stack } from '@mui/material'
 
 interface NewsProps {
     className?: string
@@ -36,12 +38,24 @@ export const News = ({ className }: NewsProps) => {
     }
 
     return (
-        // <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
-        <div data-testid="news" className={classNames(cls.News, {}, [className])}>
-            {news && news.length
-                ? news.map((post) => <Post key={post._id} post={post} />)
-                : t('У вас пока нет новостей')}
-        </div>
-        // </DynamicModuleLoader>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Stack spacing={2}>
+                    {news && news.length
+                        ? news.map((post) => <Post key={post._id} post={post} />)
+                        : t('У вас пока нет новостей')}
+                </Stack>
+            }
+            off={
+                // <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
+                <div data-testid="news" className={classNames(cls.News, {}, [className])}>
+                    {news && news.length
+                        ? news.map((post) => <Post key={post._id} post={post} />)
+                        : t('У вас пока нет новостей')}
+                </div>
+                // </DynamicModuleLoader>
+            }
+        />
     )
 }

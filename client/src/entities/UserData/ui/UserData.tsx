@@ -73,8 +73,6 @@ export const UserData = ({ className }: UserDataProps) => {
 
     if (loading || !userInit) return <UserDataLoader />
 
-    console.log(userData)
-
     return (
         <ToggleFeatures
             feature="isAppRedesigned"

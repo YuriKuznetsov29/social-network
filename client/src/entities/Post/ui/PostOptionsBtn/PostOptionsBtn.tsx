@@ -1,12 +1,9 @@
-import classNames from 'classnames'
-import OptionsIcon from '@/shared/assets/icons/options.svg'
 import { useCallback, useEffect, useState } from 'react'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
 import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import { useTranslation } from 'react-i18next'
 import { removePost } from '@/features/PostHandler'
-import cls from './PostOptionsBtn.module.scss'
 import { WhoLikesIt } from '@/entities/WhoLikesIt/ui/WhoLikesIt'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { PostOptionsBtn as PostOptionsBtnDeprecated } from '../deprecated//PostOptionBtn/PostOptionsBtn'
@@ -33,6 +30,7 @@ export const PostOptionsBtn = ({ className, postId, author }: PostOptionsBtnProp
     const dispatch = useAppDispatch()
     const userData = useAppSelector(getUserData)
     const [isOpenWhoLikes, setIsOpenWhoLikes] = useState(false)
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
     const onCloseModal = useCallback(() => {
         setIsOpenWhoLikes(false)
@@ -65,8 +63,6 @@ export const PostOptionsBtn = ({ className, postId, author }: PostOptionsBtnProp
     const onClickRemovePost = () => {
         dispatch(removePost({ postId }))
     }
-
-    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget)

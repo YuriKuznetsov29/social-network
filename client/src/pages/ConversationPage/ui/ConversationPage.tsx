@@ -4,7 +4,9 @@ import { Dialog } from '@/entities/Dialog'
 import { useMobile } from '@/shared/lib/hook/useMobile'
 import cls from './ConversationPage.module.scss'
 import { SideBar } from '@/widgets/SideBar'
-
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { Container as MuiContainer, Box } from '@mui/material'
+import { MobileNavigation } from '@/widgets/MobileNavigation/ui/MobileNavigation'
 interface ConversationPageProps {
     className?: string
 }
@@ -12,13 +14,41 @@ interface ConversationPageProps {
 export const ConversationPage = ({ className }: ConversationPageProps) => {
     const isMobile = useMobile()
     return (
-        <>
-            <Header />
-            <Container className={isMobile ? cls.contentContainer : ''}>
-                {!isMobile && <SideBar />}
-                <Dialog />
-            </Container>
-        </>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <>
+                    <Header />
+                    <MuiContainer
+                        sx={{
+                            display: 'flex',
+                            pb: {
+                                xs: '56px',
+                                sm: '56px',
+                            },
+                        }}
+                    >
+                        <SideBar />
+                        <Box
+                            width="100%"
+                            sx={{ maxWidth: { xl: '892px', lg: '892px', md: '892px' } }}
+                        >
+                            <Dialog />
+                        </Box>
+                    </MuiContainer>
+                    <MobileNavigation activeBtn={2} />
+                </>
+            }
+            off={
+                <>
+                    <Header />
+                    <Container className={isMobile ? cls.contentContainer : ''}>
+                        {!isMobile && <SideBar />}
+                        <Dialog />
+                    </Container>
+                </>
+            }
+        />
     )
 }
 

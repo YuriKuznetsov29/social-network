@@ -11,6 +11,8 @@ import { getLoadingDialogStatus } from '../model/services/getLoadingDialogStatus
 import { getDialogs } from '../model/slice/MessengerSlice'
 import { fetchDialogs } from '../model/services/fetchDialogs'
 import cls from './Messenger.module.scss'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { Divider, Paper } from '@mui/material'
 
 interface MessengerProps {
     className?: string
@@ -33,23 +35,59 @@ export const Messenger = ({ className }: MessengerProps) => {
     if (isLoading) return <MessengerLoader />
 
     return (
-        <div data-testid="dialogs" className={classNames(cls.Messenger, {}, [className])}>
-            {userData?.conversations?.length ? (
-                <ContentContainer className={cls.contentContainer}>
-                    {dialogs.map(({ message, companion, conversation }) => {
-                        return (
-                            <ConversationLink
-                                key={conversation.roomId}
-                                message={message}
-                                companion={companion}
-                                conversation={conversation}
-                            />
-                        )
-                    })}
-                </ContentContainer>
-            ) : (
-                t('У вас еще нет диалогов')
-            )}
-        </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Paper
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        // gap: 1,
+                        // justifyContent: 'space-between',
+                    }}
+                    elevation={1}
+                >
+                    {userData?.conversations?.length ? (
+                        <>
+                            {dialogs.map(({ message, companion, conversation }, i) => {
+                                return (
+                                    <>
+                                        <ConversationLink
+                                            key={conversation.roomId}
+                                            message={message}
+                                            companion={companion}
+                                            conversation={conversation}
+                                        />
+                                        {/* {i !== dialogs.length - 1 && <Divider />} */}
+                                    </>
+                                )
+                            })}
+                        </>
+                    ) : (
+                        t('У вас еще нет диалогов')
+                    )}
+                </Paper>
+            }
+            off={
+                <div data-testid="dialogs" className={classNames(cls.Messenger, {}, [className])}>
+                    {userData?.conversations?.length ? (
+                        <ContentContainer className={cls.contentContainer}>
+                            {dialogs.map(({ message, companion, conversation }) => {
+                                return (
+                                    <ConversationLink
+                                        key={conversation.roomId}
+                                        message={message}
+                                        companion={companion}
+                                        conversation={conversation}
+                                    />
+                                )
+                            })}
+                        </ContentContainer>
+                    ) : (
+                        t('У вас еще нет диалогов')
+                    )}
+                </div>
+            }
+        />
     )
 }

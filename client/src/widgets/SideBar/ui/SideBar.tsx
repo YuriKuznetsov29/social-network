@@ -45,7 +45,13 @@ export const SideBar = ({ className }: SideBarProps) => {
         <ToggleFeatures
             feature="isAppRedesigned"
             on={
-                <Box maxWidth="260px" width="100%">
+                <Box
+                    maxWidth="260px"
+                    width="100%"
+                    sx={{
+                        display: { xl: 'block', lg: 'block', md: 'block', sm: 'none', xs: 'none' },
+                    }}
+                >
                     <List
                         sx={{
                             width: '100%',
