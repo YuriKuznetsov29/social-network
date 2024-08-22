@@ -1,9 +1,6 @@
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender'
 import { screen } from '@testing-library/dom'
-import { userEvent } from '@testing-library/user-event'
 import { AnotherUserProfile } from './AnotherUserProfile'
-import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
-import { getAnotherUserData } from '../model/services/getAnotherUserData'
 
 const user = {
     userId: '65232001e84843c3b5a6404e',

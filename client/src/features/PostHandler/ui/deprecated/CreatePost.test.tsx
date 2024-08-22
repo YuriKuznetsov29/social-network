@@ -3,7 +3,7 @@ import { screen, waitFor } from '@testing-library/dom'
 import { userEvent } from '@testing-library/user-event'
 import { CreatePost } from './CreatePost'
 import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
-import { createPost } from '../model/services/createPost'
+import { createPost } from '../../model/services/createPost'
 
 describe('FoundUsersList.test', () => {
     test('test render', async () => {
