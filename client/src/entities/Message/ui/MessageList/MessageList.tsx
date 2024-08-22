@@ -4,6 +4,8 @@ import { Message } from '../Message/Message'
 import { MessageData } from '@/shared/lib/hook/useChat'
 import { useInfiniteScroll } from '@/shared/lib/hook/useInfiniteScroll'
 import cls from './MessageList.module.scss'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { Box, CardContent } from '@mui/material'
 
 interface MessageListProps {
     className?: string
@@ -43,29 +45,68 @@ export const MessageList = (props: MessageListProps) => {
     }, [messages])
 
     return (
-        <div className={classNames(cls.MessageList, {}, [className])} ref={wrapperRef}>
-            <div ref={triggerRef} />
-            {messages.length > 0 &&
-                messages.map((message, i) => {
-                    if (i === messages.length - (messages.length - 20)) {
-                        return (
-                            <Message
-                                scrollRef={firstMessage}
-                                message={message}
-                                key={message.messageId}
-                                removeMessage={removeMessage}
-                            />
-                        )
-                    }
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <CardContent
+                    sx={{
+                        height: '100%',
+                        overflowY: 'auto',
+                    }}
+                    ref={wrapperRef}
+                >
+                    <Box>
+                        <div ref={triggerRef} />
+                        {messages.length > 0 &&
+                            messages.map((message, i) => {
+                                if (i === messages.length - (messages.length - 20)) {
+                                    return (
+                                        <Message
+                                            scrollRef={firstMessage}
+                                            message={message}
+                                            key={message.messageId}
+                                            removeMessage={removeMessage}
+                                        />
+                                    )
+                                }
 
-                    return (
-                        <Message
-                            message={message}
-                            key={message.messageId}
-                            removeMessage={removeMessage}
-                        />
-                    )
-                })}
-        </div>
+                                return (
+                                    <Message
+                                        message={message}
+                                        key={message.messageId}
+                                        removeMessage={removeMessage}
+                                    />
+                                )
+                            })}
+                    </Box>
+                </CardContent>
+            }
+            off={
+                <div className={classNames(cls.MessageList, {}, [className])} ref={wrapperRef}>
+                    <div ref={triggerRef} />
+                    {messages.length > 0 &&
+                        messages.map((message, i) => {
+                            if (i === messages.length - (messages.length - 20)) {
+                                return (
+                                    <Message
+                                        scrollRef={firstMessage}
+                                        message={message}
+                                        key={message.messageId}
+                                        removeMessage={removeMessage}
+                                    />
+                                )
+                            }
+
+                            return (
+                                <Message
+                                    message={message}
+                                    key={message.messageId}
+                                    removeMessage={removeMessage}
+                                />
+                            )
+                        })}
+                </div>
+            }
+        />
     )
 }

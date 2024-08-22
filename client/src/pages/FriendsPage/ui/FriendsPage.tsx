@@ -19,7 +19,15 @@ const FriendsPage = ({ className }: FriendsPageProps) => {
             on={
                 <>
                     <Header />
-                    <MuiContainer sx={{ display: 'flex' }}>
+                    <MuiContainer
+                        sx={{
+                            display: 'flex',
+                            pb: {
+                                xs: '72px',
+                                sm: '72px',
+                            },
+                        }}
+                    >
                         <SideBar />
                         <Stack
                             spacing={2}

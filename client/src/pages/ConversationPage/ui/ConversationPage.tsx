@@ -25,7 +25,9 @@ export const ConversationPage = ({ className }: ConversationPageProps) => {
                             pb: {
                                 xs: '56px',
                                 sm: '56px',
+                                md: '0',
                             },
+                            height: 'calc(100dvh - 88px)',
                         }}
                     >
                         <SideBar />

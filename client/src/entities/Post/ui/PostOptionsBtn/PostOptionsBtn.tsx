@@ -96,6 +96,11 @@ export const PostOptionsBtn = ({ className, postId, author }: PostOptionsBtnProp
                         }}
                     >
                         <List>
+                            <ListItem disablePadding onClick={onShowModal}>
+                                <ListItemButton>
+                                    <ListItemText primary={t('Кому нравится')} />
+                                </ListItemButton>
+                            </ListItem>
                             {userData?.userId === author && (
                                 <ListItem disablePadding onClick={onClickRemovePost}>
                                     <ListItemButton>
@@ -103,13 +108,9 @@ export const PostOptionsBtn = ({ className, postId, author }: PostOptionsBtnProp
                                     </ListItemButton>
                                 </ListItem>
                             )}
-                            <ListItem disablePadding onClick={onShowModal}>
-                                <ListItemButton>
-                                    <ListItemText primary={t('Кому нравится')} />
-                                </ListItemButton>
-                            </ListItem>
                         </List>
                     </Popover>
+                    <WhoLikesIt isOpen={isOpenWhoLikes} onClose={onCloseModal} postId={postId} />
                 </>
             }
             off={<PostOptionsBtnDeprecated postId={postId} author={author} />}

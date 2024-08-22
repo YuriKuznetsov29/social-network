@@ -9,6 +9,10 @@ import { getUserData } from '@/entities/UserData'
 import { useTranslation } from 'react-i18next'
 import cls from './MessageInput.module.scss'
 import { useMobile } from '@/shared/lib/hook/useMobile'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { MessageInput as MessageInputDeprecated } from '../deprecated/MessageInput/MessageInput'
+import { CardContent, IconButton, Stack, TextField } from '@mui/material'
+import SendIcon from '@mui/icons-material/Send'
 
 interface MessageInputProps {
     className?: string
@@ -25,7 +29,7 @@ export const MessageInput = memo((props: MessageInputProps) => {
     const userData = useAppSelector(getUserData)
 
     const onClickSendMessage = () => {
-        if (text) {
+        if (text.trim()) {
             const message = {
                 messageId: nanoid(),
                 messageType: 'text',
@@ -41,7 +45,8 @@ export const MessageInput = memo((props: MessageInputProps) => {
 
     const onEnterSend = useCallback(
         (e: KeyboardEvent) => {
-            if (e.key === 'Enter') {
+            // console.log(e.key === 'Enter' && !e.shiftKey)
+            if (e.key === 'Enter' && !e.shiftKey) {
                 onClickSendMessage()
             }
         },
@@ -60,15 +65,39 @@ export const MessageInput = memo((props: MessageInputProps) => {
     }
 
     return (
-        <div className={classNames(cls.MessageInput, {}, [className])}>
-            <Input
-                placeholder={t('Напишите сообщение...')}
-                className={cls.inputMessage}
-                value={text}
-                onChange={setText}
-                onBlur={onBlurScroll}
-            />
-            <Plane className={cls.plane} onClick={onClickSendMessage} />
-        </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <CardContent>
+                    <Stack direction="row" alignItems="center" spacing={2}>
+                        <TextField
+                            fullWidth
+                            placeholder={t('Напишите сообщение...')}
+                            variant="outlined"
+                            multiline
+                            maxRows={4}
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                            onBlur={onBlurScroll}
+                            // onChange={(e) => setCommentText(e.target.value)}
+                        />
+                        <IconButton onClick={onClickSendMessage}>
+                            <SendIcon />
+                        </IconButton>
+                    </Stack>
+                </CardContent>
+            }
+            off={<MessageInputDeprecated roomId={roomId} sendMessage={sendMessage} />}
+        />
+        // <div className={classNames(cls.MessageInput, {}, [className])}>
+        //     <Input
+        //         placeholder={t('Напишите сообщение...')}
+        //         className={cls.inputMessage}
+        //         value={text}
+        //         onChange={setText}
+        //         onBlur={onBlurScroll}
+        //     />
+        //     <Plane className={cls.plane} onClick={onClickSendMessage} />
+        // </div>
     )
 })

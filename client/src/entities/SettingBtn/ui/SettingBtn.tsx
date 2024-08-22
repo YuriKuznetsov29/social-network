@@ -17,7 +17,9 @@ import { SettingBtn as SettingBtnDeprecated } from './deprecated/SettingBtn'
 import { Button, Popover, Typography, Link, ButtonGroup, Avatar } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import LogoutIcon from '@mui/icons-material/Logout'
+import FiberNewIcon from '@mui/icons-material/FiberNew'
 import { SERVER_URL } from '@/shared/api/http'
+import { LOCAL_STORAGE_LAST_DESIGN_KEY } from '@/shared/consts/localStorage'
 
 interface SettingBtnProps {
     className?: string
@@ -39,6 +41,11 @@ export const SettingBtn = ({ className }: SettingBtnProps) => {
         if (!(e.target as HTMLElement).closest('#container')) {
             setShow((prev) => !prev)
         }
+    }
+
+    const onClickNewVersion = () => {
+        localStorage.setItem(LOCAL_STORAGE_LAST_DESIGN_KEY, 'old')
+        location.reload()
     }
 
     useEffect(() => {
@@ -106,6 +113,7 @@ export const SettingBtn = ({ className }: SettingBtnProps) => {
                             <Button startIcon={<LogoutIcon />} onClick={onSignOut}>
                                 {t('Выйти')}
                             </Button>
+                            <Button onClick={onClickNewVersion}>{t('Старая версия')}</Button>
                         </ButtonGroup>
                     </Popover>
                 </div>

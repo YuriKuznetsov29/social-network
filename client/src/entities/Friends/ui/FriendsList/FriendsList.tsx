@@ -3,6 +3,7 @@ import { Avatar } from '@/entities/Avatar'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { IUser, getUserData } from '@/entities/UserData'
 import {
+    addFriend,
     getAllFriends,
     getFriendsData,
     getFriendsLoadingStatus,
@@ -14,7 +15,6 @@ import { Conversations } from '@/features/AuthByEmail/model/types/response/Conve
 import { useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import { addConversation } from '@/features/Messenger'
-import { Button } from '@/shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
 import BirthIcon from '@/shared/assets/icons/gift-bold.svg'
 import HomeIcon from '@/shared/assets/icons/house-bold.svg'
@@ -24,6 +24,22 @@ import dayjs from 'dayjs'
 import cls from './FriendsList.module.scss'
 import { AnotherUserLoader } from '@/shared/ui/AnotherUserLoader'
 import { Input } from '@/shared/ui/Input/Input'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { FriendsList as FriendsListDeprecated } from '../deprecated/FriendsList/FriendsList'
+import {
+    Button,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Paper,
+    Stack,
+    Typography,
+} from '@mui/material'
+import CakeIcon from '@mui/icons-material/Cake'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import EmailIcon from '@mui/icons-material/Email'
 
 interface FriendsListProps {
     className?: string
@@ -49,6 +65,18 @@ export const FriendsList = ({ className }: FriendsListProps) => {
         friendLastName: string
     ) => {
         dispatch(removeFriend({ friendId, userId, friendFirstName, friendLastName }))
+    }
+
+    const onClickAddFriend = (friendId: string, firstName: string, lastName: string) => {
+        dispatch(
+            addFriend({
+                friendId: friendId,
+                userId,
+                friendFirstName: firstName,
+                friendLastName: lastName,
+                t,
+            })
+        )
     }
 
     const isConversationCreated = (anotherUserId: string) => {
@@ -87,91 +115,320 @@ export const FriendsList = ({ className }: FriendsListProps) => {
     //     setTime((prev) => +prev - 1000 + '')
     // }
 
+    const isFriend = (friendId: string) => {
+        return userId !== friendId
+    }
+
+    console.log(friends.length)
+
     return (
-        <>
-            {friends.length ? (
-                <div data-testid="friends" className={cls.listContainer}>
-                    {friends.map((friend: IUser) => (
-                        <ContentContainer className={cls.contentWrapper} key={friend.userId}>
-                            <div className={cls.dataWrapper}>
-                                <Avatar
-                                    avatarPath={friend.avatarPath}
-                                    size="XL"
-                                    isOnline={friend.isOnline}
-                                    lastSeenOnline={friend.lastSeenOnline}
-                                    className={cls.avatar}
-                                />
-                                <h2 className={cls.name}>
-                                    <div>{friend.firstName}</div>
-                                    <div>{friend.lastName}</div>
-                                </h2>
-                            </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <>
+                    {friends.length ? (
+                        friends.map((friend) => {
+                            return (
+                                <>
+                                    <Paper
+                                        sx={{
+                                            padding: '16px',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                        }}
+                                        elevation={1}
+                                    >
+                                        <Stack alignItems={'flex-start'} spacing={2}>
+                                            <Avatar
+                                                size="160px"
+                                                firstName={friend.firstName}
+                                                avatarPath={friend.avatarPath}
+                                                isOnline={friend.isOnline}
+                                            />
+                                            <Typography variant="h5" component="h1">
+                                                {`${friend.firstName} ${friend.lastName}`}
+                                            </Typography>
+                                        </Stack>
+                                        <Stack>
+                                            {!friend.isOnline && (
+                                                <Typography
+                                                    align="center"
+                                                    variant="body1"
+                                                    component="div"
+                                                >
+                                                    {`Был(а) в сети ${
+                                                        dayjs(friend.lastSeenOnline)
+                                                            .locale(i18n.language)
+                                                            .toNow(true) + t(' назад')
+                                                    }`}
+                                                </Typography>
+                                            )}
 
-                            <div className={cls.valueWrapper}>
-                                <div className={cls.valueContainer}>
-                                    <div>
-                                        <div className={cls.valueTitle}>
-                                            <BirthIcon className={cls.icon} />
-                                            {t('День рождения')}
-                                        </div>
-                                        <div className={cls.valueTitle}>
-                                            <HomeIcon className={cls.icon} />
-                                            {t('Город')}
-                                        </div>
-                                        <div className={cls.valueTitle}>
-                                            <FriendsIcon className={cls.icon} />
-                                            {t('Друзья ')}
-                                        </div>
-                                        <div className={cls.valueTitle}>
-                                            <PostIcon className={cls.icon} />
-                                            {t('Посты')}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            {dayjs(friend.birthDay.split('.').reverse().join('-'))
-                                                .locale('ru')
-                                                .format('D MMMM YYYY')}
-                                        </div>
-                                        <div>{friend.city}</div>
-                                        <div>{friend.friends?.length}</div>
-                                        <div>5</div>
-                                    </div>
-                                </div>
-
-                                <Button
-                                    className={cls.addFriendBtn}
-                                    onClick={() =>
-                                        onClickRemoveFriend(
-                                            friend.userId,
-                                            friend.firstName,
-                                            friend.lastName
-                                        )
-                                    }
+                                            <List dense>
+                                                <ListItem>
+                                                    <ListItemIcon>
+                                                        <CakeIcon />
+                                                    </ListItemIcon>
+                                                    <ListItemText
+                                                        primary={`${t('День рождения')} ${dayjs(
+                                                            friend.birthDay
+                                                                .split('.')
+                                                                .reverse()
+                                                                .join('-')
+                                                        )
+                                                            .locale(i18n.language)
+                                                            .format('D MMMM YYYY')}`}
+                                                        // secondary={t('День рождения')}
+                                                    />
+                                                </ListItem>
+                                                <ListItem>
+                                                    <ListItemIcon>
+                                                        <LocationOnIcon />
+                                                    </ListItemIcon>
+                                                    <ListItemText
+                                                        primary={`${t('Город')} ${friend.city}`}
+                                                    />
+                                                </ListItem>
+                                                <ListItem>
+                                                    <ListItemIcon>
+                                                        <ChatBubbleIcon />
+                                                    </ListItemIcon>
+                                                    <ListItemText
+                                                        primary={`${t('Друзья')} ${friend.friends
+                                                            ?.length}`}
+                                                    />
+                                                </ListItem>
+                                                <ListItem>
+                                                    <ListItemIcon>
+                                                        <EmailIcon />
+                                                    </ListItemIcon>
+                                                    <ListItemText
+                                                        primary={`${t('Посты')} ${friend.posts}`}
+                                                    />
+                                                </ListItem>
+                                            </List>
+                                            <Stack spacing={2}>
+                                                <Button
+                                                    variant="outlined"
+                                                    onClick={() =>
+                                                        onClickRemoveFriend(
+                                                            friend.userId,
+                                                            friend.firstName,
+                                                            friend.lastName
+                                                        )
+                                                    }
+                                                >
+                                                    {t('Удалить из друзей')}
+                                                </Button>
+                                                <Button
+                                                    onClick={() =>
+                                                        createConversation(friend.userId)
+                                                    }
+                                                    variant="outlined"
+                                                >
+                                                    {t('Написать сообщение')}
+                                                </Button>
+                                            </Stack>
+                                        </Stack>
+                                    </Paper>
+                                </>
+                            )
+                        })
+                    ) : (
+                        <Paper
+                            sx={{
+                                padding: '16px',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                            }}
+                            elevation={1}
+                        >
+                            <Typography>{t('У вас еще нет друзей')}</Typography>
+                        </Paper>
+                    )}
+                </>
+            }
+            off={
+                <>
+                    {friends.length ? (
+                        <div data-testid="friends" className={cls.listContainer}>
+                            {friends.map((friend: IUser) => (
+                                <ContentContainer
+                                    className={cls.contentWrapper}
+                                    key={friend.userId}
                                 >
-                                    {t('Удалить из друзей')}
-                                </Button>
+                                    <div className={cls.dataWrapper}>
+                                        <Avatar
+                                            avatarPath={friend.avatarPath}
+                                            size="XL"
+                                            isOnline={friend.isOnline}
+                                            lastSeenOnline={friend.lastSeenOnline}
+                                            className={cls.avatar}
+                                        />
+                                        <h2 className={cls.name}>
+                                            <div>{friend.firstName}</div>
+                                            <div>{friend.lastName}</div>
+                                        </h2>
+                                    </div>
 
-                                <Button
-                                    className={cls.messageBtn}
-                                    onClick={() => createConversation(friend.userId)}
-                                >
-                                    {t('Написать сообщение')}
-                                </Button>
-                            </div>
-                        </ContentContainer>
-                    ))}
-                    {/* <Input value={time} onChange={setTime} />
+                                    <div className={cls.valueWrapper}>
+                                        <div className={cls.valueContainer}>
+                                            <div>
+                                                <div className={cls.valueTitle}>
+                                                    <BirthIcon className={cls.icon} />
+                                                    {t('День рождения')}
+                                                </div>
+                                                <div className={cls.valueTitle}>
+                                                    <HomeIcon className={cls.icon} />
+                                                    {t('Город')}
+                                                </div>
+                                                <div className={cls.valueTitle}>
+                                                    <FriendsIcon className={cls.icon} />
+                                                    {t('Друзья ')}
+                                                </div>
+                                                <div className={cls.valueTitle}>
+                                                    <PostIcon className={cls.icon} />
+                                                    {t('Посты')}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    {dayjs(
+                                                        friend.birthDay
+                                                            .split('.')
+                                                            .reverse()
+                                                            .join('-')
+                                                    )
+                                                        .locale('ru')
+                                                        .format('D MMMM YYYY')}
+                                                </div>
+                                                <div>{friend.city}</div>
+                                                <div>{friend.friends?.length}</div>
+                                                <div>5</div>
+                                            </div>
+                                        </div>
+
+                                        <Button
+                                            className={cls.addFriendBtn}
+                                            onClick={() =>
+                                                onClickRemoveFriend(
+                                                    friend.userId,
+                                                    friend.firstName,
+                                                    friend.lastName
+                                                )
+                                            }
+                                        >
+                                            {t('Удалить из друзей')}
+                                        </Button>
+
+                                        <Button
+                                            className={cls.messageBtn}
+                                            onClick={() => createConversation(friend.userId)}
+                                        >
+                                            {t('Написать сообщение')}
+                                        </Button>
+                                    </div>
+                                </ContentContainer>
+                            ))}
+                            {/* <Input value={time} onChange={setTime} />
                     <div>{new Date(+time).toDateString()}</div>
                     <button onClick={up}>+</button>
                     <button onClick={down}>-</button>
                     {dayjs(new Date(+time))
                         .locale(i18n.language + '-short')
                         .toNow(true)} */}
-                </div>
-            ) : (
-                <div data-testid="friends-page">{t('У вас еще нет друзей')}</div>
-            )}
-        </>
+                        </div>
+                    ) : (
+                        <div data-testid="friends-page">{t('У вас еще нет друзей')}</div>
+                    )}
+                </>
+            }
+        />
+
+        // <>
+        //     {friends.length ? (
+        //         <div data-testid="friends" className={cls.listContainer}>
+        //             {friends.map((friend: IUser) => (
+        //                 <ContentContainer className={cls.contentWrapper} key={friend.userId}>
+        //                     <div className={cls.dataWrapper}>
+        //                         <Avatar
+        //                             avatarPath={friend.avatarPath}
+        //                             size="XL"
+        //                             isOnline={friend.isOnline}
+        //                             lastSeenOnline={friend.lastSeenOnline}
+        //                             className={cls.avatar}
+        //                         />
+        //                         <h2 className={cls.name}>
+        //                             <div>{friend.firstName}</div>
+        //                             <div>{friend.lastName}</div>
+        //                         </h2>
+        //                     </div>
+
+        //                     <div className={cls.valueWrapper}>
+        //                         <div className={cls.valueContainer}>
+        //                             <div>
+        //                                 <div className={cls.valueTitle}>
+        //                                     <BirthIcon className={cls.icon} />
+        //                                     {t('День рождения')}
+        //                                 </div>
+        //                                 <div className={cls.valueTitle}>
+        //                                     <HomeIcon className={cls.icon} />
+        //                                     {t('Город')}
+        //                                 </div>
+        //                                 <div className={cls.valueTitle}>
+        //                                     <FriendsIcon className={cls.icon} />
+        //                                     {t('Друзья ')}
+        //                                 </div>
+        //                                 <div className={cls.valueTitle}>
+        //                                     <PostIcon className={cls.icon} />
+        //                                     {t('Посты')}
+        //                                 </div>
+        //                             </div>
+        //                             <div>
+        //                                 <div>
+        //                                     {dayjs(friend.birthDay.split('.').reverse().join('-'))
+        //                                         .locale('ru')
+        //                                         .format('D MMMM YYYY')}
+        //                                 </div>
+        //                                 <div>{friend.city}</div>
+        //                                 <div>{friend.friends?.length}</div>
+        //                                 <div>5</div>
+        //                             </div>
+        //                         </div>
+
+        //                         <Button
+        //                             className={cls.addFriendBtn}
+        //                             onClick={() =>
+        //                                 onClickRemoveFriend(
+        //                                     friend.userId,
+        //                                     friend.firstName,
+        //                                     friend.lastName
+        //                                 )
+        //                             }
+        //                         >
+        //                             {t('Удалить из друзей')}
+        //                         </Button>
+
+        //                         <Button
+        //                             className={cls.messageBtn}
+        //                             onClick={() => createConversation(friend.userId)}
+        //                         >
+        //                             {t('Написать сообщение')}
+        //                         </Button>
+        //                     </div>
+        //                 </ContentContainer>
+        //             ))}
+        //             {/* <Input value={time} onChange={setTime} />
+        //             <div>{new Date(+time).toDateString()}</div>
+        //             <button onClick={up}>+</button>
+        //             <button onClick={down}>-</button>
+        //             {dayjs(new Date(+time))
+        //                 .locale(i18n.language + '-short')
+        //                 .toNow(true)} */}
+        //         </div>
+        //     ) : (
+        //         <div data-testid="friends-page">{t('У вас еще нет друзей')}</div>
+        //     )}
+        // </>
     )
 }

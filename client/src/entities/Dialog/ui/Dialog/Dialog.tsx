@@ -10,6 +10,11 @@ import { MessageInput } from '../MessageInput/MessageInput'
 import { DialogHeader } from '../DialogHeader/DialogHeader'
 import cls from './Dialog.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { Dialog as DialogDeprecated } from '../deprecated/Dialog/Dialog'
+import { Card, CardContent, CardHeader, Divider, IconButton, Stack, TextField } from '@mui/material'
+import { Avatar } from '@/entities/Avatar'
+import SendIcon from '@mui/icons-material/Send'
 
 interface DialogProps {
     className?: string
@@ -37,17 +42,31 @@ export const Dialog = ({ className }: DialogProps) => {
     const { messages, sendMessage, removeMessage, loadMore, hasMore } = useChat(roomId)
 
     return (
-        <div className={cls.container}>
-            <ContentContainer className={cls.contentContainer}>
-                <DialogHeader roomId={roomId} />
-                <MessageList
-                    messages={messages}
-                    hasMore={hasMore}
-                    removeMessage={removeMessage}
-                    loadMore={loadMore}
-                />
-                <MessageInput roomId={roomId} sendMessage={sendMessage} />
-            </ContentContainer>
-        </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Card
+                    sx={{
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    <DialogHeader roomId={roomId} />
+                    <Divider />
+
+                    <MessageList
+                        messages={messages}
+                        hasMore={hasMore}
+                        removeMessage={removeMessage}
+                        loadMore={loadMore}
+                    />
+                    <Divider />
+                    <MessageInput roomId={roomId} sendMessage={sendMessage} />
+                </Card>
+            }
+            off={<DialogDeprecated />}
+        />
     )
 }

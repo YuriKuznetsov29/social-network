@@ -98,19 +98,17 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
         validationSchema: validationSchema,
         onSubmit: (values: Values) => {
             const { firstName, lastName, email, password, gender, birthDay, city } = values
-            // dispatch(
-            //     signUpByEmail({
-            //         firstName,
-            //         lastName,
-            //         email,
-            //         password,
-            //         gender,
-            //         birthDay,
-            //         city,
-            //     })
-            // )
-
-            console.log(values, 'values')
+            dispatch(
+                signUpByEmail({
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                    gender,
+                    birthDay: birthDay as unknown as string,
+                    city,
+                })
+            )
         },
     })
 

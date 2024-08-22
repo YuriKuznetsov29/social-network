@@ -138,6 +138,8 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
                             bgcolor: 'background.paper',
                             position: 'absolute',
                             zIndex: 10,
+                            maxHeight: '400px',
+                            overflowY: 'auto',
                             // bgcolor: theme.palette.grey,
                         }}
                     >

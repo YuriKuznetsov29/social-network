@@ -4,6 +4,7 @@ import { AuthSchema } from '../types/authSchema'
 import { signUpByEmail } from '../services/signUpByEmail/signUpByEmail'
 import { checkAuth } from '../services/checkAuth/checkAuth'
 import { signOut } from '../services/signOut/signOut'
+import { changeUserData } from '../services/changeUserData/changeUserData'
 
 export interface signInState {
     value: number
@@ -70,6 +71,15 @@ export const authSlice = createSlice({
             .addCase(signOut.fulfilled, (state) => {
                 state.isAuth = false
                 state.initAuth = false
+            })
+            .addCase(changeUserData.fulfilled, (state) => {
+                state.isLoading = false
+            })
+            .addCase(changeUserData.rejected, (state) => {
+                state.isLoading = false
+            })
+            .addCase(changeUserData.pending, (state) => {
+                state.isLoading = true
             })
     },
 })

@@ -48,7 +48,15 @@ root.render(
         <ErrorBoundary>
             <StoreProvider>
                 <BrowserRouter>
-                    <App />
+                    <ToggleFeatures
+                        feature="isAppRedesigned"
+                        on={<App />}
+                        off={
+                            <ThemeProvider>
+                                <App />
+                            </ThemeProvider>
+                        }
+                    />
                 </BrowserRouter>
             </StoreProvider>
         </ErrorBoundary>

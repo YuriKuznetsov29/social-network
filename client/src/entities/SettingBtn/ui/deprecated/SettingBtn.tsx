@@ -13,6 +13,7 @@ import ProfileIcon from '@/shared/assets/icons/user-circle-bold.svg'
 import { LangSwitcher } from '@/shared/ui/LangSwitcher/LangSwitcher'
 import { useTranslation } from 'react-i18next'
 import cls from './SettingBtn.module.scss'
+import { LOCAL_STORAGE_LAST_DESIGN_KEY } from '@/shared/consts/localStorage'
 
 interface SettingBtnProps {
     className?: string
@@ -24,6 +25,11 @@ export const SettingBtn = ({ className }: SettingBtnProps) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { t } = useTranslation('pages')
+
+    const onClickNewVersion = () => {
+        localStorage.setItem(LOCAL_STORAGE_LAST_DESIGN_KEY, 'new')
+        location.reload()
+    }
 
     const onSignOut = () => {
         dispatch(signOut({ navigate }))
@@ -73,6 +79,9 @@ export const SettingBtn = ({ className }: SettingBtnProps) => {
                 <span className={cls.link} onClick={onSignOut}>
                     <SignOutIcon className={cls.icon_link} />
                     {t('Выйти')}
+                </span>
+                <span className={cls.link} onClick={onClickNewVersion}>
+                    {t('Новая версия')}
                 </span>
                 <div className={cls.themeContainer}>
                     <LangSwitcher short />

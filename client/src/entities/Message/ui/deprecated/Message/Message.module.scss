@@ -1,0 +1,58 @@
+.Message {
+    margin-bottom: 10px;
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.nameWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.avatar {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.time {
+    color: var(--secondary-font-color);
+}
+
+.messageText {
+    color: var(--font-color);
+    word-break: break-all;
+}
+
+.name {
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+.messageWrapper {
+    padding: 4px;
+    width: 100%;
+    border-radius: 6px;
+    background-color: var(--bg-dialog-hover);
+}
+
+.removeBtn {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    fill: var(--icon-color);
+}
+
+@media (max-width: 650px) {
+    .Message {
+        font-size: 12px;
+    }
+
+    .removeBtn {
+        width: 20px;
+        height: 20px;
+    }
+
+}

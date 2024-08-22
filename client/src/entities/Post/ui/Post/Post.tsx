@@ -27,15 +27,8 @@ import {
     TextField,
     Typography,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 import $api, { API_URL, SERVER_URL } from '@/shared/api/http'
 import { red } from '@mui/material/colors'
-import CommentIcon from '@mui/icons-material/Comment'
-import SendIcon from '@mui/icons-material/Send'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
 import { IComment } from '@/features/PostHandler/model/types/comment'

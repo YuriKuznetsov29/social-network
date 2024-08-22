@@ -169,11 +169,7 @@ export const PostFooter = memo(({ post, className }: PostFooterProps) => {
                         >
                             <Stack spacing={3}>
                                 {comments?.map((comment, i) => {
-                                    return (
-                                        <>
-                                            <Comment key={comment._id} comment={comment} />
-                                        </>
-                                    )
+                                    return <Comment key={comment._id} comment={comment} />
                                 })}
                             </Stack>
                         </CardContent>

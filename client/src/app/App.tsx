@@ -1,5 +1,5 @@
 import { AppRouter } from './router'
-import { ThemeProvider, useTheme } from './Providers/ThemeProvider'
+import { Theme, ThemeProvider, useTheme } from './Providers/ThemeProvider'
 import { checkAuth } from '@/features/AuthByEmail'
 import { createContext, Suspense, useEffect, useMemo, useState } from 'react'
 import { useAppDispatch } from '../shared/lib/hook/useAppDispatch'
@@ -8,10 +8,14 @@ import './styles/index.scss'
 import { authActions } from '@/features/AuthByEmail/model/slice/authSlice'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { createTheme, CssBaseline, ThemeProvider as MuiThemeProvider } from '@mui/material'
+import { LOCAL_STORAGE_THEME_KEY } from './Providers/ThemeProvider/lib/ThemeContext'
+
+const defaultTheme = (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.DARK
 
 export const ColorModeContext = createContext({ toggleColorMode: () => {} })
 const App = () => {
     const { initTheme } = useTheme()
+    const [mode, setMode] = useState<'light' | 'dark'>(defaultTheme)
 
     const dispatch = useAppDispatch()
 
@@ -27,7 +31,10 @@ const App = () => {
         initTheme()
     }, [])
 
-    const [mode, setMode] = useState<'light' | 'dark'>('light')
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_THEME_KEY, mode)
+    }, [mode])
+
     const colorMode = useMemo(
         () => ({
             toggleColorMode: () => {
@@ -63,11 +70,9 @@ const App = () => {
                 </ColorModeContext.Provider>
             }
             off={
-                <ThemeProvider>
-                    <Suspense fallback="">
-                        <AppRouter />
-                    </Suspense>
-                </ThemeProvider>
+                <Suspense fallback="">
+                    <AppRouter />
+                </Suspense>
             }
         />
     )
