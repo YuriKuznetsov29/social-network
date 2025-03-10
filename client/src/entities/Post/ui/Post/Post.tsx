@@ -33,7 +33,6 @@ import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
 import { IComment } from '@/features/PostHandler/model/types/comment'
 import { PostFooter } from '../PostFooter/PostFooter'
-import { PostAddOutlined } from '@mui/icons-material'
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean
@@ -141,8 +140,6 @@ export const Post = memo(({ post }: PostProps) => {
                     )}
                     <CardContent>
                         <Typography
-                            // variant="body2"
-                            // color="text.secondary"
                             dangerouslySetInnerHTML={transformText(post.text || '')}
                         />
                     </CardContent>
