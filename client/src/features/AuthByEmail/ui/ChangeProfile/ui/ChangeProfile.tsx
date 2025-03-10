@@ -132,7 +132,7 @@ export const ChangeProfile = () => {
                                         id="firstName"
                                         label={t('введите имя')}
                                         autoFocus
-                                        value={formik.values.email}
+                                        value={formik.values.firstName}
                                         onChange={formik.handleChange}
                                         error={
                                             formik.touched.firstName &&

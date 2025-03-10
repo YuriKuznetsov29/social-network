@@ -1,5 +1,3 @@
-import classNames from 'classnames'
-import cls from './ToggleFeatures.module.scss'
 import { FeatureFlags } from '@/shared/types/featureFlags'
 import { ReactElement } from 'react'
 import { getFeatureFlag } from '../../lib/setGetFeatures'

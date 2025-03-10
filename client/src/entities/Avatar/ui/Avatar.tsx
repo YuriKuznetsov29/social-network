@@ -62,7 +62,7 @@ interface AvatarProps {
     avatarPath?: string
     isOnline?: boolean
     lastSeenOnline?: string
-    size?: 'XL' | 'L' | 'M' | 'MS' | 'S' | string
+    size?: 'XL' | 'L' | 'M' | 'MS' | 'S' | string | Record<string, string>
     click?: boolean
     userId?: string
     firstName?: string
@@ -132,7 +132,7 @@ export const Avatar = memo((props: AvatarProps) => {
                     avatarPath={avatarPath}
                     isOnline={isOnline}
                     lastSeenOnline={lastSeenOnline}
-                    size={size}
+                    size={size as string}
                     click={click}
                     userId={userId}
                 />

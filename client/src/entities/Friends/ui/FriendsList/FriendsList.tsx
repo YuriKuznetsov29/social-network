@@ -1,5 +1,5 @@
 import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-import { Avatar } from '@/entities/Avatar'
+// import { Avatar } from '@/entities/Avatar'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { IUser, getUserData } from '@/entities/UserData'
 import {
@@ -40,6 +40,8 @@ import CakeIcon from '@mui/icons-material/Cake'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
 import EmailIcon from '@mui/icons-material/Email'
+import { Avatar } from '@/entities/Avatar'
+import { SERVER_URL } from '@/shared/api/http'
 
 interface FriendsListProps {
     className?: string
@@ -119,8 +121,6 @@ export const FriendsList = ({ className }: FriendsListProps) => {
         return userId !== friendId
     }
 
-    console.log(friends.length)
-
     return (
         <ToggleFeatures
             feature="isAppRedesigned"
@@ -134,18 +134,28 @@ export const FriendsList = ({ className }: FriendsListProps) => {
                                         sx={{
                                             padding: '16px',
                                             display: 'flex',
-                                            justifyContent: 'space-between',
+                                            justifyContent: { xs: 'center', sm: 'space-between' },
+                                            alignItems: { xs: 'center', sm: 'flex-start' },
+                                            flexDirection: { xs: 'column', sm: 'row' },
                                         }}
                                         elevation={1}
                                     >
-                                        <Stack alignItems={'flex-start'} spacing={2}>
+                                        <Stack
+                                            alignItems={{ xs: 'center', sm: 'flex-start' }}
+                                            spacing={2}
+                                            style={{ maxWidth: '50%' }}
+                                        >
                                             <Avatar
-                                                size="160px"
+                                                size={{ xs: '140px', sm: '160px' }}
                                                 firstName={friend.firstName}
                                                 avatarPath={friend.avatarPath}
                                                 isOnline={friend.isOnline}
                                             />
-                                            <Typography variant="h5" component="h1">
+                                            <Typography
+                                                variant="h5"
+                                                component="h1"
+                                                textAlign="center"
+                                            >
                                                 {`${friend.firstName} ${friend.lastName}`}
                                             </Typography>
                                         </Stack>
