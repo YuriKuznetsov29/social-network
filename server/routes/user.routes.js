@@ -239,7 +239,9 @@ router.get("/:userId/getAllFriends", async (req, res) => {
         if (userId) {
             let currentUser = await User.findOne({ _id: userId });
 
-            const friends = await Promise.all(currentUser.friends.map((id) => User.findById(id))); //await User.find({ $or: findStructure })
+            const friends = (
+                await Promise.all(currentUser.friends.map((id) => User.findById(id)))
+            ).filter((el) => el !== null); //await User.find({ $or: findStructure })
 
             let modFriends = friends.map((user) => ({
                 userId: user._id,

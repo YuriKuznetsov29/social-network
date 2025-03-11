@@ -98,6 +98,7 @@ export const ChangeProfile = () => {
                     birthDay: birthDay as unknown as string,
                     userId,
                     city,
+                    t,
                 })
             )
         },
@@ -198,6 +199,7 @@ export const ChangeProfile = () => {
                                             sx={{ width: '100%' }}
                                             name="birthDay"
                                             label={t('Введите дату рождения')}
+                                            value={dayjs(formik.values.birthDay)}
                                             onChange={(value) => {
                                                 formik.setFieldValue(
                                                     'birthDay',

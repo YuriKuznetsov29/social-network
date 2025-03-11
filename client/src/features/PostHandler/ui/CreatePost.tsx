@@ -14,6 +14,8 @@ import { Box, IconButton, Paper, TextField } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import { styled } from '@mui/material/styles'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
+import { getFeatureFlag } from '@/shared/lib/features/lib/setGetFeatures'
+import { setNotification } from '@/shared/lib/features/lib/setNotification'
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -41,7 +43,6 @@ export const CreatePost = () => {
     const init = useAppSelector(getInitPostStatus)
 
     const onClickCreatePost = () => {
-        console.log(postText)
         if (postText.trim() !== '' || imagePath) {
             dispatch(
                 createPost({
@@ -54,9 +55,19 @@ export const CreatePost = () => {
             setImagePath('')
             setPostText('')
         } else {
-            dispatch(
-                notificationsActions.setNotification(t('Пост должен содержать текст или фото'))
-            )
+            if (getFeatureFlag('isAppRedesigned')) {
+                setNotification(
+                    'Пост должен содержать текст или фото',
+                    {
+                        position: 'bottom-right',
+                    },
+                    'error'
+                )
+            } else {
+                dispatch(
+                    notificationsActions.setNotification(t('Пост должен содержать текст или фото'))
+                )
+            }
         }
     }
 

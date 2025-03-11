@@ -1,6 +1,7 @@
 export { SignInForm } from './ui/SignInForm/SignInForm'
 export { SignUpForm } from './ui/SignUpForm/SignUpForm'
 export type { AuthSchema } from './model/types/authSchema'
+export type { AuthResponse } from './model/types/response/AuthResponse'
 export { authReducer } from './model/slice/authSlice'
 export { checkAuth } from './model/services/checkAuth/checkAuth'
 export { signOut } from './model/services/signOut/signOut'

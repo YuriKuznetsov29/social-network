@@ -37,7 +37,6 @@ export default function useChat(roomId: string) {
     )
 
     useEffect(() => {
-        // if (isAuth && userInit) {
         socket.io.opts.query = {
             roomId: roomId,
             userName: userData.firstName,
@@ -89,7 +88,7 @@ export default function useChat(roomId: string) {
         if (roomId === '1' && !isAuth) {
             socket.emit('user:disconnect', roomId, userData)
         }
-    }, [isAuth, userInit])
+    }, [isAuth])
 
     const loadMore = () => {
         socket.emit('message:loadMore')

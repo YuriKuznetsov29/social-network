@@ -4,7 +4,7 @@ import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/
 import { default as ThemeSwitcherDeprecated } from './deprecated/ThemeSwitcher'
 import { IconButton } from '@mui/material'
 import { useContext } from 'react'
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 import { ColorModeContext } from '@/app/App'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'

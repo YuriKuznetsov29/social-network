@@ -4,10 +4,6 @@ import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/
 import {
     Avatar,
     Box,
-    Button,
-    Checkbox,
-    Container,
-    FormControlLabel,
     Grid,
     Link,
     TextField,
@@ -15,18 +11,16 @@ import {
     Paper,
     InputAdornment,
     IconButton,
-    FormHelperText,
     Alert,
 } from '@mui/material'
-import { Copyright, Visibility, VisibilityOff } from '@mui/icons-material'
-import { t } from 'i18next'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { signInByEmail } from '../../model/services/signInByEmail/singInByEmail'
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getAuthError } from '../../model/selectors/getAuthError/getAuthError'
 import { getLoadingAuthStatus } from '../../model/selectors/getLoadingAuthStatus/getLoadingAuthStatus'
@@ -81,7 +75,7 @@ export const SignInForm = ({ className }: SignInFormProps) => {
         },
     })
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (isAuth) {
             navigate('/profile', { replace: true })
         }

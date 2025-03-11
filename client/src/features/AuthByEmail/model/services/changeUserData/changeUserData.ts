@@ -5,6 +5,8 @@ import { RequestAuthData } from '../signUpByEmail/signUpByEmail'
 import { notificationsActions } from '@/features/Notifications'
 import { TFunction } from 'i18next'
 import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { getFeatureFlag } from '@/shared/lib/features/lib/setGetFeatures'
+import { setNotification } from '@/shared/lib/features/lib/setNotification'
 
 export interface RequestChangeData {
     firstName: string
@@ -41,7 +43,17 @@ export const changeUserData = createAsyncThunk<
             )
 
             if (t) {
-                dispatch(notificationsActions.setNotification(t(`Вы успешно обновили данные`)))
+                if (getFeatureFlag('isAppRedesigned')) {
+                    setNotification(
+                        t(`Вы успешно обновили данные`),
+                        {
+                            position: 'top-right',
+                        },
+                        'success'
+                    )
+                } else {
+                    dispatch(notificationsActions.setNotification(t(`Вы успешно обновили данные`)))
+                }
             }
             return response.data
         } catch (e: unknown) {

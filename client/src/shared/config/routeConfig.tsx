@@ -43,7 +43,6 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
         path: RoutePath.main,
         element: <SignInForm />,
-        // authOnly: true,
     },
     [AppRoutes.SIGN_UP]: {
         path: RoutePath.signUp,

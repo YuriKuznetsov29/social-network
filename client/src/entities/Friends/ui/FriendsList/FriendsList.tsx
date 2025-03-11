@@ -109,14 +109,6 @@ export const FriendsList = ({ className }: FriendsListProps) => {
         return <AnotherUserLoader />
     }
 
-    // const up = () => {
-    //     setTime((prev) => +prev + 1000 + '')
-    // }
-
-    // const down = () => {
-    //     setTime((prev) => +prev - 1000 + '')
-    // }
-
     const isFriend = (friendId: string) => {
         return userId !== friendId
     }
@@ -131,6 +123,7 @@ export const FriendsList = ({ className }: FriendsListProps) => {
                             return (
                                 <>
                                     <Paper
+                                        key={friend.userId}
                                         sx={{
                                             padding: '16px',
                                             display: 'flex',

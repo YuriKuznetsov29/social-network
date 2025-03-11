@@ -1,14 +1,8 @@
-import classNames from 'classnames'
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import dayjs from 'dayjs'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '../model/selectors/getUserData'
 import { UserDataLoader } from '@/shared/ui/UserDataLoader'
 import { getUserInitied } from '../model/selectors/getUserInited'
-import BirthIcon from '@/shared/assets/icons/gift-bold.svg'
-import HomeIcon from '@/shared/assets/icons/house-bold.svg'
-import FriendsIcon from '@/shared/assets/icons/users-bold.svg'
-import PostIcon from '@/shared/assets/icons/note-pencil-bold.svg'
 import { useTranslation } from 'react-i18next'
 import { getUserDataLoading } from '../model/selectors/getUserDataLoading'
 import cls from './UserData.module.scss'
@@ -71,7 +65,7 @@ export const UserData = ({ className }: UserDataProps) => {
     const loading = useAppSelector(getUserDataLoading)
     const { t, i18n } = useTranslation('pages')
 
-    if (loading || !userInit) return <UserDataLoader />
+    if (loading) return <UserDataLoader />
 
     return (
         <ToggleFeatures

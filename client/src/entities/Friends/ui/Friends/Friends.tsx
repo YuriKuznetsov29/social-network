@@ -13,7 +13,7 @@ import { FriendsLoader } from '@/shared/ui/FriendsLoader'
 import { useTranslation } from 'react-i18next'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { Friends as FriendsDeprecated } from '../deprecated/Friends/Friends'
-import { Badge, Box, IconButton, Paper, Stack, Tooltip, Typography } from '@mui/material'
+import { Badge, Box, IconButton, Paper, Skeleton, Stack, Tooltip, Typography } from '@mui/material'
 import { Avatar } from '@/entities/Avatar'
 import DeleteIcon from '@mui/icons-material/Delete'
 

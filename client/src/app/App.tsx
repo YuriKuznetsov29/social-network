@@ -1,14 +1,14 @@
 import { AppRouter } from './router'
-import { Theme, ThemeProvider, useTheme } from './Providers/ThemeProvider'
+import { Theme, useTheme } from './Providers/ThemeProvider'
 import { checkAuth } from '@/features/AuthByEmail'
-import { createContext, Suspense, useEffect, useMemo, useState } from 'react'
+import { createContext, Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { useAppDispatch } from '../shared/lib/hook/useAppDispatch'
 import useChat from '../shared/lib/hook/useChat'
-import './styles/index.scss'
-import { authActions } from '@/features/AuthByEmail/model/slice/authSlice'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { createTheme, CssBaseline, ThemeProvider as MuiThemeProvider } from '@mui/material'
+import { Toaster } from 'react-hot-toast'
 import { LOCAL_STORAGE_THEME_KEY } from './Providers/ThemeProvider/lib/ThemeContext'
+import './styles/index.scss'
 
 const defaultTheme = (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.DARK
 
@@ -17,17 +17,9 @@ const App = () => {
     const { initTheme } = useTheme()
     const [mode, setMode] = useState<'light' | 'dark'>(defaultTheme)
 
-    const dispatch = useAppDispatch()
-
     useChat('1')
 
-    useEffect(() => {
-        if (localStorage.getItem('token')) {
-            dispatch(checkAuth())
-        } else {
-            dispatch(authActions.setInit())
-        }
-
+    useLayoutEffect(() => {
         initTheme()
     }, [])
 
@@ -54,8 +46,6 @@ const App = () => {
         [mode]
     )
 
-    console.log(theme)
-
     return (
         <ToggleFeatures
             feature="isAppRedesigned"
@@ -65,6 +55,7 @@ const App = () => {
                         <CssBaseline />
                         <Suspense fallback="">
                             <AppRouter />
+                            <Toaster />
                         </Suspense>
                     </MuiThemeProvider>
                 </ColorModeContext.Provider>

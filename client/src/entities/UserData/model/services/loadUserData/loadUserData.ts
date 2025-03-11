@@ -7,7 +7,7 @@ interface RequestUserData {
     userId: string
 }
 
-interface ResponseUserData {
+export interface ResponseUserData {
     user: IUser
 }
 

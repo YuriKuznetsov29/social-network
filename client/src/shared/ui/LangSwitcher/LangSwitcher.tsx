@@ -17,6 +17,8 @@ export const LangSwitcher = memo(({ className, short, icon }: LangSwitcherProps)
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
     const { t, i18n } = useTranslation()
 
+    const currentLanguage = i18n.language.slice(0, 2)
+
     const toggle = async () => {
         i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru')
     }
@@ -73,7 +75,11 @@ export const LangSwitcher = memo(({ className, short, icon }: LangSwitcherProps)
                         </Menu>
                     </div>
                 ) : (
-                    <Select value={i18n.language} onChange={(e) => handleChange(e)} size="small">
+                    <Select
+                        value={currentLanguage}
+                        onChange={(e: SelectChangeEvent) => handleChange(e)}
+                        size="small"
+                    >
                         <MenuItem value="ru">Русский</MenuItem>
                         <MenuItem value="en">English</MenuItem>
                     </Select>
