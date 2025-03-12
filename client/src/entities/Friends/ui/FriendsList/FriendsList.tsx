@@ -108,7 +108,6 @@ export const FriendsList = ({ className }: FriendsListProps) => {
 
     if (isLoading) {
         return <FriendsPageLoader />
-        return <AnotherUserLoader />
     }
 
     const isFriend = (friendId: string) => {

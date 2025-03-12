@@ -1,7 +1,7 @@
 import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import cls from './MessengerLoader.module.scss'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Skeleton, Stack } from '@mui/material'
+import { Paper, Skeleton, Stack } from '@mui/material'
 
 export const MessengerLoader = () => {
     const renderSkeletons = () => {
@@ -39,7 +39,17 @@ export const MessengerLoader = () => {
     return (
         <ToggleFeatures
             feature="isAppRedesigned"
-            on={<>{renderSkeletons()}</>}
+            on={
+                <Paper
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}
+                    elevation={1}
+                >
+                    {renderSkeletons()}
+                </Paper>
+            }
             off={
                 <ContentContainer className={cls.container}>
                     <div className={cls.conversation}>
