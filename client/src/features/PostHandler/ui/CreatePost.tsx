@@ -112,6 +112,7 @@ export const CreatePost = () => {
                         multiline
                         maxRows={4}
                         fullWidth
+                        value={postText}
                         onChange={(e) => setPostText(e.target.value)}
                     />
                     <Box

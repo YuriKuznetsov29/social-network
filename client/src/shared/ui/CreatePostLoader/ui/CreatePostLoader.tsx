@@ -32,8 +32,8 @@ export const CreatePostLoader = ({ className }: CreatePostLoaderProps) => {
                             gap: 2,
                         }}
                     >
-                        <Skeleton variant="circular" width="20px" height="20px" />
-                        <Skeleton variant="circular" width="20px" height="20px" />
+                        <Skeleton variant="circular" width="40px" height="40px" />
+                        <Skeleton variant="circular" width="40px" height="40px" />
                     </Box>
                 </Paper>
             }

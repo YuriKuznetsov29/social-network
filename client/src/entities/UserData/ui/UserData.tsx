@@ -92,8 +92,8 @@ export const UserData = ({ className }: UserDataProps) => {
                         >
                             <Avatar
                                 sx={{
-                                    width: '120px',
-                                    height: '120px',
+                                    width: '160px',
+                                    height: '160px',
                                 }}
                                 alt={userData.firstName}
                                 src={SERVER_URL + userData.avatarPath}

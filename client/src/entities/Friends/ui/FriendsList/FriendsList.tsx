@@ -42,6 +42,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
 import EmailIcon from '@mui/icons-material/Email'
 import { Avatar } from '@/entities/Avatar'
 import { SERVER_URL } from '@/shared/api/http'
+import { FriendsPageLoader } from '@/shared/ui/FriendsPageLoader/FriendsPageLoader'
 
 interface FriendsListProps {
     className?: string
@@ -106,6 +107,7 @@ export const FriendsList = ({ className }: FriendsListProps) => {
     }
 
     if (isLoading) {
+        return <FriendsPageLoader />
         return <AnotherUserLoader />
     }
 

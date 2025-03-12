@@ -39,7 +39,7 @@ export const FriendsLoader = () => {
                     }}
                     elevation={1}
                 >
-                    <Skeleton variant="text" sx={{ fontSize: '2rem', width: '100px' }} />
+                    <Skeleton variant="text" sx={{ width: '100px', height: '32px' }} />
                     <Box
                         sx={{
                             width: '100%',

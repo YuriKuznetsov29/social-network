@@ -7,6 +7,7 @@ export const PostsList = () => {
     const { posts, isLoading } = useAppSelector(getPostHandlerState)
     const initialized = useAppSelector(getPostInitialized)
 
+    // if (true) return <PostLoader />
     if (isLoading && !initialized) return <PostLoader />
 
     return (
