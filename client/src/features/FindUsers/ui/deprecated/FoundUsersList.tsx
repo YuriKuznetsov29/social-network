@@ -1,18 +1,19 @@
+import { Avatar } from '@/entities/Avatar'
+import { IUser } from '@/entities/UserData'
+import SearchIcon from '@/shared/assets/icons/magnifying-glass-bold.svg'
 import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { useEffect, useState } from 'react'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { Input } from '@/shared/ui/Input/Input'
 import classNames from 'classnames'
-import { Link } from 'react-router-dom'
-import { Avatar } from '@/entities/Avatar'
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-import { IUser } from '@/entities/UserData'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import SearchIcon from '@/shared/assets/icons/magnifying-glass-bold.svg'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import cls from './FoundUsersList.module.scss'
-import { findUsers } from '../../model/services/findUsers'
+import { Link } from 'react-router-dom'
+
 import { getSearchUsersState } from '../../model/selectors/getSearchUsersState'
+import { findUsers } from '../../model/services/findUsers'
 import { searchUsersActions } from '../../model/slice/searchUsersSlice'
+import cls from './FoundUsersList.module.scss'
 
 interface FoundUsersListProps {
     className?: string

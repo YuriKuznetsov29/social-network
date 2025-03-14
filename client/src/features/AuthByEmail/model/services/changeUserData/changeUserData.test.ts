@@ -1,5 +1,6 @@
 import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
 import axios from 'axios'
+
 import { changeUserData } from './changeUserData'
 
 const userData = {

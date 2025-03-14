@@ -1,4 +1,3 @@
-import { type } from 'os'
 import toast, { ToastOptions } from 'react-hot-toast'
 
 type ToastType = 'success' | 'error' | 'loading' | 'blank' | 'custom'
@@ -26,9 +25,6 @@ export const setNotification = (message: string, options?: ToastOptions, type?: 
             break
         case 'error':
             toast.error(message, toastOptions)
-            break
-        case 'success':
-            toast.success(message, toastOptions)
             break
         case 'blank':
             toast.success(message, toastOptions)

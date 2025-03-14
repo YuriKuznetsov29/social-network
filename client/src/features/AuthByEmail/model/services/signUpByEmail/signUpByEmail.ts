@@ -1,6 +1,6 @@
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
-import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
 
 export interface RequestAuthData {
     firstName: string

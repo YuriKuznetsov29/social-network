@@ -1,7 +1,8 @@
+import { componentRender } from '@/shared/lib/tests/componentRender/componentRender'
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+
 import { ChangeProfile } from './ChangeProfile'
-import { componentRender } from '@/shared/lib/tests/componentRender/componentRender'
 
 describe('ChangeProfile.test', () => {
     test('test Formik validation errors', async () => {

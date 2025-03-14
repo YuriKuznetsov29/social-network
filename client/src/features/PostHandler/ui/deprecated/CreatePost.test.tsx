@@ -1,9 +1,10 @@
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender'
-import { screen, waitFor } from '@testing-library/dom'
-import { userEvent } from '@testing-library/user-event'
-import { CreatePost } from './CreatePost'
 import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
+import { screen } from '@testing-library/dom'
+import { userEvent } from '@testing-library/user-event'
+
 import { createPost } from '../../model/services/createPost'
+import { CreatePost } from './CreatePost'
 
 describe('FoundUsersList.test', () => {
     test('test render', async () => {

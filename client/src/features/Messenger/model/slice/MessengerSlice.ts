@@ -1,14 +1,13 @@
+import { StateSchema } from '@/app/Providers/StoreProvider'
 import {
-    EntityId,
     PayloadAction,
     createEntityAdapter,
-    createSelector,
     createSlice,
 } from '@reduxjs/toolkit'
-import { MessengerSchema } from '../types/messengerSchema'
+
 import { fetchDialogs } from '../services/fetchDialogs'
 import { Dialog } from '../types/dialog'
-import { StateSchema } from '@/app/Providers/StoreProvider'
+import { MessengerSchema } from '../types/messengerSchema'
 
 const messengerAdapter = createEntityAdapter<Dialog>({
     selectId: (dialog) => dialog.id,

@@ -1,8 +1,8 @@
-import { Navigate, useLocation } from 'react-router-dom'
+import { getAuthStatus, getLoadingAuthStatus } from '@/features/AuthByEmail'
 import { RoutePath } from '@/shared/config/routeConfig'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import { getAuthStatus, getLoadingAuthStatus } from '@/features/AuthByEmail'
 import { Loader } from '@/shared/ui/Loader'
+import { Navigate, useLocation } from 'react-router-dom'
 
 export function RequireAuth({ children }: { children: JSX.Element }) {
     const auth = useAppSelector(getAuthStatus)

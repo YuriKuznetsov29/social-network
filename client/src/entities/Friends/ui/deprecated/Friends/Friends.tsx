@@ -1,19 +1,19 @@
-import classNames from 'classnames'
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Avatar } from '@/entities/Avatar'
+import { IUser, getUserData } from '@/entities/UserData'
 import {
     getAllFriends,
-    getFriendsLoadingStatus,
     getFriendsState,
     getInitFriendsStatus,
 } from '@/features/GetFriendsData'
-import { IUser, getUserData } from '@/entities/UserData'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { FriendsLoader } from '@/shared/ui/FriendsLoader'
+import classNames from 'classnames'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+
 import cls from './Friends.module.scss'
 
 interface FriendsProps {

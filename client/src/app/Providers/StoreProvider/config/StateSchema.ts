@@ -1,11 +1,3 @@
-import {
-    AnyAction,
-    CombinedState,
-    EnhancedStore,
-    Reducer,
-    ReducersMapObject,
-} from '@reduxjs/toolkit'
-import { AxiosError, AxiosInstance } from 'axios'
 import { NewsSchema } from '@/entities/News'
 import { UserDataSchema } from '@/entities/UserData/model/types/userDataSchema'
 import { LikesSchema } from '@/entities/WhoLikesIt'
@@ -16,6 +8,14 @@ import { FriendsSchema } from '@/features/GetFriendsData'
 import { MessengerSchema } from '@/features/Messenger'
 import { NotificationsSchema } from '@/features/Notifications'
 import { PostHandlerSchema } from '@/features/PostHandler/model/types/postHandlerSchema'
+import {
+    AnyAction,
+    CombinedState,
+    EnhancedStore,
+    Reducer,
+    ReducersMapObject,
+} from '@reduxjs/toolkit'
+import { AxiosInstance } from 'axios'
 import { NavigateOptions, To } from 'react-router-dom'
 
 export interface StateSchema {

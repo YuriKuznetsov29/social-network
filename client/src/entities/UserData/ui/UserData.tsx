@@ -1,13 +1,11 @@
-import dayjs from 'dayjs'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import { getUserData } from '../model/selectors/getUserData'
-import { UserDataLoader } from '@/shared/ui/UserDataLoader'
-import { getUserInitied } from '../model/selectors/getUserInited'
-import { useTranslation } from 'react-i18next'
-import { getUserDataLoading } from '../model/selectors/getUserDataLoading'
-import cls from './UserData.module.scss'
+import { SERVER_URL } from '@/shared/api/http'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { UserData as UserDataDeprecated } from './deprecated/UserData'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { UserDataLoader } from '@/shared/ui/UserDataLoader'
+import CakeIcon from '@mui/icons-material/Cake'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import EmailIcon from '@mui/icons-material/Email'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 import {
     Paper,
     Avatar,
@@ -19,12 +17,14 @@ import {
     ListItemIcon,
     Badge,
 } from '@mui/material'
-import { SERVER_URL } from '@/shared/api/http'
-import CakeIcon from '@mui/icons-material/Cake'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
-import EmailIcon from '@mui/icons-material/Email'
 import { styled } from '@mui/material/styles'
+import dayjs from 'dayjs'
+import { useTranslation } from 'react-i18next'
+
+import { getUserData } from '../model/selectors/getUserData'
+import { getUserDataLoading } from '../model/selectors/getUserDataLoading'
+import { getUserInitied } from '../model/selectors/getUserInited'
+import { UserData as UserDataDeprecated } from './deprecated/UserData'
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {

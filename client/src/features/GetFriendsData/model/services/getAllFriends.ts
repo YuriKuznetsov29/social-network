@@ -1,7 +1,8 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import $api, { API_URL } from '../../../../shared/api/http/index'
-import { IUser } from '@/entities/UserData/model/types/IUser'
 import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { IUser } from '@/entities/UserData/model/types/IUser'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+
+import { API_URL } from '../../../../shared/api/http/index'
 
 export type Response = IUser[]
 

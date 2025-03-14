@@ -1,18 +1,19 @@
-import classNames from 'classnames'
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-import { useEffect } from 'react'
 import { ConversationLink } from '@/entities/ConversationLink'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
-import { useTranslation } from 'react-i18next'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { MessengerLoader } from '@/shared/ui/MessengerLoader'
+import { Paper } from '@mui/material'
+import classNames from 'classnames'
+import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import { fetchDialogs } from '../model/services/fetchDialogs'
 import { getLoadingDialogStatus } from '../model/services/getLoadingDialogStatus'
 import { getDialogs } from '../model/slice/MessengerSlice'
-import { fetchDialogs } from '../model/services/fetchDialogs'
 import cls from './Messenger.module.scss'
-import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Divider, Paper } from '@mui/material'
 
 interface MessengerProps {
     className?: string

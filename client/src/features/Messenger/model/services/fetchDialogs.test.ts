@@ -1,4 +1,5 @@
 import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
+
 import { fetchDialogs } from './fetchDialogs'
 
 describe('fetchDialogs.test', () => {

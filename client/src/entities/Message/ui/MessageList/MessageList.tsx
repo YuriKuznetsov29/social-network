@@ -1,11 +1,12 @@
-import classNames from 'classnames'
-import { MutableRefObject, useEffect, useLayoutEffect, useRef } from 'react'
-import { Message } from '../Message/Message'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { MessageData } from '@/shared/lib/hook/useChat'
 import { useInfiniteScroll } from '@/shared/lib/hook/useInfiniteScroll'
-import cls from './MessageList.module.scss'
-import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { Box, CardContent } from '@mui/material'
+import classNames from 'classnames'
+import { MutableRefObject, useEffect, useLayoutEffect, useRef } from 'react'
+
+import { Message } from '../Message/Message'
+import cls from './MessageList.module.scss'
 
 interface MessageListProps {
     className?: string

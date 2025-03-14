@@ -1,7 +1,8 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AuthResponse } from '@/features/AuthByEmail/model/types/response/AuthResponse'
-import $api, { API_URL } from '../../../../shared/api/http'
 import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { AuthResponse } from '@/features/AuthByEmail/model/types/response/AuthResponse'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+
+import { API_URL } from '../../../../shared/api/http'
 
 export interface RequestChangeData {
     userId: string

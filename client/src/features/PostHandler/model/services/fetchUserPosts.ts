@@ -1,9 +1,10 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import $api, { API_URL } from '../../../../shared/api/http/index'
-import { PostHandlerResponse } from '../types/postHandlerResponse'
-import { getPostsPage } from '../selectors/getPostsPage'
 import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+
+import $api, { API_URL } from '../../../../shared/api/http/index'
+import { getPostsPage } from '../selectors/getPostsPage'
 import { postHandlerActions } from '../slice/postHandlerSlice'
+import { PostHandlerResponse } from '../types/postHandlerResponse'
 
 interface RequestData {
     author: string

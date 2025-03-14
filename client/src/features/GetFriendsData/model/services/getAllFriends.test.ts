@@ -1,5 +1,5 @@
 import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
-import { addFriend } from './addFriend'
+
 import { getAllFriends } from './getAllFriends'
 
 describe('getAllFriends.test', () => {

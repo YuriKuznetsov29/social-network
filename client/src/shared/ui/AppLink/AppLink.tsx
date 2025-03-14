@@ -1,6 +1,6 @@
 import classNames from 'classnames'
-import { Link, LinkProps, NavLink } from 'react-router-dom'
 import { FC } from 'react'
+import { Link, LinkProps, NavLink } from 'react-router-dom'
 
 import cls from './AppLink.module.scss'
 

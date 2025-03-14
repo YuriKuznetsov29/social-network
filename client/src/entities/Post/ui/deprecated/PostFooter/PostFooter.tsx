@@ -1,17 +1,18 @@
-import classNames from 'classnames'
 import { Comment } from '@/entities/Comment'
-import { Input } from '@/shared/ui/Input/Input'
-import { memo, useEffect, useRef, useState } from 'react'
-import { IComment } from '@/features/PostHandler/model/types/comment'
-import Plane from '@/shared/assets/icons/paper-plane-right-bold.svg'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
 import { IPost } from '@/features/PostHandler'
-import { useTranslation } from 'react-i18next'
-import Heart from '@/shared/assets/icons/iconmonstr-favorite-5.svg'
-import CommentBtn from '@/shared/assets/icons/chat-bold.svg'
-import cls from './PostFooter.module.scss'
+import { IComment } from '@/features/PostHandler/model/types/comment'
 import $api, { API_URL } from '@/shared/api/http'
+import CommentBtn from '@/shared/assets/icons/chat-bold.svg'
+import Heart from '@/shared/assets/icons/iconmonstr-favorite-5.svg'
+import Plane from '@/shared/assets/icons/paper-plane-right-bold.svg'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { Input } from '@/shared/ui/Input/Input'
+import classNames from 'classnames'
+import { memo, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import cls from './PostFooter.module.scss'
 
 interface PostFooterProps {
     className?: string

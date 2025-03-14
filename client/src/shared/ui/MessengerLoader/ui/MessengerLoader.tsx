@@ -1,7 +1,8 @@
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-import cls from './MessengerLoader.module.scss'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { Paper, Skeleton, Stack } from '@mui/material'
+
+import cls from './MessengerLoader.module.scss'
 
 export const MessengerLoader = () => {
     const renderSkeletons = () => {

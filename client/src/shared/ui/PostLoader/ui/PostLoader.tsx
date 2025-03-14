@@ -1,7 +1,8 @@
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import cls from './PostLoader.module.scss'
 import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { Card, CardActions, CardContent, CardHeader, Skeleton } from '@mui/material'
+
+import cls from './PostLoader.module.scss'
 
 export const PostLoader = () => {
     return (

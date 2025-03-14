@@ -1,23 +1,19 @@
-import classNames from 'classnames'
-import cls from './WhoLikesIt.module.scss'
-import { Modal } from '@/shared/ui/Modal/Modal'
-import { getFriendsState } from '@/features/GetFriendsData'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-import { IUser } from '@/entities/UserData'
-import { useNavigate } from 'react-router-dom'
 import { Avatar } from '@/entities/Avatar'
-import { useTranslation } from 'react-i18next'
-import { getLikesUsersData } from '../model/selectors/getLikesUsersData'
-import { useEffect } from 'react'
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { getWhoLikesUsers } from '../model/services/getWhoLikesUsers'
-import { Loader } from '@/shared/ui/Loader'
-import { getLikesLoading } from '../model/selectors/getLikesLoading'
-import { WhoLikesItLoader } from '@/shared/ui/WhoLikesItLoader/WhoLikesItLoader'
+import { IUser } from '@/entities/UserData'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { WhoLikesIt as WhoLikesItDeprecated } from './deprecated/WhoLikesIt'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { Modal } from '@/shared/ui/Modal/Modal'
+import { WhoLikesItLoader } from '@/shared/ui/WhoLikesItLoader/WhoLikesItLoader'
 import { Typography, Modal as MuiModal, Box, Stack } from '@mui/material'
+import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+
+import { getLikesLoading } from '../model/selectors/getLikesLoading'
+import { getLikesUsersData } from '../model/selectors/getLikesUsersData'
+import { getWhoLikesUsers } from '../model/services/getWhoLikesUsers'
+import cls from './WhoLikesIt.module.scss'
 
 interface WhoLikesItProps {
     isOpen: boolean
@@ -26,7 +22,7 @@ interface WhoLikesItProps {
 }
 
 const style = {
-    position: 'absolute' as 'absolute',
+    position: 'absolute' as const,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',

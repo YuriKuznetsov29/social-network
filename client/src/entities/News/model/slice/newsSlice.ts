@@ -1,7 +1,8 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { NewsSchema } from '../types/newsSchema'
 import { IPost } from '@/features/PostHandler'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+
 import { fetchNews } from '../services/fetchNews'
+import { NewsSchema } from '../types/newsSchema'
 
 const initialState: NewsSchema = {
     news: [] as IPost[],

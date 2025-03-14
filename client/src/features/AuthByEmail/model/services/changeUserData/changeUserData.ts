@@ -1,12 +1,12 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AuthResponse } from '../../types/response/AuthResponse'
-import $api, { API_URL } from '../../../../../shared/api/http/index'
-import { RequestAuthData } from '../signUpByEmail/signUpByEmail'
-import { notificationsActions } from '@/features/Notifications'
-import { TFunction } from 'i18next'
 import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { notificationsActions } from '@/features/Notifications'
 import { getFeatureFlag } from '@/shared/lib/features/lib/setGetFeatures'
 import { setNotification } from '@/shared/lib/features/lib/setNotification'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { TFunction } from 'i18next'
+
+import { API_URL } from '../../../../../shared/api/http/index'
+import { AuthResponse } from '../../types/response/AuthResponse'
 
 export interface RequestChangeData {
     firstName: string

@@ -1,18 +1,9 @@
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { useEffect, useState } from 'react'
-import { getSearchUsersState } from '../model/selectors/getSearchUsersState'
-import { findUsers } from '../model/services/findUsers'
-import { searchUsersActions } from '../model/slice/searchUsersSlice'
-import { Input } from '@/shared/ui/Input/Input'
-import classNames from 'classnames'
-import { Link, useNavigate } from 'react-router-dom'
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { IUser } from '@/entities/UserData'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import { useTranslation } from 'react-i18next'
-import cls from './FoundUsersList.module.scss'
+import { SERVER_URL } from '@/shared/api/http'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { FoundUsersList as FoundUsersListDeprecated } from './deprecated/FoundUsersList'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import SearchIcon from '@mui/icons-material/Search'
 import {
     Avatar,
     Divider,
@@ -20,15 +11,19 @@ import {
     ListItem,
     ListItemAvatar,
     ListItemText,
-    TextField,
-    Typography,
 } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
-import { styled, alpha } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
-import React from 'react'
+import { styled, alpha } from '@mui/material/styles'
 import { useTheme } from '@mui/material/styles'
-import { SERVER_URL } from '@/shared/api/http'
+import { useEffect, useState } from 'react'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+
+import { getSearchUsersState } from '../model/selectors/getSearchUsersState'
+import { findUsers } from '../model/services/findUsers'
+import { searchUsersActions } from '../model/slice/searchUsersSlice'
+import { FoundUsersList as FoundUsersListDeprecated } from './deprecated/FoundUsersList'
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',

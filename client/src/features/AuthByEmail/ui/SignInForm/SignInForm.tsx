@@ -1,6 +1,10 @@
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { SignInForm as SignInFormDeprecated } from '../deprecated/SignInForm/SignInForm'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { LangSwitcher } from '@/shared/ui/LangSwitcher/LangSwitcher'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import LoadingButton from '@mui/lab/LoadingButton'
 import {
     Avatar,
     Box,
@@ -13,20 +17,17 @@ import {
     IconButton,
     Alert,
 } from '@mui/material'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
-import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { signInByEmail } from '../../model/services/signInByEmail/singInByEmail'
 import { useLayoutEffect, useState } from 'react'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+import * as Yup from 'yup'
+
 import { getAuthError } from '../../model/selectors/getAuthError/getAuthError'
-import { getLoadingAuthStatus } from '../../model/selectors/getLoadingAuthStatus/getLoadingAuthStatus'
 import { getAuthStatus } from '../../model/selectors/getAuthStatus/getAuthStatus'
-import { LangSwitcher } from '@/shared/ui/LangSwitcher/LangSwitcher'
-import LoadingButton from '@mui/lab/LoadingButton'
+import { getLoadingAuthStatus } from '../../model/selectors/getLoadingAuthStatus/getLoadingAuthStatus'
+import { signInByEmail } from '../../model/services/signInByEmail/singInByEmail'
+import { SignInForm as SignInFormDeprecated } from '../deprecated/SignInForm/SignInForm'
 
 interface SignInFormProps {
     className?: string

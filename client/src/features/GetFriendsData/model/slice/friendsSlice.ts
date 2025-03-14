@@ -1,7 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { FriendsSchema } from '../types/friendSchema'
 import { IUser } from '@/entities/UserData/model/types/IUser'
+import { createSlice } from '@reduxjs/toolkit'
+
 import { getAllFriends } from '../services/getAllFriends'
+import { FriendsSchema } from '../types/friendSchema'
 
 export interface signInState {
     value: number

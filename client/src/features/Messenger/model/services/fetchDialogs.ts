@@ -1,11 +1,8 @@
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { isAxiosError } from 'axios'
-import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
-import { IUser } from '@/entities/UserData'
-import { MessageData } from '@/shared/lib/hook/useChat'
+
 import { Dialog } from '../types/dialog'
-import { ICompanion } from '../types/companion'
-import { IMessage } from '../types/message'
 
 type RequestAuthData = { roomId: string; friendId: string }[]
 

@@ -1,13 +1,14 @@
-import classNames from 'classnames'
-import OptionsIcon from '@/shared/assets/icons/options.svg'
-import { useCallback, useEffect, useState } from 'react'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { useTranslation } from 'react-i18next'
-import { removePost } from '@/features/PostHandler'
-import cls from './PostOptionsBtn.module.scss'
 import { WhoLikesIt } from '@/entities/WhoLikesIt/ui/WhoLikesIt'
+import { removePost } from '@/features/PostHandler'
+import OptionsIcon from '@/shared/assets/icons/options.svg'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import classNames from 'classnames'
+import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import cls from './PostOptionsBtn.module.scss'
 
 interface PostOptionsBtnProps {
     className?: string

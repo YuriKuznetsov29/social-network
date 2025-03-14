@@ -1,5 +1,5 @@
 import './ThemeSwitcher.scss'
-import classNames from 'classnames'
+
 import useTheme from '@/app/Providers/ThemeProvider/lib/useTheme'
 
 interface ThemeSwitcherProps {

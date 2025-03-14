@@ -1,6 +1,6 @@
-import { IconButton, List, ListItem, ListItemButton, ListItemText, Popover } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { useState, useTransition } from 'react'
+import { IconButton, List, ListItem, ListItemButton, ListItemText, Popover } from '@mui/material'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 interface MessageOptionBtnProps {

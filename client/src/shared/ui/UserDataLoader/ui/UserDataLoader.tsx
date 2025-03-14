@@ -1,5 +1,5 @@
-import ContentLoader from 'react-content-loader'
 import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
+
 import cls from './UserDataLoader.module.scss'
 
 export const UserDataLoader = () => (

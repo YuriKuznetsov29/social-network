@@ -1,20 +1,14 @@
-import { AppLink } from '@/shared/ui/AppLink/AppLink'
-import useChat, { MessageData } from '@/shared/lib/hook/useChat'
-import { forwardRef, useEffect, useState } from 'react'
-import { IUser } from '@/entities/UserData/model/types/IUser'
-import dayjs from 'dayjs'
-import { getUserDataById } from '@/shared/api/getUserDataById'
 import { Avatar } from '@/entities/Avatar'
-import RemoveIcon from '@/shared/assets/icons/trash-bold.svg'
-import { removeConversation } from '@/features/Messenger'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { IUser } from '@/entities/UserData/model/types/IUser'
+import { removeConversation } from '@/features/Messenger'
 import { IMessage } from '@/features/Messenger/model/types/message'
-import { useTranslation } from 'react-i18next'
-import cls from './ConversationLink.module.scss'
+import { getUserDataById } from '@/shared/api/getUserDataById'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { ConversationLink as ConversationLinkDeprecated } from './deprecated/ConversationLink'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import useChat, { MessageData } from '@/shared/lib/hook/useChat'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {
     Box,
     IconButton,
@@ -26,8 +20,12 @@ import {
     Stack,
     Typography,
 } from '@mui/material'
+import dayjs from 'dayjs'
+import { forwardRef, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
+
+import { ConversationLink as ConversationLinkDeprecated } from './deprecated/ConversationLink'
 
 const Link = forwardRef<HTMLAnchorElement, RouterLinkProps>(function Link(itemProps, ref) {
     return <RouterLink ref={ref} {...itemProps} role={undefined} />

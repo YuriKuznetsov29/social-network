@@ -1,18 +1,19 @@
-import classNames from 'classnames'
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { Avatar } from '@/entities/Avatar'
-import dayjs from 'dayjs'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import { UserDataLoader } from '@/shared/ui/UserDataLoader'
 import BirthIcon from '@/shared/assets/icons/gift-bold.svg'
 import HomeIcon from '@/shared/assets/icons/house-bold.svg'
-import FriendsIcon from '@/shared/assets/icons/users-bold.svg'
 import PostIcon from '@/shared/assets/icons/note-pencil-bold.svg'
+import FriendsIcon from '@/shared/assets/icons/users-bold.svg'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
+import { UserDataLoader } from '@/shared/ui/UserDataLoader'
+import classNames from 'classnames'
+import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
-import cls from './UserData.module.scss'
+
 import { getUserData } from '../../model/selectors/getUserData'
-import { getUserInitied } from '../../model/selectors/getUserInited'
 import { getUserDataLoading } from '../../model/selectors/getUserDataLoading'
+import { getUserInitied } from '../../model/selectors/getUserInited'
+import cls from './UserData.module.scss'
 
 interface UserDataProps {
     className?: string

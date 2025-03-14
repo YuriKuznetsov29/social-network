@@ -1,21 +1,13 @@
-import classNames from 'classnames'
 import { Comment } from '@/entities/Comment'
-import { Input } from '@/shared/ui/Input/Input'
-import { memo, useEffect, useRef, useState } from 'react'
-import { IComment } from '@/features/PostHandler/model/types/comment'
-import Plane from '@/shared/assets/icons/paper-plane-right-bold.svg'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
-import $api, { API_URL, SERVER_URL } from '../../../../shared/api/http/index'
 import { IPost } from '@/features/PostHandler'
-import { useTranslation } from 'react-i18next'
-import Heart from '@/shared/assets/icons/iconmonstr-favorite-5.svg'
-import CommentBtn from '@/shared/assets/icons/chat-bold.svg'
-import cls from './PostFooter.module.scss'
+import { IComment } from '@/features/PostHandler/model/types/comment'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { PostFooter as PostFooterDeprecated } from '../deprecated/PostFooter/PostFooter'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import CommentIcon from '@mui/icons-material/Comment'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import SendIcon from '@mui/icons-material/Send'
 import {
-    Avatar,
     Box,
     CardActions,
     CardContent,
@@ -27,12 +19,12 @@ import {
     TextField,
     Typography,
 } from '@mui/material'
-import CommentIcon from '@mui/icons-material/Comment'
-import SendIcon from '@mui/icons-material/Send'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { red } from '@mui/material/colors'
+import { memo, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import $api, { API_URL } from '../../../../shared/api/http/index'
+import { PostFooter as PostFooterDeprecated } from '../deprecated/PostFooter/PostFooter'
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean

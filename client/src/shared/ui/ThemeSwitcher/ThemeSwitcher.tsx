@@ -1,13 +1,14 @@
 import './ThemeSwitcher.scss'
-import classNames from 'classnames'
-import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { default as ThemeSwitcherDeprecated } from './deprecated/ThemeSwitcher'
-import { IconButton } from '@mui/material'
-import { useContext } from 'react'
-import { useTheme } from '@mui/material/styles'
+
 import { ColorModeContext } from '@/app/App'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
+import { IconButton } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import { useContext } from 'react'
+
+import { default as ThemeSwitcherDeprecated } from './deprecated/ThemeSwitcher'
 
 interface ThemeSwitcherProps {
     className?: string

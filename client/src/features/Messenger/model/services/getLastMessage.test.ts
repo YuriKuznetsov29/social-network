@@ -1,5 +1,5 @@
 import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
-import { getConversationUsers } from './getConversationUsers'
+
 import { getLastMessage } from './getLastMessage'
 
 describe('getLastMessage.test', () => {

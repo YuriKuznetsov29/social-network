@@ -1,11 +1,9 @@
-import classNames from 'classnames'
-import cls from './DialogOptionBtn.module.scss'
-import { IconButton, List, ListItemButton, ListItemText, Popover } from '@mui/material'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { IconButton, List, ListItemButton, ListItemText, Popover } from '@mui/material'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { removeConversation } from '@/features/Messenger'
+
 
 interface DialogOptionBtnProps {
     className?: string

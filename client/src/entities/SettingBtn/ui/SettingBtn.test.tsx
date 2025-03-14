@@ -1,5 +1,6 @@
-import { fireEvent, screen } from '@testing-library/react'
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender'
+import { fireEvent, screen } from '@testing-library/react'
+
 import { SettingBtn } from './SettingBtn'
 
 describe('SettingBtn', () => {

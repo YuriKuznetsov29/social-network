@@ -1,8 +1,9 @@
-import { useMobile } from '@/shared/lib/hook/useMobile'
-import cls from './FriendsLoader.module.scss'
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useMobile } from '@/shared/lib/hook/useMobile'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { Box, Paper, Skeleton, Stack } from '@mui/material'
+
+import cls from './FriendsLoader.module.scss'
 
 export const FriendsLoader = () => {
     const isMobile = useMobile()

@@ -1,13 +1,14 @@
-import classNames from 'classnames'
-import { Header } from '@/widgets/Header'
-import Container from '@/shared/ui/Container/Container'
-import { SideBar } from '@/widgets/SideBar'
-import cls from './AnotherUserPage.module.scss'
 import { AnotherUserProfile } from '@/features/GetAnotherUserData/ui/AnotherUserProfile'
-import { useMobile } from '@/shared/lib/hook/useMobile'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Container as MuiContainer, Stack } from '@mui/material'
+import { useMobile } from '@/shared/lib/hook/useMobile'
+import Container from '@/shared/ui/Container/Container'
+import { Header } from '@/widgets/Header'
 import { MobileNavigation } from '@/widgets/MobileNavigation/ui/MobileNavigation'
+import { SideBar } from '@/widgets/SideBar'
+import { Container as MuiContainer, Stack } from '@mui/material'
+import classNames from 'classnames'
+
+import cls from './AnotherUserPage.module.scss'
 
 interface AnotherUserPageProps {
     className?: string

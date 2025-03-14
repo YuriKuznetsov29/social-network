@@ -1,15 +1,16 @@
-import classNames from 'classnames'
-import { MessageData } from '@/shared/lib/hook/useChat'
-import dayjs from 'dayjs'
-import { MutableRefObject, useEffect, useState } from 'react'
-import { IUser } from '@/entities/UserData/model/types/IUser'
 import { Avatar } from '@/entities/Avatar'
-import { useTranslation } from 'react-i18next'
+import { getUserData } from '@/entities/UserData'
+import { IUser } from '@/entities/UserData/model/types/IUser'
+import { getUserDataById } from '@/shared/api/getUserDataById'
 import RemoveIcon from '@/shared/assets/icons/trash-bold.svg'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import { getUserData } from '@/entities/UserData'
+import { MessageData } from '@/shared/lib/hook/useChat'
+import classNames from 'classnames'
+import dayjs from 'dayjs'
+import { MutableRefObject, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import cls from './Message.module.scss'
-import { getUserDataById } from '@/shared/api/getUserDataById'
 
 interface MessageProps {
     className?: string

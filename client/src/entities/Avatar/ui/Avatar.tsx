@@ -1,12 +1,13 @@
-import { SERVER_URL } from '../../../shared/api/http/index'
-import { useTranslation } from 'react-i18next'
-import { memo, useCallback, useState } from 'react'
-import { useNavigate } from 'react-router'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Avatar as AvatarDeprecated } from './deprecated/Avatar'
 import { Badge, Avatar as MuiAvatar } from '@mui/material'
-import { styled } from '@mui/material/styles'
 import { red } from '@mui/material/colors'
+import { styled } from '@mui/material/styles'
+import { memo, useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router'
+
+import { SERVER_URL } from '../../../shared/api/http/index'
+import { Avatar as AvatarDeprecated } from './deprecated/Avatar'
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -41,7 +42,7 @@ function stringToColor(string: string) {
     let hash = 0
     let i
 
-    /* eslint-disable no-bitwise */
+     
     for (i = 0; i < string.length; i += 1) {
         hash = string.charCodeAt(i) + ((hash << 5) - hash)
     }
@@ -52,7 +53,7 @@ function stringToColor(string: string) {
         const value = (hash >> (i * 8)) & 0xff
         color += `00${value.toString(16)}`.slice(-2)
     }
-    /* eslint-enable no-bitwise */
+     
 
     return color
 }

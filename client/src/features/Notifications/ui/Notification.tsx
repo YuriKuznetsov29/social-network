@@ -1,9 +1,10 @@
-import classNames from 'classnames'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import { getNotification } from '../model/selectors/getNotification'
-import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import { Portal } from '@/shared/ui/Portal/Portal'
+import classNames from 'classnames'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
+
+import { getNotification } from '../model/selectors/getNotification'
 import { notificationsActions } from '../model/slice/notificationsSlice'
 import cls from './Notification.module.scss'
 

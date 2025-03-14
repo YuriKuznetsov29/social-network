@@ -1,21 +1,20 @@
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { forwardRef, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Avatar } from '@/entities/Avatar'
+import { getUserData } from '@/entities/UserData'
 import {
     getAllFriends,
-    getFriendsLoadingStatus,
     getFriendsState,
     getInitFriendsStatus,
 } from '@/features/GetFriendsData'
-import { IUser, getUserData } from '@/entities/UserData'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { FriendsLoader } from '@/shared/ui/FriendsLoader'
+import { Box, Paper, Stack, Typography } from '@mui/material'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useNavigate } from 'react-router-dom'
+
 import { Friends as FriendsDeprecated } from '../deprecated/Friends/Friends'
-import { Badge, Box, IconButton, Paper, Skeleton, Stack, Tooltip, Typography } from '@mui/material'
-import { Avatar } from '@/entities/Avatar'
-import DeleteIcon from '@mui/icons-material/Delete'
 
 interface FriendsProps {
     className?: string

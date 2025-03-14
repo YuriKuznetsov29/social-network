@@ -1,15 +1,11 @@
-import classNames from 'classnames'
-import cls from './MobileNavigation.module.scss'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import FeedIcon from '@mui/icons-material/Feed'
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import PersonIcon from '@mui/icons-material/Person'
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material'
 import { forwardRef, useState } from 'react'
-import RestoreIcon from '@mui/icons-material/Restore'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ArchiveIcon from '@mui/icons-material/Archive'
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom'
-import PersonIcon from '@mui/icons-material/Person'
-import FeedIcon from '@mui/icons-material/Feed'
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+
 
 const Link = forwardRef<HTMLAnchorElement, RouterLinkProps>(function Link(itemProps, ref) {
     return <RouterLink ref={ref} {...itemProps} role={undefined} />

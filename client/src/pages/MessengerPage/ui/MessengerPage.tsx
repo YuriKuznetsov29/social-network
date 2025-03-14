@@ -1,12 +1,13 @@
-import cls from './MessengerPage.module.scss'
+import { Messenger } from '@/features/Messenger'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useMobile } from '@/shared/lib/hook/useMobile'
 import Container from '@/shared/ui/Container/Container'
 import { Header } from '@/widgets/Header'
-import { SideBar } from '@/widgets/SideBar'
-import { Messenger } from '@/features/Messenger'
-import { useMobile } from '@/shared/lib/hook/useMobile'
-import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Container as MuiContainer, Box } from '@mui/material'
 import { MobileNavigation } from '@/widgets/MobileNavigation/ui/MobileNavigation'
+import { SideBar } from '@/widgets/SideBar'
+import { Container as MuiContainer, Box } from '@mui/material'
+
+import cls from './MessengerPage.module.scss'
 
 const MessengerPage = () => {
     const isMobile = useMobile()

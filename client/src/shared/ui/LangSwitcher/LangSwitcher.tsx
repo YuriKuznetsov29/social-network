@@ -1,11 +1,10 @@
-import { useTranslation } from 'react-i18next'
-import React, { memo } from 'react'
-import { Button } from '@/shared/ui/Button/Button'
-import classNames from 'classnames'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { IconButton, Menu, MenuItem, Select, SelectChangeEvent } from '@mui/material'
-import { LangSwitcher as LangSwitcherDeprecated } from './deprecated/LangSwitcher'
 import TranslateIcon from '@mui/icons-material/Translate'
+import { IconButton, Menu, MenuItem, Select, SelectChangeEvent } from '@mui/material'
+import React, { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import { LangSwitcher as LangSwitcherDeprecated } from './deprecated/LangSwitcher'
 
 interface LangSwitcherProps {
     className?: string

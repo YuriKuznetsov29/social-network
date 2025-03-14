@@ -1,13 +1,12 @@
-import { AppRouter } from './router'
-import { Theme, useTheme } from './Providers/ThemeProvider'
-import { checkAuth } from '@/features/AuthByEmail'
-import { createContext, Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react'
-import { useAppDispatch } from '../shared/lib/hook/useAppDispatch'
-import useChat from '../shared/lib/hook/useChat'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { createTheme, CssBaseline, ThemeProvider as MuiThemeProvider } from '@mui/material'
+import { createContext, Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
+
+import useChat from '../shared/lib/hook/useChat'
+import { Theme, useTheme } from './Providers/ThemeProvider'
 import { LOCAL_STORAGE_THEME_KEY } from './Providers/ThemeProvider/lib/ThemeContext'
+import { AppRouter } from './router'
 import './styles/index.scss'
 
 const defaultTheme = (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.DARK

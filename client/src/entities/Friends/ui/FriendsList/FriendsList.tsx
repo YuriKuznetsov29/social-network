@@ -1,7 +1,6 @@
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-// import { Avatar } from '@/entities/Avatar'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { Avatar } from '@/entities/Avatar'
 import { IUser, getUserData } from '@/entities/UserData'
+import { Conversations } from '@/features/AuthByEmail/model/types/response/Conversations'
 import {
     addFriend,
     getAllFriends,
@@ -9,23 +8,21 @@ import {
     getFriendsLoadingStatus,
     removeFriend,
 } from '@/features/GetFriendsData'
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { useEffect, useState } from 'react'
-import { Conversations } from '@/features/AuthByEmail/model/types/response/Conversations'
-import { useNavigate } from 'react-router-dom'
-import { nanoid } from 'nanoid'
 import { addConversation } from '@/features/Messenger'
-import { useTranslation } from 'react-i18next'
 import BirthIcon from '@/shared/assets/icons/gift-bold.svg'
 import HomeIcon from '@/shared/assets/icons/house-bold.svg'
-import FriendsIcon from '@/shared/assets/icons/users-bold.svg'
 import PostIcon from '@/shared/assets/icons/note-pencil-bold.svg'
-import dayjs from 'dayjs'
-import cls from './FriendsList.module.scss'
-import { AnotherUserLoader } from '@/shared/ui/AnotherUserLoader'
-import { Input } from '@/shared/ui/Input/Input'
+import FriendsIcon from '@/shared/assets/icons/users-bold.svg'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { FriendsList as FriendsListDeprecated } from '../deprecated/FriendsList/FriendsList'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+// import { Avatar } from '@/entities/Avatar'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
+import { FriendsPageLoader } from '@/shared/ui/FriendsPageLoader/FriendsPageLoader'
+import CakeIcon from '@mui/icons-material/Cake'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import EmailIcon from '@mui/icons-material/Email'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 import {
     Button,
     List,
@@ -36,13 +33,13 @@ import {
     Stack,
     Typography,
 } from '@mui/material'
-import CakeIcon from '@mui/icons-material/Cake'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
-import EmailIcon from '@mui/icons-material/Email'
-import { Avatar } from '@/entities/Avatar'
-import { SERVER_URL } from '@/shared/api/http'
-import { FriendsPageLoader } from '@/shared/ui/FriendsPageLoader/FriendsPageLoader'
+import dayjs from 'dayjs'
+import { nanoid } from 'nanoid'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+
+import cls from './FriendsList.module.scss'
 
 interface FriendsListProps {
     className?: string

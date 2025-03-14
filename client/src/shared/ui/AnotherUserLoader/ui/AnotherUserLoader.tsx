@@ -1,8 +1,9 @@
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-import cls from './AnotherUserLoader.module.scss'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { Paper, Skeleton, Stack } from '@mui/material'
+
 import { PostLoader } from '../../PostLoader'
+import cls from './AnotherUserLoader.module.scss'
 
 export const AnotherUserLoader = () => {
     return (

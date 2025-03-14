@@ -1,12 +1,13 @@
-import { Header } from '@/widgets/Header'
-import Container from '@/shared/ui/Container/Container'
 import { Dialog } from '@/entities/Dialog'
-import { useMobile } from '@/shared/lib/hook/useMobile'
-import cls from './ConversationPage.module.scss'
-import { SideBar } from '@/widgets/SideBar'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Container as MuiContainer, Box } from '@mui/material'
+import { useMobile } from '@/shared/lib/hook/useMobile'
+import Container from '@/shared/ui/Container/Container'
+import { Header } from '@/widgets/Header'
 import { MobileNavigation } from '@/widgets/MobileNavigation/ui/MobileNavigation'
+import { SideBar } from '@/widgets/SideBar'
+import { Container as MuiContainer, Box } from '@mui/material'
+
+import cls from './ConversationPage.module.scss'
 interface ConversationPageProps {
     className?: string
 }

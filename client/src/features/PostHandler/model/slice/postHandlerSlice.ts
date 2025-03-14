@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { PostHandlerSchema } from '../types/postHandlerSchema'
-import { IPost } from '../types/post'
+
 import { createPost } from '../services/createPost'
 import { fetchUserPosts } from '../services/fetchUserPosts'
+import { removePost } from '../services/removePost'
 // import { createComment } from '../services/createComment'
 import { IComment } from '../types/comment'
-import { removePost } from '../services/removePost'
-import { boolean } from 'yup'
+import { IPost } from '../types/post'
+import { PostHandlerSchema } from '../types/postHandlerSchema'
 // import { getCommentsForPost } from '../services/getCommentsForPosts'
 
 export interface signInState {

@@ -1,4 +1,5 @@
 import { StateSchema } from '@/app/Providers/StoreProvider'
+
 import { getAuthStatus } from './getAuthStatus'
 
 describe('getLoginError.test', () => {

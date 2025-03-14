@@ -1,13 +1,14 @@
-import classNames from 'classnames'
-import { Header } from '@/widgets/Header'
-import Container from '@/shared/ui/Container/Container'
-import { SideBar } from '@/widgets/SideBar'
 import { ChangeProfile } from '@/features/AuthByEmail'
-import cls from './ChangeProfilePage.module.scss'
-import { useMobile } from '@/shared/lib/hook/useMobile'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Stack, Container as MuiContainer, Box } from '@mui/material'
+import { useMobile } from '@/shared/lib/hook/useMobile'
+import Container from '@/shared/ui/Container/Container'
+import { Header } from '@/widgets/Header'
 import { MobileNavigation } from '@/widgets/MobileNavigation/ui/MobileNavigation'
+import { SideBar } from '@/widgets/SideBar'
+import { Container as MuiContainer, Box } from '@mui/material'
+import classNames from 'classnames'
+
+import cls from './ChangeProfilePage.module.scss'
 
 interface ProfilePageProps {
     className?: string

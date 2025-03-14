@@ -1,4 +1,5 @@
 import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
+
 import { createPost } from './createPost'
 
 describe('createPost.test', () => {

@@ -1,17 +1,18 @@
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-import { IPost } from '@/features/PostHandler/model/types/post'
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
-import dayjs from 'dayjs'
-import { IUser } from '@/entities/UserData/model/types/IUser'
 import { Avatar } from '@/entities/Avatar'
-import { useTranslation } from 'react-i18next'
-import { getUserDataById } from '@/shared/api/getUserDataById'
-import { ImageModal } from '@/shared/ui/ImageModal/ImageModal'
-import cls from './Post.module.scss'
-import { PostOptionsBtn } from '../../PostOptionsBtn/PostOptionsBtn'
 import { transformText } from '@/entities/Post/model/services/transformText/transformText'
+import { IUser } from '@/entities/UserData/model/types/IUser'
+import { IPost } from '@/features/PostHandler/model/types/post'
+import { getUserDataById } from '@/shared/api/getUserDataById'
 import { SERVER_URL } from '@/shared/api/http'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
+import { ImageModal } from '@/shared/ui/ImageModal/ImageModal'
+import dayjs from 'dayjs'
+import { memo, useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import { PostFooter } from '../../PostFooter/PostFooter'
+import { PostOptionsBtn } from '../../PostOptionsBtn/PostOptionsBtn'
+import cls from './Post.module.scss'
 
 interface PostProps {
     post: IPost

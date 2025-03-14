@@ -1,7 +1,7 @@
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { IUser } from '@/entities/UserData'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { isAxiosError } from 'axios'
-import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
-import { IUser, userDataActions } from '@/entities/UserData'
 
 interface ResponseUserData {
     users: IUser[]

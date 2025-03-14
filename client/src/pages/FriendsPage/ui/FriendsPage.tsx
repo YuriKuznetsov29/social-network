@@ -1,11 +1,11 @@
-import { Header } from '@/widgets/Header'
-import Container from '@/shared/ui/Container/Container'
-import { SideBar } from '@/widgets/SideBar'
-import { useMobile } from '@/shared/lib/hook/useMobile'
 import { FriendsList } from '@/entities/Friends'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Stack, Container as MuiContainer } from '@mui/material'
+import { useMobile } from '@/shared/lib/hook/useMobile'
+import Container from '@/shared/ui/Container/Container'
+import { Header } from '@/widgets/Header'
 import { MobileNavigation } from '@/widgets/MobileNavigation/ui/MobileNavigation'
+import { SideBar } from '@/widgets/SideBar'
+import { Stack, Container as MuiContainer } from '@mui/material'
 
 interface FriendsPageProps {
     className?: string

@@ -1,6 +1,6 @@
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import { IPost, getPostHandlerState, getPostInitialized } from '@/features/PostHandler'
 import { Post } from '@/entities/Post/ui/Post/Post'
+import { IPost, getPostHandlerState, getPostInitialized } from '@/features/PostHandler'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { PostLoader } from '@/shared/ui/PostLoader'
 
 export const PostsList = () => {

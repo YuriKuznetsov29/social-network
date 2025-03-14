@@ -1,7 +1,8 @@
-import classNames from 'classnames'
-import cls from './Container.module.scss'
-import { MutableRefObject, ReactNode } from 'react'
 import { useMobile } from '@/shared/lib/hook/useMobile'
+import classNames from 'classnames'
+import { MutableRefObject, ReactNode } from 'react'
+
+import cls from './Container.module.scss'
 
 interface ContainerProps {
     className?: string

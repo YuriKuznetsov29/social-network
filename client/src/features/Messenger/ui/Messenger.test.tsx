@@ -1,6 +1,6 @@
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender'
-import { screen, waitFor } from '@testing-library/dom'
-import { userEvent } from '@testing-library/user-event'
+import { screen } from '@testing-library/dom'
+
 import { Messenger } from './Messenger'
 
 const dialogs = [

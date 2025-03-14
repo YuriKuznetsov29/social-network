@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { signInByEmail } from '../services/signInByEmail/singInByEmail'
-import { AuthSchema } from '../types/authSchema'
-import { signUpByEmail } from '../services/signUpByEmail/signUpByEmail'
-import { checkAuth } from '../services/checkAuth/checkAuth'
-import { signOut } from '../services/signOut/signOut'
+
 import { changeUserData } from '../services/changeUserData/changeUserData'
+import { checkAuth } from '../services/checkAuth/checkAuth'
+import { signInByEmail } from '../services/signInByEmail/singInByEmail'
+import { signOut } from '../services/signOut/signOut'
+import { signUpByEmail } from '../services/signUpByEmail/signUpByEmail'
+import { AuthSchema } from '../types/authSchema'
 
 export interface signInState {
     value: number

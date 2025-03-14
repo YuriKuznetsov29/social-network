@@ -1,9 +1,10 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { API_URL } from '../../../../shared/api/http/index'
 import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
 import { IUser, userDataActions } from '@/entities/UserData'
 import { notificationsActions } from '@/features/Notifications'
-import { TFunction, i18n } from 'i18next'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { TFunction } from 'i18next'
+
+import { API_URL } from '../../../../shared/api/http/index'
 
 export interface RequestChangeData {
     userId: string

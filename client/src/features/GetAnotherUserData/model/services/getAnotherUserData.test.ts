@@ -1,4 +1,5 @@
 import { TestAsyncThunk } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk'
+
 import { getAnotherUserData } from './getAnotherUserData'
 
 const user = {

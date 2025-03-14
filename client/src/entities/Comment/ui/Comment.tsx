@@ -1,15 +1,15 @@
-import classNames from 'classnames'
-import { IComment } from '@/features/PostHandler/model/types/comment'
-import { useEffect, useState } from 'react'
 import { IUser } from '@/entities/UserData/model/types/IUser'
-import dayjs from 'dayjs'
+import { IComment } from '@/features/PostHandler/model/types/comment'
 import { getUserDataById } from '@/shared/api/getUserDataById'
-import { useTranslation } from 'react-i18next'
-import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Comment as CommentDeprecated } from './deprecated/Comment'
-import { Avatar, Box, Stack, Typography } from '@mui/material'
 import { SERVER_URL } from '@/shared/api/http'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { Avatar, Box, Stack, Typography } from '@mui/material'
 import { red } from '@mui/material/colors'
+import dayjs from 'dayjs'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import { Comment as CommentDeprecated } from './deprecated/Comment'
 
 interface CommentProps {
     className?: string

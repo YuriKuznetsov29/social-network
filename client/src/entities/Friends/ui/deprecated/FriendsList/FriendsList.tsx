@@ -1,29 +1,29 @@
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { Avatar } from '@/entities/Avatar'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { IUser, getUserData } from '@/entities/UserData'
+import { Conversations } from '@/features/AuthByEmail/model/types/response/Conversations'
 import {
     getAllFriends,
     getFriendsData,
     getFriendsLoadingStatus,
     removeFriend,
 } from '@/features/GetFriendsData'
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { useEffect, useState } from 'react'
-import { Conversations } from '@/features/AuthByEmail/model/types/response/Conversations'
-import { useNavigate } from 'react-router-dom'
-import { nanoid } from 'nanoid'
 import { addConversation } from '@/features/Messenger'
-import { Button } from '@/shared/ui/Button/Button'
-import { useTranslation } from 'react-i18next'
 import BirthIcon from '@/shared/assets/icons/gift-bold.svg'
 import HomeIcon from '@/shared/assets/icons/house-bold.svg'
-import FriendsIcon from '@/shared/assets/icons/users-bold.svg'
 import PostIcon from '@/shared/assets/icons/note-pencil-bold.svg'
-import dayjs from 'dayjs'
-import cls from './FriendsList.module.scss'
+import FriendsIcon from '@/shared/assets/icons/users-bold.svg'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { AnotherUserLoader } from '@/shared/ui/AnotherUserLoader'
-import { Input } from '@/shared/ui/Input/Input'
+import { Button } from '@/shared/ui/Button/Button'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
+import dayjs from 'dayjs'
+import { nanoid } from 'nanoid'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+
+import cls from './FriendsList.module.scss'
 
 interface FriendsListProps {
     className?: string

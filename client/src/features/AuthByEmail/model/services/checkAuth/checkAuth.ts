@@ -1,7 +1,8 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AuthResponse } from '../../types/response/AuthResponse'
 import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
 import { loadUserData } from '@/entities/UserData'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+
+import { AuthResponse } from '../../types/response/AuthResponse'
 
 export const checkAuth = createAsyncThunk<void, void, ThunkConfig<string>>(
     'login/checkAuth',

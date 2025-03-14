@@ -1,38 +1,29 @@
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-import { IPost } from '@/features/PostHandler/model/types/post'
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
-import dayjs from 'dayjs'
+import { getUserData } from '@/entities/UserData'
 import { IUser } from '@/entities/UserData/model/types/IUser'
-import { transformText } from '../../model/services/transformText/transformText'
-import { useTranslation } from 'react-i18next'
+import { IComment } from '@/features/PostHandler/model/types/comment'
+import { IPost } from '@/features/PostHandler/model/types/post'
 import { getUserDataById } from '@/shared/api/getUserDataById'
-import { ImageModal } from '@/shared/ui/ImageModal/ImageModal'
-import { PostOptionsBtn } from '../PostOptionsBtn/PostOptionsBtn'
-import cls from './Post.module.scss'
+import $api, { API_URL, SERVER_URL } from '@/shared/api/http'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Post as PostDeprecated } from '../deprecated/Post/Post'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import {
     Avatar,
-    Box,
     Card,
-    CardActions,
     CardContent,
     CardHeader,
     CardMedia,
-    Collapse,
-    IconButton,
     IconButtonProps,
-    Popover,
-    Stack,
-    TextField,
     Typography,
 } from '@mui/material'
-import $api, { API_URL, SERVER_URL } from '@/shared/api/http'
 import { red } from '@mui/material/colors'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import { getUserData } from '@/entities/UserData'
-import { IComment } from '@/features/PostHandler/model/types/comment'
+import dayjs from 'dayjs'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import { transformText } from '../../model/services/transformText/transformText'
+import { Post as PostDeprecated } from '../deprecated/Post/Post'
 import { PostFooter } from '../PostFooter/PostFooter'
+import { PostOptionsBtn } from '../PostOptionsBtn/PostOptionsBtn'
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean

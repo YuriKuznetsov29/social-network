@@ -1,28 +1,19 @@
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { getAnotherUserState } from '../model/selectors/getAnotherUserState'
-import { useNavigate, useParams } from 'react-router-dom'
-import { fetchUserPosts } from '@/features/PostHandler'
-import { useEffect } from 'react'
-import { getAnotherUserData } from '../model/services/getAnotherUserData'
-import { nanoid } from 'nanoid'
 import { Avatar } from '@/entities/Avatar'
-import { Conversations } from '@/features/AuthByEmail/model/types/response/Conversations'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { PostsList } from '@/entities/Post'
 import { getUserData } from '@/entities/UserData'
+import { Conversations } from '@/features/AuthByEmail/model/types/response/Conversations'
 import { addFriend, removeFriend } from '@/features/GetFriendsData'
 import { addConversation } from '@/features/Messenger'
-import { useTranslation } from 'react-i18next'
-import { getAnotherUserInit } from '../model/selectors/getAnotherUserInit'
-import { AnotherUserLoader } from '@/shared/ui/AnotherUserLoader'
-import BirthIcon from '@/shared/assets/icons/gift-bold.svg'
-import HomeIcon from '@/shared/assets/icons/house-bold.svg'
-import FriendsIcon from '@/shared/assets/icons/users-bold.svg'
-import PostIcon from '@/shared/assets/icons/note-pencil-bold.svg'
-import { PostsList } from '@/entities/Post'
+import { fetchUserPosts } from '@/features/PostHandler'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { AnotherUserProfile as AnotherUserProfileDeprecated } from './deprecated/AnotherUserProfile'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { AnotherUserLoader } from '@/shared/ui/AnotherUserLoader'
+import CakeIcon from '@mui/icons-material/Cake'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import EmailIcon from '@mui/icons-material/Email'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 import {
-    Badge,
     Button,
     List,
     ListItem,
@@ -32,13 +23,16 @@ import {
     Stack,
     Typography,
 } from '@mui/material'
-import CakeIcon from '@mui/icons-material/Cake'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
-import EmailIcon from '@mui/icons-material/Email'
-import { styled } from '@mui/material/styles'
-import { SERVER_URL } from '@/shared/api/http'
 import dayjs from 'dayjs'
+import { nanoid } from 'nanoid'
+import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { getAnotherUserInit } from '../model/selectors/getAnotherUserInit'
+import { getAnotherUserState } from '../model/selectors/getAnotherUserState'
+import { getAnotherUserData } from '../model/services/getAnotherUserData'
+import { AnotherUserProfile as AnotherUserProfileDeprecated } from './deprecated/AnotherUserProfile'
 
 interface AnotherUserProfileProps {
     className?: string

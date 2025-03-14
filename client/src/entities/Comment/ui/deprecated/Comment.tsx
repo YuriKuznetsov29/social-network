@@ -1,12 +1,13 @@
-import classNames from 'classnames'
-import { IComment } from '@/features/PostHandler/model/types/comment'
-import { useEffect, useState } from 'react'
-import { IUser } from '@/entities/UserData/model/types/IUser'
 import { Avatar } from '@/entities/Avatar'
-import dayjs from 'dayjs'
+import { IUser } from '@/entities/UserData/model/types/IUser'
+import { IComment } from '@/features/PostHandler/model/types/comment'
 import { getUserDataById } from '@/shared/api/getUserDataById'
-import cls from './Comment.module.scss'
+import classNames from 'classnames'
+import dayjs from 'dayjs'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+
+import cls from './Comment.module.scss'
 
 interface CommentProps {
     className?: string

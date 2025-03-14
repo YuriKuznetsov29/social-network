@@ -1,4 +1,5 @@
 import { EntityState } from '@reduxjs/toolkit'
+
 import { Dialog } from './dialog'
 
 export interface MessengerSchema extends EntityState<Dialog> {

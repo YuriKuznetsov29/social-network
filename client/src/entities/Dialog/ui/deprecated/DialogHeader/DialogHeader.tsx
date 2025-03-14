@@ -1,13 +1,14 @@
-import classNames from 'classnames'
-import { Link } from 'react-router-dom'
 import { Avatar } from '@/entities/Avatar'
-import Arrow from '@/shared/assets/icons/caret-left-bold.svg'
-import { memo, useEffect, useState } from 'react'
-import { getUserDataById } from '@/shared/api/getUserDataById'
-import { IUser } from '@/entities/UserData/model/types/IUser'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { getUserData } from '@/entities/UserData'
+import { IUser } from '@/entities/UserData/model/types/IUser'
+import { getUserDataById } from '@/shared/api/getUserDataById'
+import Arrow from '@/shared/assets/icons/caret-left-bold.svg'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import classNames from 'classnames'
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+
 import cls from './DialogHeader.module.scss'
 
 interface DialogHeaderProps {

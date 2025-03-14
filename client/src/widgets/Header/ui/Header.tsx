@@ -1,19 +1,12 @@
-import classNames from 'classnames'
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import { useNavigate } from 'react-router-dom'
-import { signOut } from '@/features/AuthByEmail'
-import { FoundUsersList } from '@/features/FindUsers'
-import { Notification } from '@/features/Notifications'
 import { SettingBtn } from '@/entities/SettingBtn'
-import cls from './Header.module.scss'
-import { useMobile } from '@/shared/lib/hook/useMobile'
+import { FoundUsersList } from '@/features/FindUsers'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { Header as HeaderDeprecated } from './deprecated/Header'
-import { AppBar, Box, IconButton, InputBase, Container } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
-import { styled, alpha } from '@mui/material/styles'
 import { LangSwitcher } from '@/shared/ui/LangSwitcher/LangSwitcher'
 import ThemeSwitcher from '@/shared/ui/ThemeSwitcher/ThemeSwitcher'
+import { AppBar, Box, InputBase, Container } from '@mui/material'
+import { styled, alpha } from '@mui/material/styles'
+
+import { Header as HeaderDeprecated } from './deprecated/Header'
 
 interface HeaderProps {
     className?: string

@@ -1,8 +1,9 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { isAxiosError } from 'axios'
-import { AuthResponse } from '../../types/response/AuthResponse'
 import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
 import { loadUserData } from '@/entities/UserData'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { isAxiosError } from 'axios'
+
+import { AuthResponse } from '../../types/response/AuthResponse'
 
 interface RequestAuthData {
     email: string

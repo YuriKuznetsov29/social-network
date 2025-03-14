@@ -1,8 +1,8 @@
-import classNames from 'classnames'
-import cls from './CreatePostLoader.module.scss'
-import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
 import { Box, Paper, Skeleton } from '@mui/material'
+
+import cls from './CreatePostLoader.module.scss'
 
 interface CreatePostLoaderProps {
     className?: string

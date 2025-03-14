@@ -1,15 +1,16 @@
-import classNames from 'classnames'
-import { AppLink } from '@/shared/ui/AppLink/AppLink'
-import ProfileIcon from '@/shared/assets/icons/user-circle-bold.svg'
+import { getUserInitied } from '@/entities/UserData'
 import NewsIcon from '@/shared/assets/icons/article-bold.svg'
 import ChatIcon from '@/shared/assets/icons/chat-circle-bold.svg'
+import ProfileIcon from '@/shared/assets/icons/user-circle-bold.svg'
 import UsersIcon from '@/shared/assets/icons/users-bold.svg'
-import { SidebarLoader } from '@/shared/ui/SidebarLoader'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import { getUserInitied } from '@/entities/UserData'
-import { useTranslation } from 'react-i18next'
-import cls from './SideBar.module.scss'
 import { useMobile } from '@/shared/lib/hook/useMobile'
+import { AppLink } from '@/shared/ui/AppLink/AppLink'
+import { SidebarLoader } from '@/shared/ui/SidebarLoader'
+import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
+
+import cls from './SideBar.module.scss'
 
 interface SideBarProps {
     className?: string

@@ -1,14 +1,15 @@
-import classNames from 'classnames'
-import User from '@/shared/assets/icons/user.svg'
-import Circle from '@/shared/assets/icons/dot-bold.svg'
-import dayjs from 'dayjs'
-import { useTranslation } from 'react-i18next'
-import { ImageModal } from '@/shared/ui/ImageModal/ImageModal'
-import { memo, useCallback, useState } from 'react'
-import CircleXL from '@/shared/assets/icons/xl-dot.svg'
-import cls from './Avatar.module.scss'
-import { useNavigate } from 'react-router'
 import { SERVER_URL } from '@/shared/api/http'
+import Circle from '@/shared/assets/icons/dot-bold.svg'
+import User from '@/shared/assets/icons/user.svg'
+import CircleXL from '@/shared/assets/icons/xl-dot.svg'
+import { ImageModal } from '@/shared/ui/ImageModal/ImageModal'
+import classNames from 'classnames'
+import dayjs from 'dayjs'
+import { memo, useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router'
+
+import cls from './Avatar.module.scss'
 
 interface AvatarProps {
     className?: string

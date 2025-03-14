@@ -1,20 +1,13 @@
-import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
-import classNames from 'classnames'
-import { signUpByEmail } from '@/features/AuthByEmail/model/services/signUpByEmail/signUpByEmail'
-import { ErrorMessage, Field, Form, Formik, useFormik } from 'formik'
-import * as Yup from 'yup'
-import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
-import ThemeSwitcher from '@/shared/ui/ThemeSwitcher/ThemeSwitcher'
-import { getLoadingAuthStatus } from '@/features/AuthByEmail/model/selectors/getLoadingAuthStatus/getLoadingAuthStatus'
 import { getAuthError } from '@/features/AuthByEmail/model/selectors/getAuthError/getAuthError'
-import { Loader } from '@/shared/ui/Loader'
-import { LangSwitcher } from '@/shared/ui/LangSwitcher/LangSwitcher'
-import { useTranslation } from 'react-i18next'
+import { getLoadingAuthStatus } from '@/features/AuthByEmail/model/selectors/getLoadingAuthStatus/getLoadingAuthStatus'
 import { getRegStatus } from '@/features/AuthByEmail/model/selectors/getRegStatus/getRegStatus'
-import dayjs, { Dayjs } from 'dayjs'
-import cls from './SignUpForm.module.scss'
+import { signUpByEmail } from '@/features/AuthByEmail/model/services/signUpByEmail/signUpByEmail'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
-import { SignUpForm as SignUpFormDeprecated } from '../deprecated/SignUpForm/SignUpForm'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { LangSwitcher } from '@/shared/ui/LangSwitcher/LangSwitcher'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import { LoadingButton } from '@mui/lab'
 import {
     Avatar,
     Box,
@@ -23,19 +16,19 @@ import {
     TextField,
     Typography,
     Link,
-    Button,
     Select,
     MenuItem,
-    TextFieldProps,
-    InputLabel,
     Alert,
 } from '@mui/material'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { DateField } from '@mui/x-date-pickers'
-import { LoadingButton } from '@mui/lab'
+import dayjs, { Dayjs } from 'dayjs'
+import { useFormik } from 'formik'
+import { useTranslation } from 'react-i18next'
+import * as Yup from 'yup'
+
+import { SignUpForm as SignUpFormDeprecated } from '../deprecated/SignUpForm/SignUpForm'
 
 export interface Values {
     firstName: string
