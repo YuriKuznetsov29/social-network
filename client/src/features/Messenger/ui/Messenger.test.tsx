@@ -310,6 +310,9 @@ describe('FoundUsersList.test', () => {
                 searchUsers: {
                     users: [],
                 },
+                authForm: {
+                    isAuth: true,
+                },
             },
         })
 

@@ -20,6 +20,7 @@ const FriendsPage = ({ className }: FriendsPageProps) => {
                 <>
                     <Header />
                     <MuiContainer
+                        data-testid="friends-page"
                         sx={{
                             display: 'flex',
                             pb: {

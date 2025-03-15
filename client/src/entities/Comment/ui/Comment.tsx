@@ -16,7 +16,7 @@ interface CommentProps {
     comment: IComment
 }
 
-export const Comment = ({ className, comment }: CommentProps) => {
+export const Comment = ({ comment }: CommentProps) => {
     const [userData, setUserData] = useState<IUser | null>(null)
 
     const { t, i18n } = useTranslation('pages')

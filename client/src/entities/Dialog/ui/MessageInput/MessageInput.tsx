@@ -18,7 +18,7 @@ interface MessageInputProps {
 }
 
 export const MessageInput = memo((props: MessageInputProps) => {
-    const { className, sendMessage, roomId } = props
+    const { sendMessage, roomId } = props
     const { t } = useTranslation('pages')
     const [text, setText] = useState('')
     const isMobile = useMobile()
@@ -42,7 +42,6 @@ export const MessageInput = memo((props: MessageInputProps) => {
 
     const onEnterSend = useCallback(
         (e: KeyboardEvent) => {
-            // console.log(e.key === 'Enter' && !e.shiftKey)
             if (e.key === 'Enter' && !e.shiftKey) {
                 onClickSendMessage()
             }
@@ -76,7 +75,6 @@ export const MessageInput = memo((props: MessageInputProps) => {
                             value={text}
                             onChange={(e) => setText(e.target.value)}
                             onBlur={onBlurScroll}
-                            // onChange={(e) => setCommentText(e.target.value)}
                         />
                         <IconButton onClick={onClickSendMessage}>
                             <SendIcon />
@@ -86,15 +84,5 @@ export const MessageInput = memo((props: MessageInputProps) => {
             }
             off={<MessageInputDeprecated roomId={roomId} sendMessage={sendMessage} />}
         />
-        // <div className={classNames(cls.MessageInput, {}, [className])}>
-        //     <Input
-        //         placeholder={t('Напишите сообщение...')}
-        //         className={cls.inputMessage}
-        //         value={text}
-        //         onChange={setText}
-        //         onBlur={onBlurScroll}
-        //     />
-        //     <Plane className={cls.plane} onClick={onClickSendMessage} />
-        // </div>
     )
 })

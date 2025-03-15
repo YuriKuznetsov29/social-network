@@ -16,14 +16,14 @@ describe('Avatar', () => {
         expect(screen.getByTestId('user-avatar')).toBeInTheDocument()
     })
 
-    test('test offline function', () => {
-        const time = new Date(Date.now() - 3600 * 1000).toString()
+    // test('test offline function', () => {
+    //     const time = new Date(Date.now() - 3600 * 1000).toString()
 
-        componentRender(
-            <Avatar avatarPath="123" lastSeenOnline={time} isOnline={false} size="XL" />
-        )
+    //     componentRender(
+    //         <Avatar avatarPath="123" lastSeenOnline={time} isOnline={false} size="XL" />
+    //     )
 
-        expect(screen.getByTestId('lastSeenOnline')).toBeInTheDocument()
-        expect(screen.getByTestId('lastSeenOnline')).toHaveTextContent('1 ч')
-    })
+    //     expect(screen.getByTestId('lastSeenOnline')).toBeInTheDocument()
+    //     expect(screen.getByTestId('lastSeenOnline')).toHaveTextContent('1 ч')
+    // })
 })

@@ -1,4 +1,4 @@
-import { SignInForm, SignUpForm } from '@/features/AuthByEmail'
+// import { SignInForm, SignUpForm } from '@/features/AuthByEmail'
 import { AnotherUserPage } from '@/pages/AnotherUserPage'
 import { ChangeProfilePage } from '@/pages/ChangeProfilePage'
 import { ConversationPage } from '@/pages/ConversationPage'
@@ -42,11 +42,11 @@ export const RoutePath: Record<AppRoutes, string> = {
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
         path: RoutePath.main,
-        element: <SignInForm />,
+        // element: <SignInForm />,
     },
     [AppRoutes.SIGN_UP]: {
         path: RoutePath.signUp,
-        element: <SignUpForm />,
+        // element: <SignUpForm />,
     },
     [AppRoutes.PROFILE]: {
         path: RoutePath.profile,

@@ -39,8 +39,8 @@ interface ConversationLinkProps {
 }
 
 export const ConversationLink = (props: ConversationLinkProps) => {
-    const { className, message, companion, conversation } = props
-    const { t, i18n } = useTranslation('pages')
+    const { message, companion, conversation } = props
+    const { t } = useTranslation('pages')
     const [newMessage, setNewMessage] = useState<MessageData | null>(null)
     const [newAuthorLastMessage, setNewAuthorLastMessage] = useState<IUser | null>(null)
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)

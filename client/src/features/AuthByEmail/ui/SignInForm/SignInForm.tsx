@@ -118,6 +118,7 @@ export const SignInForm = ({ className }: SignInFormProps) => {
                                 {t('Вход')}
                             </Typography>
                             <Box
+                                data-testid="login-form"
                                 component="form"
                                 noValidate
                                 onSubmit={formik.handleSubmit}
