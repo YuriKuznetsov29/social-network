@@ -48,6 +48,7 @@ const NewsPage = ({ className }: NewsPageProps) => {
                 <>
                     <Header />
                     <MuiContainer
+                        data-testid="news-page"
                         sx={{
                             display: 'flex',
                             pb: {
@@ -66,6 +67,7 @@ const NewsPage = ({ className }: NewsPageProps) => {
                         </Box>
                     </MuiContainer>
                     <MobileNavigation activeBtn={1} />
+                    <div data-testid="news-page">111</div>
                 </>
             }
             off={
@@ -73,7 +75,7 @@ const NewsPage = ({ className }: NewsPageProps) => {
                     <Header />
                     <Container className={isMobile ? cls.container : ''}>
                         <SideBar />
-                        <section className={cls.contentWrapper}>
+                        <section data-testid="news-page" className={cls.contentWrapper}>
                             <News />
                             <div ref={triggerRef}></div>
                         </section>

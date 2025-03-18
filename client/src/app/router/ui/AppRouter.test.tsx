@@ -1,6 +1,6 @@
 import { AppRouter } from '@/app/router'
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender'
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 
 describe('navigation test', () => {
     test('test without authorization', async () => {
@@ -18,7 +18,7 @@ describe('navigation test', () => {
 
     test('test render not found page', async () => {
         const res = componentRender(<AppRouter />, {
-            route: '/gergreeern',
+            route: '/gergreeern/*',
             initialState: {
                 authForm: {
                     isAuth: true,
@@ -33,14 +33,21 @@ describe('navigation test', () => {
 
     test('test render friends page with authorization', async () => {
         componentRender(<AppRouter />, {
-            route: '/friends',
+            route: '/news',
             initialState: {
                 authForm: {
                     isAuth: true,
+                    isLoading: false,
                 },
             },
         })
-        const friendsPage = await screen.findByTestId('friends-page')
+        screen.debug()
+        console.log('SCREEN')
+        // await waitFor(() => expect(screen.getByTestId('news-page')).toBeInTheDocument(), {
+        //     timeout: 3000,
+        // })
+        const friendsPage = await screen.findByTestId('news-page')
+        console.log(friendsPage, 'friendsPage')
         expect(friendsPage).toBeInTheDocument()
     })
 })

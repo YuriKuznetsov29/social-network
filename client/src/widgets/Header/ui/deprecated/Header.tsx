@@ -14,8 +14,6 @@ interface HeaderProps {
 }
 
 export const Header = ({ className }: HeaderProps) => {
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
     const mobile = useMobile()
 
     return (

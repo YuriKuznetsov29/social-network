@@ -1,5 +1,6 @@
 import { SERVER_URL } from '@/shared/api/http'
-import Circle from '@/shared/assets/icons/dot-bold.svg'
+// import Circle from '@/shared/assets/icons/dot-bold.svg'
+import Circle from '../../../../shared/assets/icons/dot-bold.svg'
 import User from '@/shared/assets/icons/user.svg'
 import CircleXL from '@/shared/assets/icons/xl-dot.svg'
 import { ImageModal } from '@/shared/ui/ImageModal/ImageModal'
