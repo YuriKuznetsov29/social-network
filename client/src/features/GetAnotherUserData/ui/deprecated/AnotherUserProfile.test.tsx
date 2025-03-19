@@ -3,6 +3,12 @@ import { screen } from '@testing-library/dom'
 
 import { AnotherUserProfile } from './AnotherUserProfile'
 
+jest.mock('nanoid', () => {
+    return {
+        nanoid: () => Math.random().toString(),
+    }
+})
+
 const user = {
     userId: '65232001e84843c3b5a6404e',
     email: 't1@t.ru',
@@ -35,8 +41,10 @@ describe('AnotherUserProfile.test', () => {
         componentRender(<AnotherUserProfile />, {
             initialState: {
                 anotherUser: {
-                    error: 'true',
+                    // error: 'true',
                     userData: user,
+                    isLoading: false,
+                    _initialized: true,
                 },
             },
         })

@@ -4,14 +4,7 @@ import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/
 import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import SearchIcon from '@mui/icons-material/Search'
-import {
-    Avatar,
-    Divider,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-} from '@mui/material'
+import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
 import InputBase from '@mui/material/InputBase'
 import { styled, alpha } from '@mui/material/styles'
 import { useTheme } from '@mui/material/styles'
@@ -121,6 +114,7 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
                         <SearchIcon />
                     </SearchIconWrapper>
                     <StyledInputBase
+                        data-testid="search-input"
                         placeholder="Search…"
                         inputProps={{ 'aria-label': 'search' }}
                         onChange={(e) => onChangeSearch(e)}

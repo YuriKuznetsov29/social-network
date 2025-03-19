@@ -123,6 +123,7 @@ export const ChangeProfile = () => {
                             <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
+                                        data-testid="firstName"
                                         autoComplete="given-name"
                                         name="firstName"
                                         required
@@ -143,6 +144,7 @@ export const ChangeProfile = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
+                                        data-testid="lastName"
                                         required
                                         fullWidth
                                         id="lastName"
@@ -162,6 +164,7 @@ export const ChangeProfile = () => {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
+                                        data-testid="email"
                                         required
                                         fullWidth
                                         id="email"
@@ -176,6 +179,7 @@ export const ChangeProfile = () => {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
+                                        data-testid="city"
                                         required
                                         fullWidth
                                         name="city"
@@ -192,6 +196,7 @@ export const ChangeProfile = () => {
                                 <Grid item xs={12}>
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DatePicker
+                                            data-testid="date"
                                             disableFuture
                                             sx={{ width: '100%' }}
                                             name="birthDay"
@@ -248,6 +253,7 @@ export const ChangeProfile = () => {
                                 </Grid>
                             </Grid>
                             <LoadingButton
+                                data-testid="submit"
                                 sx={{ mt: 3, mb: 2 }}
                                 type="submit"
                                 fullWidth

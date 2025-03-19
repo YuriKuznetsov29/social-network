@@ -5,25 +5,22 @@ import { Avatar } from './Avatar'
 
 describe('Avatar', () => {
     test('test render', () => {
-        componentRender(<Avatar />)
+        componentRender(<Avatar />, { featureFlags: { isAppRedesigned: true } })
+        expect(screen.getByTestId('badge')).toBeInTheDocument()
+    })
+
+    test('test render with avatarPath', () => {
+        componentRender(<Avatar avatarPath="123" />, { featureFlags: { isAppRedesigned: true } })
 
         expect(screen.getByTestId('avatar')).toBeInTheDocument()
     })
 
-    test('test render with avatarPath', () => {
-        componentRender(<Avatar avatarPath="123" />)
+    test('test online', async () => {
+        componentRender(<Avatar avatarPath="123" isOnline={true} />, {
+            featureFlags: { isAppRedesigned: true },
+        })
 
-        expect(screen.getByTestId('user-avatar')).toBeInTheDocument()
+        const badge = await screen.findByTestId('badge')
+        expect(badge.lastChild).toHaveStyle(`display: block`)
     })
-
-    // test('test offline function', () => {
-    //     const time = new Date(Date.now() - 3600 * 1000).toString()
-
-    //     componentRender(
-    //         <Avatar avatarPath="123" lastSeenOnline={time} isOnline={false} size="XL" />
-    //     )
-
-    //     expect(screen.getByTestId('lastSeenOnline')).toBeInTheDocument()
-    //     expect(screen.getByTestId('lastSeenOnline')).toHaveTextContent('1 ч')
-    // })
 })

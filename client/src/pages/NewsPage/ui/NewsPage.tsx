@@ -67,7 +67,6 @@ const NewsPage = ({ className }: NewsPageProps) => {
                         </Box>
                     </MuiContainer>
                     <MobileNavigation activeBtn={1} />
-                    <div data-testid="news-page">111</div>
                 </>
             }
             off={

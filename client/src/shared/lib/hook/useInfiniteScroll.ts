@@ -28,7 +28,6 @@ export function useInfiniteScroll({ callback, triggerRef, wrapperRef }: useInfin
 
         return () => {
             if (observer && triggerRef.current) {
-                 
                 observer.unobserve(triggerRef.current)
             }
         }

@@ -6,7 +6,6 @@ import { Avatar } from './Avatar'
 describe('Avatar', () => {
     test('test render', () => {
         componentRender(<Avatar />)
-
         expect(screen.getByTestId('avatar')).toBeInTheDocument()
     })
 

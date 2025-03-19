@@ -9,7 +9,7 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
     const loadingAuth = useAppSelector(getLoadingAuthStatus)
     const location = useLocation()
 
-    // if (loadingAuth) return <Loader center />
+    if (loadingAuth) return <Loader center />
 
     if (!auth) {
         return <Navigate to={RoutePath.main} state={{ from: location }} replace />

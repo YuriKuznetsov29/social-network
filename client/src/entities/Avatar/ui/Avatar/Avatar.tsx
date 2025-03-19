@@ -57,7 +57,7 @@ export const Avatar = memo((props: AvatarProps) => {
             feature="isAppRedesigned"
             on={
                 <StyledBadge
-                    data-testid="avatar"
+                    data-testid="badge"
                     sx={{
                         cursor: 'pointer',
                         '& .MuiBadge-badge': {
@@ -70,7 +70,7 @@ export const Avatar = memo((props: AvatarProps) => {
                     onClick={onClickNavigate}
                 >
                     <MuiAvatar
-                        data-testid="user-avatar"
+                        data-testid="avatar"
                         sx={{
                             width: size ? size : '40px',
                             height: size ? size : '40px',

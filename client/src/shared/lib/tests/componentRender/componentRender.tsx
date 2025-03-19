@@ -3,6 +3,7 @@ import { en_short } from '@/shared/config/dayjs/locales/en_short'
 import { ru_short } from '@/shared/config/dayjs/locales/ru_short'
 import { thresholds } from '@/shared/config/dayjs/thresholds'
 import i18n from '@/shared/config/i18n/i18nForTests'
+import { FeatureFlags } from '@/shared/types/featureFlags'
 import { render } from '@testing-library/react'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
@@ -12,6 +13,7 @@ import updateLocale from 'dayjs/plugin/updateLocale'
 import { ReactNode } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { MemoryRouter } from 'react-router-dom'
+import { setFeatureFlags } from '../../features/lib/setGetFeatures'
 
 dayjs.extend(relativeTime, {
     thresholds: thresholds,
@@ -39,10 +41,15 @@ dayjs.updateLocale('ru', {
 export interface componentRenderOptions {
     route?: string
     initialState?: DeepPartial<StateSchema>
+    featureFlags?: FeatureFlags
 }
 
 export function componentRender(component: ReactNode, options: componentRenderOptions = {}) {
-    const { route = '/', initialState } = options
+    const { route = '/', initialState, featureFlags } = options
+
+    if (featureFlags) {
+        setFeatureFlags(featureFlags)
+    }
 
     return render(
         <MemoryRouter initialEntries={[route]}>
