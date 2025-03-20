@@ -1,3 +1,4 @@
+import { SERVER_URL } from '@/shared/api/http/index'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { Avatar as MuiAvatar } from '@mui/material'
 import { red } from '@mui/material/colors'
@@ -5,10 +6,9 @@ import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
 
-import { SERVER_URL } from '@/shared/api/http/index'
+import { stringToColor } from '../../lib/helpers/stringToColor'
 import { Avatar as AvatarDeprecated } from '../deprecated/Avatar'
 import { StyledBadge } from '../StyledBadge/StyledBadge'
-import { stringToColor } from '../../lib/helpers/stringToColor'
 
 interface AvatarProps {
     className?: string

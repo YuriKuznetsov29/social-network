@@ -1,5 +1,3 @@
-
-
 interface RequestData {
     author: string
     body: string

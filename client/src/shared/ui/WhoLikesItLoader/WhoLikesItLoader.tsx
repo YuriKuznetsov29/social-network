@@ -1,4 +1,3 @@
-
 import cls from './WhoLikesItLoader.module.scss'
 
 interface WhoLikesItLoaderProps {

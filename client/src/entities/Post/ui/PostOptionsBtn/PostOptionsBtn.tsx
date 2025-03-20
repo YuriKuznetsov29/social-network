@@ -5,14 +5,7 @@ import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/
 import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-import {
-    IconButton,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemText,
-    Popover,
-} from '@mui/material'
+import { IconButton, List, ListItem, ListItemButton, ListItemText, Popover } from '@mui/material'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 

@@ -130,9 +130,7 @@ export const Post = memo(({ post }: PostProps) => {
                         />
                     )}
                     <CardContent>
-                        <Typography
-                            dangerouslySetInnerHTML={transformText(post.text || '')}
-                        />
+                        <Typography dangerouslySetInnerHTML={transformText(post.text || '')} />
                     </CardContent>
                     <PostFooter post={post} />
                 </Card>

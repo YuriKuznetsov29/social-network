@@ -1,4 +1,3 @@
-
 export interface AuthSchema {
     isLoading: boolean
     initAuth: boolean

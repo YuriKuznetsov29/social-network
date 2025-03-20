@@ -36,11 +36,7 @@ export const DynamicModuleLoader = (props: DynamicModuleLoaderProps) => {
                 })
             }
         }
-         
     }, [])
 
-    return (
-         
-        <>{children}</>
-    )
+    return <>{children}</>
 }

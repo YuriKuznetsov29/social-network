@@ -1,11 +1,11 @@
-import { Dialog } from '../../model/types/dialog'
-import { IUser } from '@/entities/UserData'
 import { ConversationLink } from '@/entities/ConversationLink'
+import { IUser } from '@/entities/UserData'
 import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'
-
 import classNames from 'classnames'
-import cls from './Messenger.module.scss'
 import { useTranslation } from 'react-i18next'
+
+import { Dialog } from '../../model/types/dialog'
+import cls from './Messenger.module.scss'
 
 interface MessengerProps {
     className?: string

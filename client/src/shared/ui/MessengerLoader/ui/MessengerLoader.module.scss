@@ -42,14 +42,17 @@
     animation: skeleton-loading 1s linear infinite alternate;
 }
 
-.time, .messageText, .author {
+.time,
+.messageText,
+.author {
     width: 50px;
     height: 12px;
     animation: skeleton-loading 1s linear infinite alternate;
     border-radius: 8px;
 }
 
-.time, .author {
+.time,
+.author {
     margin-bottom: 10px;
 }
 

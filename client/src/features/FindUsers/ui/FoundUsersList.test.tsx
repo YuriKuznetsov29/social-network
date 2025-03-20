@@ -1,6 +1,5 @@
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender'
 import { screen } from '@testing-library/dom'
-import { userEvent } from '@testing-library/user-event'
 
 import { FoundUsersList } from './FoundUsersList'
 

@@ -1,9 +1,5 @@
 import { StateSchema } from '@/app/Providers/StoreProvider'
-import {
-    PayloadAction,
-    createEntityAdapter,
-    createSlice,
-} from '@reduxjs/toolkit'
+import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 
 import { fetchDialogs } from '../services/fetchDialogs'
 import { Dialog } from '../types/dialog'

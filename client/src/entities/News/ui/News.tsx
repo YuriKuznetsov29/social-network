@@ -1,7 +1,5 @@
 import { Post } from '@/entities/Post'
-import {
-    ReducersList,
-} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
+import { ReducersList } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
 import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { PostLoader } from '@/shared/ui/PostLoader'

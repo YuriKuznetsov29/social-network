@@ -13,6 +13,7 @@ import updateLocale from 'dayjs/plugin/updateLocale'
 import { ReactNode } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { MemoryRouter } from 'react-router-dom'
+
 import { setFeatureFlags } from '../../features/lib/setGetFeatures'
 
 dayjs.extend(relativeTime, {

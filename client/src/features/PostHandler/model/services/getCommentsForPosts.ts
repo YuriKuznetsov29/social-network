@@ -1,4 +1,3 @@
-
 import { IComment } from '../types/comment'
 
 interface RequestData {

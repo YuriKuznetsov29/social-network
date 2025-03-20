@@ -1,10 +1,6 @@
 import { Avatar } from '@/entities/Avatar'
 import { IUser, getUserData } from '@/entities/UserData'
-import {
-    getAllFriends,
-    getFriendsState,
-    getInitFriendsStatus,
-} from '@/features/GetFriendsData'
+import { getAllFriends, getFriendsState, getInitFriendsStatus } from '@/features/GetFriendsData'
 import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
 import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
 import { ContentContainer } from '@/shared/ui/ContentContainer/ContentContainer'

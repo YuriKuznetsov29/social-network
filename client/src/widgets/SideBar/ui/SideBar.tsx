@@ -6,14 +6,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
 import FeedIcon from '@mui/icons-material/Feed'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 import PersonIcon from '@mui/icons-material/Person'
-import {
-    Box,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-} from '@mui/material'
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
