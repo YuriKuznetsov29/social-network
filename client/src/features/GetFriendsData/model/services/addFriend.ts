@@ -1,9 +1,10 @@
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { IUser, userDataActions } from '@/entities/UserData'
+import { notificationsActions } from '@/features/Notifications'
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { TFunction } from 'i18next'
+
 import { API_URL } from '../../../../shared/api/http/index'
-import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
-import { IUser, userDataActions } from 'entities/UserData'
-import { notificationsActions } from 'features/Notifications'
-import { TFunction, i18n } from 'i18next'
 
 export interface RequestChangeData {
     userId: string
@@ -30,7 +31,13 @@ export const addFriend = createAsyncThunk<void, RequestChangeData, ThunkConfig<s
                     friendId,
                 }
             )
+
+            if (!response.data) {
+                throw new Error()
+            }
+
             dispatch(userDataActions.setUserData(response.data.user))
+
             if (t) {
                 dispatch(
                     notificationsActions.setNotification(

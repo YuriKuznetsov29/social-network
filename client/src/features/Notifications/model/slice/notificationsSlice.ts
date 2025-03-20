@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+
 import { NotificationsSchema } from '../types/notiticationsSchema'
 
 export interface signInState {

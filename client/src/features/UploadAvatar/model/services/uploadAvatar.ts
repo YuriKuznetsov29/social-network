@@ -1,7 +1,7 @@
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { IUser, userDataActions } from '@/entities/UserData'
+import { notificationsActions } from '@/features/Notifications'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
-import { IUser, userDataActions } from 'entities/UserData'
-import { notificationsActions } from 'features/Notifications'
 import { TFunction } from 'i18next'
 
 export interface ResponseData {

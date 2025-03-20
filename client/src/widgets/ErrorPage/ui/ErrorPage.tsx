@@ -1,6 +1,7 @@
-import { Button } from 'shared/ui/Button/Button'
-import cls from './ErrorPage.module.scss'
+import { Button } from '@/shared/ui/Button/Button'
 import classNames from 'classnames'
+
+import cls from './ErrorPage.module.scss'
 
 interface ErrorPageProps {
     className?: string
@@ -8,7 +9,6 @@ interface ErrorPageProps {
 
 export const ErrorPage = ({ className }: ErrorPageProps) => {
     const reloadPage = () => {
-        // eslint-disable-next-line no-restricted-globals
         location.reload()
     }
 

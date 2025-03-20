@@ -1,7 +1,8 @@
+import { IUser } from '@/entities/UserData'
 import { createSlice } from '@reduxjs/toolkit'
-import { LikesSchema } from '../types/likesSchema'
-import { IUser } from 'entities/UserData'
+
 import { getWhoLikesUsers } from '../services/getWhoLikesUsers'
+import { LikesSchema } from '../types/likesSchema'
 
 const initialState: LikesSchema = {
     users: [] as IUser[],

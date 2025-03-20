@@ -1,3 +1,13 @@
+import { NewsSchema } from '@/entities/News'
+import { UserDataSchema } from '@/entities/UserData/model/types/userDataSchema'
+import { LikesSchema } from '@/entities/WhoLikesIt'
+import { AuthSchema } from '@/features/AuthByEmail/model/types/authSchema'
+import { SearchUsersSchema } from '@/features/FindUsers/model/type/searchUsersSchema'
+import { AnotherUserSchema } from '@/features/GetAnotherUserData/model/types/anotherUserSchema'
+import { FriendsSchema } from '@/features/GetFriendsData'
+import { MessengerSchema } from '@/features/Messenger'
+import { NotificationsSchema } from '@/features/Notifications'
+import { PostHandlerSchema } from '@/features/PostHandler/model/types/postHandlerSchema'
 import {
     AnyAction,
     CombinedState,
@@ -5,17 +15,7 @@ import {
     Reducer,
     ReducersMapObject,
 } from '@reduxjs/toolkit'
-import { AxiosError, AxiosInstance } from 'axios'
-import { NewsSchema } from 'entities/News'
-import { UserDataSchema } from 'entities/UserData/model/types/userDataSchema'
-import { LikesSchema } from 'entities/WhoLikesIt'
-import { AuthSchema } from 'features/AuthByEmail/model/types/authSchema'
-import { SearchUsersSchema } from 'features/FindUsers/model/type/searchUsersSchema'
-import { AnotherUserSchema } from 'features/GetAnotherUserData/model/types/anotherUserSchema'
-import { FriendsSchema } from 'features/GetFriendsData'
-import { MessengerSchema } from 'features/Messenger'
-import { NotificationsSchema } from 'features/Notifications'
-import { PostHandlerSchema } from 'features/PostHandler/model/types/postHandlerSchema'
+import { AxiosInstance } from 'axios'
 import { NavigateOptions, To } from 'react-router-dom'
 
 export interface StateSchema {
@@ -53,4 +53,5 @@ export interface ThunkExtraArg {
 export interface ThunkConfig<T> {
     rejectValue: T
     extra: ThunkExtraArg
+    state: StateSchema
 }

@@ -1,10 +1,10 @@
-import { FC, ReactNode, useEffect } from 'react'
-import { useDispatch, useStore } from 'react-redux'
-import { Reducer } from '@reduxjs/toolkit'
 import {
     ReduxStoreWithManager,
     StateSchemaKey,
-} from 'app/Providers/StoreProvider/config/StateSchema'
+} from '@/app/Providers/StoreProvider/config/StateSchema'
+import { Reducer } from '@reduxjs/toolkit'
+import { ReactNode, useEffect } from 'react'
+import { useDispatch, useStore } from 'react-redux'
 
 export type ReducersList = {
     [name in StateSchemaKey]?: Reducer
@@ -36,11 +36,7 @@ export const DynamicModuleLoader = (props: DynamicModuleLoaderProps) => {
                 })
             }
         }
-        // eslint-disable-next-line
     }, [])
 
-    return (
-        // eslint-disable-next-line react/jsx-no-useless-fragment
-        <>{children}</>
-    )
+    return <>{children}</>
 }

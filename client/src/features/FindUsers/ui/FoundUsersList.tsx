@@ -1,18 +1,62 @@
-import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
+import { IUser } from '@/entities/UserData'
+import { SERVER_URL } from '@/shared/api/http'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import SearchIcon from '@mui/icons-material/Search'
+import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
+import InputBase from '@mui/material/InputBase'
+import { styled, alpha } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 import { useEffect, useState } from 'react'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+
 import { getSearchUsersState } from '../model/selectors/getSearchUsersState'
 import { findUsers } from '../model/services/findUsers'
 import { searchUsersActions } from '../model/slice/searchUsersSlice'
-import { Input } from 'shared/ui/Input/Input'
-import classNames from 'classnames'
-import { Link } from 'react-router-dom'
-import { Avatar } from 'entities/Avatar'
-import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
-import { IUser } from 'entities/UserData'
-import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import SearchIcon from 'shared/assets/icons/magnifying-glass-bold.svg'
-import { useTranslation } from 'react-i18next'
-import cls from './FoundUsersList.module.scss'
+import { FoundUsersList as FoundUsersListDeprecated } from './deprecated/FoundUsersList'
+
+const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(3),
+        width: 'auto',
+    },
+}))
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}))
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    '& .MuiInputBase-input': {
+        padding: theme.spacing(1, 1, 1, 0),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('md')]: {
+            width: '20ch',
+        },
+    },
+}))
 
 interface FoundUsersListProps {
     className?: string
@@ -23,13 +67,14 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
     const [showResults, setShowResults] = useState(false)
     const { t } = useTranslation('pages')
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const { users, firstName, lastName } = useAppSelector(getSearchUsersState)
+
+    const theme = useTheme()
 
     useEffect(() => {
         dispatch(findUsers({ firstName, lastName }))
         if (firstName) {
-            console.log(firstName, 'first')
-
             setShowResults(true)
         }
     }, [firstName, lastName])
@@ -56,53 +101,84 @@ export const FoundUsersList = ({ className }: FoundUsersListProps) => {
         dispatch(searchUsersActions.setLastName(name[1] || ''))
     }, [searchValue])
 
-    const onChangeSearch = (value: string) => {
-        setSearchValue(value)
+    const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setSearchValue(e.target.value)
     }
 
     return (
-        <>
-            <label className={cls.labelSearch} htmlFor="search">
-                <div className={cls.iconWrapper}>
-                    <SearchIcon className={cls.searchIcon} />
-                </div>
-                <Input
-                    id="search"
-                    className={cls.search}
-                    placeholder={t('Поиск')}
-                    type="search"
-                    value={searchValue}
-                    onChange={onChangeSearch}
-                    autoComplete="off"
-                />
-            </label>
-
-            <ContentContainer
-                id="search"
-                className={classNames(cls.results, { [cls.show]: showResults }, [])}
-            >
-                {users.length ? (
-                    users.map((user: IUser) => {
-                        return (
-                            <Link to={`/${user.userId}`}>
-                                <div key={user.userId} className={cls.userContainer}>
-                                    <Avatar
-                                        avatarPath={user.avatarPath}
-                                        className={cls.avatar}
-                                        size="L"
-                                        isOnline={user.isOnline}
-                                        lastSeenOnline={user.lastSeenOnline}
-                                    />
-                                    <div>{user.firstName}</div>
-                                    <div>{user.lastName}</div>
-                                </div>
-                            </Link>
-                        )
-                    })
-                ) : (
-                    <div>{t('Пользователей не найдено')}</div>
-                )}
-            </ContentContainer>
-        </>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Search id="search" sx={{ position: 'relative' }}>
+                    <SearchIconWrapper>
+                        <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                        data-testid="search-input"
+                        placeholder="Search…"
+                        inputProps={{ 'aria-label': 'search' }}
+                        onChange={(e) => onChangeSearch(e)}
+                    />
+                    <List
+                        sx={{
+                            display: showResults ? 'block' : 'none',
+                            width: '100%',
+                            maxWidth: 360,
+                            bgcolor: 'background.paper',
+                            position: 'absolute',
+                            zIndex: 10,
+                            maxHeight: '400px',
+                            overflowY: 'auto',
+                            // bgcolor: theme.palette.grey,
+                        }}
+                    >
+                        {users.length ? (
+                            users.map((user: IUser) => {
+                                return (
+                                    <>
+                                        <ListItem
+                                            sx={{
+                                                cursor: 'pointer',
+                                                // bgcolor: theme.palette.divider,
+                                                ':hover': { bgcolor: theme.palette.action.hover },
+                                            }}
+                                            alignItems="flex-start"
+                                            onClick={() => navigate(`/${user.userId}`)}
+                                        >
+                                            <ListItemAvatar>
+                                                <Avatar
+                                                    alt={user.firstName}
+                                                    src={SERVER_URL + user.avatarPath}
+                                                />
+                                            </ListItemAvatar>
+                                            <ListItemText
+                                                primary={`${user.firstName} ${user.lastName}`}
+                                                secondary={
+                                                    <React.Fragment>
+                                                        {/* <Typography
+                                                            sx={{ display: 'inline' }}
+                                                            component="span"
+                                                            variant="body2"
+                                                            color="text.primary"
+                                                        >
+                                                            {`${user.firstName} ${user.lastName}`}
+                                                        </Typography> */}
+                                                        {user.city}
+                                                    </React.Fragment>
+                                                }
+                                            />
+                                        </ListItem>
+                                        <Divider variant="inset" component="li" />
+                                    </>
+                                )
+                            })
+                        ) : (
+                            <div data-testid="not-found-users">{t('Пользователей не найдено')}</div>
+                        )}
+                    </List>
+                </Search>
+            }
+            off={<FoundUsersListDeprecated />}
+        />
     )
 }

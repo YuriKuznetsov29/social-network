@@ -1,15 +1,16 @@
-import classNames from 'classnames'
-import { AppLink } from 'shared/ui/AppLink/AppLink'
-import ProfileIcon from 'shared/assets/icons/user-circle-bold.svg'
-import NewsIcon from 'shared/assets/icons/article-bold.svg'
-import ChatIcon from 'shared/assets/icons/chat-circle-bold.svg'
-import UsersIcon from 'shared/assets/icons/users-bold.svg'
-import { SidebarLoader } from 'shared/ui/SidebarLoader'
-import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { getUserInitied } from 'entities/UserData'
+import { getUserInitied } from '@/entities/UserData'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { useMobile } from '@/shared/lib/hook/useMobile'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import FeedIcon from '@mui/icons-material/Feed'
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import PersonIcon from '@mui/icons-material/Person'
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import cls from './SideBar.module.scss'
-import { useMobile } from 'shared/lib/hook/useMobile'
+import { useNavigate } from 'react-router-dom'
+
+import { SideBar as SidebarDeprecated } from './deprecated/SideBar'
 
 interface SideBarProps {
     className?: string
@@ -19,53 +20,60 @@ export const SideBar = ({ className }: SideBarProps) => {
     const userInit = useAppSelector(getUserInitied)
     const { t } = useTranslation('pages')
     const isMobile = useMobile()
+    const navigate = useNavigate()
 
-    return isMobile ? (
-        <div className={cls.mobileSidebar}>
-            <AppLink to={'/news'} className={cls.linkMobile} active activeClass={cls.activeLink}>
-                <NewsIcon className={cls.mobileIcon} />
-            </AppLink>
-            <AppLink to={'/friends'} className={cls.linkMobile} active activeClass={cls.activeLink}>
-                <UsersIcon className={cls.mobileIcon} />
-            </AppLink>
-            <AppLink
-                to={'/messenger'}
-                className={cls.linkMobile}
-                active
-                activeClass={cls.activeLink}
-            >
-                <ChatIcon className={cls.mobileIcon} />
-            </AppLink>
-            <AppLink to={'/profile'} className={cls.linkMobile} active activeClass={cls.activeLink}>
-                <ProfileIcon className={cls.mobileIcon} />
-            </AppLink>
-        </div>
-    ) : (
-        <div className={classNames(cls.SideBar, {}, [className])}>
-            <nav className={cls.nav}>
-                {!userInit ? (
-                    <SidebarLoader />
-                ) : (
-                    <>
-                        <AppLink to={'/profile'} className={cls.link}>
-                            <ProfileIcon className={cls.icon} />
-                            {t('Моя страница')}
-                        </AppLink>
-                        <AppLink to={'/news'} className={cls.link}>
-                            <NewsIcon className={cls.icon} />
-                            {t('Новости')}
-                        </AppLink>
-                        <AppLink to={'/messenger'} className={cls.link}>
-                            <ChatIcon className={cls.icon} />
-                            {t('Мессенджер')}
-                        </AppLink>
-                        <AppLink to={'/friends'} className={cls.link}>
-                            <UsersIcon className={cls.icon} />
-                            {t('Друзья')}
-                        </AppLink>
-                    </>
-                )}
-            </nav>
-        </div>
+    return (
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Box
+                    maxWidth="260px"
+                    width="100%"
+                    sx={{
+                        display: { xl: 'block', lg: 'block', md: 'block', sm: 'none', xs: 'none' },
+                    }}
+                >
+                    <List
+                        sx={{
+                            width: '100%',
+                        }}
+                    >
+                        <ListItem disablePadding onClick={() => navigate('/profile')}>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <PersonIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={t('Моя страница')} />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding onClick={() => navigate('/news')}>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <FeedIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={t('Новости')} />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding onClick={() => navigate('/messenger')}>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <ChatBubbleIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={t('Мессенджер')} />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding onClick={() => navigate('/friends')}>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <PeopleAltIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={t('Друзья')} />
+                            </ListItemButton>
+                        </ListItem>
+                    </List>
+                </Box>
+            }
+            off={<SidebarDeprecated />}
+        />
     )
 }

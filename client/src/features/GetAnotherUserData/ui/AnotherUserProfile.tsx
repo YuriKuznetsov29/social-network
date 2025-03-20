@@ -1,28 +1,38 @@
-import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
-import { getAnotherUserState } from '../model/selectors/getAnotherUserState'
-import { useNavigate, useParams } from 'react-router-dom'
-import { IPost, getPostHandlerState, getUserPosts } from 'features/PostHandler'
-import { useEffect } from 'react'
-import { getAnotherUserData } from '../model/services/getAnotherUserData'
+import { Avatar } from '@/entities/Avatar'
+import { PostsList } from '@/entities/Post'
+import { getUserData } from '@/entities/UserData'
+import { Conversations } from '@/features/AuthByEmail/model/types/response/Conversations'
+import { addFriend, removeFriend } from '@/features/GetFriendsData'
+import { addConversation } from '@/features/Messenger'
+import { fetchUserPosts } from '@/features/PostHandler'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { AnotherUserLoader } from '@/shared/ui/AnotherUserLoader'
+import CakeIcon from '@mui/icons-material/Cake'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import EmailIcon from '@mui/icons-material/Email'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import {
+    Button,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Paper,
+    Stack,
+    Typography,
+} from '@mui/material'
+import dayjs from 'dayjs'
 import { nanoid } from 'nanoid'
-import classNames from 'classnames'
-import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
-import { Avatar } from 'entities/Avatar'
-import { Button } from 'shared/ui/Button/Button'
-import { Conversations } from 'features/AuthByEmail/model/types/response/Conversations'
-import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { getUserData } from 'entities/UserData'
-import { addFriend, removeFriend } from 'features/GetFriendsData'
-import { addConversation } from 'features/Messenger'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate, useParams } from 'react-router-dom'
+
 import { getAnotherUserInit } from '../model/selectors/getAnotherUserInit'
-import { AnotherUserLoader } from 'shared/ui/AnotherUserLoader'
-import { PostsList } from 'entities/PostsList'
-import BirthIcon from 'shared/assets/icons/gift-bold.svg'
-import HomeIcon from 'shared/assets/icons/house-bold.svg'
-import FriendsIcon from 'shared/assets/icons/users-bold.svg'
-import PostIcon from 'shared/assets/icons/note-pencil-bold.svg'
-import cls from './AnotherUserProfile.module.scss'
+import { getAnotherUserState } from '../model/selectors/getAnotherUserState'
+import { getAnotherUserData } from '../model/services/getAnotherUserData'
+import { AnotherUserProfile as AnotherUserProfileDeprecated } from './deprecated/AnotherUserProfile'
 
 interface AnotherUserProfileProps {
     className?: string
@@ -55,7 +65,7 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
     useEffect(() => {
         if (anotherUserId) {
             dispatch(getAnotherUserData({ userId: anotherUserId }))
-            dispatch(getUserPosts({ author: anotherUserId }))
+            dispatch(fetchUserPosts({ author: anotherUserId }))
         }
     }, [anotherUserId])
 
@@ -120,64 +130,95 @@ export const AnotherUserProfile = ({ className }: AnotherUserProfileProps) => {
     if (!anotherUserInit) return <AnotherUserLoader />
 
     return (
-        <div className={classNames(cls.AnotherUserProfile, {}, [className])}>
-            <ContentContainer className={cls.contentWrapper}>
-                <div className={cls.dataWrapper}>
-                    <Avatar
-                        avatarPath={userData.avatarPath}
-                        size="XL"
-                        isOnline={userData.isOnline}
-                        lastSeenOnline={userData.lastSeenOnline}
-                        className={cls.avatar}
-                    />
-                    <h2 className={cls.name}>
-                        <div>{userData.firstName}</div>
-                        <div>{userData.lastName}</div>
-                    </h2>
-                </div>
-                <div>
-                    <div className={cls.valueContainer}>
-                        <div>
-                            <div className={cls.valueTitle}>
-                                <BirthIcon className={cls.icon} />
-                                {t('День рождения')}
-                            </div>
-                            <div className={cls.valueTitle}>
-                                <HomeIcon className={cls.icon} />
-                                {t('Город')}
-                            </div>
-                            <div className={cls.valueTitle}>
-                                <FriendsIcon className={cls.icon} />
-                                {t('Друзья ')}
-                            </div>
-                            <div className={cls.valueTitle}>
-                                <PostIcon className={cls.icon} />
-                                {t('Посты')}
-                            </div>
-                        </div>
-                        <div className={cls.dataWrapper}>
-                            <div>{userData.birthDay}</div>
-                            <div>Новодвинск</div>
-                            <div>{userData.friends?.length}</div>
-                            <div>{userData?.posts}</div>
-                        </div>
-                    </div>
-                    <div className={cls.btnBlock}>
-                        {isFriend() ? (
-                            <Button className={cls.friendBtn} onClick={onClickRemoveFriend}>
-                                {t('Удалить из друзей')}
-                            </Button>
-                        ) : (
-                            <Button className={cls.friendBtn} onClick={onClickAddFriend}>
-                                {t('Добавить в друзья')}
-                            </Button>
-                        )}
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <>
+                    <Paper
+                        sx={{
+                            padding: '16px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                        }}
+                        elevation={1}
+                    >
+                        <Stack alignItems={'flex-start'} spacing={2}>
+                            <Avatar
+                                size="160px"
+                                firstName={userData.firstName}
+                                avatarPath={userData.avatarPath}
+                                isOnline={userData.isOnline}
+                            />
+                            <Typography variant="h5" component="h1">
+                                {`${userData.firstName} ${userData.lastName}`}
+                            </Typography>
+                        </Stack>
+                        <Stack>
+                            {!userData.isOnline && (
+                                <Typography align="center" variant="body1" component="div">
+                                    {`Был(а) в сети ${
+                                        dayjs(userData.lastSeenOnline)
+                                            .locale(i18n.language)
+                                            .toNow(true) + t(' назад')
+                                    }`}
+                                </Typography>
+                            )}
 
-                        <Button onClick={createConversation}>{t('Написать сообщение')}</Button>
-                    </div>
-                </div>
-            </ContentContainer>
-            <PostsList />
-        </div>
+                            <List dense>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <CakeIcon />
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={`${t('День рождения')} ${dayjs(
+                                            userData.birthDay.split('.').reverse().join('-')
+                                        )
+                                            .locale(i18n.language)
+                                            .format('D MMMM YYYY')}`}
+                                        // secondary={t('День рождения')}
+                                    />
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <LocationOnIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={`${t('Город')} ${userData.city}`} />
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <ChatBubbleIcon />
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={`${t('Друзья')} ${userData.friends?.length}`}
+                                    />
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <EmailIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={`${t('Посты')} ${userData.posts}`} />
+                                </ListItem>
+                            </List>
+                            <Stack spacing={2}>
+                                {isFriend() ? (
+                                    <Button variant="outlined" onClick={onClickRemoveFriend}>
+                                        {t('Удалить из друзей')}
+                                    </Button>
+                                ) : (
+                                    <Button variant="outlined" onClick={onClickAddFriend}>
+                                        {t('Добавить в друзья')}
+                                    </Button>
+                                )}
+                                <Button onClick={createConversation} variant="outlined">
+                                    {t('Написать сообщение')}
+                                </Button>
+                            </Stack>
+                        </Stack>
+                    </Paper>
+                    <PostsList />
+                </>
+            }
+            off={<AnotherUserProfileDeprecated />}
+        />
     )
 }

@@ -1,29 +1,49 @@
-import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
-import * as Yup from 'yup'
-import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
-import { ErrorMessage, Field, Form, Formik } from 'formik'
-import { changeUserData } from 'features/AuthByEmail/model/services/changeUserData'
-import { removeAvatar, uploadAvatar } from 'features/UploadAvatar'
-import { Button } from 'shared/ui/Button/Button'
-import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { getUserData } from 'entities/UserData'
-import { Avatar } from 'entities/Avatar'
+import { getUserData } from '@/entities/UserData'
+import { getLoadingAuthStatus } from '@/features/AuthByEmail/model/selectors/getLoadingAuthStatus/getLoadingAuthStatus'
+import { changeUserData } from '@/features/AuthByEmail/model/services/changeUserData/changeUserData'
+import { removeAvatar, uploadAvatar } from '@/features/UploadAvatar'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
+import HideImageIcon from '@mui/icons-material/HideImage'
+import { LoadingButton } from '@mui/lab'
+import { Box, Container, Grid, MenuItem, Select, TextField, Button } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import dayjs, { Dayjs } from 'dayjs'
+import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import dayjs from 'dayjs'
-import cls from './ChangeProfile.module.scss'
+import * as Yup from 'yup'
+
+import { ChangeProfile as ChangeProfileDeprecated } from '../../deprecated/ChangeProfile'
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+})
 
 export interface Values {
     firstName: string
     lastName: string
     email: string
     gender: 'male' | 'female' | ''
-    birthDay: string
+    birthDay: Dayjs
     city: string
 }
 
 export const ChangeProfile = () => {
     const { birthDay, email, firstName, lastName, gender, userId, avatarPath, city } =
         useAppSelector(getUserData)
+    const loading = useAppSelector(getLoadingAuthStatus)
     const { t } = useTranslation('authForms')
     const dispatch = useAppDispatch()
 
@@ -41,12 +61,12 @@ export const ChangeProfile = () => {
         lastName: Yup.string().trim().required(t('Введите фамилию')),
         email: Yup.string().email(t('Неправильный формат email')).required(t('Введите Email')),
         birthDay: Yup.date()
-            .transform((value, originalValue, context) => {
-                if (context.isType(value)) return value
+            // .transform((value, originalValue, context) => {
+            //     if (context.isType(value)) return value
 
-                value = originalValue.split('.').reverse().join('-')
-                return dayjs(value).isValid() ? dayjs(value).toDate() : new Date('')
-            })
+            //     value = originalValue.split('.').reverse().join('-')
+            //     return dayjs(value).isValid() ? dayjs(value).toDate() : new Date('')
+            // })
             .max(new Date(), t('Введите корректную дату'))
             .min('1969-11-13', t('Date is too early'))
             .required(t('Введите дату рождения')),
@@ -54,127 +74,200 @@ export const ChangeProfile = () => {
         gender: Yup.string().required(t('Выберете значение')),
     })
 
-    return (
-        <ContentContainer className={cls.contentWrapper}>
-            <Formik
-                initialValues={{
+    const formik = useFormik({
+        initialValues: {
+            firstName,
+            lastName,
+            email,
+            birthDay: birthDay as unknown as Dayjs,
+            gender,
+            city,
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values: Values) => {
+            const { firstName, lastName, email, gender, birthDay, city } = values
+            dispatch(
+                changeUserData({
                     firstName,
                     lastName,
                     email,
-                    birthDay,
                     gender,
+                    birthDay: birthDay as unknown as string,
+                    userId,
                     city,
-                }}
-                validationSchema={validationSchema}
-                onSubmit={(values: Values) => {
-                    const { firstName, lastName, email, gender, birthDay, city } = values
-                    dispatch(
-                        changeUserData({
-                            firstName,
-                            lastName,
-                            email,
-                            gender,
-                            birthDay,
-                            userId,
-                            city,
-                        })
-                    )
-                }}
-            >
-                <Form className={cls.form} autoComplete="off">
-                    <label htmlFor="firstName">{t('Имя')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="firstName"
-                            name="firstName"
-                            placeholder={t('введите имя')}
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="firstName" />
-                    </div>
+                    t,
+                })
+            )
+        },
+    })
 
-                    <label htmlFor="lastName">{t('Фамилия')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="lastName"
-                            name="lastName"
-                            placeholder={t('введите фамилию')}
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="lastName" />
-                    </div>
-
-                    <label htmlFor="email">Email</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="email"
-                            name="email"
-                            placeholder={t('введите email')}
-                            type="email"
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="email" />
-                    </div>
-
-                    <label htmlFor="confirmPassword">{t('Введите ваш город')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="city"
-                            name="city"
-                            placeholder={t('ваш город')}
-                            type="text"
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="city" />
-                    </div>
-
-                    <label htmlFor="confirmPassword">{t('Введите дату рождения')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field
-                            className={cls.input}
-                            id="birthDay"
-                            name="birthDay"
-                            placeholder="dd.mm.yyyy"
-                            type="date"
-                        />
-                        <ErrorMessage className={cls.error} component="div" name="birthDay" />
-                    </div>
-
-                    <label htmlFor="gender">{t('Пол')}</label>
-                    <div className={cls.fieldContainer}>
-                        <Field className={cls.select} id="gender" name="gender" as="select">
-                            <option disabled value="">
-                                {t('Выберете ваш пол')}
-                            </option>
-                            <option value="male">{t('мужчина')}</option>
-                            <option value="female">{t('женщина')}</option>
-                        </Field>
-                        <ErrorMessage className={cls.error} name="gender" />
-                    </div>
-
-                    <div className={cls.avatarBlock}>
-                        <Avatar avatarPath={avatarPath} size="XL" className={cls.avatar} />
-                        <input
-                            className={cls.input_file}
-                            accept="image/*"
-                            type="file"
-                            id="input-file"
-                            onChange={(e) => onChangeLoadAvatar(e)}
-                        />
-
-                        <label className={cls.classLabel} htmlFor="input-file">
-                            {t('Загрузить аватар')}
-                        </label>
-                        <Button className={cls.rmBtn} onClick={onClickRemoveAvatar}>
-                            {t('Удалить аватар')}
-                        </Button>
-                    </div>
-
-                    <Button className={cls.saveBtn} type="submit">
-                        {t('Сохранить изменения')}
-                    </Button>
-                </Form>
-            </Formik>
-        </ContentContainer>
+    return (
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Container component="main" maxWidth="xs">
+                    <Box
+                        sx={{
+                            marginTop: 8,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Box
+                            component="form"
+                            noValidate
+                            onSubmit={formik.handleSubmit}
+                            sx={{ mt: 3 }}
+                        >
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        data-testid="firstName"
+                                        autoComplete="given-name"
+                                        name="firstName"
+                                        required
+                                        fullWidth
+                                        id="firstName"
+                                        label={t('введите имя')}
+                                        autoFocus
+                                        value={formik.values.firstName}
+                                        onChange={formik.handleChange}
+                                        error={
+                                            formik.touched.firstName &&
+                                            Boolean(formik.errors.firstName)
+                                        }
+                                        helperText={
+                                            formik.touched.firstName && formik.errors.firstName
+                                        }
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        data-testid="lastName"
+                                        required
+                                        fullWidth
+                                        id="lastName"
+                                        label={t('введите фамилию')}
+                                        name="lastName"
+                                        autoComplete="family-name"
+                                        value={formik.values.lastName}
+                                        onChange={formik.handleChange}
+                                        error={
+                                            formik.touched.lastName &&
+                                            Boolean(formik.errors.lastName)
+                                        }
+                                        helperText={
+                                            formik.touched.lastName && formik.errors.lastName
+                                        }
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        data-testid="email"
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label={t('введите email')}
+                                        name="email"
+                                        autoComplete="email"
+                                        value={formik.values.email}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.email && Boolean(formik.errors.email)}
+                                        helperText={formik.touched.email && formik.errors.email}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        data-testid="city"
+                                        required
+                                        fullWidth
+                                        name="city"
+                                        label={t('Введите ваш город')}
+                                        type="text"
+                                        id="city"
+                                        autoComplete="address-level2"
+                                        value={formik.values.city}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.city && Boolean(formik.errors.city)}
+                                        helperText={formik.touched.city && formik.errors.city}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DatePicker
+                                            data-testid="date"
+                                            disableFuture
+                                            sx={{ width: '100%' }}
+                                            name="birthDay"
+                                            label={t('Введите дату рождения')}
+                                            value={dayjs(formik.values.birthDay)}
+                                            onChange={(value) => {
+                                                formik.setFieldValue(
+                                                    'birthDay',
+                                                    dayjs(value).format('YYYY-MM-DD')
+                                                )
+                                            }}
+                                        />
+                                    </LocalizationProvider>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Select
+                                        required
+                                        fullWidth
+                                        id="gender"
+                                        name="gender"
+                                        value={formik.values.gender}
+                                        onChange={formik.handleChange}
+                                        error={
+                                            formik.touched.gender && Boolean(formik.errors.gender)
+                                        }
+                                    >
+                                        <MenuItem value="male">{t('мужчина')}</MenuItem>
+                                        <MenuItem value="female">{t('женщина')}</MenuItem>
+                                    </Select>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button
+                                        variant="outlined"
+                                        component="label"
+                                        fullWidth
+                                        startIcon={<AddPhotoAlternateIcon />}
+                                    >
+                                        {t('Загрузить аватар')}
+                                        <VisuallyHiddenInput
+                                            type="file"
+                                            onChange={(e) => onChangeLoadAvatar(e)}
+                                        />
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button
+                                        variant="outlined"
+                                        fullWidth
+                                        startIcon={<HideImageIcon />}
+                                        onClick={onClickRemoveAvatar}
+                                    >
+                                        {t('Удалить аватар')}
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                            <LoadingButton
+                                data-testid="submit"
+                                sx={{ mt: 3, mb: 2 }}
+                                type="submit"
+                                fullWidth
+                                loading={loading}
+                                loadingIndicator="Loading…"
+                                variant="contained"
+                            >
+                                {t('Сохранить изменения')}
+                            </LoadingButton>
+                        </Box>
+                    </Box>
+                </Container>
+            }
+            off={<ChangeProfileDeprecated />}
+        />
     )
 }

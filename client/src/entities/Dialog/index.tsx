@@ -1,3 +1,3 @@
-import { Dialog } from './ui/Dialog'
+import { Dialog } from './ui/Dialog/Dialog'
 
 export { Dialog }

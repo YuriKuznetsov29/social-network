@@ -1,10 +1,11 @@
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { IUser, userDataActions } from '@/entities/UserData'
+import { notificationsActions } from '@/features/Notifications'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { API_URL } from '../../../../shared/api/http/index'
-import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
-import { IUser, userDataActions } from 'entities/UserData'
-import { notificationsActions } from 'features/Notifications'
-import { getAllFriends } from './getAllFriends'
 import { TFunction } from 'i18next'
+
+import { API_URL } from '../../../../shared/api/http/index'
+import { getAllFriends } from './getAllFriends'
 
 export interface RequestChangeData {
     userId: string
@@ -31,6 +32,11 @@ export const removeFriend = createAsyncThunk<void, RequestChangeData, ThunkConfi
                     friendId,
                 }
             )
+
+            if (!response.data) {
+                throw new Error()
+            }
+
             dispatch(userDataActions.setUserData(response.data.user))
             dispatch(getAllFriends(userId))
             if (t) {

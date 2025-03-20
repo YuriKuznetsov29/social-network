@@ -1,12 +1,12 @@
-import { SignInForm, SignUpForm } from 'features/AuthByEmail'
-import { AnotherUserPage } from 'pages/AnotherUserPage'
-import { ChangeProfilePage } from 'pages/ChangeProfilePage'
-import { ConversationPage } from 'pages/ConversationPage'
-import { FriendsPage } from 'pages/FriendsPage'
-import { MessengerPage } from 'pages/MessengerPage'
-import { NewsPage } from 'pages/NewsPage'
-import { NotFoundPage } from 'pages/NotFoundPage'
-import { ProfilePage } from 'pages/ProfilePage'
+import { SignInForm, SignUpForm } from '@/features/AuthByEmail'
+import { AnotherUserPage } from '@/pages/AnotherUserPage'
+import { ChangeProfilePage } from '@/pages/ChangeProfilePage'
+import { ConversationPage } from '@/pages/ConversationPage'
+import { FriendsPage } from '@/pages/FriendsPage'
+import { MessengerPage } from '@/pages/MessengerPage'
+import { NewsPage } from '@/pages/NewsPage'
+import { NotFoundPage } from '@/pages/NotFoundPage'
+import { ProfilePage } from '@/pages/ProfilePage'
 import { RouteProps } from 'react-router-dom'
 
 export type AppRoutesProps = RouteProps & {
@@ -43,7 +43,6 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
         path: RoutePath.main,
         element: <SignInForm />,
-        // authOnly: true,
     },
     [AppRoutes.SIGN_UP]: {
         path: RoutePath.signUp,

@@ -2,7 +2,6 @@ const express = require("express");
 const User = require("../models/User");
 const Message = require("../models/Message");
 const auth = require("../middleware/auth.middleware");
-const UserService = require("../services/user.service");
 const { findOne } = require("../models/Token");
 const router = express.Router({ mergeParams: true });
 
@@ -234,18 +233,17 @@ router.patch("/:userId/removeFriend", async (req, res) => {
 router.get("/:userId/getAllFriends", async (req, res) => {
     try {
         const { userId } = req.params;
+        const limit = req.query._limit;
+        const page = req.query._page;
 
         if (userId) {
             let currentUser = await User.findOne({ _id: userId });
 
-            // if (currentUser.friends.length !== 0) {
-            // const findStructure = currentUser.friends.map((el) => ({
-            //     _id: el,
-            // }));
+            const friends = (
+                await Promise.all(currentUser.friends.map((id) => User.findById(id)))
+            ).filter((el) => el !== null); //await User.find({ $or: findStructure })
 
-            const friends = await Promise.all(currentUser.friends.map((id) => User.findById(id))); //await User.find({ $or: findStructure })
-
-            const modFriends = friends.map((user) => ({
+            let modFriends = friends.map((user) => ({
                 userId: user._id,
                 email: user.email,
                 firstName: user.firstName,
@@ -263,19 +261,17 @@ router.get("/:userId/getAllFriends", async (req, res) => {
                 city: user.city,
             }));
 
-            res.send({
-                friends: modFriends,
-            });
+            if (page && limit) {
+                const start = (page - 1) * limit;
+                const end = page * limit;
+                const pageFriends = modFriends.slice(start, end);
+
+                res.append("X-Total-Count", `${modFriends.length}`);
+                res.send(pageFriends);
+            } else {
+                res.send(modFriends);
+            }
         }
-        // else {
-        //     res.status(400).json({
-        //         error: {
-        //             message: "У вас еще нет друзей",
-        //             code: 400,
-        //         },
-        //     })
-        // }
-        // }
     } catch (e) {
         console.log(e);
         res.status(500).json({

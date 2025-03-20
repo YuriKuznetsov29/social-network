@@ -6,10 +6,16 @@ const messages = {};
 
 module.exports = function messageHandlers(io, socket) {
     const { roomId } = socket;
+    let page = 1;
 
-    const updateMessageList = () => {
-        io.to(roomId).emit("message_list:update", messages[roomId]);
-        // console.log(roomId)
+    const updateMessageList = async () => {
+        let messages = await Message.find({ roomId });
+        const limit = messages.length - page * 20 > 0 ? messages.length - page * 20 : 0;
+        const pageMessages = messages.slice(limit, messages.length);
+        const hasMore = pageMessages.length !== messages.length;
+
+        io.to(roomId).emit("message_list:update", pageMessages, hasMore);
+        // io.to(roomId).emit("message_list:update", messages[roomId]);
     };
 
     socket.on("message:get", async () => {
@@ -24,11 +30,17 @@ module.exports = function messageHandlers(io, socket) {
         }
     });
 
-    socket.on("message:add", (message) => {
-        Message.create(message).catch(onError);
+    socket.on("message:add", async (message) => {
+        await Message.create(message).catch(onError);
 
         // message.createdAt = Date.now()
         messages[roomId].push(message);
+        updateMessageList();
+    });
+
+    socket.on("message:loadMore", () => {
+        console.log("more");
+        page++;
         updateMessageList();
     });
 

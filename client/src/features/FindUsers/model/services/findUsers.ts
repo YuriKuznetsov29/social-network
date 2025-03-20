@@ -1,7 +1,8 @@
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { IUser } from '@/entities/UserData/model/types/IUser'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import $api, { API_URL } from '../../../../shared/api/http/index'
-import { AuthResponse } from 'features/AuthByEmail/model/types/response/AuthResponse'
-import { IUser } from 'entities/UserData/model/types/IUser'
+
+import { API_URL } from '../../../../shared/api/http/index'
 
 export interface RequestData {
     firstName: string
@@ -12,14 +13,19 @@ export interface ResponseData {
     users: IUser[]
 }
 
-export const findUsers = createAsyncThunk<ResponseData, RequestData, { rejectValue: string }>(
+export const findUsers = createAsyncThunk<ResponseData, RequestData, ThunkConfig<string>>(
     'user/findUser',
-    async ({ firstName, lastName }, { rejectWithValue }) => {
+    async ({ firstName, lastName }, { extra, rejectWithValue }) => {
         try {
-            const response = await $api.post<ResponseData>(`${API_URL}/user/findUser`, {
+            const response = await extra.api.post<ResponseData>(`${API_URL}/user/findUser`, {
                 firstName,
                 lastName,
             })
+
+            if (!response.data) {
+                throw new Error()
+            }
+
             return response.data
         } catch (e: unknown) {
             console.log(e)

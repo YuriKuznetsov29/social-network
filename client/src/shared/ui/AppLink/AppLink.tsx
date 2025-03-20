@@ -1,6 +1,6 @@
 import classNames from 'classnames'
-import { Link, LinkProps, NavLink } from 'react-router-dom'
 import { FC } from 'react'
+import { Link, LinkProps, NavLink } from 'react-router-dom'
 
 import cls from './AppLink.module.scss'
 
@@ -15,6 +15,7 @@ interface AppLinkProps extends LinkProps {
     theme?: AppLinkTheme
     active?: boolean
     activeClass?: string
+    scroll?: boolean
 }
 
 export const AppLink: FC<AppLinkProps> = (props) => {
@@ -25,8 +26,13 @@ export const AppLink: FC<AppLinkProps> = (props) => {
         theme = AppLinkTheme.PRIMARY,
         active,
         activeClass,
+        scroll,
         ...otherProps
     } = props
+
+    const onClickResetScroll = () => {
+        if (scroll) document.documentElement.scrollTop = 0
+    }
 
     return (
         <>
@@ -34,12 +40,13 @@ export const AppLink: FC<AppLinkProps> = (props) => {
                 <NavLink
                     to={to}
                     className={({ isActive, isPending }) => {
-                        console.log(activeClass, isActive, 'active')
                         return classNames(cls.navbar, { [cls.activeClass]: isActive }, [
                             className,
                             cls[theme],
                         ])
                     }}
+                    onClick={onClickResetScroll}
+                    {...otherProps}
                 >
                     {children}
                 </NavLink>

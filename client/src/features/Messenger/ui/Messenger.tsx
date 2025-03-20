@@ -1,20 +1,17 @@
-import classNames from 'classnames'
-import { useAppDispatch } from 'shared/lib/hook/useAppDispatch'
-import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
+import { ConversationLink } from '@/entities/ConversationLink'
+import { getUserData } from '@/entities/UserData'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useAppDispatch } from '@/shared/lib/hook/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { MessengerLoader } from '@/shared/ui/MessengerLoader'
+import { Paper } from '@mui/material'
 import { useEffect } from 'react'
-import { getConversationUsers } from '../model/services/getConversationUsers'
-import { ConversationLink } from 'entities/ConversationLink'
-import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { getUserData } from 'entities/UserData'
 import { useTranslation } from 'react-i18next'
-import cls from './Messenger.module.scss'
-import { MessengerLoader } from 'shared/ui/MessengerLoader'
-import { Button } from 'shared/ui/Button/Button'
-import $api, { API_URL } from 'shared/api/http'
-import { getDialogs } from '../model/services/getDialogs'
-import { getDialogsData } from '../model/selectors/getDialogsData'
-import { getLoadingAuthStatus } from 'features/AuthByEmail'
+
+import { fetchDialogs } from '../model/services/fetchDialogs'
 import { getLoadingDialogStatus } from '../model/services/getLoadingDialogStatus'
+import { getDialogs } from '../model/slice/MessengerSlice'
+import { Messenger as MessengerDeprecated } from './deprecated/Messenger'
 
 interface MessengerProps {
     className?: string
@@ -22,7 +19,7 @@ interface MessengerProps {
 
 export const Messenger = ({ className }: MessengerProps) => {
     const userData = useAppSelector(getUserData)
-    const dialogs = useAppSelector(getDialogsData)
+    const dialogs = useAppSelector(getDialogs.selectAll)
     const isLoading = useAppSelector(getLoadingDialogStatus)
 
     const dispatch = useAppDispatch()
@@ -30,30 +27,44 @@ export const Messenger = ({ className }: MessengerProps) => {
 
     useEffect(() => {
         if (userData.conversations && userData.conversations.length) {
-            dispatch(getDialogs(userData.conversations))
+            dispatch(fetchDialogs(userData.conversations))
         }
     }, [userData.conversations])
 
     if (isLoading) return <MessengerLoader />
 
     return (
-        <div className={classNames(cls.Messenger, {}, [className])}>
-            {userData?.conversations?.length ? (
-                <ContentContainer className={cls.contentContainer}>
-                    {dialogs.map(({ message, companion, conversation }) => {
-                        return (
-                            <ConversationLink
-                                key={conversation.roomId}
-                                message={message}
-                                companion={companion}
-                                conversation={conversation}
-                            />
-                        )
-                    })}
-                </ContentContainer>
-            ) : (
-                t('У вас еще нет диалогов')
-            )}
-        </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Paper
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}
+                    elevation={1}
+                >
+                    {userData?.conversations?.length ? (
+                        <>
+                            {dialogs.map(({ message, companion, conversation }, i) => {
+                                return (
+                                    <ConversationLink
+                                        key={conversation.roomId}
+                                        message={message}
+                                        companion={companion}
+                                        conversation={conversation}
+                                    />
+                                )
+                            })}
+                        </>
+                    ) : (
+                        t('У вас еще нет диалогов')
+                    )}
+                </Paper>
+            }
+            off={
+                <MessengerDeprecated dialogs={dialogs} userData={userData} className={className} />
+            }
+        />
     )
 }

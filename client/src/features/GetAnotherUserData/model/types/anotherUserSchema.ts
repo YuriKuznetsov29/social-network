@@ -1,4 +1,4 @@
-import { IUser } from 'entities/UserData/model/types/IUser'
+import { IUser } from '@/entities/UserData/model/types/IUser'
 
 export interface AnotherUserSchema {
     isLoading: boolean

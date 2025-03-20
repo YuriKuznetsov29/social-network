@@ -1,9 +1,11 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { signInByEmail } from '../services/singInByEmail'
+import { createSlice } from '@reduxjs/toolkit'
+
+import { changeUserData } from '../services/changeUserData/changeUserData'
+import { checkAuth } from '../services/checkAuth/checkAuth'
+import { signInByEmail } from '../services/signInByEmail/singInByEmail'
+import { signOut } from '../services/signOut/signOut'
+import { signUpByEmail } from '../services/signUpByEmail/signUpByEmail'
 import { AuthSchema } from '../types/authSchema'
-import { signUpByEmail } from '../services/signUpByEmail'
-import { checkAuth } from '../services/checkAuth'
-import { signOut } from '../services/signOut'
 
 export interface signInState {
     value: number
@@ -22,12 +24,6 @@ export const authSlice = createSlice({
     name: 'authorization',
     initialState,
     reducers: {
-        setEmail: (state, action: PayloadAction<string>) => {
-            state.email = action.payload
-        },
-        setPassword: (state, action: PayloadAction<string>) => {
-            state.password = action.payload
-        },
         setInit: (state) => {
             state.initAuth = true
         },
@@ -76,6 +72,15 @@ export const authSlice = createSlice({
             .addCase(signOut.fulfilled, (state) => {
                 state.isAuth = false
                 state.initAuth = false
+            })
+            .addCase(changeUserData.fulfilled, (state) => {
+                state.isLoading = false
+            })
+            .addCase(changeUserData.rejected, (state) => {
+                state.isLoading = false
+            })
+            .addCase(changeUserData.pending, (state) => {
+                // state.isLoading = true
             })
     },
 })

@@ -3,6 +3,8 @@
     "Пароль": "Password",
     "Зарегистрироваться": "Register",
     "Войти": "Sign in",
+    "Вход": "Sign in",
+    "У вас уже есть аккаунт? Войти": "Already have an account? Sign in",
     "мужчина": "male",
     "женщина": "female",
     "Повторите пароль": "Confirm password",
@@ -31,5 +33,4 @@
     "Аватар успешно удален": "Avatar successfully deleted",
     "Вы успешно обновили данные": "You have successfully updated your data",
     "dd.mm.yyyy": "dd.mm.yyyy"
-
 }

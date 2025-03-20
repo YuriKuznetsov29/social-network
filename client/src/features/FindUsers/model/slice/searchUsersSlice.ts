@@ -1,7 +1,8 @@
-import { IUser } from 'entities/UserData/model/types/IUser'
-import { SearchUsersSchema } from '../type/searchUsersSchema'
+import { IUser } from '@/entities/UserData/model/types/IUser'
 import { createSlice } from '@reduxjs/toolkit'
+
 import { findUsers } from '../services/findUsers'
+import { SearchUsersSchema } from '../type/searchUsersSchema'
 
 export interface signInState {
     value: number

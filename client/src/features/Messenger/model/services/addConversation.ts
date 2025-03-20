@@ -1,7 +1,8 @@
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { IUser, userDataActions } from '@/entities/UserData'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import $api, { API_URL } from '../../../../shared/api/http/index'
-import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
-import { IUser, userDataActions } from 'entities/UserData'
+
+import { API_URL } from '../../../../shared/api/http/index'
 
 export interface RequestChangeData {
     userId: string
@@ -25,6 +26,11 @@ export const addConversation = createAsyncThunk<void, RequestChangeData, ThunkCo
                     friendId,
                 }
             )
+
+            if (!response.data) {
+                throw new Error()
+            }
+
             dispatch(userDataActions.setUserData(response.data.user))
             navigate(`/messenger/${roomId}`)
         } catch (e: unknown) {

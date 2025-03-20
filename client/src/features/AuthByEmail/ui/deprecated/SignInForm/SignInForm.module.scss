@@ -1,0 +1,109 @@
+.SignInForm {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+}
+
+.form {
+    width: 300px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--header-bg-color);
+    border: 1px var(--container-border-color) solid;
+    border-radius: 10px;
+}
+
+.input {
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    height: 30px;
+    background-color: var(--bg-input);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    color: var(--primary-color);
+    &:focus {
+        outline: 1px solid var(--icon-link-color);
+    }
+}
+
+.btnWrapper {
+    width: 100%;
+}
+
+.inputBtn {
+    margin-bottom: 10px;
+}
+
+.regBtn {
+    width: 100%;
+}
+
+.switchersContainer {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fieldContainer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.error {
+    position: absolute;
+    bottom: -4px;
+    color: red;
+    font-size: 14px;
+}
+
+.errorBlock {
+    width: 100%;
+    min-height: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.serverError {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+}
+
+.showPasswordWrapper {
+    position: absolute;
+    top: 28px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.showPasswordIcon {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    fill: var(--icon-color);
+}
+
+.loginData {
+    color: red;
+    position: absolute;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}

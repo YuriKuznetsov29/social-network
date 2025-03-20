@@ -1,7 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+
 import { IUser } from '../../../../entities/UserData/model/types/IUser'
+import { loadUserData } from '../services/loadUserData/loadUserData'
 import { UserDataSchema } from '../types/userDataSchema'
-import { loadUserData } from '../services/loadUserData'
 
 const initialState: UserDataSchema = {
     userData: {} as IUser,

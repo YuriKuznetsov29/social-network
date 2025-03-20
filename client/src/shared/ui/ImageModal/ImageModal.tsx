@@ -1,8 +1,7 @@
-import { ReactNode, useCallback, useState } from 'react'
+import { SERVER_URL } from '@/shared/api/http'
+
 import { Modal } from '../Modal/Modal'
-import classNames from 'classnames'
 import cls from './ImageModal.module.scss'
-import { SERVER_URL } from 'shared/api/http'
 
 interface ImageProps {
     className?: string
@@ -21,7 +20,12 @@ export const ImageModal = ({
 }: ImageProps) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose} className={cls.background}>
-            <img className={cls.image} src={SERVER_URL + imagePath} alt={alt} />
+            <img
+                data-testid="avatar-modal"
+                className={cls.image}
+                src={SERVER_URL + imagePath}
+                alt={alt}
+            />
         </Modal>
     )
 }

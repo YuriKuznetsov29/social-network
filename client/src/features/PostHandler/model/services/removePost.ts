@@ -1,8 +1,9 @@
+import { ThunkConfig } from '@/app/Providers/StoreProvider/config/StateSchema'
+import { notificationsActions } from '@/features/Notifications'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import $api, { API_URL } from '../../../../shared/api/http/index'
+
+import { API_URL } from '../../../../shared/api/http/index'
 import { PostHandlerResponse } from '../types/postHandlerResponse'
-import { notificationsActions } from 'features/Notifications'
-import { ThunkConfig } from 'app/Providers/StoreProvider/config/StateSchema'
 
 interface RequestData {
     postId: string

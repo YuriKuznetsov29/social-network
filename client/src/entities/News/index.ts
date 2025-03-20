@@ -1,3 +1,5 @@
 export { News } from './ui/News'
-export { NewsSchema } from './model/types/newsSchema'
+export type { NewsSchema } from './model/types/newsSchema'
 export { newsReducer } from './model/slice/newsSlice'
+export { getNewsHasMore } from './model/selectors/getNewsHasMore'
+export { getNewsInitialized } from './model/selectors/getNewsInitialized'

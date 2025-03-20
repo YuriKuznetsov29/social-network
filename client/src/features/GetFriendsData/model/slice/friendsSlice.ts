@@ -1,7 +1,8 @@
+import { IUser } from '@/entities/UserData/model/types/IUser'
 import { createSlice } from '@reduxjs/toolkit'
-import { FriendsSchema } from '../types/friendSchema'
-import { IUser } from 'entities/UserData/model/types/IUser'
+
 import { getAllFriends } from '../services/getAllFriends'
+import { FriendsSchema } from '../types/friendSchema'
 
 export interface signInState {
     value: number
@@ -27,9 +28,7 @@ export const friendSlice = createSlice({
             .addCase(getAllFriends.fulfilled, (state, action) => {
                 state.isLoading = false
                 state._initialized = true
-                if (action.payload?.friends) {
-                    state.friends = action.payload.friends
-                }
+                state.friends = action.payload
             })
             .addCase(getAllFriends.rejected, (state, action) => {
                 state.isLoading = false

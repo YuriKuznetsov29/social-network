@@ -1,0 +1,39 @@
+.Header {
+    height: var(--header-height);
+    background-color: var(--header-bg-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.container {
+    margin-bottom: 10px;
+    height: var(--header-height);
+}
+
+.contentContainer {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.outBtn {
+    padding: 0 10px;
+    height: 32px;
+    background-color: var(--bg-button);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: background-color 0.2s;
+    &:hover {
+        background-color: var(--bg-button-hover);
+    }
+}
+
+.mobile {
+    padding: 0 10px;
+}

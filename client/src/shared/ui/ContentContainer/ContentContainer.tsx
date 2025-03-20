@@ -1,6 +1,7 @@
 import classNames from 'classnames'
-import cls from './ContentContainer.module.scss'
 import { ReactNode } from 'react'
+
+import cls from './ContentContainer.module.scss'
 
 interface ContentContainerProps
     extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {

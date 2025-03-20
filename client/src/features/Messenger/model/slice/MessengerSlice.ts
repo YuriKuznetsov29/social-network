@@ -1,39 +1,40 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IUser } from 'entities/UserData/model/types/IUser'
-import { MessengerSchema } from '../types/messengerSchema'
-import { getConversationUsers } from '../services/getConversationUsers'
-import { getLastMessage } from '../services/getLastMessage'
-import { MessageData } from 'shared/lib/hook/useChat'
-import { getDialogs } from '../services/getDialogs'
+import { StateSchema } from '@/app/Providers/StoreProvider'
+import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+
+import { fetchDialogs } from '../services/fetchDialogs'
 import { Dialog } from '../types/dialog'
-import { ICompanion } from '../types/companion'
-import { IMessage } from '../types/message'
+import { MessengerSchema } from '../types/messengerSchema'
 
-export interface signInState {
-    value: number
-}
+const messengerAdapter = createEntityAdapter<Dialog>({
+    selectId: (dialog) => dialog.id,
+})
 
-const initialState: MessengerSchema = {
-    dialogs: [] as Dialog[],
-    isLoading: false,
-}
+export const getDialogs = messengerAdapter.getSelectors<StateSchema>(
+    (state) => state.messenger || messengerAdapter.getInitialState()
+)
 
 export const messengerSlice = createSlice({
     name: 'messenger',
-    initialState,
+    initialState: messengerAdapter.getInitialState<MessengerSchema>({
+        isLoading: false,
+        error: undefined,
+        ids: [],
+        entities: {},
+    }),
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getDialogs.pending, (state, action) => {
+            .addCase(fetchDialogs.pending, (state) => {
+                state.error = undefined
                 state.isLoading = true
             })
-            .addCase(getDialogs.rejected, (state, action) => {
+            .addCase(fetchDialogs.rejected, (state, action) => {
                 state.isLoading = false
                 state.error = action.payload
             })
-            .addCase(getDialogs.fulfilled, (state, action) => {
+            .addCase(fetchDialogs.fulfilled, (state, action: PayloadAction<Dialog[]>) => {
                 state.isLoading = false
-                state.dialogs = action.payload.dialogs
+                messengerAdapter.setAll(state, action.payload)
             })
     },
 })

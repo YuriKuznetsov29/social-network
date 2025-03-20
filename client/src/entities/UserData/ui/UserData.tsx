@@ -1,18 +1,59 @@
-import classNames from 'classnames'
-import { ContentContainer } from 'shared/ui/ContentContainer/ContentContainer'
-import { Avatar } from 'entities/Avatar'
+import { SERVER_URL } from '@/shared/api/http'
+import { ToggleFeatures } from '@/shared/lib/features/components/ToggleFeatures/ToggleFeatures'
+import { useAppSelector } from '@/shared/lib/hook/useAppSelector'
+import { UserDataLoader } from '@/shared/ui/UserDataLoader'
+import CakeIcon from '@mui/icons-material/Cake'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import EmailIcon from '@mui/icons-material/Email'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import {
+    Paper,
+    Avatar,
+    Stack,
+    Typography,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemIcon,
+    Badge,
+} from '@mui/material'
+import { styled } from '@mui/material/styles'
 import dayjs from 'dayjs'
-import { useAppSelector } from 'shared/lib/hook/useAppSelector'
-import { getUserData } from '../model/selectors/getUserData'
-import { UserDataLoader } from 'shared/ui/UserDataLoader'
-import { getUserInitied } from '../model/selectors/getUserInited'
-import BirthIcon from 'shared/assets/icons/gift-bold.svg'
-import HomeIcon from 'shared/assets/icons/house-bold.svg'
-import FriendsIcon from 'shared/assets/icons/users-bold.svg'
-import PostIcon from 'shared/assets/icons/note-pencil-bold.svg'
 import { useTranslation } from 'react-i18next'
+
+import { getUserData } from '../model/selectors/getUserData'
 import { getUserDataLoading } from '../model/selectors/getUserDataLoading'
-import cls from './UserData.module.scss'
+import { getUserInitied } from '../model/selectors/getUserInited'
+import { UserData as UserDataDeprecated } from './deprecated/UserData'
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        backgroundColor: '#44b700',
+        color: '#44b700',
+        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+        '&::after': {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            animation: 'ripple 1.2s infinite ease-in-out',
+            border: '1px solid currentColor',
+            content: '""',
+        },
+    },
+    '@keyframes ripple': {
+        '0%': {
+            transform: 'scale(.8)',
+            opacity: 1,
+        },
+        '100%': {
+            transform: 'scale(2.4)',
+            opacity: 0,
+        },
+    },
+}))
 
 interface UserDataProps {
     className?: string
@@ -24,59 +65,94 @@ export const UserData = ({ className }: UserDataProps) => {
     const loading = useAppSelector(getUserDataLoading)
     const { t, i18n } = useTranslation('pages')
 
-    if (loading || !userInit) return <UserDataLoader />
+    if (loading) return <UserDataLoader />
 
     return (
-        <div className={classNames(cls.UserData, {}, [className])}>
-            <ContentContainer className={cls.contentWrapper}>
-                <div className={cls.avatarContainer}>
-                    <Avatar
-                        avatarPath={userData.avatarPath}
-                        className={cls.avatar}
-                        isOnline={userData.isOnline}
-                        lastSeenOnline={userData.lastSeenOnline}
-                        size="XL"
-                    />
-                    <h2 className={cls.name}>
-                        <div>{userData.firstName}</div>
-                        <div>{userData.lastName}</div>
-                    </h2>
-                </div>
-                <div className={cls.dataWrapper}>
-                    <div className={cls.valueContainer}>
-                        <div className={cls.value}>
-                            <div>
-                                <div className={cls.valueTitle}>
-                                    <BirthIcon className={cls.icon} />
-                                    {t('День рождения')}
-                                </div>
-                                <div className={cls.valueTitle}>
-                                    <HomeIcon className={cls.icon} />
-                                    {t('Город')}
-                                </div>
-                                <div className={cls.valueTitle}>
-                                    <FriendsIcon className={cls.icon} />
-                                    {t('Друзья ')}
-                                </div>
-                                <div className={cls.valueTitle}>
-                                    <PostIcon className={cls.icon} />
-                                    {t('Посты')}
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    {dayjs(userData.birthDay.split('.').reverse().join('-'))
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={
+                <Paper
+                    sx={{
+                        padding: '16px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                    }}
+                    elevation={1}
+                >
+                    <Stack alignItems={'flex-start'} spacing={2}>
+                        <StyledBadge
+                            sx={{
+                                '& .MuiBadge-badge': {
+                                    display: userData.isOnline ? 'block' : 'none',
+                                },
+                            }}
+                            overlap="circular"
+                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                            variant="dot"
+                        >
+                            <Avatar
+                                sx={{
+                                    width: '160px',
+                                    height: '160px',
+                                }}
+                                alt={userData.firstName}
+                                src={SERVER_URL + userData.avatarPath}
+                            />
+                        </StyledBadge>
+                        <Typography variant="h5" component="h1">
+                            {`${userData.firstName} ${userData.lastName}`}
+                        </Typography>
+                    </Stack>
+                    <Stack>
+                        {!userData.isOnline && (
+                            <Typography align="center" variant="body1" component="div">
+                                {`Был(а) в сети ${
+                                    dayjs(userData.lastSeenOnline)
                                         .locale(i18n.language)
-                                        .format('D MMMM YYYY')}
-                                </div>
-                                <div>{userData.city}</div>
-                                <div>{userData.friends?.length}</div>
-                                <div>{userData?.posts}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ContentContainer>
-        </div>
+                                        .toNow(true) + t(' назад')
+                                }`}
+                            </Typography>
+                        )}
+
+                        <List dense>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <CakeIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary={`${t('День рождения')} ${dayjs(
+                                        userData.birthDay.split('.').reverse().join('-')
+                                    )
+                                        .locale(i18n.language)
+                                        .format('D MMMM YYYY')}`}
+                                    // secondary={t('День рождения')}
+                                />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <LocationOnIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={`${t('Город')} ${userData.city}`} />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <ChatBubbleIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary={`${t('Друзья')} ${userData.friends?.length}`}
+                                />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <EmailIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={`${t('Посты')} ${userData.posts}`} />
+                            </ListItem>
+                        </List>
+                    </Stack>
+                </Paper>
+            }
+            off={<UserDataDeprecated />}
+        />
     )
 }
