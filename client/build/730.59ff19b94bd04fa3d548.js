@@ -5,50 +5,34 @@
         6633: (s, e, a) => {
             a.r(e), a.d(e, { default: () => ls })
             var i = a(5893),
-                n = a(4184),
-                d = a.n(n),
-                c = a(4607),
-                r = a(8826),
-                l = a(3388)
-            var t = a(3743),
-                x = function (s) {
-                    return s.anotherUser
-                },
-                j = a(9250),
-                v = a(9984),
-                h = a(7294),
-                m = a(8971),
-                o = a(3416),
-                N = a(4524),
-                f = a(966),
-                u = a(9053),
-                p = a(8084),
-                g = a(1745),
-                Z = a(1072),
-                I = function (s) {
-                    var e
-                    return null === (e = s.anotherUser) || void 0 === e ? void 0 : e._initialized
-                },
-                C = a(6765)
-            const w = 'fCec3PIN',
-                y = 'Ee2Stfad',
-                O = 'VHEjMuCO',
-                k = 'iemYWh92',
-                b = 'wT8hpHIt',
-                P = 'iRhQyzF7',
-                z = 'VdPkbWZ9',
-                E = 'oT8i9zsO'
-            var F = a(1209),
-                U = a(4680),
-                B = a(9708),
-                D = a(8973),
-                S = a(9731),
-                T = function () {
-                    return (0, i.jsx)(F.z, {
+                n = a(5895),
+                d = a(4155),
+                c = a(9053),
+                r = a(8084),
+                l = a(9799),
+                t = a(9984),
+                x = a(1209),
+                j = a(3743),
+                v = a(966),
+                h = a(6765),
+                m = a(4680),
+                o = a(9708),
+                N = a(8973),
+                f = a(9731)
+            const u = 'fCec3PIN',
+                p = 'Ee2Stfad',
+                g = 'VHEjMuCO',
+                Z = 'iemYWh92',
+                I = 'wT8hpHIt',
+                C = 'iRhQyzF7',
+                w = 'VdPkbWZ9',
+                y = 'oT8i9zsO'
+            var O = function () {
+                    return (0, i.jsx)(x.z, {
                         feature: 'isAppRedesigned',
                         on: (0, i.jsxs)(i.Fragment, {
                             children: [
-                                (0, i.jsxs)(U.Z, {
+                                (0, i.jsxs)(m.Z, {
                                     sx: {
                                         padding: '16px',
                                         display: 'flex',
@@ -56,25 +40,25 @@
                                     },
                                     elevation: 1,
                                     children: [
-                                        (0, i.jsxs)(B.Z, {
+                                        (0, i.jsxs)(o.Z, {
                                             alignItems: 'flex-start',
                                             spacing: 2,
                                             children: [
-                                                (0, i.jsx)(D.Z, {
+                                                (0, i.jsx)(N.Z, {
                                                     variant: 'circular',
                                                     width: 160,
                                                     height: 160,
                                                 }),
-                                                (0, i.jsxs)(B.Z, {
+                                                (0, i.jsxs)(o.Z, {
                                                     direction: 'row',
                                                     spacing: 1,
                                                     children: [
-                                                        (0, i.jsx)(D.Z, {
+                                                        (0, i.jsx)(N.Z, {
                                                             variant: 'text',
                                                             width: 100,
                                                             height: 30,
                                                         }),
-                                                        (0, i.jsx)(D.Z, {
+                                                        (0, i.jsx)(N.Z, {
                                                             variant: 'text',
                                                             width: 100,
                                                             height: 30,
@@ -83,43 +67,43 @@
                                                 }),
                                             ],
                                         }),
-                                        (0, i.jsxs)(B.Z, {
+                                        (0, i.jsxs)(o.Z, {
                                             spacing: 1,
                                             children: [
-                                                (0, i.jsx)(D.Z, {
+                                                (0, i.jsx)(N.Z, {
                                                     variant: 'text',
                                                     width: 200,
                                                     height: 20,
                                                 }),
-                                                (0, i.jsx)(D.Z, {
+                                                (0, i.jsx)(N.Z, {
                                                     variant: 'text',
                                                     width: 200,
                                                     height: 20,
                                                 }),
-                                                (0, i.jsx)(D.Z, {
+                                                (0, i.jsx)(N.Z, {
                                                     variant: 'text',
                                                     width: 200,
                                                     height: 20,
                                                 }),
-                                                (0, i.jsx)(D.Z, {
+                                                (0, i.jsx)(N.Z, {
                                                     variant: 'text',
                                                     width: 200,
                                                     height: 20,
                                                 }),
-                                                (0, i.jsx)(D.Z, {
+                                                (0, i.jsx)(N.Z, {
                                                     variant: 'text',
                                                     width: 200,
                                                     height: 20,
                                                 }),
-                                                (0, i.jsxs)(B.Z, {
+                                                (0, i.jsxs)(o.Z, {
                                                     spacing: 2,
                                                     children: [
-                                                        (0, i.jsx)(D.Z, {
+                                                        (0, i.jsx)(N.Z, {
                                                             variant: 'rounded',
                                                             width: 200,
                                                             height: 40,
                                                         }),
-                                                        (0, i.jsx)(D.Z, {
+                                                        (0, i.jsx)(N.Z, {
                                                             variant: 'rounded',
                                                             width: 200,
                                                             height: 40,
@@ -130,168 +114,168 @@
                                         }),
                                     ],
                                 }),
-                                (0, i.jsx)(S.t, {}),
+                                (0, i.jsx)(f.t, {}),
                             ],
                         }),
                         off: (0, i.jsxs)('div', {
                             className: 'SBfn8Gb5',
                             children: [
-                                (0, i.jsxs)(C.O, {
-                                    className: w,
+                                (0, i.jsxs)(h.O, {
+                                    className: u,
                                     children: [
                                         (0, i.jsxs)('div', {
-                                            className: E,
+                                            className: y,
                                             children: [
-                                                (0, i.jsx)('div', { className: y }),
-                                                (0, i.jsx)('div', { className: O }),
+                                                (0, i.jsx)('div', { className: p }),
+                                                (0, i.jsx)('div', { className: g }),
                                             ],
                                         }),
                                         (0, i.jsxs)('div', {
-                                            className: b,
+                                            className: I,
                                             children: [
                                                 (0, i.jsxs)('div', {
-                                                    className: P,
+                                                    className: C,
                                                     children: [
                                                         (0, i.jsxs)('div', {
                                                             children: [
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
                                                             ],
                                                         }),
                                                         (0, i.jsxs)('div', {
                                                             children: [
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
                                                             ],
                                                         }),
                                                     ],
                                                 }),
-                                                (0, i.jsx)('div', { className: k }),
-                                                (0, i.jsx)('div', { className: k }),
+                                                (0, i.jsx)('div', { className: Z }),
+                                                (0, i.jsx)('div', { className: Z }),
                                             ],
                                         }),
                                     ],
                                 }),
-                                (0, i.jsxs)(C.O, {
-                                    className: w,
+                                (0, i.jsxs)(h.O, {
+                                    className: u,
                                     children: [
                                         (0, i.jsxs)('div', {
-                                            className: E,
+                                            className: y,
                                             children: [
-                                                (0, i.jsx)('div', { className: y }),
-                                                (0, i.jsx)('div', { className: O }),
+                                                (0, i.jsx)('div', { className: p }),
+                                                (0, i.jsx)('div', { className: g }),
                                             ],
                                         }),
                                         (0, i.jsxs)('div', {
-                                            className: b,
+                                            className: I,
                                             children: [
                                                 (0, i.jsxs)('div', {
-                                                    className: P,
+                                                    className: C,
                                                     children: [
                                                         (0, i.jsxs)('div', {
                                                             children: [
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
                                                             ],
                                                         }),
                                                         (0, i.jsxs)('div', {
                                                             children: [
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
                                                             ],
                                                         }),
                                                     ],
                                                 }),
-                                                (0, i.jsx)('div', { className: k }),
-                                                (0, i.jsx)('div', { className: k }),
+                                                (0, i.jsx)('div', { className: Z }),
+                                                (0, i.jsx)('div', { className: Z }),
                                             ],
                                         }),
                                     ],
                                 }),
-                                (0, i.jsxs)(C.O, {
-                                    className: w,
+                                (0, i.jsxs)(h.O, {
+                                    className: u,
                                     children: [
                                         (0, i.jsxs)('div', {
-                                            className: E,
+                                            className: y,
                                             children: [
-                                                (0, i.jsx)('div', { className: y }),
-                                                (0, i.jsx)('div', { className: O }),
+                                                (0, i.jsx)('div', { className: p }),
+                                                (0, i.jsx)('div', { className: g }),
                                             ],
                                         }),
                                         (0, i.jsxs)('div', {
-                                            className: b,
+                                            className: I,
                                             children: [
                                                 (0, i.jsxs)('div', {
-                                                    className: P,
+                                                    className: C,
                                                     children: [
                                                         (0, i.jsxs)('div', {
                                                             children: [
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
                                                             ],
                                                         }),
                                                         (0, i.jsxs)('div', {
                                                             children: [
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
                                                             ],
                                                         }),
                                                     ],
                                                 }),
-                                                (0, i.jsx)('div', { className: k }),
-                                                (0, i.jsx)('div', { className: k }),
+                                                (0, i.jsx)('div', { className: Z }),
+                                                (0, i.jsx)('div', { className: Z }),
                                             ],
                                         }),
                                     ],
                                 }),
-                                (0, i.jsxs)(C.O, {
-                                    className: w,
+                                (0, i.jsxs)(h.O, {
+                                    className: u,
                                     children: [
                                         (0, i.jsxs)('div', {
-                                            className: E,
+                                            className: y,
                                             children: [
-                                                (0, i.jsx)('div', { className: y }),
-                                                (0, i.jsx)('div', { className: O }),
+                                                (0, i.jsx)('div', { className: p }),
+                                                (0, i.jsx)('div', { className: g }),
                                             ],
                                         }),
                                         (0, i.jsxs)('div', {
-                                            className: b,
+                                            className: I,
                                             children: [
                                                 (0, i.jsxs)('div', {
-                                                    className: P,
+                                                    className: C,
                                                     children: [
                                                         (0, i.jsxs)('div', {
                                                             children: [
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
                                                             ],
                                                         }),
                                                         (0, i.jsxs)('div', {
                                                             children: [
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
-                                                                (0, i.jsx)('div', { className: z }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
+                                                                (0, i.jsx)('div', { className: w }),
                                                             ],
                                                         }),
                                                     ],
                                                 }),
-                                                (0, i.jsx)('div', { className: k }),
-                                                (0, i.jsx)('div', { className: k }),
+                                                (0, i.jsx)('div', { className: Z }),
+                                                (0, i.jsx)('div', { className: Z }),
                                             ],
                                         }),
                                     ],
@@ -300,13 +284,38 @@
                         }),
                     })
                 },
-                W = a(4155),
-                K = a(9161),
-                A = a(6495),
-                G = a(5253),
-                M = a(7974),
-                R = a(6055)
-            const Y = {
+                k = a(9197),
+                b = a(9320),
+                P = a(891),
+                z = a(9308),
+                E = a(2658),
+                F = a(2440),
+                U = a(576),
+                B = a(8885),
+                D = a(9334),
+                S = a(2642),
+                T = a(7484),
+                W = a.n(T),
+                K = a(3416),
+                A = a(7294),
+                G = a(1072),
+                M = a(9250),
+                R = function (s) {
+                    var e
+                    return null === (e = s.anotherUser) || void 0 === e ? void 0 : e._initialized
+                },
+                Y = function (s) {
+                    return s.anotherUser
+                },
+                J = a(8971),
+                L = a(6495),
+                V = a(5253),
+                $ = a(6055),
+                Q = a(7974),
+                X = a(9161),
+                _ = a(4184),
+                H = a.n(_)
+            const q = {
                 contentWrapper: 'QGonfvl0',
                 user: 'gGdpAiOQ',
                 dataWrapper: 'y9r_Wueo',
@@ -318,66 +327,66 @@
                 btnBlock: 'gKj9Y8dB',
                 icon: 'Dau66QXa',
             }
-            var J = function (s) {
+            var ss = function (s) {
                     var e,
                         a = s.className,
-                        n = (0, f.C)(x),
-                        c = n.userData,
-                        r = n.error,
-                        l = (0, f.C)(u.is),
-                        w = (0, Z.$G)('pages'),
-                        y = w.t,
-                        O = (w.i18n, (0, f.C)(u.is)),
-                        k = O.userId,
-                        b = O.friends,
-                        P = (0, t.T)(),
-                        z = (0, j.s0)(),
-                        E = (0, j.UO)().anotherUserId,
-                        F = (0, f.C)(I)
+                        x = (0, v.C)(Y),
+                        m = x.userData,
+                        o = x.error,
+                        N = (0, v.C)(c.is),
+                        f = (0, G.$G)('pages'),
+                        u = f.t,
+                        p = (f.i18n, (0, v.C)(c.is)),
+                        g = p.userId,
+                        Z = p.friends,
+                        I = (0, j.T)(),
+                        C = (0, M.s0)(),
+                        w = (0, M.UO)().anotherUserId,
+                        y = (0, v.C)(R)
                     return (
-                        (0, h.useEffect)(
+                        (0, A.useEffect)(
                             function () {
-                                r && z('*', { replace: !0 })
+                                o && C('*', { replace: !0 })
                             },
-                            [r]
+                            [o]
                         ),
-                        (0, h.useEffect)(
+                        (0, A.useEffect)(
                             function () {
-                                k === E && z('/profile', { replace: !0 })
+                                g === w && C('/profile', { replace: !0 })
                             },
-                            [k]
+                            [g]
                         ),
-                        (0, h.useEffect)(
+                        (0, A.useEffect)(
                             function () {
-                                E && (P((0, m.P)({ userId: E })), P((0, v.bg)({ author: E })))
+                                w && (I((0, J.P)({ userId: w })), I((0, t.bg)({ author: w })))
                             },
-                            [E]
+                            [w]
                         ),
-                        F
+                        y
                             ? (0, i.jsxs)('div', {
-                                  className: d()(Y.AnotherUserProfile, {}, [a]),
+                                  className: H()(q.AnotherUserProfile, {}, [a]),
                                   children: [
-                                      (0, i.jsxs)(C.O, {
-                                          className: Y.contentWrapper,
+                                      (0, i.jsxs)(h.O, {
+                                          className: q.contentWrapper,
                                           children: [
                                               (0, i.jsxs)('div', {
-                                                  className: Y.dataWrapper,
+                                                  className: q.dataWrapper,
                                                   children: [
-                                                      (0, i.jsx)(N.q, {
-                                                          avatarPath: c.avatarPath,
+                                                      (0, i.jsx)(n.q, {
+                                                          avatarPath: m.avatarPath,
                                                           size: 'XL',
-                                                          isOnline: c.isOnline,
-                                                          lastSeenOnline: c.lastSeenOnline,
-                                                          className: Y.avatar,
+                                                          isOnline: m.isOnline,
+                                                          lastSeenOnline: m.lastSeenOnline,
+                                                          className: q.avatar,
                                                       }),
                                                       (0, i.jsxs)('h2', {
-                                                          className: Y.name,
+                                                          className: q.name,
                                                           children: [
                                                               (0, i.jsx)('div', {
-                                                                  children: c.firstName,
+                                                                  children: m.firstName,
                                                               }),
                                                               (0, i.jsx)('div', {
-                                                                  children: c.lastName,
+                                                                  children: m.lastName,
                                                               }),
                                                           ],
                                                       }),
@@ -386,53 +395,53 @@
                                               (0, i.jsxs)('div', {
                                                   children: [
                                                       (0, i.jsxs)('div', {
-                                                          className: Y.valueContainer,
+                                                          className: q.valueContainer,
                                                           children: [
                                                               (0, i.jsxs)('div', {
                                                                   children: [
                                                                       (0, i.jsxs)('div', {
-                                                                          className: Y.valueTitle,
+                                                                          className: q.valueTitle,
                                                                           children: [
-                                                                              (0, i.jsx)(A.Z, {
-                                                                                  className: Y.icon,
+                                                                              (0, i.jsx)(L.Z, {
+                                                                                  className: q.icon,
                                                                               }),
-                                                                              y('День рождения'),
+                                                                              u('День рождения'),
                                                                           ],
                                                                       }),
                                                                       (0, i.jsxs)('div', {
-                                                                          className: Y.valueTitle,
+                                                                          className: q.valueTitle,
                                                                           children: [
-                                                                              (0, i.jsx)(G.Z, {
-                                                                                  className: Y.icon,
+                                                                              (0, i.jsx)(V.Z, {
+                                                                                  className: q.icon,
                                                                               }),
-                                                                              y('Город'),
+                                                                              u('Город'),
                                                                           ],
                                                                       }),
                                                                       (0, i.jsxs)('div', {
-                                                                          className: Y.valueTitle,
+                                                                          className: q.valueTitle,
                                                                           children: [
-                                                                              (0, i.jsx)(M.Z, {
-                                                                                  className: Y.icon,
+                                                                              (0, i.jsx)(Q.Z, {
+                                                                                  className: q.icon,
                                                                               }),
-                                                                              y('Друзья '),
+                                                                              u('Друзья '),
                                                                           ],
                                                                       }),
                                                                       (0, i.jsxs)('div', {
-                                                                          className: Y.valueTitle,
+                                                                          className: q.valueTitle,
                                                                           children: [
-                                                                              (0, i.jsx)(R.Z, {
-                                                                                  className: Y.icon,
+                                                                              (0, i.jsx)($.Z, {
+                                                                                  className: q.icon,
                                                                               }),
-                                                                              y('Посты'),
+                                                                              u('Посты'),
                                                                           ],
                                                                       }),
                                                                   ],
                                                               }),
                                                               (0, i.jsxs)('div', {
-                                                                  className: Y.dataWrapper,
+                                                                  className: q.dataWrapper,
                                                                   children: [
                                                                       (0, i.jsx)('div', {
-                                                                          children: c.birthDay,
+                                                                          children: m.birthDay,
                                                                       }),
                                                                       (0, i.jsx)('div', {
                                                                           children: 'Новодвинск',
@@ -440,102 +449,102 @@
                                                                       (0, i.jsx)('div', {
                                                                           children:
                                                                               null ===
-                                                                                  (e = c.friends) ||
+                                                                                  (e = m.friends) ||
                                                                               void 0 === e
                                                                                   ? void 0
                                                                                   : e.length,
                                                                       }),
                                                                       (0, i.jsx)('div', {
                                                                           children:
-                                                                              null == c
+                                                                              null == m
                                                                                   ? void 0
-                                                                                  : c.posts,
+                                                                                  : m.posts,
                                                                       }),
                                                                   ],
                                                               }),
                                                           ],
                                                       }),
                                                       (0, i.jsxs)('div', {
-                                                          className: Y.btnBlock,
+                                                          className: q.btnBlock,
                                                           children: [
                                                               (function () {
-                                                                  if (E && b) return b.includes(E)
+                                                                  if (w && Z) return Z.includes(w)
                                                               })()
-                                                                  ? (0, i.jsx)(K.z, {
-                                                                        className: Y.friendBtn,
+                                                                  ? (0, i.jsx)(X.z, {
+                                                                        className: q.friendBtn,
                                                                         onClick: function () {
-                                                                            E &&
-                                                                                P(
-                                                                                    (0, p.tJ)({
-                                                                                        friendId: E,
-                                                                                        userId: k,
+                                                                            w &&
+                                                                                I(
+                                                                                    (0, r.tJ)({
+                                                                                        friendId: w,
+                                                                                        userId: g,
                                                                                         friendFirstName:
-                                                                                            c.firstName,
+                                                                                            m.firstName,
                                                                                         friendLastName:
-                                                                                            c.lastName,
-                                                                                        t: y,
+                                                                                            m.lastName,
+                                                                                        t: u,
                                                                                     })
                                                                                 )
                                                                         },
                                                                         children:
-                                                                            y('Удалить из друзей'),
+                                                                            u('Удалить из друзей'),
                                                                     })
-                                                                  : (0, i.jsx)(K.z, {
-                                                                        className: Y.friendBtn,
+                                                                  : (0, i.jsx)(X.z, {
+                                                                        className: q.friendBtn,
                                                                         onClick: function () {
-                                                                            E &&
-                                                                                P(
-                                                                                    (0, p.SK)({
-                                                                                        friendId: E,
-                                                                                        userId: k,
+                                                                            w &&
+                                                                                I(
+                                                                                    (0, r.SK)({
+                                                                                        friendId: w,
+                                                                                        userId: g,
                                                                                         friendFirstName:
-                                                                                            c.firstName,
+                                                                                            m.firstName,
                                                                                         friendLastName:
-                                                                                            c.lastName,
-                                                                                        t: y,
+                                                                                            m.lastName,
+                                                                                        t: u,
                                                                                     })
                                                                                 )
                                                                         },
                                                                         children:
-                                                                            y('Добавить в друзья'),
+                                                                            u('Добавить в друзья'),
                                                                     }),
-                                                              (0, i.jsx)(K.z, {
+                                                              (0, i.jsx)(X.z, {
                                                                   onClick: function () {
                                                                       var s = (function () {
                                                                           var s
                                                                           return null ===
                                                                               (s =
-                                                                                  l.conversations) ||
+                                                                                  N.conversations) ||
                                                                               void 0 === s
                                                                               ? void 0
                                                                               : s.find(
                                                                                     function (s) {
                                                                                         return (
                                                                                             s.friendId ===
-                                                                                            E
+                                                                                            w
                                                                                         )
                                                                                     }
                                                                                 )
                                                                       })()
                                                                       if (s)
-                                                                          z(
+                                                                          C(
                                                                               '/messenger/'.concat(
                                                                                   s.roomId
                                                                               )
                                                                           )
-                                                                      else if (E) {
-                                                                          var e = (0, o.x0)()
-                                                                          P(
-                                                                              (0, g.V$)({
+                                                                      else if (w) {
+                                                                          var e = (0, K.x0)()
+                                                                          I(
+                                                                              (0, l.V$)({
                                                                                   roomId: e,
-                                                                                  friendId: E,
-                                                                                  userId: k,
-                                                                                  navigate: z,
+                                                                                  friendId: w,
+                                                                                  userId: g,
+                                                                                  navigate: C,
                                                                               })
                                                                           )
                                                                       }
                                                                   },
-                                                                  children: y('Написать сообщение'),
+                                                                  children: u('Написать сообщение'),
                                                               }),
                                                           ],
                                                       }),
@@ -543,66 +552,54 @@
                                               }),
                                           ],
                                       }),
-                                      (0, i.jsx)(W.E, {}),
+                                      (0, i.jsx)(d.E, {}),
                                   ],
                               })
-                            : (0, i.jsx)(T, {})
+                            : (0, i.jsx)(O, {})
                     )
                 },
-                L = a(2658),
-                V = a(2440),
-                $ = a(576),
-                Q = a(8885),
-                X = a(9334),
-                _ = a(2642),
-                H = a(9197),
-                q = a(9308),
-                ss = a(9320),
-                es = a(891),
-                as = a(7484),
-                is = a.n(as),
-                ns = function (s) {
+                es = function (s) {
                     s.className
                     var e,
-                        a = (0, f.C)(x),
-                        n = a.userData,
-                        d = a.error,
-                        c = (0, f.C)(u.is),
-                        r = (0, Z.$G)('pages'),
-                        l = r.t,
-                        C = r.i18n,
-                        w = (0, f.C)(u.is),
-                        y = w.userId,
-                        O = w.friends,
-                        k = (0, t.T)(),
-                        b = (0, j.s0)(),
-                        P = (0, j.UO)().anotherUserId,
-                        z = (0, f.C)(I)
+                        a = (0, v.C)(Y),
+                        h = a.userData,
+                        N = a.error,
+                        f = (0, v.C)(c.is),
+                        u = (0, G.$G)('pages'),
+                        p = u.t,
+                        g = u.i18n,
+                        Z = (0, v.C)(c.is),
+                        I = Z.userId,
+                        C = Z.friends,
+                        w = (0, j.T)(),
+                        y = (0, M.s0)(),
+                        T = (0, M.UO)().anotherUserId,
+                        L = (0, v.C)(R)
                     return (
-                        (0, h.useEffect)(
+                        (0, A.useEffect)(
                             function () {
-                                d && b('*', { replace: !0 })
+                                N && y('*', { replace: !0 })
                             },
-                            [d]
+                            [N]
                         ),
-                        (0, h.useEffect)(
+                        (0, A.useEffect)(
                             function () {
-                                y === P && b('/profile', { replace: !0 })
+                                I === T && y('/profile', { replace: !0 })
                             },
-                            [y]
+                            [I]
                         ),
-                        (0, h.useEffect)(
+                        (0, A.useEffect)(
                             function () {
-                                P && (k((0, m.P)({ userId: P })), k((0, v.bg)({ author: P })))
+                                T && (w((0, J.P)({ userId: T })), w((0, t.bg)({ author: T })))
                             },
-                            [P]
+                            [T]
                         ),
-                        z
-                            ? (0, i.jsx)(F.z, {
+                        L
+                            ? (0, i.jsx)(x.z, {
                                   feature: 'isAppRedesigned',
                                   on: (0, i.jsxs)(i.Fragment, {
                                       children: [
-                                          (0, i.jsxs)(U.Z, {
+                                          (0, i.jsxs)(m.Z, {
                                               sx: {
                                                   padding: '16px',
                                                   display: 'flex',
@@ -610,60 +607,60 @@
                                               },
                                               elevation: 1,
                                               children: [
-                                                  (0, i.jsxs)(B.Z, {
+                                                  (0, i.jsxs)(o.Z, {
                                                       alignItems: 'flex-start',
                                                       spacing: 2,
                                                       children: [
-                                                          (0, i.jsx)(N.q, {
+                                                          (0, i.jsx)(n.q, {
                                                               size: '160px',
-                                                              firstName: n.firstName,
-                                                              avatarPath: n.avatarPath,
-                                                              isOnline: n.isOnline,
+                                                              firstName: h.firstName,
+                                                              avatarPath: h.avatarPath,
+                                                              isOnline: h.isOnline,
                                                           }),
-                                                          (0, i.jsx)(L.Z, {
+                                                          (0, i.jsx)(E.Z, {
                                                               variant: 'h5',
                                                               component: 'h1',
                                                               children: ''
-                                                                  .concat(n.firstName, ' ')
-                                                                  .concat(n.lastName),
+                                                                  .concat(h.firstName, ' ')
+                                                                  .concat(h.lastName),
                                                           }),
                                                       ],
                                                   }),
-                                                  (0, i.jsxs)(B.Z, {
+                                                  (0, i.jsxs)(o.Z, {
                                                       children: [
-                                                          !n.isOnline &&
-                                                              (0, i.jsx)(L.Z, {
+                                                          !h.isOnline &&
+                                                              (0, i.jsx)(E.Z, {
                                                                   align: 'center',
                                                                   variant: 'body1',
                                                                   component: 'div',
                                                                   children: 'Был(а) в сети '.concat(
-                                                                      is()(n.lastSeenOnline)
-                                                                          .locale(C.language)
-                                                                          .toNow(!0) + l(' назад')
+                                                                      W()(h.lastSeenOnline)
+                                                                          .locale(g.language)
+                                                                          .toNow(!0) + p(' назад')
                                                                   ),
                                                               }),
-                                                          (0, i.jsxs)(V.Z, {
+                                                          (0, i.jsxs)(F.Z, {
                                                               dense: !0,
                                                               children: [
-                                                                  (0, i.jsxs)($.ZP, {
+                                                                  (0, i.jsxs)(U.ZP, {
                                                                       children: [
-                                                                          (0, i.jsx)(Q.Z, {
+                                                                          (0, i.jsx)(B.Z, {
                                                                               children: (0, i.jsx)(
-                                                                                  H.Z,
+                                                                                  k.Z,
                                                                                   {}
                                                                               ),
                                                                           }),
-                                                                          (0, i.jsx)(X.Z, {
+                                                                          (0, i.jsx)(D.Z, {
                                                                               primary: ''
                                                                                   .concat(
-                                                                                      l(
+                                                                                      p(
                                                                                           'День рождения'
                                                                                       ),
                                                                                       ' '
                                                                                   )
                                                                                   .concat(
-                                                                                      is()(
-                                                                                          n.birthDay
+                                                                                      W()(
+                                                                                          h.birthDay
                                                                                               .split(
                                                                                                   '.'
                                                                                               )
@@ -673,7 +670,7 @@
                                                                                               )
                                                                                       )
                                                                                           .locale(
-                                                                                              C.language
+                                                                                              g.language
                                                                                           )
                                                                                           .format(
                                                                                               'D MMMM YYYY'
@@ -682,42 +679,42 @@
                                                                           }),
                                                                       ],
                                                                   }),
-                                                                  (0, i.jsxs)($.ZP, {
+                                                                  (0, i.jsxs)(U.ZP, {
                                                                       children: [
-                                                                          (0, i.jsx)(Q.Z, {
+                                                                          (0, i.jsx)(B.Z, {
                                                                               children: (0, i.jsx)(
-                                                                                  q.Z,
+                                                                                  z.Z,
                                                                                   {}
                                                                               ),
                                                                           }),
-                                                                          (0, i.jsx)(X.Z, {
+                                                                          (0, i.jsx)(D.Z, {
                                                                               primary: ''
                                                                                   .concat(
-                                                                                      l('Город'),
+                                                                                      p('Город'),
                                                                                       ' '
                                                                                   )
-                                                                                  .concat(n.city),
+                                                                                  .concat(h.city),
                                                                           }),
                                                                       ],
                                                                   }),
-                                                                  (0, i.jsxs)($.ZP, {
+                                                                  (0, i.jsxs)(U.ZP, {
                                                                       children: [
-                                                                          (0, i.jsx)(Q.Z, {
+                                                                          (0, i.jsx)(B.Z, {
                                                                               children: (0, i.jsx)(
-                                                                                  ss.Z,
+                                                                                  b.Z,
                                                                                   {}
                                                                               ),
                                                                           }),
-                                                                          (0, i.jsx)(X.Z, {
+                                                                          (0, i.jsx)(D.Z, {
                                                                               primary: ''
                                                                                   .concat(
-                                                                                      l('Друзья'),
+                                                                                      p('Друзья'),
                                                                                       ' '
                                                                                   )
                                                                                   .concat(
                                                                                       null ===
                                                                                           (e =
-                                                                                              n.friends) ||
+                                                                                              h.friends) ||
                                                                                           void 0 ===
                                                                                               e
                                                                                           ? void 0
@@ -726,84 +723,84 @@
                                                                           }),
                                                                       ],
                                                                   }),
-                                                                  (0, i.jsxs)($.ZP, {
+                                                                  (0, i.jsxs)(U.ZP, {
                                                                       children: [
-                                                                          (0, i.jsx)(Q.Z, {
+                                                                          (0, i.jsx)(B.Z, {
                                                                               children: (0, i.jsx)(
-                                                                                  es.Z,
+                                                                                  P.Z,
                                                                                   {}
                                                                               ),
                                                                           }),
-                                                                          (0, i.jsx)(X.Z, {
+                                                                          (0, i.jsx)(D.Z, {
                                                                               primary: ''
                                                                                   .concat(
-                                                                                      l('Посты'),
+                                                                                      p('Посты'),
                                                                                       ' '
                                                                                   )
-                                                                                  .concat(n.posts),
+                                                                                  .concat(h.posts),
                                                                           }),
                                                                       ],
                                                                   }),
                                                               ],
                                                           }),
-                                                          (0, i.jsxs)(B.Z, {
+                                                          (0, i.jsxs)(o.Z, {
                                                               spacing: 2,
                                                               children: [
                                                                   (function () {
-                                                                      if (P && O)
-                                                                          return O.includes(P)
+                                                                      if (T && C)
+                                                                          return C.includes(T)
                                                                   })()
-                                                                      ? (0, i.jsx)(_.Z, {
+                                                                      ? (0, i.jsx)(S.Z, {
                                                                             variant: 'outlined',
                                                                             onClick: function () {
-                                                                                P &&
-                                                                                    k(
-                                                                                        (0, p.tJ)({
+                                                                                T &&
+                                                                                    w(
+                                                                                        (0, r.tJ)({
                                                                                             friendId:
-                                                                                                P,
-                                                                                            userId: y,
+                                                                                                T,
+                                                                                            userId: I,
                                                                                             friendFirstName:
-                                                                                                n.firstName,
+                                                                                                h.firstName,
                                                                                             friendLastName:
-                                                                                                n.lastName,
-                                                                                            t: l,
+                                                                                                h.lastName,
+                                                                                            t: p,
                                                                                         })
                                                                                     )
                                                                             },
                                                                             children:
-                                                                                l(
+                                                                                p(
                                                                                     'Удалить из друзей'
                                                                                 ),
                                                                         })
-                                                                      : (0, i.jsx)(_.Z, {
+                                                                      : (0, i.jsx)(S.Z, {
                                                                             variant: 'outlined',
                                                                             onClick: function () {
-                                                                                P &&
-                                                                                    k(
-                                                                                        (0, p.SK)({
+                                                                                T &&
+                                                                                    w(
+                                                                                        (0, r.SK)({
                                                                                             friendId:
-                                                                                                P,
-                                                                                            userId: y,
+                                                                                                T,
+                                                                                            userId: I,
                                                                                             friendFirstName:
-                                                                                                n.firstName,
+                                                                                                h.firstName,
                                                                                             friendLastName:
-                                                                                                n.lastName,
-                                                                                            t: l,
+                                                                                                h.lastName,
+                                                                                            t: p,
                                                                                         })
                                                                                     )
                                                                             },
                                                                             children:
-                                                                                l(
+                                                                                p(
                                                                                     'Добавить в друзья'
                                                                                 ),
                                                                         }),
-                                                                  (0, i.jsx)(_.Z, {
+                                                                  (0, i.jsx)(S.Z, {
                                                                       onClick: function () {
                                                                           var s = (function () {
                                                                               var s
                                                                               return null ===
                                                                                   (s =
-                                                                                      c.conversations) ||
+                                                                                      f.conversations) ||
                                                                                   void 0 === s
                                                                                   ? void 0
                                                                                   : s.find(
@@ -812,32 +809,32 @@
                                                                                         ) {
                                                                                             return (
                                                                                                 s.friendId ===
-                                                                                                P
+                                                                                                T
                                                                                             )
                                                                                         }
                                                                                     )
                                                                           })()
                                                                           if (s)
-                                                                              b(
+                                                                              y(
                                                                                   '/messenger/'.concat(
                                                                                       s.roomId
                                                                                   )
                                                                               )
-                                                                          else if (P) {
-                                                                              var e = (0, o.x0)()
-                                                                              k(
-                                                                                  (0, g.V$)({
+                                                                          else if (T) {
+                                                                              var e = (0, K.x0)()
+                                                                              w(
+                                                                                  (0, l.V$)({
                                                                                       roomId: e,
-                                                                                      friendId: P,
-                                                                                      userId: y,
-                                                                                      navigate: b,
+                                                                                      friendId: T,
+                                                                                      userId: I,
+                                                                                      navigate: y,
                                                                                   })
                                                                               )
                                                                           }
                                                                       },
                                                                       variant: 'outlined',
                                                                       children:
-                                                                          l('Написать сообщение'),
+                                                                          p('Написать сообщение'),
                                                                   }),
                                                               ],
                                                           }),
@@ -845,50 +842,53 @@
                                                   }),
                                               ],
                                           }),
-                                          (0, i.jsx)(W.E, {}),
+                                          (0, i.jsx)(d.E, {}),
                                       ],
                                   }),
-                                  off: (0, i.jsx)(J, {}),
+                                  off: (0, i.jsx)(ss, {}),
                               })
-                            : (0, i.jsx)(T, {})
+                            : (0, i.jsx)(O, {})
                     )
                 },
-                ds = a(775),
-                cs = a(4102),
-                rs = a(684)
+                as = a(775),
+                is = a(8826),
+                ns = a(4607),
+                ds = a(684),
+                cs = a(3388),
+                rs = a(4102)
             const ls = function (s) {
                 var e = s.className,
-                    a = (0, ds.X)()
-                return (0, i.jsx)(F.z, {
+                    a = (0, as.X)()
+                return (0, i.jsx)(x.z, {
                     feature: 'isAppRedesigned',
                     on: (0, i.jsxs)(i.Fragment, {
                         children: [
-                            (0, i.jsx)(c.h, {}),
-                            (0, i.jsxs)(cs.Z, {
+                            (0, i.jsx)(ns.h, {}),
+                            (0, i.jsxs)(rs.Z, {
                                 sx: { display: 'flex' },
                                 children: [
-                                    (0, i.jsx)(l.K, {}),
-                                    (0, i.jsx)(B.Z, {
+                                    (0, i.jsx)(cs.K, {}),
+                                    (0, i.jsx)(o.Z, {
                                         spacing: 2,
                                         width: '100%',
                                         sx: { maxWidth: { xl: '892px', lg: '892px', md: '892px' } },
-                                        children: (0, i.jsx)(ns, {}),
+                                        children: (0, i.jsx)(es, {}),
                                     }),
                                 ],
                             }),
-                            (0, i.jsx)(rs.$, {}),
+                            (0, i.jsx)(ds.$, {}),
                         ],
                     }),
                     off: (0, i.jsxs)(i.Fragment, {
                         children: [
-                            (0, i.jsx)(c.h, {}),
-                            (0, i.jsxs)(r.Z, {
+                            (0, i.jsx)(ns.h, {}),
+                            (0, i.jsxs)(is.Z, {
                                 className: a ? 'hX2C4hE0' : '',
                                 children: [
-                                    (0, i.jsx)(l.K, {}),
+                                    (0, i.jsx)(cs.K, {}),
                                     (0, i.jsx)('div', {
-                                        className: d()('RDKMi7bD', {}, [e]),
-                                        children: (0, i.jsx)(ns, {}),
+                                        className: H()('RDKMi7bD', {}, [e]),
+                                        children: (0, i.jsx)(es, {}),
                                     }),
                                 ],
                             }),

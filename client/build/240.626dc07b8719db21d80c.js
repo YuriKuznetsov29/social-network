@@ -5,27 +5,26 @@
         8240: (s, e, i) => {
             i.d(e, { _: () => k, $: () => T })
             var a = i(5893),
-                n = i(3743),
-                t = i(7294),
-                r = i(9250),
-                l = i(8084),
-                c = i(9053),
+                n = i(5895),
+                t = i(9053),
+                r = i(8084),
+                l = i(1209),
+                c = i(3743),
                 d = i(966),
-                x = i(775)
-            const h = 'gV5RSwSi',
-                j = 'ImIDrdm5',
-                m = 'iaNgHOmW'
-            var o = i(6765),
-                v = i(1209),
-                f = i(9708),
-                u = i(8973),
-                N = i(4680),
-                p = i(3906),
-                g = function () {
+                x = i(775),
+                h = i(6765),
+                j = i(9708),
+                m = i(8973),
+                o = i(4680),
+                v = i(3906)
+            const f = 'gV5RSwSi',
+                u = 'ImIDrdm5',
+                N = 'iaNgHOmW'
+            var p = function () {
                     var s = (0, x.X)()
-                    return (0, a.jsx)(v.z, {
+                    return (0, a.jsx)(l.z, {
                         feature: 'isAppRedesigned',
-                        on: (0, a.jsxs)(N.Z, {
+                        on: (0, a.jsxs)(o.Z, {
                             sx: {
                                 width: '100%',
                                 padding: '16px',
@@ -37,11 +36,11 @@
                             },
                             elevation: 1,
                             children: [
-                                (0, a.jsx)(u.Z, {
+                                (0, a.jsx)(m.Z, {
                                     variant: 'text',
                                     sx: { width: '100px', height: '32px' },
                                 }),
-                                (0, a.jsx)(p.Z, {
+                                (0, a.jsx)(v.Z, {
                                     sx: {
                                         width: '100%',
                                         display: 'flex',
@@ -52,17 +51,17 @@
                                         for (var e = [], i = s ? 5 : 11, n = 0; n < i; n++)
                                             e.push(
                                                 (0, a.jsxs)(
-                                                    f.Z,
+                                                    j.Z,
                                                     {
                                                         alignItems: 'center',
                                                         spacing: 1,
                                                         children: [
-                                                            (0, a.jsx)(u.Z, {
+                                                            (0, a.jsx)(m.Z, {
                                                                 variant: 'circular',
                                                                 width: 60,
                                                                 height: 60,
                                                             }),
-                                                            (0, a.jsx)(u.Z, {
+                                                            (0, a.jsx)(m.Z, {
                                                                 variant: 'text',
                                                                 sx: {
                                                                     fontSize: '1rem',
@@ -79,7 +78,7 @@
                                 }),
                             ],
                         }),
-                        off: (0, a.jsxs)(o.O, {
+                        off: (0, a.jsxs)(h.O, {
                             className: 'YVQJeQtu',
                             children: [
                                 (0, a.jsx)('div', { className: 'a_huN9Gd' }),
@@ -89,31 +88,31 @@
                                         ? (0, a.jsxs)(a.Fragment, {
                                               children: [
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                               ],
@@ -121,52 +120,52 @@
                                         : (0, a.jsxs)(a.Fragment, {
                                               children: [
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                                   (0, a.jsxs)('div', {
-                                                      className: h,
+                                                      className: f,
                                                       children: [
-                                                          (0, a.jsx)('div', { className: j }),
-                                                          (0, a.jsx)('div', { className: m }),
+                                                          (0, a.jsx)('div', { className: u }),
+                                                          (0, a.jsx)('div', { className: N }),
                                                       ],
                                                   }),
                                               ],
@@ -176,11 +175,13 @@
                         }),
                     })
                 },
-                Z = i(1072),
-                w = i(4184),
-                I = i.n(w),
-                y = i(4524)
-            const C = {
+                g = i(2658),
+                Z = i(7294),
+                w = i(1072),
+                I = i(9250),
+                y = i(4184),
+                C = i.n(y)
+            const O = {
                 friendsWrapper: 'MdEpdl0U',
                 title: 'SwoXFFHE',
                 friend: 'wRqZ4GH1',
@@ -188,44 +189,44 @@
                 user: 'OHrjhNfk',
                 container: 'CFvu_KaO',
             }
-            var O = function (s) {
+            var S = function (s) {
                     var e = s.className,
-                        i = (0, d.C)(c.is).userId,
-                        x = (0, d.C)(l.yH).friends,
-                        h = (0, d.C)(l.Bl),
-                        j = (0, Z.$G)('pages').t,
-                        m = (0, n.T)(),
-                        v = (0, r.s0)()
+                        i = (0, d.C)(t.is).userId,
+                        l = (0, d.C)(r.yH).friends,
+                        x = (0, d.C)(r.Bl),
+                        j = (0, w.$G)('pages').t,
+                        m = (0, c.T)(),
+                        o = (0, I.s0)()
                     return (
-                        (0, t.useEffect)(
+                        (0, Z.useEffect)(
                             function () {
-                                i && m((0, l._F)(i))
+                                i && m((0, r._F)(i))
                             },
                             [i]
                         ),
-                        h
+                        x
                             ? (0, a.jsx)('div', {
-                                  className: I()(C.Friends, {}, [e]),
-                                  children: (0, a.jsxs)(o.O, {
-                                      className: C.container,
+                                  className: C()(O.Friends, {}, [e]),
+                                  children: (0, a.jsxs)(h.O, {
+                                      className: O.container,
                                       children: [
                                           (0, a.jsx)('h3', {
-                                              className: C.title,
+                                              className: O.title,
                                               children: j('Друзья'),
                                           }),
                                           (0, a.jsx)('div', {
-                                              className: C.friendsWrapper,
-                                              children: x.length
-                                                  ? x.map(function (s) {
+                                              className: O.friendsWrapper,
+                                              children: l.length
+                                                  ? l.map(function (s) {
                                                         return (0, a.jsxs)(
                                                             'div',
                                                             {
-                                                                className: C.friend,
+                                                                className: O.friend,
                                                                 onClick: function () {
-                                                                    return v('/'.concat(s.userId))
+                                                                    return o('/'.concat(s.userId))
                                                                 },
                                                                 children: [
-                                                                    (0, a.jsx)(y.q, {
+                                                                    (0, a.jsx)(n.q, {
                                                                         avatarPath: s.avatarPath,
                                                                         size: 'M',
                                                                         isOnline: s.isOnline,
@@ -245,29 +246,28 @@
                                       ],
                                   }),
                               })
-                            : (0, a.jsx)(g, {})
+                            : (0, a.jsx)(p, {})
                     )
                 },
-                S = i(2658),
                 k = function (s) {
                     s.className
-                    var e = (0, d.C)(c.is).userId,
-                        i = (0, d.C)(l.yH).friends,
-                        x = (0, d.C)(l.Bl),
-                        h = (0, Z.$G)('pages').t,
-                        j = (0, n.T)()
+                    var e = (0, d.C)(t.is).userId,
+                        i = (0, d.C)(r.yH).friends,
+                        x = (0, d.C)(r.Bl),
+                        h = (0, w.$G)('pages').t,
+                        m = (0, c.T)()
                     return (
-                        (0, r.s0)(),
-                        (0, t.useEffect)(
+                        (0, I.s0)(),
+                        (0, Z.useEffect)(
                             function () {
-                                e && j((0, l._F)(e))
+                                e && m((0, r._F)(e))
                             },
                             [e]
                         ),
                         x
-                            ? (0, a.jsx)(v.z, {
+                            ? (0, a.jsx)(l.z, {
                                   feature: 'isAppRedesigned',
-                                  on: (0, a.jsxs)(N.Z, {
+                                  on: (0, a.jsxs)(o.Z, {
                                       sx: {
                                           width: '100%',
                                           padding: '16px',
@@ -279,8 +279,8 @@
                                       },
                                       elevation: 1,
                                       children: [
-                                          (0, a.jsx)(S.Z, { variant: 'h5', children: h('Друзья') }),
-                                          (0, a.jsx)(p.Z, {
+                                          (0, a.jsx)(g.Z, { variant: 'h5', children: h('Друзья') }),
+                                          (0, a.jsx)(v.Z, {
                                               sx: {
                                                   width: '100%',
                                                   display: 'flex',
@@ -289,12 +289,12 @@
                                               },
                                               children: i.map(function (s) {
                                                   return (0, a.jsxs)(
-                                                      f.Z,
+                                                      j.Z,
                                                       {
                                                           alignItems: 'center',
                                                           spacing: 1,
                                                           children: [
-                                                              (0, a.jsx)(y.q, {
+                                                              (0, a.jsx)(n.q, {
                                                                   avatarPath: s.avatarPath,
                                                                   isOnline: s.isOnline,
                                                                   size: '60px',
@@ -302,7 +302,7 @@
                                                                   link: !0,
                                                                   userId: s.userId,
                                                               }),
-                                                              (0, a.jsx)(S.Z, {
+                                                              (0, a.jsx)(g.Z, {
                                                                   children: s.firstName,
                                                               }),
                                                           ],
@@ -313,38 +313,24 @@
                                           }),
                                       ],
                                   }),
-                                  off: (0, a.jsx)(O, {}),
+                                  off: (0, a.jsx)(S, {}),
                               })
-                            : (0, a.jsx)(g, {})
+                            : (0, a.jsx)(p, {})
                     )
                 },
-                F = i(3416),
-                P = i(1745),
-                D = i(6495),
-                M = i(5253),
-                b = i(7974),
-                Y = i(6055),
-                H = i(7484),
-                W = i.n(H)
-            const _ = 'qFVAD8PN',
-                z = 'o_WKJ7g4'
-            var G = i(2440),
-                V = i(576),
-                X = i(8885),
-                q = i(9334),
-                A = i(2642),
-                R = i(9197),
-                E = i(9308),
-                $ = i(9320),
-                J = i(891)
-            function K() {
-                return (0, a.jsx)(f.Z, {
+                F = i(9799),
+                P = i(6495),
+                D = i(5253),
+                M = i(6055),
+                b = i(7974)
+            function Y() {
+                return (0, a.jsx)(j.Z, {
                     spacing: 2,
                     sx: { maxWidth: '892px', width: '100%' },
                     children: (function () {
                         for (var s = [], e = 0; e < 10; e++)
                             s.push(
-                                (0, a.jsxs)(N.Z, {
+                                (0, a.jsxs)(o.Z, {
                                     sx: {
                                         padding: '16px',
                                         display: 'flex',
@@ -354,26 +340,26 @@
                                     },
                                     elevation: 1,
                                     children: [
-                                        (0, a.jsxs)(f.Z, {
+                                        (0, a.jsxs)(j.Z, {
                                             alignItems: 'flex-start',
                                             spacing: 2,
                                             sx: { alignItems: { xs: 'center', sm: 'flex-start' } },
                                             children: [
-                                                (0, a.jsx)(u.Z, {
+                                                (0, a.jsx)(m.Z, {
                                                     variant: 'circular',
                                                     width: 160,
                                                     height: 160,
                                                 }),
-                                                (0, a.jsxs)(f.Z, {
+                                                (0, a.jsxs)(j.Z, {
                                                     direction: 'row',
                                                     spacing: 1,
                                                     children: [
-                                                        (0, a.jsx)(u.Z, {
+                                                        (0, a.jsx)(m.Z, {
                                                             variant: 'text',
                                                             width: 100,
                                                             height: 30,
                                                         }),
-                                                        (0, a.jsx)(u.Z, {
+                                                        (0, a.jsx)(m.Z, {
                                                             variant: 'text',
                                                             width: 100,
                                                             height: 30,
@@ -382,43 +368,43 @@
                                                 }),
                                             ],
                                         }),
-                                        (0, a.jsxs)(f.Z, {
+                                        (0, a.jsxs)(j.Z, {
                                             spacing: 1,
                                             children: [
-                                                (0, a.jsx)(u.Z, {
+                                                (0, a.jsx)(m.Z, {
                                                     variant: 'text',
                                                     width: 200,
                                                     height: 30,
                                                 }),
-                                                (0, a.jsx)(u.Z, {
+                                                (0, a.jsx)(m.Z, {
                                                     variant: 'text',
                                                     width: 200,
                                                     height: 30,
                                                 }),
-                                                (0, a.jsx)(u.Z, {
+                                                (0, a.jsx)(m.Z, {
                                                     variant: 'text',
                                                     width: 200,
                                                     height: 30,
                                                 }),
-                                                (0, a.jsx)(u.Z, {
+                                                (0, a.jsx)(m.Z, {
                                                     variant: 'text',
                                                     width: 200,
                                                     height: 30,
                                                 }),
-                                                (0, a.jsx)(u.Z, {
+                                                (0, a.jsx)(m.Z, {
                                                     variant: 'text',
                                                     width: 200,
                                                     height: 30,
                                                 }),
-                                                (0, a.jsxs)(f.Z, {
+                                                (0, a.jsxs)(j.Z, {
                                                     spacing: 2,
                                                     children: [
-                                                        (0, a.jsx)(u.Z, {
+                                                        (0, a.jsx)(m.Z, {
                                                             variant: 'rounded',
                                                             width: 200,
                                                             height: 35,
                                                         }),
-                                                        (0, a.jsx)(u.Z, {
+                                                        (0, a.jsx)(m.Z, {
                                                             variant: 'rounded',
                                                             width: 200,
                                                             height: 35,
@@ -434,30 +420,44 @@
                     })(),
                 })
             }
+            var H = i(9197),
+                W = i(9320),
+                _ = i(891),
+                z = i(9308),
+                G = i(2440),
+                V = i(576),
+                X = i(8885),
+                q = i(9334),
+                A = i(2642),
+                R = i(7484),
+                E = i.n(R),
+                $ = i(3416)
+            const J = 'qFVAD8PN',
+                K = 'o_WKJ7g4'
             var T = function (s) {
                 s.className
-                var e = (0, d.C)(c.is),
+                var e = (0, d.C)(t.is),
                     i = e.userId,
                     x = e.conversations,
-                    h = (0, d.C)(l.k4),
-                    j = (0, d.C)(l.Sb),
-                    m = (0, n.T)(),
-                    u = (0, r.s0)(),
-                    p = (0, Z.$G)('pages'),
-                    g = p.t,
-                    w = p.i18n,
-                    I = (0, t.useState)(Date.now() + '')
-                I[0],
-                    I[1],
-                    (0, t.useEffect)(
+                    m = (0, d.C)(r.k4),
+                    v = (0, d.C)(r.Sb),
+                    f = (0, c.T)(),
+                    u = (0, I.s0)(),
+                    N = (0, w.$G)('pages'),
+                    p = N.t,
+                    y = N.i18n,
+                    C = (0, Z.useState)(Date.now() + '')
+                C[0],
+                    C[1],
+                    (0, Z.useEffect)(
                         function () {
-                            i && m((0, l._F)(i))
+                            i && f((0, r._F)(i))
                         },
                         [i]
                     )
-                var C = function (s, e, a) {
-                        m(
-                            (0, l.tJ)({
+                var O = function (s, e, a) {
+                        f(
+                            (0, r.tJ)({
                                 friendId: s,
                                 userId: i,
                                 friendFirstName: e,
@@ -465,7 +465,7 @@
                             })
                         )
                     },
-                    O = function (s) {
+                    S = function (s) {
                         var e,
                             a =
                                 ((e = s),
@@ -476,21 +476,21 @@
                                       }))
                         if (a) u('/messenger/'.concat(a.roomId))
                         else {
-                            var n = (0, F.x0)()
-                            m((0, P.V$)({ roomId: n, friendId: s, userId: i, navigate: u }))
+                            var n = (0, $.x0)()
+                            f((0, F.V$)({ roomId: n, friendId: s, userId: i, navigate: u }))
                         }
                     }
-                return j
-                    ? (0, a.jsx)(K, {})
-                    : (0, a.jsx)(v.z, {
+                return v
+                    ? (0, a.jsx)(Y, {})
+                    : (0, a.jsx)(l.z, {
                           feature: 'isAppRedesigned',
                           on: (0, a.jsx)(a.Fragment, {
-                              children: h.length
-                                  ? h.map(function (s) {
+                              children: m.length
+                                  ? m.map(function (s) {
                                         var e
                                         return (0, a.jsx)(a.Fragment, {
                                             children: (0, a.jsxs)(
-                                                N.Z,
+                                                o.Z,
                                                 {
                                                     sx: {
                                                         padding: '16px',
@@ -507,7 +507,7 @@
                                                     },
                                                     elevation: 1,
                                                     children: [
-                                                        (0, a.jsxs)(f.Z, {
+                                                        (0, a.jsxs)(j.Z, {
                                                             alignItems: {
                                                                 xs: 'center',
                                                                 sm: 'flex-start',
@@ -515,7 +515,7 @@
                                                             spacing: 2,
                                                             style: { maxWidth: '50%' },
                                                             children: [
-                                                                (0, a.jsx)(y.q, {
+                                                                (0, a.jsx)(n.q, {
                                                                     size: {
                                                                         xs: '140px',
                                                                         sm: '160px',
@@ -524,7 +524,7 @@
                                                                     avatarPath: s.avatarPath,
                                                                     isOnline: s.isOnline,
                                                                 }),
-                                                                (0, a.jsx)(S.Z, {
+                                                                (0, a.jsx)(g.Z, {
                                                                     variant: 'h5',
                                                                     component: 'h1',
                                                                     textAlign: 'center',
@@ -534,23 +534,23 @@
                                                                 }),
                                                             ],
                                                         }),
-                                                        (0, a.jsxs)(f.Z, {
+                                                        (0, a.jsxs)(j.Z, {
                                                             children: [
                                                                 !s.isOnline &&
-                                                                    (0, a.jsx)(S.Z, {
+                                                                    (0, a.jsx)(g.Z, {
                                                                         align: 'center',
                                                                         variant: 'body1',
                                                                         component: 'div',
                                                                         children:
                                                                             'Был(а) в сети '.concat(
-                                                                                W()(
+                                                                                E()(
                                                                                     s.lastSeenOnline
                                                                                 )
                                                                                     .locale(
-                                                                                        w.language
+                                                                                        y.language
                                                                                     )
                                                                                     .toNow(!0) +
-                                                                                    g(' назад')
+                                                                                    p(' назад')
                                                                             ),
                                                                     }),
                                                                 (0, a.jsxs)(G.Z, {
@@ -560,18 +560,18 @@
                                                                             children: [
                                                                                 (0, a.jsx)(X.Z, {
                                                                                     children: (0,
-                                                                                    a.jsx)(R.Z, {}),
+                                                                                    a.jsx)(H.Z, {}),
                                                                                 }),
                                                                                 (0, a.jsx)(q.Z, {
                                                                                     primary: ''
                                                                                         .concat(
-                                                                                            g(
+                                                                                            p(
                                                                                                 'День рождения'
                                                                                             ),
                                                                                             ' '
                                                                                         )
                                                                                         .concat(
-                                                                                            W()(
+                                                                                            E()(
                                                                                                 s.birthDay
                                                                                                     .split(
                                                                                                         '.'
@@ -582,7 +582,7 @@
                                                                                                     )
                                                                                             )
                                                                                                 .locale(
-                                                                                                    w.language
+                                                                                                    y.language
                                                                                                 )
                                                                                                 .format(
                                                                                                     'D MMMM YYYY'
@@ -595,12 +595,12 @@
                                                                             children: [
                                                                                 (0, a.jsx)(X.Z, {
                                                                                     children: (0,
-                                                                                    a.jsx)(E.Z, {}),
+                                                                                    a.jsx)(z.Z, {}),
                                                                                 }),
                                                                                 (0, a.jsx)(q.Z, {
                                                                                     primary: ''
                                                                                         .concat(
-                                                                                            g(
+                                                                                            p(
                                                                                                 'Город'
                                                                                             ),
                                                                                             ' '
@@ -615,12 +615,12 @@
                                                                             children: [
                                                                                 (0, a.jsx)(X.Z, {
                                                                                     children: (0,
-                                                                                    a.jsx)($.Z, {}),
+                                                                                    a.jsx)(W.Z, {}),
                                                                                 }),
                                                                                 (0, a.jsx)(q.Z, {
                                                                                     primary: ''
                                                                                         .concat(
-                                                                                            g(
+                                                                                            p(
                                                                                                 'Друзья'
                                                                                             ),
                                                                                             ' '
@@ -641,12 +641,12 @@
                                                                             children: [
                                                                                 (0, a.jsx)(X.Z, {
                                                                                     children: (0,
-                                                                                    a.jsx)(J.Z, {}),
+                                                                                    a.jsx)(_.Z, {}),
                                                                                 }),
                                                                                 (0, a.jsx)(q.Z, {
                                                                                     primary: ''
                                                                                         .concat(
-                                                                                            g(
+                                                                                            p(
                                                                                                 'Посты'
                                                                                             ),
                                                                                             ' '
@@ -659,30 +659,30 @@
                                                                         }),
                                                                     ],
                                                                 }),
-                                                                (0, a.jsxs)(f.Z, {
+                                                                (0, a.jsxs)(j.Z, {
                                                                     spacing: 2,
                                                                     children: [
                                                                         (0, a.jsx)(A.Z, {
                                                                             variant: 'outlined',
                                                                             onClick: function () {
-                                                                                return C(
+                                                                                return O(
                                                                                     s.userId,
                                                                                     s.firstName,
                                                                                     s.lastName
                                                                                 )
                                                                             },
                                                                             children:
-                                                                                g(
+                                                                                p(
                                                                                     'Удалить из друзей'
                                                                                 ),
                                                                         }),
                                                                         (0, a.jsx)(A.Z, {
                                                                             onClick: function () {
-                                                                                return O(s.userId)
+                                                                                return S(s.userId)
                                                                             },
                                                                             variant: 'outlined',
                                                                             children:
-                                                                                g(
+                                                                                p(
                                                                                     'Написать сообщение'
                                                                                 ),
                                                                         }),
@@ -696,34 +696,34 @@
                                             ),
                                         })
                                     })
-                                  : (0, a.jsx)(N.Z, {
+                                  : (0, a.jsx)(o.Z, {
                                         sx: {
                                             padding: '16px',
                                             display: 'flex',
                                             justifyContent: 'space-between',
                                         },
                                         elevation: 1,
-                                        children: (0, a.jsx)(S.Z, {
-                                            children: g('У вас еще нет друзей'),
+                                        children: (0, a.jsx)(g.Z, {
+                                            children: p('У вас еще нет друзей'),
                                         }),
                                     }),
                           }),
                           off: (0, a.jsx)(a.Fragment, {
-                              children: h.length
+                              children: m.length
                                   ? (0, a.jsx)('div', {
                                         'data-testid': 'friends',
                                         className: 'oFdG7cJ6',
-                                        children: h.map(function (s) {
+                                        children: m.map(function (s) {
                                             var e
                                             return (0, a.jsxs)(
-                                                o.O,
+                                                h.O,
                                                 {
                                                     className: 'OD9M9OCO',
                                                     children: [
                                                         (0, a.jsxs)('div', {
                                                             className: 'S2HyMLUp',
                                                             children: [
-                                                                (0, a.jsx)(y.q, {
+                                                                (0, a.jsx)(n.q, {
                                                                     avatarPath: s.avatarPath,
                                                                     size: 'XL',
                                                                     isOnline: s.isOnline,
@@ -753,59 +753,59 @@
                                                                         (0, a.jsxs)('div', {
                                                                             children: [
                                                                                 (0, a.jsxs)('div', {
-                                                                                    className: _,
+                                                                                    className: J,
                                                                                     children: [
                                                                                         (0, a.jsx)(
-                                                                                            D.Z,
+                                                                                            P.Z,
                                                                                             {
                                                                                                 className:
-                                                                                                    z,
+                                                                                                    K,
                                                                                             }
                                                                                         ),
-                                                                                        g(
+                                                                                        p(
                                                                                             'День рождения'
                                                                                         ),
                                                                                     ],
                                                                                 }),
                                                                                 (0, a.jsxs)('div', {
-                                                                                    className: _,
+                                                                                    className: J,
                                                                                     children: [
                                                                                         (0, a.jsx)(
-                                                                                            M.Z,
+                                                                                            D.Z,
                                                                                             {
                                                                                                 className:
-                                                                                                    z,
+                                                                                                    K,
                                                                                             }
                                                                                         ),
-                                                                                        g('Город'),
+                                                                                        p('Город'),
                                                                                     ],
                                                                                 }),
                                                                                 (0, a.jsxs)('div', {
-                                                                                    className: _,
+                                                                                    className: J,
                                                                                     children: [
                                                                                         (0, a.jsx)(
                                                                                             b.Z,
                                                                                             {
                                                                                                 className:
-                                                                                                    z,
+                                                                                                    K,
                                                                                             }
                                                                                         ),
-                                                                                        g(
+                                                                                        p(
                                                                                             'Друзья '
                                                                                         ),
                                                                                     ],
                                                                                 }),
                                                                                 (0, a.jsxs)('div', {
-                                                                                    className: _,
+                                                                                    className: J,
                                                                                     children: [
                                                                                         (0, a.jsx)(
-                                                                                            Y.Z,
+                                                                                            M.Z,
                                                                                             {
                                                                                                 className:
-                                                                                                    z,
+                                                                                                    K,
                                                                                             }
                                                                                         ),
-                                                                                        g('Посты'),
+                                                                                        p('Посты'),
                                                                                     ],
                                                                                 }),
                                                                             ],
@@ -813,7 +813,7 @@
                                                                         (0, a.jsxs)('div', {
                                                                             children: [
                                                                                 (0, a.jsx)('div', {
-                                                                                    children: W()(
+                                                                                    children: E()(
                                                                                         s.birthDay
                                                                                             .split(
                                                                                                 '.'
@@ -853,22 +853,22 @@
                                                                 (0, a.jsx)(A.Z, {
                                                                     className: 'bKlHK4G8',
                                                                     onClick: function () {
-                                                                        return C(
+                                                                        return O(
                                                                             s.userId,
                                                                             s.firstName,
                                                                             s.lastName
                                                                         )
                                                                     },
                                                                     children:
-                                                                        g('Удалить из друзей'),
+                                                                        p('Удалить из друзей'),
                                                                 }),
                                                                 (0, a.jsx)(A.Z, {
                                                                     className: 'kOStNXY6',
                                                                     onClick: function () {
-                                                                        return O(s.userId)
+                                                                        return S(s.userId)
                                                                     },
                                                                     children:
-                                                                        g('Написать сообщение'),
+                                                                        p('Написать сообщение'),
                                                                 }),
                                                             ],
                                                         }),
@@ -880,7 +880,7 @@
                                     })
                                   : (0, a.jsx)('div', {
                                         'data-testid': 'friends-page',
-                                        children: g('У вас еще нет друзей'),
+                                        children: p('У вас еще нет друзей'),
                                     }),
                           }),
                       })
