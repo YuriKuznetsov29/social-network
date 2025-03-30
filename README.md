@@ -50,15 +50,5 @@ npm run serve - запуск backend проекта в dev режиме
 - [GetFriendsData](client/src/features/GetFriendsData)
 - [Messenger](client/src/features/Messenger)
 - [Notifications](client/src/features/Notifications)
-<!-- - [CreatePost](client/src/features/CreatePost) -->
+- [CreatePost](client/src/features/CreatePost)
 - [UploadAvatar](client/src/features/UploadAvatar)
-
-
-----
-
-
-## Работа с переводами
-
-В проекте используется библиотека i18next для работы с переводами.
-
-Документация i18next - [https://react.i18next.com/](https://react.i18next.com/)
