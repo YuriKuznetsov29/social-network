@@ -160,7 +160,9 @@ router.get("/getNews", auth, async (req, res) => {
         let posts = await Promise.all(
             usersList.map((id) => Post.find({ author: id }).sort({ createdAt: -1 }))
         )
-        posts = posts.flat(1)
+        posts = posts.flat(1).sort((a, b) => b.createdAt - a.createdAt)
+
+        console.log(posts)
 
         if (page && limit) {
             const end = page * limit > posts.length ? posts.length : page * limit
