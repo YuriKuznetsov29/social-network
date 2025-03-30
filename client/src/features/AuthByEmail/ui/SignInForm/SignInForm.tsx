@@ -102,6 +102,11 @@ export const SignInForm = ({ className }: SignInFormProps) => {
                         }}
                     />
                     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                        <Box sx={{ color: 'red', textAlign: 'center' }}>
+                            <h1>Тестовый пользователь</h1>
+                            <h1>Email: t@t.ru</h1>
+                            <h1>Пароль: 12345678</h1>
+                        </Box>
                         <Box
                             sx={{
                                 my: 8,
